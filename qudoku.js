@@ -62,11 +62,9 @@ function makeCircle(vals, x, y) {
 }
 
 function drawLines(outerRadius, innerRadius) {
-    outerRadius = 50; // TODO: clean this up
-    innerRadius = outerRadius * 0.4;
 
     let svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-    const svgSize = outerRadius * 2;
+    const svgSize = 100;
     svg.setAttribute('width', svgSize);
     svg.setAttribute('height', svgSize);
 
