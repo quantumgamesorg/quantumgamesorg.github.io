@@ -1,0 +1,38 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+header {
+    height: 100px;
+
+    border-bottom: 2px solid #666;
+    background-color: #aaa;
+}
+
+#content {
+    display: flex;
+    padding-bottom: 20px;
+
+    background-color: #eee;
+}
+
+footer {
+    height: 100px;
+
+    border-top: 2px solid #666;
+    background-color: #aaa;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

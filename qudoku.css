@@ -1,0 +1,222 @@
+
+#content {
+    flex-direction: column;
+    align-items: center;
+}
+
+#title {
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+#title + hr {
+    width: 400px !important;
+}
+
+#does {
+    margin-bottom: 20px;
+
+    color: #600;
+}
+
+#upperArea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 100%;
+}
+
+#upperLeft, #upperRight {
+    width: 250px;
+    margin: 0px 20px 20px 20px;
+
+    text-align: center;
+
+    border: 1px solid red;
+}
+
+@media (max-width: 1200px) {
+    #upperArea {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #upperLeft {
+        width: 500px;
+        max-width: 95%;
+        margin: 10px;
+        order: 1;
+    }
+
+    #upperRight {
+        width: 500px;
+        max-width: 95%;
+        margin: 10px;
+        order: 2;
+    }
+}
+
+#boardContainer {
+    position: relative;
+    display: flex;
+    max-width: 95%;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#boardContainer .board {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-bottom: 94.6642%; /* hack to make height stay the same as width */
+    max-width: 95%;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.moveCounter::before {
+    position: absolute;
+    width: 50px;
+    left: 50%;
+    bottom: 100%;
+    font-size: 12pt;
+    font-size: calc(min(4vw, 12pt));
+    text-align: center;
+    transform: translate(-50%);
+
+    content: "moves";
+}
+
+.moveCounter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10%;
+    max-width: 40px;
+    height: 10%;
+    max-height: 50px;
+
+    border: 1px solid #666;
+    background-color: #fff;
+    font-size: 20pt;
+    font-size: calc(min(6vw, 20pt));
+    text-align: center;
+}
+
+#boardContainer .scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100px;
+    width: 100%;
+    order: 2;
+    margin-top: 20px;
+    
+    font-size: 14pt;
+    box-shadow: #0002 2px 2px 5px;
+}
+
+.scoreboard .entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: calc(100% / 12);
+
+    border: 1px solid #666;
+    background-color: #fff;
+}
+
+.scoreboard .entry.odd {
+    background-color: #fbb;
+}
+
+.scoreboard .entry.even {
+    background-color: #bfb;
+}
+
+@media (max-width: 650px) {
+    #boardContainer .scoreboard {
+        height: 150px;
+    }
+
+    .scoreboard .entry {
+        height: 33.33%;
+        width: calc(100% / 8);
+    }
+}
+
+.scoreboard .entry div {
+    text-align: center;
+}
+
+.board .circle {
+    display: flex;
+    position: absolute;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 12%;
+    height: 12%;
+    transform: translate(-50%, -50%);
+    padding: 1%;
+    font-size: 14pt;
+    font-size: calc(min(3vw, 14pt));
+
+    border: 1px solid #666;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: #0002 2px 2px 5px;
+    cursor: pointer;
+    z-index: 5;
+    user-select: none;
+}
+
+@media (max-width: 600px) {
+    .board .circle {
+        font-weight: bold;
+    }
+}
+
+.board .circle.selected {
+    background-color: #fcc;
+}
+
+.board .circle .value {
+    width: 50%;
+    text-align: center;
+}
+
+.board svg .inner {
+    stroke-width: 2;
+}
+
+.board svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#content > p {
+    width: 800px;
+    max-width: 90%;
+
+    line-height: 16pt;
+}
+
+#content > hr {
+    width: 850px;
+    max-width: 92%;
+
+    line-height: 16pt;
+}
