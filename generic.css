@@ -16,6 +16,7 @@ header {
 
     border-bottom: 2px solid #666;
     background-color: #aaa;
+    padding-left: 20px;
 }
 
 #content {
@@ -30,6 +31,9 @@ footer {
 
     border-top: 2px solid #666;
     background-color: #aaa;
+
+    text-align: center;
+    padding-top: 10px;
 }
 
 h1 {
