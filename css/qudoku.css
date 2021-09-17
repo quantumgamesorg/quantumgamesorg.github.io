@@ -139,6 +139,7 @@
   flex-direction: column;
   margin-bottom: 20px;
   width: calc(100vh - 100px);
+  min-width: 200px;
   scroll-snap-align: end;
   scroll-snap-stop: normal;
 }
@@ -189,6 +190,7 @@
   order: 2;
   margin-top: 20px;
   font-size: 16pt;
+  font-size: max(min(4vw, 2.5vh), 8pt);
   box-shadow: #0002 2px 2px 5px;
 }
 #boardContainer .scoreboard .entry {
@@ -219,7 +221,6 @@
 @media (max-width: 650px) {
   #boardContainer .scoreboard {
     height: 150px;
-    font-size: 14pt;
   }
   #boardContainer .scoreboard .entry {
     height: 33.33%;
