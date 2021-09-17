@@ -1,0 +1,48 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+header {
+  height: 100px;
+  border-bottom: 2px solid #666;
+  background-color: #aaa;
+  padding-left: 20px;
+}
+header a {
+  color: #000;
+}
+header a:hover {
+  color: #332;
+}
+header a:active {
+  color: #554;
+}
+
+#content {
+  display: flex;
+  padding-bottom: 20px;
+  background-color: #eee;
+}
+
+footer {
+  height: 100px;
+  border-top: 2px solid #666;
+  background-color: #aaa;
+  text-align: center;
+  padding-top: 10px;
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=common.css.map */

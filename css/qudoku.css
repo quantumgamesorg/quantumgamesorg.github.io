@@ -1,0 +1,305 @@
+#content {
+  flex-direction: column;
+  align-items: center;
+}
+#content > p {
+  width: 800px;
+  max-width: 90%;
+  line-height: 16pt;
+}
+#content > hr {
+  width: 850px;
+  max-width: 92%;
+  line-height: 16pt;
+}
+#content > ul {
+  padding-left: 5px;
+  margin-top: 5px;
+}
+
+#title {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+#title + hr {
+  width: 400px !important;
+}
+
+#does {
+  margin-bottom: 20px;
+  color: #600;
+}
+#does::after {
+  content: "Does God play dice?";
+}
+#does.won {
+  color: #060;
+}
+#does.won::after {
+  content: "God does play dice!";
+}
+
+#upperArea {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+#upperLeft, #upperRight {
+  width: 250px;
+  margin: 0px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#upperLeft .leftArea > button {
+  margin-bottom: 6px;
+  font-size: 12pt;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid #888;
+  text-decoration: none;
+  box-shadow: #0004 2px 2px 4px;
+  transform: translate(0.1px, 0.1px);
+}
+#upperLeft .leftArea > button:hover {
+  background-color: #ccc;
+}
+#upperLeft .leftArea > button:active {
+  background-color: #bbb;
+  box-shadow: #0004 1px 1px 4px;
+  transform: translate(1px, 1px);
+}
+#upperLeft .leftArea > button:nth-of-type(1) {
+  background-color: #fdd;
+}
+#upperLeft .leftArea > button:nth-of-type(1):hover {
+  background-color: #fcc;
+}
+#upperLeft .leftArea > button:nth-of-type(1):active {
+  background-color: #faa;
+}
+#upperLeft .leftArea > button:nth-of-type(2) {
+  background-color: #dfd;
+}
+#upperLeft .leftArea > button:nth-of-type(2):hover {
+  background-color: #cfc;
+}
+#upperLeft .leftArea > button:nth-of-type(2):active {
+  background-color: #afa;
+}
+
+#upperRight {
+  opacity: 0.5;
+}
+
+@media (max-width: calc(100vh - 100px + 600px)) {
+  #upperArea {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #upperLeft {
+    width: 800px;
+    max-width: 95%;
+    margin: 10px;
+    order: 1;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #upperLeft .leftArea {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  #upperRight {
+    width: 500px;
+    max-width: 95%;
+    margin: 10px;
+    order: 2;
+  }
+}
+#boardContainer {
+  position: relative;
+  display: flex;
+  max-width: 95%;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: calc(100vh - 100px);
+  scroll-snap-align: end;
+  scroll-snap-stop: normal;
+}
+#boardContainer .moveCounter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  left: 90%;
+  top: 5%;
+  width: 10%;
+  max-width: 40px;
+  height: 10%;
+  max-height: 50px;
+  border: 1px solid #666;
+  background-color: #fff;
+  font-size: 20pt;
+  font-size: min(6vw, 20pt);
+  text-align: center;
+}
+#boardContainer .moveCounter::before {
+  position: absolute;
+  width: 50px;
+  left: 50%;
+  bottom: 100%;
+  font-size: 12pt;
+  font-size: min(4vw, 12pt);
+  text-align: center;
+  transform: translate(-50%);
+  content: "moves";
+}
+#boardContainer .moveCounter.even {
+  background-color: #fcc;
+}
+#boardContainer .moveCounter.odd {
+  background-color: #cfc;
+}
+#boardContainer .scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100px;
+  width: 100%;
+  order: 2;
+  margin-top: 20px;
+  font-size: 14pt;
+  box-shadow: #0002 2px 2px 5px;
+}
+#boardContainer .scoreboard .entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  width: 8.3333333333%;
+  border: 1px solid #666;
+  background-color: #fff;
+  transition: transform ease-out 0.1s, font-weight ease 0.1s;
+}
+#boardContainer .scoreboard .entry.odd {
+  background-color: #fbb;
+}
+#boardContainer .scoreboard .entry.even {
+  background-color: #bfb;
+}
+#boardContainer .scoreboard .entry.highlight {
+  font-weight: bold;
+  border: 2px solid #995;
+  transform: scale(1.1, 1.1);
+}
+#boardContainer .scoreboard .entry div {
+  text-align: center;
+}
+@media (max-width: 650px) {
+  #boardContainer .scoreboard {
+    height: 150px;
+  }
+  #boardContainer .scoreboard .entry {
+    height: 33.33%;
+    width: 12.5%;
+  }
+}
+#boardContainer .board {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding-bottom: 85%;
+  max-width: 85%;
+  min-width: 200px;
+  min-height: 200px;
+}
+#boardContainer .board .circle {
+  display: flex;
+  position: absolute;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 12%;
+  height: 12%;
+  transform: translate(-50%, -50%);
+  padding: 1%;
+  font-size: 14pt;
+  font-size: min(3vw, 14pt);
+  border: 1px solid #666;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: #0002 2px 2px 5px;
+  cursor: pointer;
+  z-index: 5;
+  user-select: none;
+  transition: transform ease-out 0.1s, font-weight ease 0.1s;
+}
+@media (max-width: 600px) {
+  #boardContainer .board .circle {
+    font-weight: bold;
+  }
+}
+#boardContainer .board .circle::before {
+  content: "";
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  right: -15%;
+  bottom: -15%;
+  border-radius: 50%;
+}
+#boardContainer .board .circle.selected {
+  background-color: #fcc;
+}
+#boardContainer .board .circle.highlight {
+  transform: translate(-50%, -50%) scale(1.1, 1.1);
+  border: 2px solid #885;
+  font-weight: bold;
+}
+#boardContainer .board .circle .value {
+  width: 50%;
+  text-align: center;
+}
+#boardContainer.won .board .circle.selected {
+  background-color: #cfc;
+}
+#boardContainer svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+#boardContainer svg .inner {
+  stroke-width: 2;
+}
+
+.window h3 {
+  text-align: center;
+  margin: 10px;
+}
+
+#win_about {
+  width: 400px;
+  height: 300px;
+}
+
+#win_rules {
+  width: 400px;
+  height: 300px;
+}
+
+/*# sourceMappingURL=qudoku.css.map */

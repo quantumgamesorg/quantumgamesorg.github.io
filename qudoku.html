@@ -6,9 +6,9 @@
         <title>Qudoku</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-        <link rel="stylesheet" href="generic.css">
-        <link rel="stylesheet" href="qudoku.css">
-        <link rel="stylesheet" href="windowManager.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/qudoku.css">
+        <link rel="stylesheet" href="css/windowManager.css">
     </head>
     <body>
         <noscript></noscript>
@@ -19,16 +19,24 @@
             <h1 id="does"></h1>
             <div id="upperArea">
                 <div id="upperLeft">
-                    <h2>Left side</h2>
-                    <button>Reset</button>
-                    <button>Display a Solution</button>
-                    <br>
-                    <button>About <img src="assets/window_icon.png" style="height: 10px;"></button>
-                    <button>Show Rules <img src="assets/window_icon.png" style="height: 10px;"></button>
-                    <br>
-                    <button>Personalities &ShortDownArrow;</button>
-                    <button>Credits &ShortDownArrow;</button>
-                    <button>Further Reading &ShortDownArrow;</button>
+                    <div class="leftArea">
+                        <h3>Actions</h3>
+                        <button>Reset</button>
+                        <br>
+                        <button>Display a Solution</button>
+                        <br>
+                    </div>
+                    <div class="leftArea">
+                        <h3>Info</h3>
+                        <button>About <img src="assets/window_icon.png" style="height: 10px;"></button>
+                        <br>
+                        <button>Rules <img src="assets/window_icon.png" style="height: 10px;"></button>
+                        <br>
+                        <button>More &ShortDownArrow;</button>
+                        <!-- <button>Personalities &ShortDownArrow;</button>
+                        <button>Credits &ShortDownArrow;</button>
+                        <button>Further Reading &ShortDownArrow;</button> -->
+                    </div>
 
                     
                     <div id="windowContainer">
@@ -85,21 +93,32 @@
                     </div>
                     <div class="moveCounter"><div class="inner">0</div></div>
                 </div>
-                <div id="upperRight"><h2>Right side</h2>Some content can go here</div>
+                <div id="upperRight"><h3>Right side</h3>(room for something here if needed)</div>
             </div>
             <hr>
             <h2>More Information</h2>
+            <h2>Personalities</h2>
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis elit ut nisi ullamcorper placerat. Nulla facilisi. In sit amet augue in velit efficitur interdum at finibus magna. Quisque pharetra, justo vel fermentum pharetra, nulla sapien mollis nulla, non blandit metus purus vel ex. Phasellus dolor sem, porta ut fringilla non, lacinia vel diam. Duis est nisl, euismod ut ullamcorper vel, sodales ut nisi. Nulla dictum placerat cursus. Praesent euismod iaculis tincidunt. Aenean aliquet neque et libero luctus ornare eu nec augue.
             </p><p>
             Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam aliquet volutpat nisi quis accumsan. Fusce nisl nisi, tincidunt elementum massa a, viverra semper sem. Nunc eleifend enim arcu, a varius ligula pretium vel. Fusce ut egestas justo. Sed egestas fringilla lectus, id bibendum massa convallis quis. Phasellus ipsum purus, lacinia nec ornare ac, gravida et mauris. Cras mollis, nunc non vulputate porta, risus nisi dignissim eros, non placerat velit lacus nec dui. Phasellus ultricies urna vel lacus eleifend, non ullamcorper magna mollis. Nunc non luctus turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi condimentum orci non neque malesuada, vitae tempor quam scelerisque. Suspendisse ante odio, malesuada at quam sed, aliquet pellentesque orci. In molestie semper accumsan.
-            </p><p>
+            </p>
+            <h2>Credits</h2>
+            <p>
             Maecenas bibendum turpis eros, non mattis enim sagittis sit amet. Nunc lacinia nulla sit amet condimentum blandit. Curabitur ullamcorper faucibus sem, nec tincidunt neque facilisis a. Cras vestibulum nisi id diam lobortis accumsan. Aenean fermentum massa et mattis suscipit. Phasellus pellentesque tellus sit amet urna auctor, in condimentum ante tincidunt. Suspendisse elementum, nisi vitae efficitur ornare, lorem leo consectetur mi, non egestas orci massa ultrices lacus. Sed faucibus congue sem in gravida. Donec urna ligula, molestie sit amet ipsum ut, rhoncus aliquet nibh. Maecenas sed velit in lectus facilisis dapibus. Donec diam massa, condimentum nec risus quis, viverra feugiat sapien. Duis diam lorem, hendrerit et vestibulum at, dictum non neque.
             </p><p>
             In metus ante, pretium vestibulum lectus vel, aliquam mattis augue. Donec aliquet nibh ac fringilla facilisis. Curabitur id pellentesque tellus. Duis luctus, lorem a maximus euismod, risus ligula commodo dolor, id pretium lorem neque eget leo. Mauris rutrum justo sit amet orci cursus, a fermentum magna efficitur. Donec maximus tempor neque maximus tempus. Sed volutpat feugiat nisi, eu vulputate orci varius id. Nulla facilisi. Vivamus quis elementum ex. Suspendisse euismod iaculis varius.
-            </p><p>
-            Vestibulum et sapien tellus. Pellentesque pulvinar vestibulum vestibulum. Cras ac porta dui. Morbi maximus pharetra tellus nec aliquam. Suspendisse orci nisl, euismod et ultricies ut, tincidunt ut libero. Ut vel felis nec neque dictum cursus ultricies eu ligula. Maecenas interdum tellus et eros tincidunt pellentesque at ultricies arcu. Donec non libero vel augue vestibulum fermentum sagittis eget velit. Phasellus aliquam enim elit, eget pellentesque eros imperdiet ut. Etiam condimentum ultricies mauris, nec consectetur urna convallis quis. Aliquam tincidunt dui sit amet leo pretium, non pretium ipsum suscipit. Integer lacus sapien, tincidunt vitae ornare feugiat, fermentum quis quam. Nam at vulputate est. Donec efficitur semper fermentum. Sed faucibus tortor nisl, eget faucibus risus ullamcorper vitae. 
             </p>
+            <h2>Further Reading</h2>
+            <p>
+            Vestibulum et sapien tellus. Pellentesque pulvinar vestibulum vestibulum. Cras ac porta dui. Morbi maximus pharetra tellus nec aliquam. Suspendisse orci nisl, euismod et ultricies ut, tincidunt ut libero.
+            </p>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Another Link</a></li>
+                <li><a href="#">Third One</a></li>
+                <li><a href="#">The Final Link</a></li>
+            </ul>
         </div>
         <footer>
             <button id="toTop">Back to Top &ShortUpArrow;</button>
