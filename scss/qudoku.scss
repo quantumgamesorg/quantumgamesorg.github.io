@@ -215,12 +215,12 @@ html {
     .scoreboard {
         display: flex;
         flex-wrap: wrap;
-        height: 100px;
+        height: 120px;
         width: 100%;
         order: 2;
         margin-top: 20px;
         
-        font-size: 14pt;
+        font-size: 16pt;
         box-shadow: #0002 2px 2px 5px;
 
         .entry {
@@ -257,6 +257,7 @@ html {
 
         @media (max-width: 650px) {
             height: 150px;
+            font-size: 14pt;
 
             .entry {
                 height: 33.33%;
