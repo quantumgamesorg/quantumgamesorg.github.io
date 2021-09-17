@@ -47,7 +47,7 @@
 }
 
 #upperLeft, #upperRight {
-  width: 250px;
+  width: 180px;
   margin: 0px 20px 20px 20px;
   display: flex;
   flex-direction: column;
@@ -97,7 +97,7 @@
   opacity: 0.5;
 }
 
-@media (max-width: calc(100vh - 100px + 600px)) {
+@media (max-width: calc(100vh - 100px + 460px)) {
   #upperArea {
     flex-direction: column;
     align-items: center;
@@ -107,10 +107,14 @@
     width: 800px;
     max-width: 95%;
     margin: 10px;
+    margin-top: 0px;
     order: 1;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+  }
+  #upperLeft h3 {
+    margin-top: 0px;
   }
   #upperLeft .leftArea {
     margin-left: 10px;
@@ -143,7 +147,7 @@
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  left: 90%;
+  right: 2%;
   top: 5%;
   width: 10%;
   max-width: 40px;
@@ -154,6 +158,11 @@
   font-size: 20pt;
   font-size: min(6vw, 20pt);
   text-align: center;
+}
+@media (max-width: 650px) {
+  #boardContainer .moveCounter {
+    top: 2%;
+  }
 }
 #boardContainer .moveCounter::before {
   position: absolute;
@@ -226,6 +235,12 @@
   min-width: 200px;
   min-height: 200px;
 }
+@media (max-width: 650px) {
+  #boardContainer .board {
+    padding-bottom: 95%;
+    max-width: 95%;
+  }
+}
 #boardContainer .board .circle {
   display: flex;
   position: absolute;
@@ -237,7 +252,7 @@
   transform: translate(-50%, -50%);
   padding: 1%;
   font-size: 14pt;
-  font-size: min(3vw, 14pt);
+  font-size: min(3vw, 2vh);
   border: 1px solid #666;
   border-radius: 50%;
   background-color: #fff;
@@ -247,7 +262,12 @@
   user-select: none;
   transition: transform ease-out 0.1s, font-weight ease 0.1s;
 }
-@media (max-width: 600px) {
+@media (max-width: 650px) {
+  #boardContainer .board .circle {
+    font-weight: bold;
+  }
+}
+@media (max-height: 650px) {
   #boardContainer .board .circle {
     font-weight: bold;
   }

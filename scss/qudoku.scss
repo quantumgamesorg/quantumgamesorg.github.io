@@ -62,7 +62,7 @@ html {
 }
 
 #upperLeft, #upperRight {
-    width: 250px;
+    width: 180px;
     margin: 0px 20px 20px 20px;
     display: flex;
     flex-direction: column;
@@ -125,7 +125,7 @@ html {
     opacity: 0.5;
 }
 
-@media (max-width: calc(100vh - 100px + 600px)) {
+@media (max-width: calc(100vh - 100px + 460px)) {
     #upperArea {
         flex-direction: column;
         align-items: center;
@@ -135,10 +135,15 @@ html {
         width: 800px;
         max-width: 95%;
         margin: 10px;
+        margin-top: 0px;
         order: 1;
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
+
+        h3 {
+            margin-top: 0px;
+        }
 
         .leftArea {
             margin-left: 10px;
@@ -177,7 +182,7 @@ html {
         position: absolute;
         // right: 0;
         // top: 0;
-        left: calc(50% + 40%);
+        right: calc(2%);
         top: calc(5%);
         width: 10%;
         max-width: 40px;
@@ -189,6 +194,10 @@ html {
         font-size: 20pt;
         font-size: calc(min(6vw, 20pt));
         text-align: center;
+
+        @media (max-width: 650px) {
+            top: calc(2%);
+        }
     
         &::before {
             position: absolute;
@@ -275,6 +284,13 @@ html {
         min-width: 200px;
         min-height: 200px;
 
+        // make the board take up more of the horizontal space when it gets small
+        // TODO: this is a dumb way to do this
+        @media (max-width: 650px) {
+            padding-bottom: 95%; // hack to make height stay the same as width
+            max-width: 95%;
+        }
+
         .circle {
             display: flex;
             position: absolute;
@@ -286,7 +302,7 @@ html {
             transform: translate(-50%, -50%);
             padding: 1%;
             font-size: 14pt;
-            font-size: calc(min(3vw, 14pt));
+            font-size: calc(min(3vw, 2vh));
         
             border: 1px solid #666;
             border-radius: 50%;
@@ -297,7 +313,11 @@ html {
             user-select: none;
             transition: transform ease-out 0.1s, font-weight ease 0.1s;
 
-            @media (max-width: 600px) {
+            @media (max-width: 650px) {
+                font-weight: bold;
+            }
+
+            @media (max-height: 650px) {
                 font-weight: bold;
             }
 
