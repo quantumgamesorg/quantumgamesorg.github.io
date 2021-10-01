@@ -18,6 +18,14 @@ document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollT
 // document.querySelectorAll("#upperLeft button")[6].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[3].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
+document.querySelectorAll(".person").forEach((e, i) => {
+    e.onmouseenter = ev => {
+        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
+    };
+    e.onmouseleave = ev => {
+        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
+    };
+});
 
 function makeBoard(outerRadius) {
     const innerRadius = outerRadius * 0.4;
