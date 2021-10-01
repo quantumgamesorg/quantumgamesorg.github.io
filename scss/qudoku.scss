@@ -96,7 +96,7 @@ html {
         transform: translate(1px, 1px);
     }
 
-    &:nth-of-type(1) {
+    &.resetButton {
         background-color: #fdd;
 
         &:hover {
@@ -108,7 +108,7 @@ html {
         }
     }
 
-    &:nth-of-type(2) {
+    &.solveButton {
         background-color: #dfd;
 
         &:hover {
@@ -117,6 +117,18 @@ html {
 
         &:active {
             background-color: #afa;
+        }
+    }
+
+    &.infoButton {
+        background-color: #ffd;
+
+        &:hover {
+            background-color: #ffc;
+        }
+
+        &:active {
+            background-color: #ffa;
         }
     }
 }
@@ -170,7 +182,7 @@ html {
     flex-direction: column;
     margin-bottom: 20px;
     // height: calc(100vh - 50px);
-    width: calc(100vh - 100px);
+    // width: calc(100vh - 100px);
     min-width: 200px;
 
     scroll-snap-align: end;
@@ -183,30 +195,34 @@ html {
         position: absolute;
         // right: 0;
         // top: 0;
-        right: calc(2%);
         top: calc(5%);
-        width: 10%;
-        max-width: 40px;
-        height: 10%;
-        max-height: 50px;
+        right: calc(5%);
+        // width: calc(min(7vw, 40px));
+        // max-width: 40px;
+        // height: calc(min(8vw, 50px));
+        // max-height: 50px;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
     
         border: 1px solid #666;
         background-color: #fff;
         font-size: 20pt;
-        font-size: calc(min(6vw, 20pt));
+        font-size: calc(min(6vw, 24pt));
         text-align: center;
 
         @media (max-width: 650px) {
             top: calc(2%);
+            right: calc(3%);
         }
     
         &::before {
             position: absolute;
-            width: 50px;
+            width: 200%;
             left: 50%;
             bottom: 100%;
             font-size: 12pt;
-            font-size: calc(min(4vw, 12pt));
+            font-size: calc(min(4vw, 14pt));
             text-align: center;
             transform: translate(-50%);
         
@@ -225,7 +241,7 @@ html {
     .scoreboard {
         display: flex;
         flex-wrap: wrap;
-        height: 120px;
+        height: 15vh;
         width: 100%;
         order: 2;
         margin-top: 20px;
@@ -257,7 +273,7 @@ html {
 
             &.highlight {
                 font-weight: bold;
-                border: 2px solid #995;
+                border: 1px solid #995;
                 transform: scale(1.1, 1.1);
             }
 
@@ -280,8 +296,8 @@ html {
         display: flex;
         position: relative;
         width: 100%;
-        padding-bottom: 85%; // hack to make height stay the same as width
-        max-width: 85%;
+        padding-bottom: 95%; // hack to make height stay the same as width
+        max-width: 95%;
         min-width: 200px;
         min-height: 200px;
 
@@ -390,4 +406,86 @@ html {
 #win_rules {
     width: 400px;
     height: 300px;
+}
+
+#peopleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    max-width: 95vw;
+    
+    z-index: 1;
+    
+    .person {
+        position: relative;
+        clip-path: circle(75px at 50% 100px);
+        transition: clip-path 0.2s;
+
+        img {
+            width: 150px;
+            height: auto;
+            margin: 1px;
+            margin-left: 2px;
+            margin-right: 2px;
+            clip-path: circle(74px at 50% 99px);
+            transition: clip-path 0.2s;
+
+            display: block; // need this or the img will get a bit of padding on the bottom that is impossible to remove otherwise
+        }
+
+        div {
+            position: absolute;
+            bottom: 1px;
+            left: 2px;
+            width: calc(100% - 4px);
+            height: 50px;
+            text-align: center;
+            line-height: 18px;
+            padding-top: 10px;
+
+            text-shadow: #fff 0px 0px 8px;
+            background-color: white;
+            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        &::before {
+            clip-path: circle(76px at 50% 101px);
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 1.0;
+            transition: clip-path 0.2s, opacity 0.2s;
+
+            background-color: #000f;
+        }
+
+        &:hover {
+            clip-path: circle(80% at 50% 40%);
+
+            img {
+                clip-path: circle(80% at 50% 40%);
+                box-sizing: content-box;
+                border: 1px solid black;
+                margin: 0px;
+                margin-left: 1px;
+                margin-right: 1px;
+            }
+
+            div {
+                opacity: 1;
+            }
+
+            &::before {
+                clip-path: circle(80% at 50% 40%);
+                opacity: 0.0;
+            }
+        }
+    }
 }

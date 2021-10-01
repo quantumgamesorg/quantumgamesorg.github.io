@@ -9,6 +9,7 @@ let circleMap = [];
 boardContainer.appendChild(makeBoard(45));
 
 document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
+document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
 document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[3].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
@@ -218,4 +219,25 @@ function reset() {
 
     boardContainer.classList.remove("won");
     document.querySelector("#does").classList.remove("won");
+}
+
+function solve() {
+    reset();
+
+    let circles = boardContainer.querySelectorAll(".board .circle");
+    [[17,10], [0,9], [1,8], [2,13], [3,12], [4,11], [5,16], [6,15], [7,14]].forEach(pair => {
+        if(Math.random() >= 0.5) {
+            circles[pair[0]].click();
+        }else {
+            circles[pair[1]].click();
+        }
+    });
+
+    let score = boardContainer.querySelectorAll(".scoreboard .entry");
+    for(let i = 0; i < 6; i++) {
+        if(score[i * 4].classList.contains("odd")){
+            circles[[18, 22, 20, 21, 19, 23][i]].click();
+        }
+    }
+
 }

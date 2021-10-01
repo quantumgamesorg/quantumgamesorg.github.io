@@ -74,23 +74,32 @@
   box-shadow: #0004 1px 1px 4px;
   transform: translate(1px, 1px);
 }
-#upperLeft .leftArea > button:nth-of-type(1) {
+#upperLeft .leftArea > button.resetButton {
   background-color: #fdd;
 }
-#upperLeft .leftArea > button:nth-of-type(1):hover {
+#upperLeft .leftArea > button.resetButton:hover {
   background-color: #fcc;
 }
-#upperLeft .leftArea > button:nth-of-type(1):active {
+#upperLeft .leftArea > button.resetButton:active {
   background-color: #faa;
 }
-#upperLeft .leftArea > button:nth-of-type(2) {
+#upperLeft .leftArea > button.solveButton {
   background-color: #dfd;
 }
-#upperLeft .leftArea > button:nth-of-type(2):hover {
+#upperLeft .leftArea > button.solveButton:hover {
   background-color: #cfc;
 }
-#upperLeft .leftArea > button:nth-of-type(2):active {
+#upperLeft .leftArea > button.solveButton:active {
   background-color: #afa;
+}
+#upperLeft .leftArea > button.infoButton {
+  background-color: #ffd;
+}
+#upperLeft .leftArea > button.infoButton:hover {
+  background-color: #ffc;
+}
+#upperLeft .leftArea > button.infoButton:active {
+  background-color: #ffa;
 }
 
 #upperRight {
@@ -138,7 +147,6 @@
   justify-content: center;
   flex-direction: column;
   margin-bottom: 20px;
-  width: calc(100vh - 100px);
   min-width: 200px;
   scroll-snap-align: end;
   scroll-snap-stop: normal;
@@ -148,30 +156,30 @@
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  right: 2%;
   top: 5%;
-  width: 10%;
-  max-width: 40px;
-  height: 10%;
-  max-height: 50px;
+  right: 5%;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid #666;
   background-color: #fff;
   font-size: 20pt;
-  font-size: min(6vw, 20pt);
+  font-size: min(6vw, 24pt);
   text-align: center;
 }
 @media (max-width: 650px) {
   #boardContainer .moveCounter {
     top: 2%;
+    right: 3%;
   }
 }
 #boardContainer .moveCounter::before {
   position: absolute;
-  width: 50px;
+  width: 200%;
   left: 50%;
   bottom: 100%;
   font-size: 12pt;
-  font-size: min(4vw, 12pt);
+  font-size: min(4vw, 14pt);
   text-align: center;
   transform: translate(-50%);
   content: "moves";
@@ -185,7 +193,7 @@
 #boardContainer .scoreboard {
   display: flex;
   flex-wrap: wrap;
-  height: 120px;
+  height: 15vh;
   width: 100%;
   order: 2;
   margin-top: 20px;
@@ -212,7 +220,7 @@
 }
 #boardContainer .scoreboard .entry.highlight {
   font-weight: bold;
-  border: 2px solid #995;
+  border: 1px solid #995;
   transform: scale(1.1, 1.1);
 }
 #boardContainer .scoreboard .entry div {
@@ -231,8 +239,8 @@
   display: flex;
   position: relative;
   width: 100%;
-  padding-bottom: 85%;
-  max-width: 85%;
+  padding-bottom: 95%;
+  max-width: 95%;
   min-width: 200px;
   min-height: 200px;
 }
@@ -322,6 +330,76 @@
 #win_rules {
   width: 400px;
   height: 300px;
+}
+
+#peopleContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  max-width: 95vw;
+  z-index: 1;
+}
+#peopleContainer .person {
+  position: relative;
+  clip-path: circle(75px at 50% 100px);
+  transition: clip-path 0.2s;
+}
+#peopleContainer .person img {
+  width: 150px;
+  height: auto;
+  margin: 1px;
+  margin-left: 2px;
+  margin-right: 2px;
+  clip-path: circle(74px at 50% 99px);
+  transition: clip-path 0.2s;
+  display: block;
+}
+#peopleContainer .person div {
+  position: absolute;
+  bottom: 1px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: 50px;
+  text-align: center;
+  line-height: 18px;
+  padding-top: 10px;
+  text-shadow: #fff 0px 0px 8px;
+  background-color: white;
+  background: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#peopleContainer .person::before {
+  clip-path: circle(76px at 50% 101px);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 1;
+  transition: clip-path 0.2s, opacity 0.2s;
+  background-color: #000f;
+}
+#peopleContainer .person:hover {
+  clip-path: circle(80% at 50% 40%);
+}
+#peopleContainer .person:hover img {
+  clip-path: circle(80% at 50% 40%);
+  box-sizing: content-box;
+  border: 1px solid black;
+  margin: 0px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+#peopleContainer .person:hover div {
+  opacity: 1;
+}
+#peopleContainer .person:hover::before {
+  clip-path: circle(80% at 50% 40%);
+  opacity: 0;
 }
 
 /*# sourceMappingURL=qudoku.css.map */
