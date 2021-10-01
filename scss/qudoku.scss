@@ -444,9 +444,9 @@ html {
             line-height: 18px;
             padding-top: 10px;
 
-            text-shadow: #fff 0px 0px 8px;
+            text-shadow: #fff 0px 0px 6px;
             background-color: white;
-            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%);
             opacity: 0;
             transition: opacity 0.2s;
         }
