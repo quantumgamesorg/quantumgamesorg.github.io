@@ -6,7 +6,7 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.appendChild(makeBoard(45));
+boardContainer.appendChild(makeBoard(50));
 
 document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -27,8 +27,10 @@ document.querySelectorAll(".person").forEach((e, i) => {
     };
 });
 
+
+
 function makeBoard(outerRadius) {
-    const innerRadius = outerRadius * 0.55;
+    const innerRadius = outerRadius * 0.6;
     const innerVals = [...Array(5).keys()].map(i => [...Array(8).keys()].map(n => n + 8 * i + 1));
     const outerVals = [[ 1, 2, 13, 14, 15, 16, 3, 4 ]    , [ 1, 2, 19, 20, 23, 24, 5, 6 ]    , [ 1, 3, 26, 28, 30, 32, 5, 7 ]    , [ 1, 4, 37, 38, 39, 40, 6, 7 ],
                        [ 9, 11, 18, 20, 22, 24, 13, 15 ] , [ 9, 10, 27, 28, 31, 32, 13, 14 ] , [ 9, 12, 35, 36, 39, 40, 14, 15 ] , [ 5, 6, 9, 10, 11, 12, 7, 8 ],
@@ -42,14 +44,21 @@ function makeBoard(outerRadius) {
     circleMap = [];
 
     for(let i = 0; i < outerVals.length; i++) {
+        
         const vals = outerVals[i];
-        const thru = Math.floor(i/(outerVals.length / innerVals.length)) / innerVals.length * (2 * Math.PI);
+        /*const thru = Math.floor(i/(outerVals.length / innerVals.length)) / innerVals.length * (2 * Math.PI);
         const thru2 = (i % (outerVals.length / innerVals.length) + 0.5) / (outerVals.length / innerVals.length) * (2 * Math.PI / 2.5) - (2 * Math.PI / 2.5)/2;
 
         let bx = (innerRadius * Math.sin(thru));
         let by = (innerRadius * -Math.cos(thru));
+        var outerXOffset = 1.17;
+        var outerYOffset = 0.91;
+        */
 
-        let circle = makeCircle(vals, "calc(50% + " + (bx + ((outerRadius - innerRadius) * Math.sin(thru2 + thru))) + "%)", "calc(50% + " + (by + ((outerRadius - innerRadius) * -Math.cos(thru2 + thru))) + "%)");
+        let pos = circlePos(i, innerVals.length, outerVals.length / innerVals.length, innerRadius, outerRadius, 'outer')
+        let circle = makeCircle(vals, "calc(50% + " + pos[0] + "%)", "calc(50% + " + pos[1] + "%)");
+        //let circle = makeCircle(vals, "calc(50% + " + (bx + ((outerRadius - innerRadius) * Math.sin(thru2 + thru)))*outerXOffset + "%)", "calc(50% + " + (by + ((outerRadius - innerRadius) * -Math.cos(thru2 + thru))) * outerYOffset + "%)");
+        
         vals.forEach(e => {
             if(typeof(circleMap[e]) === 'undefined') {
                 circleMap[e] = [];
@@ -61,9 +70,13 @@ function makeBoard(outerRadius) {
 
     for(let i = 0; i < innerVals.length; i++) {
         const vals = innerVals[i];
-        const thru = i / innerVals.length * (2 * Math.PI);
+        /*const thru = i / innerVals.length * (2 * Math.PI);
 
         let circle = makeCircle(vals, "calc(50% + " + (innerRadius * Math.sin(thru)) + "%)", "calc(50% + " + (innerRadius * -Math.cos(thru)) + "%)");
+        */
+        let pos = circlePos(i, innerVals.length, outerVals.length, innerRadius, outerRadius, 'inner')
+        let circle = makeCircle(vals, "calc(50% + " + pos[0] + "%)", "calc(50% + " + pos[1] + "%)");
+
         vals.forEach(e => {
             if(typeof(circleMap[e]) === 'undefined') {
                 circleMap[e] = [];
@@ -88,6 +101,41 @@ function makeBoard(outerRadius) {
     return board;
 }
 
+function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
+    let innerXOffset = 1.3;
+    let innerYOffset = 1;
+    console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
+    if(type === 'outer'){
+        let spread = 3;
+        const angleRelativeToCenter = Math.floor(index/numOuter) * 2 * Math.PI / numInner;
+        
+        const alignTerm = ((numOuter - 1)/numOuter * spread) / 2;
+        const angleRelativeToInnerCircle = ((index % numOuter) * spread / numOuter) - alignTerm;
+
+        console.log(`Index: ${index} Index/Outer = ${index/numOuter} Num outer ${numOuter}`)
+        console.log(`Index: ${index} Center: ${angleRelativeToCenter * 360.0/Math.PI} Inner: ${angleRelativeToInnerCircle * 360.0/Math.PI}`)
+
+        let baseX = (innerRadius * Math.sin(angleRelativeToCenter));
+        let baseY = (innerRadius * -Math.cos(angleRelativeToCenter));
+
+        const deltaR = outerRadius - innerRadius;
+        let deltaBx =  deltaR * Math.sin(angleRelativeToCenter + angleRelativeToInnerCircle);
+        let deltaBy = deltaR *-Math.cos(angleRelativeToCenter + angleRelativeToInnerCircle);
+
+        var outerXOffset = 1.25;
+        var outerYOffset = .9;
+        
+        console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
+        return [baseX * innerXOffset + deltaBx * outerXOffset, baseY  * innerYOffset + deltaBy * outerYOffset]
+    }else{//type is inner
+        const angleRelativeToCenter = index/numInner * 2 * Math.PI;
+        let baseX = (innerRadius * Math.sin(angleRelativeToCenter))
+        let baseY = (innerRadius * -Math.cos(angleRelativeToCenter))
+        console.log(`[circlePos]: Returning ${baseX * innerXOffset}, ${baseY * innerYOffset}`)
+        return [baseX * innerXOffset,  baseY * innerYOffset]
+    }
+};
+
 function makeCircle(vals, x, y) {
     let circle = document.createElement("div");
     circle.classList.add("circle");
@@ -95,12 +143,32 @@ function makeCircle(vals, x, y) {
     circle.style.left = x;
     circle.style.top = y;
 
-    vals.forEach(v => {
+    let topVals = document.createElement("div")
+    let midVals = document.createElement("div")
+    let botVals = document.createElement("div")
+
+    topVals.classList.add("topVals");
+    midVals.classList.add("midVals");
+    botVals.classList.add("bottomVals");
+
+    topVals.classList.add("rowOfValues");
+    midVals.classList.add("rowOfValues");
+    botVals.classList.add("rowOfValues");
+
+
+    for(let i = 0; i < vals.length; ++i) {
         let valElement = document.createElement("div");
-        valElement.innerText = v;
+        valElement.innerText = vals[i];
         valElement.classList.add("value");
-        circle.appendChild(valElement);
-    });
+        if(i < 2) {topVals.appendChild(valElement);}
+        else if (i < 6) { midVals.appendChild(valElement);}
+        else {botVals.appendChild(valElement);}
+    }
+    
+
+    circle.appendChild(topVals);
+    circle.appendChild(midVals);
+    circle.appendChild(botVals);
 
     circle.onclick = () => {
         if(circle.classList.toggle("selected")) {
@@ -133,6 +201,9 @@ function drawLines(outerRadius, innerRadius) {
     svg.setAttribute('height', svgSize);
 
     svg.line = (x1, y1, x2, y2, addClass) => {
+        console.log(`Typeof x1 ${typeof(x1)} Typeof x2 ${typeof(x2)} Typeof y1 ${typeof(y1)} Typeof y2 ${typeof(y2)}`)
+        console.log(`Valueof x1 ${x1} Valueof x2 ${x2} Valueof y1 ${y1} Valueof y2 ${y2}`)
+
         let newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
         if(typeof(addClass) !== 'undefined') newLine.classList.add(addClass);
         newLine.setAttribute('x1',x1 + "%");
@@ -143,45 +214,28 @@ function drawLines(outerRadius, innerRadius) {
         svg.append(newLine);
     };
 
-    const circlePos = (i, n, radius) => {
-        
-        if(typeof(n) === 'object'){
-            const thru = Math.floor(i/(n[1] / n[0])) / n[0] * (2 * Math.PI);
-            const thru2 = (i % (n[1] / n[0]) + 0.5) / (n[1] / n[0]) * (2 * Math.PI / 2.5) - (2 * Math.PI / 2.5)/2;
-    
-            let bx = (innerRadius * Math.sin(thru));
-            let by = (innerRadius * -Math.cos(thru));
-            
-            return [(bx + ((outerRadius - innerRadius) * Math.sin(thru2 + thru))), (by + ((outerRadius - innerRadius) * -Math.cos(thru2 + thru)))]
-        }else{
-            const thru = i/n * 2 * Math.PI;
-            return [(radius * Math.sin(thru)), (radius * -Math.cos(thru))]
+
+    //if connecting an inner and outer circle pass addClass1 as inner, and addClass2 as outer
+    const circleLine = (i1, i2, numInner, numOuter, innerRadius, outerRadius, type1, type2) => {
+        const pos1 = circlePos(i1, numInner, numOuter, innerRadius, outerRadius, type1);
+        const pos2 = circlePos(i2, numInner, numOuter, innerRadius, outerRadius, type2);
+        svg.line(svgSize/2 + pos1[0], svgSize/2 + pos1[1], svgSize/2 + pos2[0],  svgSize/2 + pos2[1], type2);
+    };
+
+    let numInner = 5;
+    let numOuter = 4;
+    for(let i = 0; i < numInner; i++) {
+        for(let j = 0; j<numOuter; j++){
+        circleLine(i, i*numOuter + j, numInner, numOuter, innerRadius, outerRadius, "inner", "outer");
         }
-    };
-
-    const circleLine = (i1, i2, n, radius, addClass) => {
-        const pos1 = circlePos(i1, n, radius);
-        const pos2 = circlePos(i2, n, radius);
-        svg.line(svgSize/2 + pos1[0], svgSize/2 + pos1[1], svgSize/2 + pos2[0],  svgSize/2 + pos2[1], addClass);
-    };
-
-    for(let i = 0; i < 5; i++) {
-        const numOuter = 4 * 5;
-        const wrap = n => (n + i * 4) % numOuter;
-        circleLine(wrap(0), wrap(7), [5, 5*4], outerRadius);
-        circleLine(wrap(1), wrap(10), [5, 5*4], outerRadius);
     }
 
-    circleLine(0, 1, 5, innerRadius, "inner");
-    circleLine(1, 2, 5, innerRadius, "inner");
-    circleLine(2, 3, 5, innerRadius, "inner");
-    circleLine(3, 4, 5, innerRadius, "inner");
-    circleLine(4, 0, 5, innerRadius, "inner");
-    circleLine(0, 2, 5, innerRadius, "inner");
-    circleLine(2, 4, 5, innerRadius, "inner");
-    circleLine(4, 1, 5, innerRadius, "inner");
-    circleLine(1, 3, 5, innerRadius, "inner");
-    circleLine(3, 0, 5, innerRadius, "inner");
+    for (let i = 0; i < numInner; i++) {
+        for (let j = i+1; j < numInner; j ++) {
+            circleLine(i, j, numInner, numOuter, innerRadius, outerRadius, "inner", "inner");
+        }
+    }
+
     
     // svg.line(svgSize/2 + circlePos(), svgSize/2 - outerRadius, svgSize/2,  svgSize/2 + outerRadius);
     

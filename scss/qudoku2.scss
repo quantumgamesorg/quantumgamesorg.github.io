@@ -245,7 +245,7 @@ html {
         width: 100%;
         max-width: 80vh;
         order: 2;
-        margin-top: 20px;
+        margin-top: 40px;
         
         font-size: 16pt;
         font-size: calc(max(min(4vw, 2.5vh), 8pt));
@@ -311,12 +311,13 @@ html {
 
         .circle {
             display: flex;
+            flex-direction: column;
             position: absolute;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            width: 12%;
-            height: 12%;
+            width: 18%;
+            height: 13%;
             transform: translate(-50%, -50%);
             padding: 1%;
             font-size: 14pt;
@@ -369,10 +370,26 @@ html {
                 font-weight: bold;
             }
 
-            .value {
-                width: 50%;
-                text-align: center;
+            .rowOfValues {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .value {
+                    width: 50%;
+                    text-align: center;
+                }
             }
+
+            .topVals, .bottomVals {
+                width: 50%;
+            }
+            
+            .midVals {
+                width: 100%;
+            }
+
+            
         }
     }
 
