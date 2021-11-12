@@ -1,46 +1,146 @@
+var intervalID = 0;
+
+var state = 0;
+
 function startSimulation() {
-    window.setInterval(simulate, 3000);
-    document.getElementById("pauseButton").innerHTML = 'Pause'
-    document.getElementById("pauseButton").onClick = pauseSimulation;
+    state = 0;
+    document.getElementById("emmiter").style.backgroundColor = 'white';
+    clearDetectors();
+    intervalID = window.setInterval(simulate, 1500);
+    this.innerHTML = 'Pause'
+    this.onclick = pauseSimulation;
 }  
 
 function pauseSimulation() {
-    window.clearInterval; 
-    document.getElementById("pauseButton").innerHTML = 'Resume'
-    document.getElementById("pauseButton").onClick = startSimulation;
+    window.clearInterval(intervalID); 
+    this.innerHTML = 'Resume'
+    this.onclick = startSimulation;
 }
-
-
-window.onLoad = function() {
-    startSimulation;
-}
-
-
-let content = document.getElementById("content");
-
-let boardContainer = document.getElementById("boardContainer");
-const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
-
-document.querySelectorAll("#upperLeft button")[0].onclick = () => pauseSimulation;
-document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.q
-// document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-// document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-// document.querySelectorAll("#upperLeft button")[6].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[3].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
-
-document.querySelectorAll(".person").forEach((e, i) => {
-    e.onmouseenter = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
-    };
-    e.onmouseleave = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
-    };
-});
 
 function simulate() {
-    //emmiter needs to light up first
+    switch (state) {
+        case 0:
+            toggleEmmiter();
+            break;
+        case 1:
+            toggleDetectors();
+            break;
+        case 2:
+            toggleEmmiter();
+            break;
+        case 3:
+            clearDetectors();
+            break;
+    }
+    state = (state+1) % 4; //the are 4 states
+}
+
+function toggleEmmiter() {
     let emmiter = document.getElementById("emmiter");
-    emmiter.style.backgroundColor = "yellow";
+    if(emmiter.style.backgroundColor == "yellow") {
+            emmiter.style.backgroundColor = "white";
+    } else {
+            emmiter.style.backgroundColor = "yellow";
+    }
+}
+
+
+function toggleDetectors() {
+    //0 is red, 1 is green
+    let row = generateRandomRow();
+    let colors = [generateRandomColor(), generateRandomColor()]
+    let color3 = 0;
+    if (colors[0] + colors[1] === 0) { //if both red
+        color3 = 1; //make it green
+    } else if (colors[0] + colors[1] === 1){ //if one red, one green
+        color = 0; //make it red
+    } else {    //both are green
+        color = 1; //make it green
+    }
+    colors.push(color3);
+
+    let numCols = 3;
+    //paint the cells
+    for(let i = 0; i < numCols; ++i) {
+        let color = colors[i] ? 'green' : 'red'
+        document.getElementById(`ar${row}c${i}`).style.backgroundColor = color;
+    }
+
+    randomCol = generateRandomColumn();
+    toggleBob(row, randomCol, colors[randomCol]);
+}
+
+function toggleBob(row, col, commonColor) {
+    let colors = [commonColor, generateRandomColor()] 
+    let color3 = 0;
+    if (colors[0] + colors[1] === 0) { //if both red
+        color3 = 0; //make it red
+    } else if (colors[0] + colors[1] === 1){ //if one red, one green
+        color = 1; //make it green
+    } else {    //both are green
+        color = 0; //make it red
+    }
+    colors.push(color3);
+
+    let numRows = 3;
+    //paint the cells
+    for(let i = 0; i < numRows; ++i) {
+        let color = colors[i] ? 'green' : 'red'
+        let j = (row + i) % numRows;
+        document.getElementById(`br${j}c${col}`).style.backgroundColor = color;
+    }
+}   
+
+
+function clearDetectors() {
+    let cells = document.querySelectorAll(".square");
+    for (let i = 0; i < cells.length; ++i) {
+        cells[i].style.backgroundColor = 'white'
+    }
+}
+
+
+
+
+function generateRandomRow() {
+    let numRows = 3;
+    return Math.floor(Math.random() * numRows)
+}
+
+function generateRandomColumn() {
+    let numCols = 3;
+    return Math.floor(Math.random() * numCols)
+}
+
+function generateRandomColor() {
+    let numColors = 2;
+    return Math.floor(Math.random() * numColors)
+}
+
+window.onload = () => {
+    let content = document.getElementById("content");
+
+    let boardContainer = document.getElementById("boardContainer");
+    //const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
+
+    document.getElementById("pauseButton").onclick = pauseSimulation;
+    document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
+    document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+    document.q
+    // document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+    // document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+    // document.querySelectorAll("#upperLeft button")[6].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[3].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+    document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
+
+    document.querySelectorAll(".person").forEach((e, i) => {
+        e.onmouseenter = ev => {
+            document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
+        };
+        e.onmouseleave = ev => {
+            document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
+        };
+    });
+
+ 
+    startSimulation();
 }

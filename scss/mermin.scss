@@ -178,13 +178,48 @@ html {
     width: 700px;
 }
 
-.sensor {
+.detectorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#aliceSquaresContainer {
+    min-height: 190px;
+    min-height: 150px;
+    width: 190px;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .rowLabel {
+        display: flex;
+        margin: 0px;
+        height: 50px;
+        font-size: 16pt;
+        font-weight: 100;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+#bobSquaresContainer {
     min-height: 150px;
     min-height: 150px;
     width: 150px;
     height: 150px;
     display: flex;
     flex-wrap: wrap;
+
+    .columnLabel {
+        display: flex;
+        margin: 0px;
+        width: 50px;
+        font-size: 16pt;
+        font-weight: 100;
+        align-items: center;
+        justify-content: space-evenly;
+    }
 }
 
 .square {
@@ -193,10 +228,17 @@ html {
     border: 1pt black solid;
 }
 
+#emmiterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #emmiter {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+    margin: -10px;
     border: 2pt black solid;
 }
 
