@@ -6,7 +6,7 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.appendChild(makeBoard(50));
+boardContainer.appendChild(makeBoard(45));
 
 document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -30,7 +30,7 @@ document.querySelectorAll(".person").forEach((e, i) => {
 
 
 function makeBoard(outerRadius) {
-    const innerRadius = outerRadius * 0.6;
+    const innerRadius = outerRadius * 0.55;
     const innerVals = [...Array(5).keys()].map(i => [...Array(8).keys()].map(n => n + 8 * i + 1));
     const outerVals = [[ 1, 2, 13, 14, 15, 16, 3, 4 ]    , [ 1, 2, 19, 20, 23, 24, 5, 6 ]    , [ 1, 3, 26, 28, 30, 32, 5, 7 ]    , [ 1, 4, 37, 38, 39, 40, 6, 7 ],
                        [ 9, 11, 18, 20, 22, 24, 13, 15 ] , [ 9, 10, 27, 28, 31, 32, 13, 14 ] , [ 9, 12, 35, 36, 39, 40, 14, 15 ] , [ 5, 6, 9, 10, 11, 12, 7, 8 ],
@@ -88,7 +88,7 @@ function makeBoard(outerRadius) {
 
     board.appendChild(drawLines(outerRadius, innerRadius));
 
-    boardContainer.querySelectorAll(".scoreboard .entry").forEach((el, i) => {
+    document.querySelectorAll(".scoreboard .entry").forEach((el, i) => {
         el.onmouseenter = () => {
             circleMap[i + 1].forEach(c => c.classList.add("highlight"));
         };
@@ -102,11 +102,11 @@ function makeBoard(outerRadius) {
 }
 
 function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
-    let innerXOffset = 1.3;
+    let innerXOffset = 1;
     let innerYOffset = 1;
     console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
     if(type === 'outer'){
-        let spread = 3;
+        let spread = 2.5;
         const angleRelativeToCenter = Math.floor(index/numOuter) * 2 * Math.PI / numInner;
         
         const alignTerm = ((numOuter - 1)/numOuter * spread) / 2;
@@ -122,8 +122,10 @@ function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
         let deltaBx =  deltaR * Math.sin(angleRelativeToCenter + angleRelativeToInnerCircle);
         let deltaBy = deltaR *-Math.cos(angleRelativeToCenter + angleRelativeToInnerCircle);
 
-        var outerXOffset = 1.25;
-        var outerYOffset = .9;
+        var outerXOffset = 1.2;
+        var outerYOffset = 1.2;
+        // var outerXOffset = 1.17;
+        // var outerYOffset = 0.91;
         
         console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
         return [baseX * innerXOffset + deltaBx * outerXOffset, baseY  * innerYOffset + deltaBy * outerYOffset]
@@ -180,13 +182,13 @@ function makeCircle(vals, x, y) {
 
     circle.onmouseenter = () => {
         vals.forEach(v => {
-            boardContainer.querySelector(".scoreboard").children[v - 1].classList.add("highlight");
+            document.querySelector(".scoreboard").children[v - 1].classList.add("highlight");
         });
     };
 
     circle.onmouseleave = () => {
         vals.forEach(v => {
-            boardContainer.querySelector(".scoreboard").children[v - 1].classList.remove("highlight");
+            document.querySelector(".scoreboard").children[v - 1].classList.remove("highlight");
         });
     };
 
@@ -244,7 +246,7 @@ function drawLines(outerRadius, innerRadius) {
 
 function addValues(values) {
     values.forEach(v => {
-        let entry = boardContainer.querySelector(".scoreboard").children[v - 1];
+        let entry = document.querySelector(".scoreboard").children[v - 1];
         let current = entry.children[1].innerText;
         let current_n = parseInt(current.substr(1, current.length-2));
 
@@ -259,7 +261,7 @@ function addValues(values) {
 
 function removeValues(values) {
     values.forEach(v => {
-        let entry = boardContainer.querySelector(".scoreboard").children[v - 1];
+        let entry = document.querySelector(".scoreboard").children[v - 1];
         let current = entry.children[1].innerText;
         let current_n = parseInt(current.substr(1, current.length-2));
 
@@ -273,7 +275,7 @@ function removeValues(values) {
 }
 
 function checkWon() {
-    const allEven = Array.prototype.slice.call(boardContainer.querySelector(".scoreboard").children).every(e => !e.classList.contains("odd"));
+    const allEven = Array.prototype.slice.call(document.querySelector(".scoreboard").children).every(e => !e.classList.contains("odd"));
     const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
 
     boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
@@ -287,7 +289,7 @@ function checkWon() {
 }
 
 function reset() {
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".scoreboard .entry")).forEach(e => {
+    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .entry")).forEach(e => {
         e.children[1].innerText = "(0)";
         e.classList.remove("even");
         e.classList.remove("odd");
@@ -309,7 +311,7 @@ function solve() {
     reset();
 
     let circles = boardContainer.querySelectorAll(".board .circle");
-    [[17,10], [0,9], [1,8], [2,13], [3,12], [4,11], [5,16], [6,15], [7,14]].forEach(pair => {
+    [[0,7], [1,10], [2,13], [3,16], [4,11], [5,14], [6,17], [8,15], [9,18], [12,19]].forEach(pair => {
         if(Math.random() >= 0.5) {
             circles[pair[0]].click();
         }else {
@@ -317,10 +319,10 @@ function solve() {
         }
     });
 
-    let score = boardContainer.querySelectorAll(".scoreboard .entry");
-    for(let i = 0; i < 6; i++) {
-        if(score[i * 4].classList.contains("odd")){
-            circles[[18, 22, 20, 21, 19, 23][i]].click();
+    let score = document.querySelectorAll(".scoreboard .entry");
+    for(let i = 0; i < 5; i++) {
+        if(score[i * 8].classList.contains("odd")){
+            circles[[20, 21, 22, 23, 24][i]].click();
         }
     }
 
