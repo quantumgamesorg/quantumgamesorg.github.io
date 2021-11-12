@@ -53,9 +53,9 @@ function toggleDetectors() {
     if (colors[0] + colors[1] === 0) { //if both red
         color3 = 1; //make it green
     } else if (colors[0] + colors[1] === 1){ //if one red, one green
-        color = 0; //make it red
+        color3 = 0; //make it red
     } else {    //both are green
-        color = 1; //make it green
+        color3 = 1; //make it green
     }
     colors.push(color3);
 
@@ -66,8 +66,10 @@ function toggleDetectors() {
         document.getElementById(`ar${row}c${i}`).style.backgroundColor = color;
     }
 
-    randomCol = generateRandomColumn();
-    toggleBob(row, randomCol, colors[randomCol]);
+    bobColumn = generateRandomColumn();
+    let bobColors = toggleBob(row, bobColumn, colors[bobColumn]);
+
+    return [row, colors, bobColumn, bobColors];
 }
 
 function toggleBob(row, col, commonColor) {
@@ -76,9 +78,9 @@ function toggleBob(row, col, commonColor) {
     if (colors[0] + colors[1] === 0) { //if both red
         color3 = 0; //make it red
     } else if (colors[0] + colors[1] === 1){ //if one red, one green
-        color = 1; //make it green
+        color3 = 1; //make it green
     } else {    //both are green
-        color = 0; //make it red
+        color3 = 0; //make it red
     }
     colors.push(color3);
 
@@ -89,6 +91,9 @@ function toggleBob(row, col, commonColor) {
         let j = (row + i) % numRows;
         document.getElementById(`br${j}c${col}`).style.backgroundColor = color;
     }
+
+    return colors;
+
 }   
 
 
@@ -144,3 +149,49 @@ window.onload = () => {
  
     startSimulation();
 }
+
+
+function checkStatistics(n) {
+    let aliceResults = new Array(12).fill(0);
+    let bobResults = new Array(12).fill(0);
+
+    for (let i=0; i < n; ++i) {
+        let sample = toggleDetectors();
+        let aliceIndex = computeAliceIndex(sample[0], sample[1])
+        let bobIndex = computeBobIndex(sample[2], sample[3])
+
+        aliceResults[aliceIndex]++;
+        bobResults[bobIndex]++
+    }
+
+    console.log("Alice")
+    console.log(aliceResults);
+    console.log("Bob")
+    console.log(bobResults);
+}
+
+function computeAliceIndex(row, colors) {
+        return (row*4 + computeColorIndex(colors))
+}
+function computeBobIndex(column, colors) {
+    return (column*4 + computeColorIndex(colors))
+}
+
+function computeColorIndex(colors) {
+    if (colors[0]) {    //first square is green
+        if(colors[1]) { //second square is green
+            return 3;
+        } else {        //second square is red
+            return 2;
+        }
+    } else {            //first square is red
+        if(colors[1]) { //second square is green
+            return 1;   
+        } else {        //second square is red
+            return 0;
+        }
+    }
+}
+
+
+
