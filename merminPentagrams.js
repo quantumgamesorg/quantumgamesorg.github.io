@@ -311,6 +311,7 @@ window.onload = () => {
 function checkStatistics(n) {
     let aliceResults = new Array(40).fill(0);
     let bobResults = new Array(40).fill(0);
+    clearDetectors();
 
     for (let i=0; i < n; ++i) {
         let sample = toggleDetectors();
