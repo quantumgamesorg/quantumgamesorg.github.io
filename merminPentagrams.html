@@ -7,13 +7,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/mermin.css">
+        <link rel="stylesheet" href="css/merminPentagrams.css">
         <link rel="stylesheet" href="css/windowManager.css">
     </head>
     <body>
         <header><h1>Quantum Games</h1> <a href="qudoku.html">Qudoku</a> | <a href="qudoku2.html">Qudoku 2</a> | <a href="mermin.html">Mermin's magic squares</a>  | Other Game</header>
         <div id="content">
-            <h1 id="title">Mermin's Magic Squares</h1>
+            <h1 id="title">Mermin's Magic Pentagrams</h1>
             <hr>
             <h1 id="does"></h1>
             <div id="upperArea">
@@ -45,52 +45,10 @@
                         </div>
                     </div>
                 </div>
-                <div id="simulationContainer">
-                    <div class='detectorContainer'>
-                        <h1>Alice</h1>
-                        <div id='aliceSquaresContainer' class='sensor'>
-                            <div class='rowLabel'>R1</div>
-                            <div id = "ar0c0" class='square'></div>
-                            <div id = "ar0c1" class='square'></div>
-                            <div id = "ar0c2" class='square'></div>
-                            <div class='rowLabel'>R2</div>
-                            <div id = "ar1c0" class='square'></div>
-                            <div id = "ar1c1" class='square'></div>
-                            <div id = "ar1c2" class='square'></div>
-                            <div class='rowLabel'>R3</div>
-                            <div id = "ar2c0" class='square'></div>
-                            <div id = "ar2c1" class='square'></div>
-                            <div id = "ar2c2" class='square'></div>
-                       </div>
-                    </div>
-                   
-                   <div id='emmiterContainer'>
-                        <h2>S</h2>
-                        <div id='emmiter'></div>
-                   </div>
-                   <div class='detectorContainer'>
-                    <h1>Bob</h1>
-                    <div id='bobSquaresContainer' class='sensor'>
-                         <div id = "br0c0" class='square'></div>
-                         <div id = "br0c1" class='square'></div>
-                         <div id = "br0c2" class='square'></div>
-                         <div id = "br1c0" class='square'></div>
-                         <div id = "br1c1" class='square'></div>
-                         <div id = "br1c2" class='square'></div>
-                         <div id = "br2c0" class='square'></div>
-                         <div id = "br2c1" class='square'></div>
-                         <div id = "br2c2" class='square'></div>
-                         <div class='columnLabel'>C1</div>
-                         <div class='columnLabel'>C2</div>
-                         <div class='columnLabel'>C2</div>
-                    </div>
-                  </div>
-                </div>
             </div>
             <div id='explanationContainer'>
-                <p>The number of red panels on Alice's detector is always even</p>
-                <p>The number of red panels on Bob's detector is always odd</p>
-                <p>The single lighted panel common to both detectors always has the same color on both</p>
+                <p>An odd number of red panels always lights up on each detector</p>
+                <p>The lighted panel(s) common to both detectors always has (have) the same color(s)</p>
             </div>
             <hr>
             <h2>More Information</h2>
@@ -144,6 +102,6 @@
             Copyright info, contact info, etc.
         </footer>
         <script src="windowManager.js" async defer></script>
-        <script src="mermin.js" async defer></script>
+        <script src="merminPentagrams.js" async defer></script>
     </body>
 </html>
