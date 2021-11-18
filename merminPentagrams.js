@@ -55,10 +55,10 @@ function clearDetectors() {
 function toggleDetectors() {
     let aliceLine = generateRandomLine();
     let aliceCircles = generateCirclesOnLine(aliceLine);
-    console.log(`Generated circles on line ${aliceLine} are ${aliceCircles}`)
+    //console.log(`Generated circles on line ${aliceLine} are ${aliceCircles}`)
     let bobLine = generateRandomLine();
     let bobCircles = generateCirclesOnLine(bobLine);
-    console.log(`Generated circles on line ${bobLine} are ${bobCircles}`)
+    //console.log(`Generated circles on line ${bobLine} are ${bobCircles}`)
 
     let intersection = calculateIntersection(aliceCircles, bobCircles);
 
@@ -114,6 +114,8 @@ function toggleDetectors() {
         document.getElementById(`ac${aliceCircles[i]}`).style.fill =  (numRed%2 ? 'green' : 'red');
         document.getElementById(`bc${bobCircles[i]}`).style.fill =  (numRed%2 ? 'green' : 'red');
     }
+
+    return [aliceLine, bobLine];
 }
 
 //this returns all circles which lie on line number lineNum
@@ -307,16 +309,16 @@ window.onload = () => {
 
 
 function checkStatistics(n) {
-    let aliceResults = new Array(12).fill(0);
-    let bobResults = new Array(12).fill(0);
+    let aliceResults = new Array(40).fill(0);
+    let bobResults = new Array(40).fill(0);
 
     for (let i=0; i < n; ++i) {
         let sample = toggleDetectors();
-        let aliceIndex = computeAliceIndex(sample[0], sample[1])
-        let bobIndex = computeBobIndex(sample[2], sample[3])
 
-        aliceResults[aliceIndex]++;
-        bobResults[bobIndex]++
+        aliceResults[sample[0]*8 + calculateColorBucket('a', sample[0])]++;
+        bobResults[sample[1]*8 + calculateColorBucket('b', sample[1])]++
+
+        clearDetectors();
     }
 
     console.log("Alice")
@@ -325,7 +327,19 @@ function checkStatistics(n) {
     console.log(bobResults);
 }
 
-
+function calculateColorBucket(aliceOrBob, lineNum) {
+    let circles = generateCirclesOnLine(lineNum);
+    let numRed = 0;
+    let redIndex = -1;
+    let greenIndex = -1;
+    for (let i = 0; i < circles.length; ++i) {
+        let isRed = document.getElementById(`${aliceOrBob}c${circles[i]}`).style.fill === 'red';
+        numRed += isRed;
+        isRed ? redIndex = i : greenIndex = i;
+    }
+    if (numRed === 1) {return redIndex;}
+    else {return circles.length + greenIndex;}
+} 
 
 
 
