@@ -214,7 +214,7 @@ function drawPentagram(aliceOrBob, svgSize) {
         let coords = getPentagramPointCoords(scaledSize, i);
         newCircle.setAttribute('cx', coords[0] + "px");
         newCircle.setAttribute('cy', coords[1] + "px");
-        newCircle.setAttribute('r', "10px");
+        newCircle.setAttribute('r', "12px");
         newCircle.setAttribute("stroke", "black")
         newCircle.setAttribute("fill", "white")
         svg.append(newCircle);
