@@ -62,6 +62,7 @@ html {
     width: 100%;
     margin-left: -14.5vw;
     min-width: 1200px;
+    margin-bottom: -70px;
 }
 
 
@@ -173,9 +174,9 @@ html {
 #simulationContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-width: 950px;
-    width: 950px;
+    justify-content: space-evenly;
+    min-width: 1000px;
+    width: 1000px;
     margin-bottom: 100px;
 }
 
