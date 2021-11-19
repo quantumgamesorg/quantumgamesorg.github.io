@@ -62,7 +62,7 @@ html {
 }
 
 #upperLeft, #upperRight {
-    width: 180px;
+    width: 200px;
     margin: 0px 20px 20px 20px;
     display: flex;
     flex-direction: column;
@@ -135,7 +135,7 @@ html {
 
 #upperRight {
     // opacity: 0.5;
-        margin-left: 30px;
+        margin-left: 40px;
         margin-right: 10px;
 }
 
@@ -177,10 +177,11 @@ html {
         height: 250px !important;
         margin-top: -10px !important;
         margin-bottom: 10px !important;
+        flex-direction: row !important;
 
         .entry {
-            height: 25% !important;
-            width: calc(100% / 10) !important;
+            height: calc(100% / 5) !important;
+            width: calc(100% / 8) !important;
         }
     }
 }
@@ -219,7 +220,7 @@ html {
         padding-right: 5px;
     
         border: 1px solid #666;
-        background-color: #fff;
+        background-color: #fcc;
         font-size: 20pt;
         font-size: calc(min(6vw, 24pt));
         text-align: center;
@@ -375,7 +376,8 @@ html {
 .scoreboard {
     display: flex;
     flex-wrap: wrap;
-    height: 15vh;
+    flex-direction: column;
+    height: 80vh;
     width: 100%;
     max-width: 80vh;
     order: 2;
@@ -391,11 +393,11 @@ html {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 50%;
-        width: calc(100% / 4);
+        height: calc(100% / 8);
+        width: calc(100% / 5);
     
         border: 1px solid #666;
-        background-color: #fff;
+        background-color: #dfd;
         // transition: background-color ease 0.1s;
         transition: transform ease-out 0.1s, font-weight ease 0.1s;
 
@@ -419,6 +421,7 @@ html {
     }
 
     @media (max-width: 650px) {
+        flex-direction: row;
         height: 150px;
 
         .entry {
