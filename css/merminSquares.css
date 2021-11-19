@@ -126,7 +126,7 @@
 
 #aliceSquaresContainer {
   min-height: 225px;
-  width: 255px;
+  width: 265px;
   height: 225px;
   display: flex;
   flex-wrap: wrap; }
@@ -137,7 +137,8 @@
     font-size: 16pt;
     font-weight: 100;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    margin-right: 10px; }
 
 #bobSquaresContainer {
   min-height: 225px;
@@ -152,7 +153,8 @@
     font-size: 16pt;
     font-weight: 100;
     align-items: center;
-    justify-content: space-evenly; }
+    justify-content: space-evenly;
+    margin-top: 10px; }
 
 .square {
   width: 75px;
