@@ -301,7 +301,7 @@
   flex-wrap: wrap;
   flex-direction: column;
   height: 80vh;
-  width: 100%;
+  width: max(100%, min(250px, 14vw));
   max-width: 80vh;
   order: 2;
   margin-top: 40px;
