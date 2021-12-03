@@ -103,8 +103,8 @@
 }
 
 #upperRight {
-  margin-left: 40px;
-  margin-right: 10px;
+  margin-left: 50px;
+  margin-right: 0px;
 }
 
 @media (max-width: calc(100vh - 100px + 460px)) {
