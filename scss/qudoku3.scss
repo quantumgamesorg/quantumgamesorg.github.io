@@ -1,0 +1,527 @@
+html {
+	// scroll-snap-type: y proximity;
+}
+
+#content {
+    flex-direction: column;
+    align-items: center;
+
+    > p {
+        width: 800px;
+        max-width: 90%;
+    
+        line-height: 16pt;
+    }
+
+    > hr {
+        width: 850px;
+        max-width: 92%;
+    
+        line-height: 16pt;
+    }
+
+    > ul {
+        padding-left: 5px;
+        margin-top: 5px;
+    }
+}
+
+#title {
+    margin-top: 10px;
+    margin-bottom: 4px;
+
+    + hr {
+        width: 400px !important;
+    }
+}
+
+#does {
+    margin-bottom: 20px;
+
+    color: #600;
+    
+    &::after {
+        content: "Does God play dice?";
+    }
+
+    &.won {
+        color: #060;
+
+        &::after {
+            content: "God does play dice!";
+        }
+    }
+}
+
+#upperArea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 100%;
+}
+
+#upperLeft, #upperRight {
+    width: 200px;
+    margin: 0px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+
+    // text-align: center;
+
+    // border: 1px dashed red;
+}
+
+#upperLeft .leftArea > button {
+    margin-bottom: 6px;
+    font-size: 12pt;
+    cursor: pointer;
+
+    border-radius: 5px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid #888;
+    text-decoration: none;
+    box-shadow: #0004 2px 2px 4px;
+    transform: translate(0.1px, 0.1px);
+
+    &:hover {
+        background-color: #ccc;
+    }
+
+    &:active {
+        background-color: #bbb;
+        box-shadow: #0004 1px 1px 4px;
+        transform: translate(1px, 1px);
+    }
+
+    &.resetButton {
+        background-color: #fdd;
+
+        &:hover {
+            background-color: #fcc;
+        }
+
+        &:active {
+            background-color: #faa;
+        }
+    }
+
+    &.solveButton {
+        background-color: #dfd;
+
+        &:hover {
+            background-color: #cfc;
+        }
+
+        &:active {
+            background-color: #afa;
+        }
+    }
+
+    &.infoButton {
+        background-color: #ffd;
+
+        &:hover {
+            background-color: #ffc;
+        }
+
+        &:active {
+            background-color: #ffa;
+        }
+    }
+}
+
+#upperRight {
+    // opacity: 0.5;
+    margin-left: 50px;
+    margin-right: 0px;
+}
+
+@media (max-width: calc(100vh - 100px + 460px)) {
+    #upperArea {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #upperLeft {
+        width: 800px;
+        max-width: 95%;
+        margin: 10px;
+        margin-top: 0px;
+        order: 2;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        h3 {
+            margin-top: 0px;
+        }
+
+        .leftArea {
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    }
+
+    #upperRight {
+        width: 500px;
+        max-width: 95%;
+        margin: 10px;
+        order: 1;
+    }
+
+    .scoreboard {
+        height: 250px !important;
+        margin-top: -10px !important;
+        margin-bottom: 10px !important;
+        flex-direction: row !important;
+
+        .entry {
+            height: calc(100% / 5) !important;
+            width: calc(100% / 8) !important;
+        }
+    }
+}
+
+#boardContainer {
+    position: relative;
+    display: flex;
+    max-width: 95%;
+    align-self: center;
+    align-items: center;
+    // justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    height: calc(100vh - 50px);
+    width: calc(100vh - 100px);
+    min-width: 200px;
+
+    scroll-snap-align: end;
+    scroll-snap-stop: normal;
+
+    .moveCounter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        // right: 0;
+        // top: 0;
+        top: calc(5%);
+        right: calc(-5%);
+        // width: calc(min(7vw, 40px));
+        // max-width: 40px;
+        // height: calc(min(8vw, 50px));
+        // max-height: 50px;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+    
+        border: 1px solid #666;
+        background-color: #fcc;
+        font-size: 20pt;
+        font-size: calc(min(6vw, 24pt));
+        text-align: center;
+
+        @media (max-width: 650px) {
+            top: calc(2%);
+            right: calc(3%);
+        }
+    
+        &::before {
+            position: absolute;
+            width: 200%;
+            left: 50%;
+            bottom: 100%;
+            font-size: 12pt;
+            font-size: calc(min(4vw, 14pt));
+            text-align: center;
+            transform: translate(-50%);
+        
+            content: "moves";
+        }
+    
+        &.even {
+            background-color: #fcc;
+        }
+    
+        &.odd {
+            background-color: #cfc;
+        }
+    }
+
+    .scoreboard {
+        margin-top: 5%;
+        order: 3;
+        
+        font-size: 12pt;
+        font-size: calc(min(4vw, 14pt));
+    }
+
+    .board {
+        display: flex;
+        position: relative;
+        width: 100%;
+        // padding-bottom: 95%; // hack to make height stay the same as width
+        max-width: 95%;
+        min-width: 200px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+
+        // make the board take up more of the horizontal space when it gets small
+        // TODO: this is a dumb way to do this
+        @media (max-width: 650px) {
+            padding-bottom: 95%; // hack to make height stay the same as width
+            max-width: 95%;
+        }
+
+        .gridRow {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 10vh;
+            // transform: translate(-50%, -50%);
+            font-size: 14pt;
+            font-size: calc(min(2vw, 1.75vh));
+            order: 2;
+
+            user-select: none;
+
+            .gridSpot {
+                display: flex;
+                flex-direction: column;
+                width: 20%;
+                height: 100%;
+                border-bottom: 1px solid black;
+                border-right: 1px solid black;
+
+                &:nth-child(4n) {
+                    border-right: 1px solid black;
+                }
+
+                &.selected {
+
+                }
+
+                .basis {
+                    display: flex;
+                    flex-direction: row;
+                    height: calc(33% - 5%);
+                    margin-top: 2.5%;
+                    margin-bottom: 2.5%;
+                    background-color: #fff;
+                    border-radius: 2vh;
+
+                    &.selected {
+                        background-color: #fcc;
+                    }
+
+                    .val {
+                        width: 25%;
+
+                        text-align: center;
+                        cursor: pointer;
+
+                        &.hover {
+                            transform: scale(1.5);
+                            text-shadow: #995 0 0 0.25vh;
+                            
+                            &::after {
+                                position: absolute;
+                                top: 45%;
+                                left: 50%;
+                                width: 2.5vh;
+                                height: 2.5vh;
+                                transform: translate(-50%, -50%);
+
+                                border: 1px dashed #0008;
+                                border-radius: 50%;
+                                content: "";
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    &.won .board .circle.selected {
+        background-color: #cfc;
+    }
+
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+
+        .inner {
+            // stroke-width: 2;
+        }
+    }
+}
+
+.window h3 {
+    text-align: center;
+    margin: 10px;
+}
+
+#win_about {
+    width: 400px;
+    height: 300px;
+}
+
+#win_rules {
+    width: 400px;
+    height: 300px;
+}
+
+#peopleContainer {
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    // align-items: start;
+    position: relative;
+    width: 600px;
+    height: 600px;
+    max-width: 95vw;
+    max-height: 95vw;
+    margin-bottom: 20px;
+    // border: 1px solid blue;
+    
+    z-index: 1;
+    
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .person {
+        width: 33%;
+        position: absolute;
+        clip-path: circle(calc(35% + 1.5px) at 50% 50%);
+        transition: clip-path 0.2s;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+
+        img {
+            width: 100%;
+            height: auto;
+            margin: 1px;
+            margin-left: 0px;
+            margin-right: 2px;
+            clip-path: circle(35% at 50% 50%);
+            transition: clip-path 0.2s;
+            border: 1px solid black;
+
+            display: block; // need this or the img will get a bit of padding on the bottom that is impossible to remove otherwise
+        }
+
+        div {
+            position: absolute;
+            bottom: 1px;
+            left: 1px;
+            width: calc(100% - 2px);
+            height: 50px;
+            text-align: center;
+            line-height: 18px;
+            padding-top: 10px;
+
+            text-shadow: #fff 0px 0px 6px;
+            background-color: white;
+            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        &::before {
+            clip-path: circle(calc(35% + 1.5px) at 50% 50%);
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 1.0;
+            transition: clip-path 0.2s, opacity 0.2s;
+
+            background-color: #000f;
+        }
+
+        &:hover {
+            clip-path: circle(81% at 50% 40%);
+            z-index: 3;
+
+            img {
+                clip-path: circle(81% at 50% 40%);
+                margin: 0px;
+                // margin-left: 1px;
+                margin-right: 1px;
+            }
+
+            div {
+                opacity: 1;
+            }
+
+            &::before {
+                clip-path: circle(80% at 50% 40%);
+                opacity: 0.0;
+            }
+        }
+
+        &:nth-of-type(1) {
+            top: 15%;
+            left: 50%;
+        }
+
+        &:nth-of-type(2) {
+            top: 68%;
+            left: 18%;
+        }
+
+        &:nth-of-type(3) {
+            top: 68%;
+            left: 82%;
+        }
+
+        &:nth-of-type(4) {
+            top: 85%;
+            left: 50%;
+        }
+
+        &:nth-of-type(5) {
+            top: 32%;
+            left: 18%;
+        }
+
+        &:nth-of-type(6) {
+            top: 32%;
+            left: 82%;
+        }
+
+        &:nth-of-type(7) {
+            top: 50%;
+            left: 50%;
+        }
+    }
+}
+
+.personDesc {
+    text-decoration: none;
+    &.highlight {
+        text-decoration: underline;
+    }
+}
