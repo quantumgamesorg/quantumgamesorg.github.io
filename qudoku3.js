@@ -6,7 +6,7 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.appendChild(makeBoard(45));
+boardContainer.insertBefore(makeBoard(45), boardContainer.firstChild);
 
 document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -64,18 +64,21 @@ function makeBoard(outerRadius) {
         
                 let basis = document.createElement("div");
                 basis.classList.add("basis");
-        
+                
+                let basis_vals = []
                 for(let x = 0; x < 4; x++) {
                     let val = vals[y + gy * 3][x + gx * 4];
-        
+                    basis_vals.push(val);
+
                     let val_el = document.createElement("div");
                     val_el.classList.add("val");
+                    val_el.classList.add(val);
         
                     val_el.innerText = val;
 
-                    val_el.onclick = e => {
+                    /*val_el.onclick = e => {
                         val_el.parentElement.classList.toggle("selected");
-                    };
+                    };*/
 
                     val_el.onmouseenter = e => {
                         [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
@@ -97,6 +100,15 @@ function makeBoard(outerRadius) {
                 }
         
                 gridSpot.appendChild(basis);
+
+                basis.onclick = () => {
+                    if(basis.classList.toggle("selected")) {
+                        addValues(basis_vals);
+                    } else {
+                        removeValues(basis_vals);
+                    }
+                    updateScore();
+                };
             }
 
             gridRow.appendChild(gridSpot);
@@ -105,17 +117,64 @@ function makeBoard(outerRadius) {
         board.appendChild(gridRow);
     }
 
-    document.querySelectorAll(".scoreboard .entry").forEach((el, i) => {
+    document.querySelectorAll(".scoreboard .ray").forEach((el, i) => {
+        let val_elems = document.getElementsByClassName(`val ${i + 1}`);
         el.onmouseenter = () => {
-            circleMap[i + 1].forEach(c => c.classList.add("highlight"));
+            for (let j = 0; j < val_elems.length; ++j) {
+                console.log(i);
+                val_elems[j].classList.add("highlight");
+            }
         };
 
         el.onmouseleave = () => {
-            circleMap[i + 1].forEach(c => c.classList.remove("highlight"));
+            for (let j = 0; j < val_elems.length; ++j) {
+                val_elems[j].classList.remove("highlight");
+            }
         };
     })
 
+ 
     return board;
+}
+
+function addValues(values) {
+    values.forEach(v => {
+        let entry = document.querySelector(".scoreboard").children[v - 1];
+        let current = entry.children[1].innerText;
+        let current_n = parseInt(current.substr(1, current.length-2));
+
+        current_n++;
+        entry.children[1].innerText = "(" + current_n + ")";
+
+        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
+        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
+    });
+    //checkWon();
+}
+
+function removeValues(values) {
+    values.forEach(v => {
+        let entry = document.querySelector(".scoreboard").children[v - 1];
+        let current = entry.children[1].innerText;
+        let current_n = parseInt(current.substr(1, current.length-2));
+
+        current_n--;
+        entry.children[1].innerText = "(" + current_n + ")";
+
+        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
+        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
+    });
+    //checkWon();
+}
+
+function updateScore() {
+    let even = document.getElementsByClassName("ray even").length
+    let odd = document.getElementsByClassName("ray odd").length
+    console.log(`Num even = ${even} Num odd = ${odd}`);
+    document.getElementById("num_rays").innerHTML = even + odd;
+
+    let basis = document.getElementsByClassName("basis selected").length
+    document.getElementById("num_basis").innerHTML = basis;
 }
 
 function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
@@ -273,7 +332,7 @@ function addValues(values) {
         entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
         entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
     });
-    checkWon();
+    //checkWon();
 }
 
 function removeValues(values) {
@@ -288,7 +347,7 @@ function removeValues(values) {
         entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
         entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
     });
-    checkWon();
+    //checkWon();
 }
 
 function checkWon() {
@@ -306,22 +365,17 @@ function checkWon() {
 }
 
 function reset() {
-    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .entry")).forEach(e => {
+    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .ray")).forEach(e => {
         e.children[1].innerText = "(0)";
         e.classList.remove("even");
         e.classList.remove("odd");
     });
 
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .circle")).forEach(e => {
+    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .basis")).forEach(e => {
         e.classList.remove("selected");
     });
 
-    boardContainer.querySelector(".moveCounter .inner").innerText = "0";
-    boardContainer.querySelector(".moveCounter").classList.remove("even");
-    boardContainer.querySelector(".moveCounter").classList.remove("odd");
-
-    boardContainer.classList.remove("won");
-    document.querySelector("#does").classList.remove("won");
+    updateScore();
 }
 
 function solve() {
