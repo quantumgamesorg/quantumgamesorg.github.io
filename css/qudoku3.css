@@ -80,7 +80,8 @@
 
 #upperRight {
   margin-left: 50px;
-  margin-right: 0px; }
+  margin-right: 0px;
+  margin-top: -5vh; }
 
 @media (max-width: calc(100vh - 100px + 460px)) {
   #upperArea {
@@ -230,15 +231,33 @@
 
 #score {
   display: flex;
-  direction: row;
-  font-size: 16pt; }
+  flex-direction: column;
+  font-size: 16pt;
+  margin-top: 10px; }
+
+#numBasis {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 0px;
+  border: 1px solid #666;
+  font-size: 20pt;
+  text-align: center;
+  background-color: #fbb; }
+  #numBasis.odd {
+    background-color: #bfb; }
+  #numBasis.even {
+    background-color: #fbb; }
 
 .scoreboard {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 60vh;
-  width: 14vw;
+  height: 70vh;
+  width: 10vw;
   max-width: 80vh;
   order: 2;
   font-size: 16pt;
@@ -250,10 +269,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(100% / 10);
-    width: calc(100% / 6);
+    height: calc(100% / 12);
+    width: calc(100% / 5);
+    background-color: #bfb;
     border: 1px solid #666;
-    background-color: #ffffff;
     transition: transform ease-out 0.1s, font-weight ease 0.1s; }
     .scoreboard .ray.odd {
       background-color: #fbb; }

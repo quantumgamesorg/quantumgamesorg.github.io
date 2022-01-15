@@ -6,7 +6,7 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.insertBefore(makeBoard(45), boardContainer.firstChild);
+boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
 document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -109,6 +109,20 @@ function makeBoard(outerRadius) {
                     }
                     updateScore();
                 };
+
+                basis.onmouseenter = () => {
+                    basis_vals.forEach(v => {
+                        document.querySelector(".scoreboard").children[v - 1].classList.add("highlight");
+                    });
+                };
+            
+                basis.onmouseleave = () => {
+                    basis_vals.forEach(v => {
+                        document.querySelector(".scoreboard").children[v - 1].classList.remove("highlight");
+                    });
+                };
+
+             
             }
 
             gridRow.appendChild(gridSpot);
@@ -122,13 +136,13 @@ function makeBoard(outerRadius) {
         el.onmouseenter = () => {
             for (let j = 0; j < val_elems.length; ++j) {
                 console.log(i);
-                val_elems[j].classList.add("highlight");
+                val_elems[j].classList.toggle("hover", true);
             }
         };
 
         el.onmouseleave = () => {
             for (let j = 0; j < val_elems.length; ++j) {
-                val_elems[j].classList.remove("highlight");
+                val_elems[j].classList.toggle("hover", false);
             }
         };
     })
@@ -146,8 +160,8 @@ function addValues(values) {
         current_n++;
         entry.children[1].innerText = "(" + current_n + ")";
 
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
+        entry.classList.toggle("even", current_n % 2 == 0);
+        entry.classList.toggle("odd", current_n % 2 == 1);
     });
     //checkWon();
 }
@@ -171,10 +185,13 @@ function updateScore() {
     let even = document.getElementsByClassName("ray even").length
     let odd = document.getElementsByClassName("ray odd").length
     console.log(`Num even = ${even} Num odd = ${odd}`);
-    document.getElementById("num_rays").innerHTML = even + odd;
 
-    let basis = document.getElementsByClassName("basis selected").length
-    document.getElementById("num_basis").innerHTML = basis;
+    let numBasis = document.getElementsByClassName("basis selected").length
+    let basisDiv = document.getElementById("numBasis");
+    basisDiv.innerHTML = numBasis;
+
+    basisDiv.classList.toggle("even", numBasis%2 == 0);
+    basisDiv.classList.toggle("odd", numBasis%2 == 1)
 }
 
 function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
