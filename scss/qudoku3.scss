@@ -273,6 +273,7 @@ html {
             font-size: 14pt;
             font-size: calc(min(2vw, 1.75vh));
             order: 2;
+            background-color: #ccc;
 
             user-select: none;
 
@@ -282,6 +283,8 @@ html {
                 width: 20%;
                 height: 100%;
                 border: 1px solid black;
+                padding-left: calc(20% * 0.025);
+                padding-right: calc(20% * 0.025);
 
                 &:nth-child(4n) {
                     border-right: 1px solid black;
@@ -293,8 +296,9 @@ html {
                     height: calc(33% - 5%);
                     margin-top: 2.5%;
                     margin-bottom: 2.5%;
-                    background-color: #fff;
+                    background-color: #eee;
                     border-radius: 2vh;
+                    border: 1px solid #666;
 
                     &.selected {
                         background-color: #bfb;;
