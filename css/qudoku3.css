@@ -221,7 +221,7 @@
   font-size: 14pt;
   font-size: min(2vw, 1.75vh);
   order: 2;
-  background-color: #ccc;
+  background-color: #ddd;
   user-select: none;
 }
 #boardContainer .board .gridRow .gridSpot {
