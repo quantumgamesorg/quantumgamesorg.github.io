@@ -131,7 +131,7 @@ function makeBoard(outerRadius) {
         board.appendChild(gridRow);
     }
 
-    document.querySelectorAll(".scoreboard .ray").forEach((el, i) => {
+    document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
         let val_elems = document.getElementsByClassName(`val ${i + 1}`);
         el.onmouseenter = () => {
             for (let j = 0; j < val_elems.length; ++j) {
