@@ -9,16 +9,15 @@ let circleMap = [];
 boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
 document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
-document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
 // TODO: these extra solve buttons are temporary
-document.querySelectorAll("#upperLeft button")[2].onclick = () => solve("26-13");
-document.querySelectorAll("#upperLeft button")[3].onclick = () => solve("30-15");
-document.querySelectorAll("#upperLeft button")[4].onclick = () => solve("32-17");
-document.querySelectorAll("#upperLeft button")[5].onclick = () => solve("54-27");
+var solutionElements = document.querySelectorAll('#upperLeft option');
+for (let i = 1; i < solutionElements.length; ++i) {
+    solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
+}
 
-document.querySelectorAll("#upperLeft button")[6].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[7].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[8].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[3].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 // document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 // document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 // document.querySelectorAll("#upperLeft button")[6].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[3].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
