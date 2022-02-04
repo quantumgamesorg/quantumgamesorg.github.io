@@ -8,10 +8,11 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 let circleMap = [];
 boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
-document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
+document.querySelectorAll("#upperLeft button")[0].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true
+;  reset();}
 // TODO: these extra solve buttons are temporary
 var solutionElements = document.querySelectorAll('#upperLeft option');
-for (let i = 1; i < solutionElements.length; ++i) {
+for (let i = 0; i < solutionElements.length; ++i) {
     solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
 }
 
@@ -417,6 +418,8 @@ function reset() {
 
 function solve(size) {
     reset();
+
+    if (size == '-') {return;}
 
     let solutions = {
         "26-13": [1, 10, 15, 18, 26, 28, 35, 39, 50, 54, 63, 71, 73],
