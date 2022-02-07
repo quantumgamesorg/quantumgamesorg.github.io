@@ -19,9 +19,6 @@ for (let i = 0; i < solutionElements.length; ++i) {
 document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[3].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-// document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-// document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-// document.querySelectorAll("#upperLeft button")[6].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[3].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
 document.querySelectorAll(".person").forEach((e, i) => {
@@ -81,11 +78,7 @@ function makeBoard(outerRadius) {
                     val_el.classList.add(val);
         
                     val_el.innerText = val;
-
-                    /*val_el.onclick = e => {
-                        val_el.parentElement.classList.toggle("selected");
-                    };*/
-
+                    
                     val_el.onmouseenter = e => {
                         [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
                             if(e !== val_el) {
@@ -213,149 +206,6 @@ function updateScore() {
     }
 
     window.alert("You have won the game!")
-}
-
-function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
-    let innerXOffset = 1;
-    let innerYOffset = 1;
-    console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
-    if(type === 'outer'){
-        let spread = 2.5;
-        const angleRelativeToCenter = Math.floor(index/numOuter) * 2 * Math.PI / numInner;
-        
-        const alignTerm = ((numOuter - 1)/numOuter * spread) / 2;
-        const angleRelativeToInnerCircle = ((index % numOuter) * spread / numOuter) - alignTerm;
-
-        console.log(`Index: ${index} Index/Outer = ${index/numOuter} Num outer ${numOuter}`)
-        console.log(`Index: ${index} Center: ${angleRelativeToCenter * 360.0/Math.PI} Inner: ${angleRelativeToInnerCircle * 360.0/Math.PI}`)
-
-        let baseX = (innerRadius * Math.sin(angleRelativeToCenter));
-        let baseY = (innerRadius * -Math.cos(angleRelativeToCenter));
-
-        const deltaR = outerRadius - innerRadius;
-        let deltaBx =  deltaR * Math.sin(angleRelativeToCenter + angleRelativeToInnerCircle);
-        let deltaBy = deltaR *-Math.cos(angleRelativeToCenter + angleRelativeToInnerCircle);
-
-        var outerXOffset = 1.2;
-        var outerYOffset = 1.2;
-        // var outerXOffset = 1.17;
-        // var outerYOffset = 0.91;
-        
-        console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
-        return [baseX * innerXOffset + deltaBx * outerXOffset, baseY  * innerYOffset + deltaBy * outerYOffset]
-    }else{//type is inner
-        const angleRelativeToCenter = index/numInner * 2 * Math.PI;
-        let baseX = (innerRadius * Math.sin(angleRelativeToCenter))
-        let baseY = (innerRadius * -Math.cos(angleRelativeToCenter))
-        console.log(`[circlePos]: Returning ${baseX * innerXOffset}, ${baseY * innerYOffset}`)
-        return [baseX * innerXOffset,  baseY * innerYOffset]
-    }
-};
-
-function makeCircle(vals, x, y) {
-    let circle = document.createElement("div");
-    circle.classList.add("circle");
-
-    circle.style.left = x;
-    circle.style.top = y;
-
-    let topVals = document.createElement("div")
-    let midVals = document.createElement("div")
-    let botVals = document.createElement("div")
-
-    topVals.classList.add("topVals");
-    midVals.classList.add("midVals");
-    botVals.classList.add("bottomVals");
-
-    topVals.classList.add("rowOfValues");
-    midVals.classList.add("rowOfValues");
-    botVals.classList.add("rowOfValues");
-
-
-    for(let i = 0; i < vals.length; ++i) {
-        let valElement = document.createElement("div");
-        valElement.innerText = vals[i];
-        valElement.classList.add("value");
-        if(i < 2) {topVals.appendChild(valElement);}
-        else if (i < 6) { midVals.appendChild(valElement);}
-        else {botVals.appendChild(valElement);}
-    }
-    
-
-    circle.appendChild(topVals);
-    circle.appendChild(midVals);
-    circle.appendChild(botVals);
-
-    circle.onclick = () => {
-        if(circle.classList.toggle("selected")) {
-            addValues(vals);
-        } else {
-            removeValues(vals);
-        }
-    };
-
-    circle.onmouseenter = () => {
-        vals.forEach(v => {
-            document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
-        });
-    };
-
-    circle.onmouseleave = () => {
-        vals.forEach(v => {
-            document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
-        });
-    };
-
-    return circle;
-}
-
-function drawLines(outerRadius, innerRadius) {
-
-    let svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-    const svgSize = 100;
-    svg.setAttribute('width', svgSize);
-    svg.setAttribute('height', svgSize);
-
-    svg.line = (x1, y1, x2, y2, addClass) => {
-        console.log(`Typeof x1 ${typeof(x1)} Typeof x2 ${typeof(x2)} Typeof y1 ${typeof(y1)} Typeof y2 ${typeof(y2)}`)
-        console.log(`Valueof x1 ${x1} Valueof x2 ${x2} Valueof y1 ${y1} Valueof y2 ${y2}`)
-
-        let newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
-        if(typeof(addClass) !== 'undefined') newLine.classList.add(addClass);
-        newLine.setAttribute('x1',x1 + "%");
-        newLine.setAttribute('y1',y1 + "%");
-        newLine.setAttribute('x2',x2 + "%");
-        newLine.setAttribute('y2',y2 + "%");
-        newLine.setAttribute("stroke", "black")
-        svg.append(newLine);
-    };
-
-
-    //if connecting an inner and outer circle pass addClass1 as inner, and addClass2 as outer
-    const circleLine = (i1, i2, numInner, numOuter, innerRadius, outerRadius, type1, type2) => {
-        const pos1 = circlePos(i1, numInner, numOuter, innerRadius, outerRadius, type1);
-        const pos2 = circlePos(i2, numInner, numOuter, innerRadius, outerRadius, type2);
-        svg.line(svgSize/2 + pos1[0], svgSize/2 + pos1[1], svgSize/2 + pos2[0],  svgSize/2 + pos2[1], type2);
-    };
-
-    let numInner = 5;
-    let numOuter = 4;
-    for(let i = 0; i < numInner; i++) {
-        for(let j = 0; j<numOuter; j++){
-        circleLine(i, i*numOuter + j, numInner, numOuter, innerRadius, outerRadius, "inner", "outer");
-        }
-    }
-
-    for (let i = 0; i < numInner; i++) {
-        for (let j = i+1; j < numInner; j ++) {
-            circleLine(i, j, numInner, numOuter, innerRadius, outerRadius, "inner", "inner");
-        }
-    }
-
-    
-    // svg.line(svgSize/2 + circlePos(), svgSize/2 - outerRadius, svgSize/2,  svgSize/2 + outerRadius);
-    
-    return svg;
 }
 
 function addValues(values) {
