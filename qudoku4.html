@@ -3,17 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Qudoku 1</title>
+        <title>Qudoku 4</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/qudoku.css">
+        <link rel="stylesheet" href="css/qudoku4.css">
         <link rel="stylesheet" href="css/windowManager.css">
     </head>
     <body>
         <noscript></noscript>
         <header>
-            <h1>Quantum Games - Qudoku 1</h1>
+            <h1>Quantum Games - Qudoku 4</h1>
             <a href="qudoku.html">Qudoku 1</a> | <a href="qudoku2.html">Qudoku 2</a> | <a href="qudoku3.html">Qudoku 3</a> | <a href="qudoku4.html">Qudoku 4</a> | <a href="merminSquares.html">Mermin's Magic Squares</a>  | <a href="merminPentagrams.html">Mermin's Magic Pentagrams</a>
         </header>
         <div id="content">
@@ -25,8 +25,35 @@
                         <h3>Actions</h3>
                         <button class="resetButton">Reset</button>
                         <br>
-                        <button class="solveButton">Display a Solution</button>
+                        <label for="cars">Display a solution:</label>
                         <br>
+                        <select name="solveButton" class="solveButton">
+                            <option class="solution" value='-' selected>-</option>
+                            <option class="solution" value="26-13">26-13</option>
+                            <option class="solution" value="30-15">30-15</option>
+                            <option class="solution" value="32-17">32-17</option>
+                            <option class="solution" value="33-17">33-17</option>
+                            <option class="solution" value="34-17">34-17</option>
+                            <option class="solution" value="36-19">36-19</option>
+                            <option class="solution" value="37-19">37-19</option>
+                            <option class="solution" value="38-19">38-19</option>
+                            <option class="solution" value="38-21">38-21</option>
+                            <option class="solution" value="39-21">39-21</option>
+                            <option class="solution" value="40-21">40-21</option>
+                            <option class="solution" value="41-21">41-21</option>
+                            <option class="solution" value="42-21">42-21</option>
+                            <option class="solution" value="43-23">43-23</option>
+                            <option class="solution" value="44-23">44-23</option>
+                            <option class="solution" value="45-23">45-23</option>
+                            <option class="solution" value="46-23">46-23</option>
+                            <option class="solution" value="48-25">48-25</option>
+                            <option class="solution" value="49-25">49-25</option>
+                            <option class="solution" value="50-25">50-25</option>
+                            <option class="solution" value="53-27">53-27</option>
+                            <option class="solution" value="54-27">54-27</option>
+                        </select>
+                        <br>
+                        
                     </div>
                     <div class="leftArea">
                         <h3>Info</h3>
@@ -66,35 +93,76 @@
                     </div>
                 </div>
                 <div id="boardContainer">
-                    <div class="scoreboard">
-                        <div class="entry"><div>1</div><div>(0)</div></div>
-                        <div class="entry"><div>2</div><div>(0)</div></div>
-                        <div class="entry"><div>3</div><div>(0)</div></div>
-                        <div class="entry"><div>4</div><div>(0)</div></div>
-                        <div class="entry"><div>5</div><div>(0)</div></div>
-                        <div class="entry"><div>6</div><div>(0)</div></div>
-                        <div class="entry"><div>7</div><div>(0)</div></div>
-                        <div class="entry"><div>8</div><div>(0)</div></div>
-                        <div class="entry"><div>9</div><div>(0)</div></div>
-                        <div class="entry"><div>10</div><div>(0)</div></div>
-                        <div class="entry"><div>11</div><div>(0)</div></div>
-                        <div class="entry"><div>12</div><div>(0)</div></div>
-                        <div class="entry"><div>13</div><div>(0)</div></div>
-                        <div class="entry"><div>14</div><div>(0)</div></div>
-                        <div class="entry"><div>15</div><div>(0)</div></div>
-                        <div class="entry"><div>16</div><div>(0)</div></div>
-                        <div class="entry"><div>17</div><div>(0)</div></div>
-                        <div class="entry"><div>18</div><div>(0)</div></div>
-                        <div class="entry"><div>19</div><div>(0)</div></div>
-                        <div class="entry"><div>20</div><div>(0)</div></div>
-                        <div class="entry"><div>21</div><div>(0)</div></div>
-                        <div class="entry"><div>22</div><div>(0)</div></div>
-                        <div class="entry"><div>23</div><div>(0)</div></div>
-                        <div class="entry"><div>24</div><div>(0)</div></div>
+                    <div id="score" class="even">
+                        Basis Counter: 
+                        <div id="numBasis">0</div>
                     </div>
-                    <div class="moveCounter"><div class="inner">0</div></div>
                 </div>
-                <div id="upperRight"><!-- <h3>Right side</h3>(room for something here if needed) --></div>
+
+                <div id="upperRight">
+                    <div id="scoreboard">
+                        <div class="ray"><div>1</div><div>(0)</div></div>
+                        <div class="ray"><div>2</div><div>(0)</div></div>
+                        <div class="ray"><div>3</div><div>(0)</div></div>
+                        <div class="ray"><div>4</div><div>(0)</div></div>
+                        <div class="ray"><div>5</div><div>(0)</div></div>
+                        <div class="ray"><div>6</div><div>(0)</div></div>
+                        <div class="ray"><div>7</div><div>(0)</div></div>
+                        <div class="ray"><div>8</div><div>(0)</div></div>
+                        <div class="ray"><div>9</div><div>(0)</div></div>
+                        <div class="ray"><div>10</div><div>(0)</div></div>
+                        <div class="ray"><div>11</div><div>(0)</div></div>
+                        <div class="ray"><div>12</div><div>(0)</div></div>
+                        <div class="ray"><div>13</div><div>(0)</div></div>
+                        <div class="ray"><div>14</div><div>(0)</div></div>
+                        <div class="ray"><div>15</div><div>(0)</div></div>
+                        <div class="ray"><div>16</div><div>(0)</div></div>
+                        <div class="ray"><div>17</div><div>(0)</div></div>
+                        <div class="ray"><div>18</div><div>(0)</div></div>
+                        <div class="ray"><div>19</div><div>(0)</div></div>
+                        <div class="ray"><div>20</div><div>(0)</div></div>
+                        <div class="ray"><div>21</div><div>(0)</div></div>
+                        <div class="ray"><div>22</div><div>(0)</div></div>
+                        <div class="ray"><div>23</div><div>(0)</div></div>
+                        <div class="ray"><div>24</div><div>(0)</div></div>
+                        <div class="ray"><div>25</div><div>(0)</div></div>
+                        <div class="ray"><div>26</div><div>(0)</div></div>
+                        <div class="ray"><div>27</div><div>(0)</div></div>
+                        <div class="ray"><div>28</div><div>(0)</div></div>
+                        <div class="ray"><div>29</div><div>(0)</div></div>
+                        <div class="ray"><div>30</div><div>(0)</div></div>
+                        <div class="ray"><div>31</div><div>(0)</div></div>
+                        <div class="ray"><div>32</div><div>(0)</div></div>
+                        <div class="ray"><div>33</div><div>(0)</div></div>
+                        <div class="ray"><div>34</div><div>(0)</div></div>
+                        <div class="ray"><div>35</div><div>(0)</div></div>
+                        <div class="ray"><div>36</div><div>(0)</div></div>
+                        <div class="ray"><div>37</div><div>(0)</div></div>
+                        <div class="ray"><div>38</div><div>(0)</div></div>
+                        <div class="ray"><div>39</div><div>(0)</div></div>
+                        <div class="ray"><div>40</div><div>(0)</div></div>
+                        <div class="ray"><div>41</div><div>(0)</div></div>
+                        <div class="ray"><div>42</div><div>(0)</div></div>
+                        <div class="ray"><div>43</div><div>(0)</div></div>
+                        <div class="ray"><div>44</div><div>(0)</div></div>
+                        <div class="ray"><div>45</div><div>(0)</div></div>
+                        <div class="ray"><div>46</div><div>(0)</div></div>
+                        <div class="ray"><div>47</div><div>(0)</div></div>
+                        <div class="ray"><div>48</div><div>(0)</div></div>
+                        <div class="ray"><div>49</div><div>(0)</div></div>
+                        <div class="ray"><div>50</div><div>(0)</div></div>
+                        <div class="ray"><div>51</div><div>(0)</div></div>
+                        <div class="ray"><div>52</div><div>(0)</div></div>
+                        <div class="ray"><div>53</div><div>(0)</div></div>
+                        <div class="ray"><div>54</div><div>(0)</div></div>
+                        <div class="ray"><div>55</div><div>(0)</div></div>
+                        <div class="ray"><div>56</div><div>(0)</div></div>
+                        <div class="ray"><div>57</div><div>(0)</div></div>
+                        <div class="ray"><div>58</div><div>(0)</div></div>
+                        <div class="ray"><div>59</div><div>(0)</div></div>
+                        <div class="ray"><div>60</div><div>(0)</div></div>
+                    </div>
+                </div>
             </div>
             <hr>
             <h2>More Information</h2>
@@ -148,6 +216,6 @@
             Copyright info, contact info, etc.
         </footer>
         <script src="windowManager.js" async defer></script>
-        <script src="qudoku.js" async defer></script>
+        <script src="qudoku4.js" async defer></script>
     </body>
 </html>

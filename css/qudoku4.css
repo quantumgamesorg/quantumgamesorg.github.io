@@ -36,7 +36,7 @@
   width: 100%; }
 
 #upperLeft, #upperRight {
-  width: 180px;
+  width: 200px;
   margin: 0px 20px 20px 20px;
   display: flex;
   flex-direction: column; }
@@ -79,7 +79,8 @@
       background-color: #ffa; }
 
 #upperRight {
-  opacity: 0.5; }
+  margin-left: 50px;
+  margin-right: 0px; }
 
 @media (max-width: calc(100vh - 100px + 460px)) {
   #upperArea {
@@ -90,7 +91,7 @@
     max-width: 95%;
     margin: 10px;
     margin-top: 0px;
-    order: 1;
+    order: 2;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap; }
@@ -104,7 +105,7 @@
     width: 500px;
     max-width: 95%;
     margin: 10px;
-    order: 2; } }
+    order: 1; } }
 
 #boardContainer {
   position: relative;
@@ -112,24 +113,26 @@
   max-width: 95%;
   align-self: center;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   margin-bottom: 20px;
+  height: 80vh;
+  width: 100vh;
   min-width: 200px;
   scroll-snap-align: end;
-  scroll-snap-stop: normal; }
+  scroll-snap-stop: normal;
+  justify-content: space-between; }
   #boardContainer .moveCounter {
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: absolute;
     top: calc(5%);
-    right: calc(5%);
+    right: calc(-5%);
     padding: 3px;
     padding-left: 5px;
     padding-right: 5px;
     border: 1px solid #666;
-    background-color: #fff;
+    background-color: #fcc;
     font-size: 20pt;
     font-size: calc(min(6vw, 24pt));
     text-align: center; }
@@ -151,108 +154,74 @@
       background-color: #fcc; }
     #boardContainer .moveCounter.odd {
       background-color: #cfc; }
-  #boardContainer .scoreboard {
-    display: flex;
-    flex-wrap: wrap;
-    height: 15vh;
-    width: 100%;
-    max-width: 80vh;
-    order: 2;
-    margin-top: 40px;
-    font-size: 16pt;
-    font-size: calc(max(min(4vw, 2.5vh), 8pt));
-    box-shadow: #0002 2px 2px 5px; }
-    #boardContainer .scoreboard .entry {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 50%;
-      width: calc(100% / 20);
-      border: 1px solid #666;
-      background-color: #fff;
-      transition: transform ease-out 0.1s, font-weight ease 0.1s; }
-      #boardContainer .scoreboard .entry.odd {
-        background-color: #fbb; }
-      #boardContainer .scoreboard .entry.even {
-        background-color: #bfb; }
-      #boardContainer .scoreboard .entry.highlight {
-        font-weight: bold;
-        border: 1px solid #995;
-        transform: scale(1.1, 1.1); }
-      #boardContainer .scoreboard .entry div {
-        text-align: center; }
-    @media (max-width: 650px) {
-      #boardContainer .scoreboard {
-        height: 150px; }
-        #boardContainer .scoreboard .entry {
-          height: 33.33%;
-          width: calc(100% / 8); } }
   #boardContainer .board {
     display: flex;
     position: relative;
     width: 100%;
-    padding-bottom: 95%;
     max-width: 95%;
     min-width: 200px;
-    min-height: 200px; }
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column; }
     @media (max-width: 650px) {
       #boardContainer .board {
         padding-bottom: 95%;
         max-width: 95%; } }
-    #boardContainer .board .circle {
+    #boardContainer .board .gridRow {
       display: flex;
-      flex-direction: column;
-      position: absolute;
+      flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      width: 17%;
-      height: 17%;
-      transform: translate(-50%, -50%);
-      padding: 1%;
+      width: 100%;
+      height: 10vh;
       font-size: 14pt;
-      font-size: calc(min(3vw, 2vh));
-      border: 1px solid #666;
-      border-radius: 50%;
-      background-color: #fff;
-      box-shadow: #0002 2px 2px 5px;
-      cursor: pointer;
-      z-index: 5;
-      user-select: none;
-      transition: transform ease-out 0.1s, font-weight ease 0.1s; }
-      @media (max-width: 650px) {
-        #boardContainer .board .circle {
-          font-weight: bold; } }
-      @media (max-height: 650px) {
-        #boardContainer .board .circle {
-          font-weight: bold; } }
-      #boardContainer .board .circle::before {
-        content: "";
-        position: absolute;
-        left: -15%;
-        top: -15%;
-        right: -15%;
-        bottom: -15%;
-        border-radius: 50%; }
-      #boardContainer .board .circle.selected {
-        background-color: #fcc; }
-      #boardContainer .board .circle.highlight {
-        transform: translate(-50%, -50%) scale(1.1, 1.1);
-        border: 2px solid #885;
-        font-weight: bold; }
-      #boardContainer .board .circle .rowOfValues {
+      font-size: calc(min(2vw, 1.75vh));
+      order: 2;
+      background-color: #ddd;
+      user-select: none; }
+      #boardContainer .board .gridRow .gridSpot {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between; }
-        #boardContainer .board .circle .rowOfValues .value {
-          margin-right: 4px;
-          width: 50%;
-          text-align: center; }
-      #boardContainer .board .circle .topVals, #boardContainer .board .circle .bottomVals {
-        width: 50%; }
-      #boardContainer .board .circle .midVals {
-        width: 100%; }
+        flex-direction: column;
+        width: 20%;
+        height: 100%;
+        border: 1px solid black;
+        padding-left: calc(20% * 0.025);
+        padding-right: calc(20% * 0.025); }
+        #boardContainer .board .gridRow .gridSpot:nth-child(4n) {
+          border-right: 1px solid black; }
+        #boardContainer .board .gridRow .gridSpot .basis {
+          display: flex;
+          flex-direction: row;
+          height: calc(33% - 5%);
+          margin-top: 2.5%;
+          margin-bottom: 2.5%;
+          background-color: #eee;
+          border-radius: 2vh;
+          border: 1px solid #666; }
+          #boardContainer .board .gridRow .gridSpot .basis.selected {
+            background-color: #bfb; }
+          #boardContainer .board .gridRow .gridSpot .basis .val {
+            width: 25%;
+            text-align: center;
+            cursor: pointer; }
+            #boardContainer .board .gridRow .gridSpot .basis .val.hover {
+              transform: scale(1.5);
+              text-shadow: #995 0 0 0.25vh; }
+              #boardContainer .board .gridRow .gridSpot .basis .val.hover::after {
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                width: 2.5vh;
+                height: 2.5vh;
+                transform: translate(-50%, -50%);
+                border: 1px dashed #0008;
+                border-radius: 50%;
+                content: ""; }
+            #boardContainer .board .gridRow .gridSpot .basis .val.highlight {
+              transform: scale(1.1, 1.1);
+              border: 2px solid #885;
+              font-weight: bold; }
   #boardContainer.won .board .circle.selected {
     background-color: #cfc; }
   #boardContainer svg {
@@ -262,6 +231,68 @@
     width: 100%;
     height: 100%;
     z-index: 1; }
+
+#score {
+  display: flex;
+  flex-direction: column;
+  font-size: 16pt; }
+
+#numBasis {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 0px;
+  border: 1px solid #666;
+  font-size: 20pt;
+  text-align: center;
+  background-color: #fbb; }
+  #numBasis.odd {
+    background-color: #bfb; }
+  #numBasis.even {
+    background-color: #fbb; }
+
+#scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 70vh;
+  width: 10vw;
+  max-width: 80vh;
+  order: 2;
+  font-size: 16pt;
+  font-size: calc(max(min(3vw, 2vh), 7pt));
+  box-shadow: #0002 2px 2px 5px;
+  color: black; }
+  #scoreboard .ray {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% / 12);
+    width: calc(100% / 5);
+    background-color: #dfd;
+    border: 1px solid #666;
+    transition: transform ease-out 0.1s, font-weight ease 0.1s; }
+    #scoreboard .ray.odd {
+      background-color: #fbb; }
+    #scoreboard .ray.even {
+      background-color: #bfb; }
+    #scoreboard .ray.highlight {
+      font-weight: bold;
+      border: 1px solid #995;
+      transform: scale(1.1, 1.1); }
+    #scoreboard .ray div {
+      text-align: center; }
+  @media (max-width: 650px) {
+    #scoreboard {
+      flex-direction: row;
+      height: 150px; }
+      #scoreboard .entry {
+        height: 33.33%;
+        width: calc(100% / 8); } }
 
 .window h3 {
   text-align: center;
