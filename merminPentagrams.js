@@ -233,54 +233,54 @@ function calculateLineCoords(svgSize, i) {
 function getPentagramPointCoords(svgSize, i) {
     let x, y = 0;
     //this is 360 degrees in radians ... just for quicker code
-    const rad = 2 * Math.PI;
+    const degTorad = (2 * Math.PI) / 360;
     //this is the side length of the pentagram
-    let a = Math.sqrt(Math.pow(svgSize, 2)  / (2 - 2*Math.cos(rad * 0.3)))
+    let a = Math.sqrt(Math.pow(svgSize, 2)  / (2 - 2*Math.cos(degTorad * 108)))
     //this is the length of a specific line segment
-    let b = Math.sqrt(Math.pow(svgSize, 2)  / Math.pow((2 - 2*Math.cos(rad * 0.3)),2))
+    let b = a / (2 * Math.cos(degTorad * 36)); 
     //this is the length of another specific line segment
     let c = svgSize - 2 * b;
     //explanation: 2b + c is the length of a single diagonal
     switch (i) {
         case 0:
-            x = a * Math.sin(rad * 0.05);
+            x = a * Math.sin(degTorad * 18);
             y = svgSize;
             break;
         case 1:
             x = svgSize / 2;
-            y = svgSize - svgSize * Math.sin(rad * 0.2);
+            y = svgSize - svgSize * Math.sin(degTorad * 72);
             break;
         case 2:
-            x = svgSize - (a * Math.sin(rad * 0.05));
+            x = svgSize - (a * Math.sin(degTorad * 18));
             y = svgSize;
             break;
         case 3:
             x = 0;
-            y = svgSize - (a * Math.sin(rad * 0.2));
+            y = svgSize - (a * Math.sin(degTorad * 72));
             break;
         case 4:
             x = svgSize;
-            y = svgSize - (a * Math.sin(rad * 0.2));
+            y = svgSize - (a * Math.sin(degTorad * 72));
             break;
         case 5:
-            x = a * Math.sin(rad * 0.05) + b * Math.cos(rad * 0.2);
-            y = svgSize - b * Math.sin(rad * 0.2);
+            x = b * Math.sin(degTorad * 54);
+            y = svgSize - b * Math.sin(degTorad * 72);
             break;
         case 6:
             x = b + c;
-            y = svgSize - (a * Math.sin(rad * 0.2));
+            y = svgSize - (b + c) * Math.sin(degTorad*72);
             break;
         case 7: 
             x = svgSize / 2;
-            y = svgSize - (b * Math.sin(rad * 0.1));
+            y = svgSize - (b * Math.sin(degTorad * 36));
             break;
         case 8: 
-            x = a * Math.sin(rad * 0.05) + (b + c) * Math.cos(rad * 0.2);
-            y = svgSize - (b + c) * Math.sin(rad * 0.2);
+            x = b;    
+            y = svgSize - (b + c) * Math.sin(degTorad * 72);
             break;
         case 9:
-            x =  svgSize - (a * Math.sin(rad * 0.05) + b * Math.cos(rad * 0.2));
-            y = svgSize - b * Math.sin(rad * 0.2);
+            x =  svgSize - b * Math.sin(degTorad * 54);
+            y = svgSize - b * Math.sin(degTorad * 72);
             break;
         default:
             null;
