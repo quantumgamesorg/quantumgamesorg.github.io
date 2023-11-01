@@ -6,7 +6,7 @@ inputFile = open('proofs.csv', 'r')
 Lines = inputFile.readlines()
 inputFile.close()
 
-
+# Initialize
 output = []
 previousLine0 = -1
 previousLine1 = -1

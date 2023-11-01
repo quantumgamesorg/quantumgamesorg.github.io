@@ -321,7 +321,8 @@ function solve(size) {
     }
 
     for(var i in solution){
-        document.querySelectorAll(".basis")[convert_index(solution[i] - 1)].click();
+        let basisSol = document.querySelectorAll(".basis");
+        basisSol[convert_index(solution[i] - 1)].click();
     }
 
 }
