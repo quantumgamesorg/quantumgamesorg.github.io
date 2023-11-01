@@ -8,6 +8,8 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 let circleMap = [];
 boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
+let size = document.getElementsByClassName("solveButton");
+
 document.querySelectorAll("#upperLeft button")[0].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true
 ;  reset();}
 // TODO: these extra solve buttons are temporary
