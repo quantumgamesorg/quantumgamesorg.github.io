@@ -7,16 +7,16 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 
 let circleMap = [];
 boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
-
-let size = document.getElementsByClassName("solveButton");
-
+// Reset button
 document.querySelectorAll("#upperLeft button")[0].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true
 ;  reset();}
-// TODO: these extra solve buttons are temporary
-var solutionElements = document.querySelectorAll('#upperLeft option');
-for (let i = 0; i < solutionElements.length; ++i) {
-    solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
-}
+// // TODO: these extra solve buttons are temporary
+//var solutionElements = document.querySelectorAll('#upperLeft option');
+//for (let i = 0; i < solutionElements.length; ++i) {
+//    solutionElements[i].onclick = () => solve(solutionElements[i].value);
+//}
+// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
+// // comment from my friend: "Who fucking wrote this?"
 
 document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
@@ -273,7 +273,7 @@ function solve(size) {
 
     if (size == '-') {return;}
 
-    let solutions = {
+    const solutions = {
         "26-13": [1, 10, 15, 18, 26, 28, 35, 39, 50, 54, 63, 71, 73],
         "30-15": [1, 4, 8, 12, 14, 18, 21, 22, 26, 28, 63, 66, 67, 71, 73],
         "32-17": [1, 4, 11, 15, 17, 21, 26, 28, 38, 48, 49, 55, 59, 61, 65, 71, 74],
