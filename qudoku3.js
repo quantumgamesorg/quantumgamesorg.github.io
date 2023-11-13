@@ -207,7 +207,7 @@ function updateScore() {
         return;
     }
 
-    window.alert("You have won the game!")
+    //window.alert("You have won the game!")
 }
 
 function addValues(values) {
