@@ -1,0 +1,912 @@
+REM Demonstrations of Bell's theorem inspired by Mermin
+DIM ca(4), cb(4), cc(4), ltx(5, 4), lty(5, 4), rtx(5, 4), rty(5, 4)
+CLS: SCREEN 0
+PRINT "   DEMONSTRATIONS OF BELL'S THEOREM INSPIRED BY DAVID MERMIN"
+PRINT "  "
+PRINT "   This program was created by P.K.Aravind, Physics Department,"
+PRINT "   Worcester Polytechnic Institute, Worcester, MA 01609"
+PRINT "   "
+PRINT "   The various demonstrations available are:"
+PRINT "   1: Mermin's Physics Today demonstration "
+PRINT "   2: Hardy-Mermin demonstration"
+PRINT "   3: GHZ-Mermin demonstration"
+PRINT "   4: Mermin's magic squares"
+PRINT "   5: Mermin's magic pentagrams"
+PRINT "   6: CHSH demonstration"
+PRINT "  "
+PRINT "   HERE ARE SOME USEFUL NAVIGATION TIPS:"
+PRINT "   (1) To end any demonstration, press Ctrl+Break"
+PRINT "   (2) At blue screen, press File, Exit to exit program"
+PRINT "   (3) At blue screen, press Run,Restart,Run,Start to get this (menu) screen"
+PRINT "   (4) Keep Ctrl key pressed to speeden up pace of any demonstration"
+PRINT "   "
+INPUT "   Enter the number of the demonstration you want"; ndem
+PRINT "  "
+IF ndem = 1 THEN GOTO 10
+IF ndem = 2 THEN GOTO 20
+IF ndem = 3 THEN GOTO 30
+IF ndem = 4 THEN GOTO 40
+IF ndem = 5 THEN GOTO 50
+IF ndem = 6 THEN GOTO 60
+REM Mermin Physics Today demonstration
+10 GOSUB 11
+LOCATE 15, 6: PRINT "For settings 11,22 and 33, the detector colors always agree"
+LOCATE 17, 6: PRINT "The detector colors agree half the time over all 9 settings"
+LOCATE 19, 6: PRINT "N = Total number of runs ="
+LOCATE 21, 6: PRINT "A = Number of runs in which detector colors agree = "
+LOCATE 23, 6: PRINT "F = Fraction of runs in which detector colors agree = "
+LOCATE 24, 6: PRINT "    (A commonsense argument predicts that F > .55)"
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+N = 0: X = 0: A = 0
+16 SLEEP 2
+N = N + 1
+PAINT (xc, yc), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 3) + 1
+RANDOMIZE TIMER: lb = INT(RND * 3) + 1
+GOSUB 13
+IF ca(1) = cb(1) THEN
+    X = X + 1
+END IF
+A = X / N
+COLOR 0
+LOCATE 19, 32: PRINT "OOOOOOOOOOOO"
+LOCATE 21, 57: PRINT "000000000000"
+LOCATE 23, 59: PRINT "000000000000"
+COLOR 15
+LOCATE 19, 32: PRINT N
+LOCATE 21, 57: PRINT X
+LOCATE 23, 59: PRINT A
+clab = 1: GOSUB 14
+SLEEP 8
+clab = 0: GOSUB 14
+PAINT (xc, yc), 0, 15
+GOTO 16
+REM Hardy-Mermin demonstration
+20 GOSUB 21
+LOCATE 13, 6: PRINT "1R, 2R never occurs"
+LOCATE 13, 29: PRINT "1G, 2'G never occurs"
+LOCATE 13, 54: PRINT "1'G, 2G never occurs"
+LOCATE 15, 27: PRINT "1'G, 2'G sometimes occurs"
+LOCATE 19, 6: PRINT "Number of 1'2' runs to date  = "
+LOCATE 21, 6: PRINT "Number of 1'G, 2'G events to date  = "
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+N = 0: X = 0: A = 0
+26 SLEEP 2
+PAINT (xc, yc), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 2) + 1
+RANDOMIZE TIMER: lb = INT(RND * 2) + 1
+GOSUB 23
+IF (la + lb) = 4 THEN
+    N = N + 1
+    IF ca(1) + cb(1) = 4 THEN X = X + 1
+END IF
+COLOR 0
+LOCATE 19, 37: PRINT "OOOOOOOOOOOO"
+LOCATE 21, 43: PRINT "000000000000"
+COLOR 15
+LOCATE 19, 37: PRINT N
+LOCATE 21, 43: PRINT X
+clab = 1: GOSUB 24
+IF la = 1 AND lb = 1 THEN
+    COLOR 11: LOCATE 13, 6: PRINT "1R, 2R never occurs": COLOR 15
+ELSEIF la = 1 AND lb = 2 THEN
+    COLOR 11: LOCATE 13, 29: PRINT "1G, 2'G never occurs": COLOR 15
+ELSEIF la = 2 AND lb = 1 THEN
+    COLOR 11: LOCATE 13, 54: PRINT "1'G, 2G never occurs": COLOR 15
+ELSEIF la = 2 AND lb = 2 THEN
+    COLOR 11: LOCATE 15, 27: PRINT "1'G, 2'G sometimes occurs": COLOR 15
+END IF
+SLEEP 8
+IF la = 1 AND lb = 1 THEN
+    COLOR 15: LOCATE 13, 6: PRINT "1R, 2R never occurs": COLOR 15
+ELSEIF la = 1 AND lb = 2 THEN
+    COLOR 15: LOCATE 13, 29: PRINT "1G, 2'G never occurs": COLOR 15
+ELSEIF la = 2 AND lb = 1 THEN
+    COLOR 15: LOCATE 13, 54: PRINT "1'G, 2G never occurs": COLOR 15
+ELSEIF la = 2 AND lb = 2 THEN
+    COLOR 15: LOCATE 15, 27: PRINT "1'G, 2'G sometimes occurs": COLOR 15
+END IF
+clab = 0: GOSUB 24
+PAINT (xc, yc), 0, 15
+GOTO 26
+REM GHZ-Mermin demonstration
+30 GOSUB 31
+LOCATE 20, 6: PRINT "For settings xyy,yxy and yyx, an even number of red lights appear"
+LOCATE 22, 6: PRINT "For the setting xxx, an odd number of red lights appear"
+LOCATE 24, 6: PRINT "For all other settings, the outcomes are random"
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+36 SLEEP 2
+PAINT (xc, yc), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 2) + 1
+RANDOMIZE TIMER: lb = INT(RND * 2) + 1
+RANDOMIZE TIMER: lc = INT(RND * 2) + 1
+lt = la + lb + lc
+GOSUB 33
+clab = 1: GOSUB 34
+IF lt = 3 THEN
+    COLOR 4: LOCATE 22, 6: PRINT "For the setting xxx, an odd number of red lights appear": COLOR 15
+ELSEIF lt = 5 THEN
+    COLOR 4: LOCATE 20, 6: PRINT "For settings xyy,yxy and yyx, an even number of red lights appear": COLOR 15
+END IF
+SLEEP 8
+IF lt = 3 THEN
+    COLOR 15: LOCATE 22, 6: PRINT "For the setting xxx, an odd number of red lights appear"
+ELSEIF lt = 5 THEN
+    COLOR 15: LOCATE 20, 6: PRINT "For settings xyy,yxy and yyx, an even number of red lights appear"
+END IF
+clab = 0: GOSUB 34
+PAINT (xc, yc), 0, 15
+GOTO 36
+REM Mermin squares demonstration
+40 GOSUB 41
+REM Coordinates of left and right square elements
+l11x = lcx - h3: l11y = lcy + h3
+l12x = lcx: l12y = lcy + h3
+l13x = lcx + h3: l13y = lcy + h3
+l21x = lcx - h3: l21y = lcy
+l22x = lcx: l22y = lcy
+l23x = lcx + h3: l23y = lcy
+l31x = lcx - h3: l31y = lcy - h3
+l32x = lcx: l32y = lcy - h3
+l33x = lcx + h3: l33y = lcy - h3
+r11x = rcx - h3: r11y = rcy + h3
+r12x = rcx: r12y = rcy + h3
+r13x = rcx + h3: r13y = rcy + h3
+r21x = rcx - h3: r21y = rcy
+r22x = rcx: r22y = rcy
+r23x = rcx + h3: r23y = rcy
+r31x = rcx - h3: r31y = rcy - h3
+r32x = rcx: r32y = rcy - h3
+r33x = rcx + h3: r33y = rcy - h3
+clab = 0:
+la = 1: lb = 1: clab = 0: GOSUB 42
+la = 2: lb = 2: clab = 0: GOSUB 42
+la = 3: lb = 3: clab = 0: GOSUB 42
+LOCATE 17, 6: PRINT "The number of red panels on Alice's detector is always even"
+LOCATE 19, 6: PRINT "The number of red panels on Bob's detector is always odd"
+LOCATE 21, 6: PRINT "The single lighted panel common to both detectors always"
+LOCATE 22, 6: PRINT "has the same color on both"
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+46 SLEEP 2
+PAINT (xc, yc), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 3) + 1
+RANDOMIZE TIMER: lb = INT(RND * 3) + 1
+clab = 1: GOSUB 42
+GOSUB 43
+clab = 1: GOSUB 44
+SLEEP 8
+clab = 0: GOSUB 42
+clab = 0: GOSUB 44
+PAINT (xc, yc), 0, 15
+GOTO 46
+REM Mermin pentagrams demonstration
+50 GOSUB 51
+LOCATE 21, 6: PRINT "An odd number of red panels always lights up on each detector"
+LOCATE 23, 6: PRINT "The lighted panel(s) common to both detectors always has (have)"
+LOCATE 24, 6: PRINT "the same color(s)"
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+56 SLEEP 2
+PAINT (xc, yc + 5), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 5) + 1
+RANDOMIZE TIMER: lb = INT(RND * 5) + 1
+GOSUB 53
+clab = 1: GOSUB 54
+SLEEP 8
+clab = 0: GOSUB 54
+PAINT (xc, yc + 5), 0, 15
+GOTO 56
+REM CHSH demonstration
+60 GOSUB 61
+LOCATE 15, 7: PRINT "Total   XX'+   XX'-   XY'+   XY'-   YX'+   YX'-   YY'+   YY'-"
+LOCATE 18, 17: PRINT "<XX'>": LOCATE 18, 31: PRINT "<XY'>"
+LOCATE 18, 45: PRINT "<YX'>": LOCATE 18, 59: PRINT "<YY'>"
+LOCATE 22, 17: PRINT "|<XX'>-<XY'>+<YX'>+<YY'>| ="
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+N = 0: xxp = 0: xxm = 0: xyp = 0: xym = 0: yxp = 0: yxm = 0: yyp = 0: yym = 0
+66 SLEEP 10
+N = N + 1
+PAINT (xc, yc), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 2) + 1
+RANDOMIZE TIMER: lb = INT(RND * 2) + 1
+GOSUB 63
+IF la = 1 AND lb = 1 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        xxm = xxm + 1
+    ELSE
+        xxp = xxp + 1
+    END IF
+ELSEIF la = 1 AND lb = 2 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        xym = xym + 1
+    ELSE
+        xyp = xyp + 1
+    END IF
+ELSEIF la = 2 AND lb = 1 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        yxm = yxm + 1
+    ELSE
+        yxp = yxp + 1
+    END IF
+ELSEIF la = 2 AND lb = 2 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        yym = yym + 1
+    ELSE
+        yyp = yyp + 1
+    END IF
+END IF
+IF (xxp + xxm) > 0 THEN
+    xxa = (xxp - xxm) / (xxp + xxm)
+    xxat = INT(100 * xxa) / 100
+ELSE
+    xxa = 0: xxat = 0
+END IF
+IF (xyp + xym) > 0 THEN
+    xya = (xyp - xym) / (xyp + xym)
+    xyat = INT(100 * xya) / 100
+ELSE
+    xya = 0: xyat = 0
+END IF
+IF (yxp + yxm) > 0 THEN
+    yxa = (yxp - yxm) / (yxp + yxm)
+    yxat = INT(100 * yxa) / 100
+ELSE
+    yxa = 0: yxat = 0
+END IF
+IF (yyp + yym) > 0 THEN
+    yya = (yyp - yym) / (yyp + yym)
+    yyat = INT(100 * yya) / 100
+ELSE
+    yya = 0: yyat = 0
+END IF
+bell = ABS(xxa - xya + yxa + yya)
+bellt = INT(100 * bell) / 100
+clab = 1: GOSUB 64
+COLOR 15
+IF la = 1 AND ca(1) = 2 THEN
+    LOCATE 10, 21: PRINT "+1"
+ELSEIF la = 1 AND ca(1) = 4 THEN
+    LOCATE 10, 21: PRINT "-1"
+ELSEIF la = 2 AND ca(1) = 2 THEN
+    LOCATE 7, 15: PRINT "+1"
+ELSEIF la = 2 AND ca(1) = 4 THEN
+    LOCATE 7, 15: PRINT "-1"
+END IF
+IF lb = 1 AND cb(1) = 2 THEN
+    LOCATE 8, 71: PRINT "+1"
+ELSEIF lb = 1 AND cb(1) = 4 THEN
+    LOCATE 8, 71: PRINT "-1"
+ELSEIF lb = 2 AND cb(1) = 2 THEN
+    LOCATE 8, 57: PRINT "+1"
+ELSEIF lb = 2 AND cb(1) = 4 THEN
+    LOCATE 8, 57: PRINT "-1"
+END IF
+ncol2 = 0: ncol = 0: cacb = ca(1) * cb(1)
+65 ncoli = ncol - 2 * INT(ncol / 2)
+IF ncoli = 0 THEN COLOR 0
+IF ncoli > 0 THEN COLOR 15
+LOCATE 16, 8: PRINT N
+IF la = 1 AND lb = 1 THEN
+    IF cacb = 8 THEN
+        LOCATE 16, 22: PRINT xxm
+    ELSE
+        LOCATE 16, 15: PRINT xxp
+    END IF
+    LOCATE 19, 17: PRINT xxat
+ELSEIF la = 1 AND lb = 2 THEN
+    IF cacb = 8 THEN
+        LOCATE 16, 36: PRINT xym
+    ELSE
+        LOCATE 16, 29: PRINT xyp
+    END IF
+    LOCATE 19, 31: PRINT xyat
+ELSEIF la = 2 AND lb = 1 THEN
+    IF cacb = 8 THEN
+        LOCATE 16, 50: PRINT yxm
+    ELSE
+        LOCATE 16, 43: PRINT yxp
+    END IF
+    LOCATE 19, 45: PRINT yxat
+ELSEIF la = 2 AND lb = 2 THEN
+    IF cacb = 8 THEN
+        LOCATE 16, 64: PRINT yym
+    ELSE
+        LOCATE 16, 57: PRINT yyp
+    END IF
+    LOCATE 19, 59: PRINT yyat
+END IF
+LOCATE 22, 45: PRINT bellt
+IF ncol = 11 THEN GOTO 67
+ncol = ncol + 1: SLEEP 1: GOTO 65
+67 ncol = 0
+SLEEP 2
+COLOR 0
+IF la = 1 AND ca(1) = 2 THEN
+    LOCATE 10, 21: PRINT "+1"
+ELSEIF la = 1 AND ca(1) = 4 THEN
+    LOCATE 10, 21: PRINT "-1"
+ELSEIF la = 2 AND ca(1) = 2 THEN
+    LOCATE 7, 15: PRINT "+1"
+ELSEIF la = 2 AND ca(1) = 4 THEN
+    LOCATE 7, 15: PRINT "-1"
+END IF
+IF lb = 1 AND cb(1) = 2 THEN
+    LOCATE 8, 71: PRINT "+1"
+ELSEIF lb = 1 AND cb(1) = 4 THEN
+    LOCATE 8, 71: PRINT "-1"
+ELSEIF lb = 2 AND cb(1) = 2 THEN
+    LOCATE 8, 57: PRINT "+1"
+ELSEIF lb = 2 AND cb(1) = 4 THEN
+    LOCATE 8, 57: PRINT "-1"
+END IF
+clab = 0: GOSUB 64
+PAINT (xc, yc), 0, 15
+GOTO 66
+END
+REM Sub 11: Draws setup for Mermin PT demonstration
+11 xc = 65: yc = 70: h = 10: d = 44: pi = 3.14159
+lcx = xc - d: lcy = yc: rcx = xc + d: rcy = yc
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+lcx1 = lcx: lcy1 = lcy + h
+lcx2 = lcx - h * SIN(pi / 3): lcy2 = lcy - h * COS(pi / 3)
+lcx3 = lcx + h * SIN(pi / 3): lcy3 = lcy2
+LINE (lcx, lcy)-(lcx1, lcy1)
+LINE (lcx, lcy)-(lcx2, lcy2)
+LINE (lcx, lcy)-(lcx3, lcy3)
+CIRCLE (lcx1, lcy1), 2, 14: PAINT (lcx1, lcy1), 0, 14: CIRCLE (lcx1, lcy1), 2, 15
+CIRCLE (lcx2, lcy2), 2, 14: PAINT (lcx2, lcy2), 0, 14: CIRCLE (lcx2, lcy2), 2, 15
+CIRCLE (lcx3, lcy3), 2, 14: PAINT (lcx3, lcy3), 0, 14: CIRCLE (lcx3, lcy3), 2, 15
+rcx1 = rcx: rcy1 = rcy + h
+rcx2 = rcx - h * SIN(pi / 3): rcy2 = rcy - h * COS(pi / 3)
+rcx3 = rcx + h * SIN(pi / 3): rcy3 = rcy2
+LINE (rcx, rcy)-(rcx1, rcy1)
+LINE (rcx, rcy)-(rcx2, rcy2)
+LINE (rcx, rcy)-(rcx3, rcy3)
+CIRCLE (rcx1, rcy1), 2, 14: PAINT (rcx1, rcy1), 0, 14: CIRCLE (rcx1, rcy1), 2, 15
+CIRCLE (rcx2, rcy2), 2, 14: PAINT (rcx2, rcy2), 0, 14: CIRCLE (rcx2, rcy2), 2, 15
+CIRCLE (rcx3, rcy3), 2, 14: PAINT (rcx3, rcy3), 0, 14: CIRCLE (rcx3, rcy3), 2, 15
+CIRCLE (xc, yc), 5
+LOCATE 7, 11: PRINT "1": LOCATE 7, 63: PRINT "1"
+LOCATE 11, 6: PRINT "2": LOCATE 11, 20: PRINT "3"
+LOCATE 11, 58: PRINT "2": LOCATE 11, 72: PRINT "3"
+LOCATE 3, 20: PRINT "MERMIN'S PHYSICS TODAY DEMONSTRATION"
+LOCATE 5, 11: PRINT "ALICE"
+LOCATE 5, 64: PRINT "BOB"
+LOCATE 7, 39: PRINT "S"
+COLOR 15
+RETURN
+REM Sub 13: Outputs colors of A and B's circles in any run
+REM Colors are encoded in ca(1) and cb(1)
+13 RANDOMIZE TIMER: r1 = INT(RND * 2) + 1
+RANDOMIZE TIMER: r2 = INT(RND * 2) + 1
+ca(1) = 2 + (r1 - 1) * 2
+IF lb = la THEN
+    cb(1) = ca(1)
+ELSE
+    RANDOMIZE TIMER: r4 = INT(RND * 4) + 1
+    IF r4 < 2 THEN
+        cb(1) = ca(1)
+    ELSEIF r4 > 1 THEN
+        IF ca(1) = 2 THEN cb(1) = 4
+        IF ca(1) = 4 THEN cb(1) = 2
+    END IF
+END IF
+RETURN
+REM Sub 14: Paints in colors of A and B's circles
+14 IF clab = 0 THEN
+    ca(1) = 0: cb(1) = 0
+END IF
+IF la = 1 THEN PAINT (lcx1, lcy1), ca(1), 15
+IF la = 2 THEN PAINT (lcx2, lcy2), ca(1), 15
+IF la = 3 THEN PAINT (lcx3, lcy3), ca(1), 15
+IF lb = 1 THEN PAINT (rcx1, rcy1), cb(1), 15
+IF lb = 2 THEN PAINT (rcx2, rcy2), cb(1), 15
+IF lb = 3 THEN PAINT (rcx3, rcy3), cb(1), 15
+RETURN
+REM Sub 21: Draws setup for Hardy-Mermin demo
+21 xc = 65: yc = 74: d = 44: l = 18: w = 12: r0 = 2: pi = 3.14159
+b1x = xc - d: b1y = yc + 1: b2x = xc + d: b2y = yc + 1
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+LINE (b1x - l / 2, b1y + w / 2)-(b1x + l / 2, b1y + w / 2)
+LINE (b1x - l / 2, b1y - w / 2)-(b1x + l / 2, b1y - w / 2)
+LINE (b1x - l / 2, b1y + w / 2)-(b1x - l / 2, b1y - w / 2)
+LINE (b1x + l / 2, b1y + w / 2)-(b1x + l / 2, b1y - w / 2)
+LINE (b2x - l / 2, b2y + w / 2)-(b2x + l / 2, b2y + w / 2)
+LINE (b2x - l / 2, b2y - w / 2)-(b2x + l / 2, b2y - w / 2)
+LINE (b2x - l / 2, b2y + w / 2)-(b2x - l / 2, b2y - w / 2)
+LINE (b2x + l / 2, b2y + w / 2)-(b2x + l / 2, b2y - w / 2)
+CIRCLE (b1x - l / 4, b1y + 2), 2: CIRCLE (b1x + l / 4, b1y + 2), 2
+CIRCLE (b2x - l / 4, b2y + 2), 2: CIRCLE (b2x + l / 4, b2y + 2), 2
+CIRCLE (xc, yc), 5
+LOCATE 3, 26: PRINT "HARDY-MERMIN DEMONSTRATION"
+LOCATE 5, 11: PRINT "ALICE"
+LOCATE 5, 64: PRINT "BOB"
+LOCATE 6, 39: PRINT "S"
+LOCATE 9, 10: PRINT "1": LOCATE 9, 16: PRINT "1'"
+LOCATE 9, 62: PRINT "2": LOCATE 9, 68: PRINT "2'"
+RETURN
+REM Sub 23: Outputs colors of A and B's circles in any run
+REM Probabilities fixed as in Mermin's AJP paper
+REM Colors are encoded in ca(1) and cb(1)
+23 RANDOMIZE TIMER: r1 = RND
+IF la = 1 AND lb = 2 THEN
+    IF r1 < .15 THEN
+        ca(1) = 4: cb(1) = 4
+    ELSEIF r1 > .15 AND r1 < .375 THEN
+        ca(1) = 4: cb(1) = 2
+    ELSE
+        ca(1) = 2: cb(1) = 4
+    END IF
+ELSEIF la = 2 AND lb = 1 THEN
+    IF r1 < .15 THEN
+        ca(1) = 4: cb(1) = 4
+    ELSEIF r1 > .15 AND r1 < .775 THEN
+        ca(1) = 4: cb(1) = 2
+    ELSE
+        ca(1) = 2: cb(1) = 4
+    END IF
+ELSEIF la = 1 AND lb = 1 THEN
+    IF r1 < .25 THEN
+        ca(1) = 2: cb(1) = 2
+    ELSEIF r1 > .25 AND r1 < .625 THEN
+        ca(1) = 4: cb(1) = 2
+    ELSE
+        ca(1) = 2: cb(1) = 4
+    END IF
+ELSEIF la = 2 AND lb = 2 THEN
+    IF r1 < .09 THEN
+        ca(1) = 2: cb(1) = 2
+    ELSEIF r1 > .09 AND r1 < .73 THEN
+        ca(1) = 4: cb(1) = 4
+    ELSEIF r1 > .73 AND r1 < .865 THEN
+        ca(1) = 4: cb(1) = 2
+    ELSE
+        ca(1) = 2: cb(1) = 4
+    END IF
+END IF
+RETURN
+REM Sub 24: Paints in colors of A,B and C's circles
+24 IF clab = 0 THEN
+    ca(1) = 0: cb(1) = 0
+END IF
+IF la = 1 THEN PAINT (b1x - l / 4, b1y + 2), ca(1), 15
+IF la = 2 THEN PAINT (b1x + l / 4, b1y + 2), ca(1), 15
+IF lb = 1 THEN PAINT (b2x - l / 4, b2y + 2), cb(1), 15
+IF lb = 2 THEN PAINT (b2x + l / 4, b2y + 2), cb(1), 15
+RETURN
+REM Sub 31: Draws setup for GHZ-Mermin demo
+31 xc = 65: yc = 64: d = 20: l = 18: w = 10: r0 = 2: pi = 3.14159
+b1x = xc: b1y = yc + d - 3
+b2x = xc - (d + 5) * COS(pi / 6): b2y = yc - d * SIN(pi / 6) - 3
+b3x = xc + (d + 5) * COS(pi / 6): b3y = b2y
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+LINE (b1x - l / 2, b1y + w / 2)-(b1x + l / 2, b1y + w / 2)
+LINE (b1x - l / 2, b1y - w / 2)-(b1x + l / 2, b1y - w / 2)
+LINE (b1x - l / 2, b1y + w / 2)-(b1x - l / 2, b1y - w / 2)
+LINE (b1x + l / 2, b1y + w / 2)-(b1x + l / 2, b1y - w / 2)
+LINE (b2x - l / 2, b2y + w / 2)-(b2x + l / 2, b2y + w / 2)
+LINE (b2x - l / 2, b2y - w / 2)-(b2x + l / 2, b2y - w / 2)
+LINE (b2x - l / 2, b2y + w / 2)-(b2x - l / 2, b2y - w / 2)
+LINE (b2x + l / 2, b2y + w / 2)-(b2x + l / 2, b2y - w / 2)
+LINE (b3x - l / 2, b3y + w / 2)-(b3x + l / 2, b3y + w / 2)
+LINE (b3x - l / 2, b3y - w / 2)-(b3x + l / 2, b3y - w / 2)
+LINE (b3x - l / 2, b3y + w / 2)-(b3x - l / 2, b3y - w / 2)
+LINE (b3x + l / 2, b3y + w / 2)-(b3x + l / 2, b3y - w / 2)
+CIRCLE (b1x - l / 4, b1y + 1), 2: CIRCLE (b1x + l / 4, b1y + 1), 2
+CIRCLE (b2x - l / 4, b2y + 1), 2: CIRCLE (b2x + l / 4, b2y + 1), 2
+CIRCLE (b3x - l / 4, b3y + 1), 2: CIRCLE (b3x + l / 4, b3y + 1), 2
+CIRCLE (xc, yc), 5
+LOCATE 11, 39: PRINT "S"
+LOCATE 3, 28: PRINT "GHZ-MERMIN DEMONSTRATION"
+LOCATE 16, 24: PRINT "x": LOCATE 16, 29: PRINT "y"
+LOCATE 16, 49: PRINT "x": LOCATE 16, 55: PRINT "y"
+LOCATE 7, 37: PRINT "x": LOCATE 7, 42: PRINT "y"
+RETURN
+REM Sub 33: Outputs colors of Alice, Bob and Carol's circles in any run
+REM Colors are encoded in ca(1),cb(1) and cc(1)
+33 RANDOMIZE TIMER: r1 = INT(RND * 2) + 1
+RANDOMIZE TIMER: r2 = INT(RND * 2) + 1
+RANDOMIZE TIMER: r3 = INT(RND * 2) + 1
+IF lt = 3 OR lt = 5 THEN
+    ca(1) = 2 + (r1 - 1) * 2: cb(1) = 2 + (r2 - 1) * 2
+    ct = ca(1) + cb(1)
+    IF lt = 5 THEN
+        IF ct = 4 OR ct = 8 THEN cc(1) = 2
+        IF ct = 6 THEN cc(1) = 4
+    ELSEIF lt = 3 THEN
+        IF ct = 4 OR ct = 8 THEN cc(1) = 4
+        IF ct = 6 THEN cc(1) = 2
+    END IF
+ELSEIF lt = 4 OR lt = 6 THEN
+    ca(1) = 2 + (r1 - 1) * 2: cb(1) = 2 + (r2 - 1) * 2
+    cc(1) = 2 + (r3 - 1) * 2
+END IF
+RETURN
+REM Sub 34: Paints in colors of A,B and C's circles
+34 IF clab = 0 THEN
+    ca(1) = 0: cb(1) = 0: cc(1) = 0
+END IF
+IF la = 1 THEN PAINT (b1x - l / 4, b1y + 1), ca(1), 15
+IF la = 2 THEN PAINT (b1x + l / 4, b1y + 1), ca(1), 15
+IF lb = 1 THEN PAINT (b2x - l / 4, b2y + 1), cb(1), 15
+IF lb = 2 THEN PAINT (b2x + l / 4, b2y + 1), cb(1), 15
+IF lc = 1 THEN PAINT (b3x - l / 4, b3y + 1), cc(1), 15
+IF lc = 2 THEN PAINT (b3x + l / 4, b3y + 1), cc(1), 15
+RETURN
+REM Sub 41: Draws setup for magic squares
+41 xc = 65: yc = 71: h = 20: d = 44
+h2 = h / 2: h3 = h / 3
+lcx = xc - d: lcy = yc: rcx = xc + d: rcy = yc
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+FOR i = 1 TO 4
+    xl = lcx - h2: yl = lcy + h2 - (i - 1) * h3: xr = lcx + h2: yr = yl
+    LINE (xl, yl)-(xr, yr)
+    xu = lcx - h2 + (i - 1) * h3: yu = lcy + h2: xd = xu: yd = yu - h
+    LINE (xu, yu)-(xd, yd)
+NEXT
+FOR i = 1 TO 4
+    xl = rcx - h2: yl = rcy + h2 - (i - 1) * h3: xr = rcx + h2: yr = yl
+    LINE (xl, yl)-(xr, yr)
+    xu = rcx - h2 + (i - 1) * h3: yu = rcy + h2: xd = xu: yd = yu - h
+    LINE (xu, yu)-(xd, yd)
+NEXT
+CIRCLE (xc, yc), 5
+LOCATE 3, 28: PRINT "MERMIN'S MAGIC SQUARES"
+LOCATE 5, 11: PRINT "ALICE"
+LOCATE 5, 64: PRINT "BOB"
+LOCATE 7, 39: PRINT "S"
+COLOR 15
+RETURN
+REM Sub 42: Prints row/column labels on squares
+42 IF clab = 0 THEN COLOR 15
+IF clab = 1 THEN COLOR 14
+IF la = 1 THEN
+    LOCATE 7, 5: PRINT "R1"
+ELSEIF la = 2 THEN
+    LOCATE 9, 5: PRINT "R2"
+ELSEIF la = 3 THEN
+    LOCATE 11, 5: PRINT "R3"
+END IF
+IF lb = 1 THEN
+    LOCATE 13, 61: PRINT "C1"
+ELSEIF lb = 2 THEN
+    LOCATE 13, 65: PRINT "C2"
+ELSEIF lb = 3 THEN
+    LOCATE 13, 69: PRINT "C3"
+END IF
+COLOR 15
+RETURN
+REM Sub 43: Outputs colors of Alice and Bob's squares in any run
+REM Alice's colors are encoded in ca(i) and Bob's in cb(i)
+43 REM First fix Alice's colors
+RANDOMIZE TIMER: rva = INT(RND * 4) + 1
+IF rva = 1 THEN
+    ca(1) = 4: ca(2) = 4: ca(3) = 2
+ELSEIF rva = 2 THEN
+    ca(1) = 4: ca(2) = 2: ca(3) = 4
+ELSEIF rva = 3 THEN
+    ca(1) = 2: ca(2) = 4: ca(3) = 4
+ELSEIF rva = 4 THEN
+    ca(1) = 2: ca(2) = 2: ca(3) = 2
+END IF
+RANDOMIZE TIMER: rvb = INT(RND * 2) + 1
+IF la = 1 THEN
+    cb(1) = ca(lb)
+    IF rvb = 1 THEN cb(2) = 4
+    IF rvb = 2 THEN cb(2) = 2
+    cbx = cb(1) + cb(2)
+    IF cbx = 4 OR cbx = 8 THEN cb(3) = 4
+    IF cbx = 6 THEN cb(3) = 2
+ELSEIF la = 2 THEN
+    cb(2) = ca(lb)
+    IF rvb = 1 THEN cb(1) = 4
+    IF rvb = 2 THEN cb(1) = 2
+    cbx = cb(1) + cb(2)
+    IF cbx = 4 OR cbx = 8 THEN cb(3) = 4
+    IF cbx = 6 THEN cb(3) = 2
+ELSEIF la = 3 THEN
+    cb(3) = ca(lb)
+    IF rvb = 1 THEN cb(1) = 4
+    IF rvb = 2 THEN cb(1) = 2
+    cbx = cb(3) + cb(1)
+    IF cbx = 4 OR cbx = 8 THEN cb(2) = 4
+    IF cbx = 6 THEN cb(2) = 2
+END IF
+RETURN
+REM Sub 44: Paints in colors of Alice and Bob's squares
+44 IF clab = 0 THEN
+    ca(1) = 0: ca(2) = 0: ca(3) = 0: cb(1) = 0: cb(2) = 0: cb(3) = 0
+END IF
+IF la = 1 THEN
+    PAINT (l11x, l11y), ca(1), 15: PAINT (l12x, l12y), ca(2), 15:
+    PAINT (l13x, l13y), ca(3), 15:
+ELSEIF la = 2 THEN
+    PAINT (l21x, l21y), ca(1), 15: PAINT (l22x, l22y), ca(2), 15:
+    PAINT (l23x, l23y), ca(3), 15:
+ELSEIF la = 3 THEN
+    PAINT (l31x, l31y), ca(1), 15: PAINT (l32x, l32y), ca(2), 15:
+    PAINT (l33x, l33y), ca(3), 15:
+END IF
+IF lb = 1 THEN
+    PAINT (r11x, r11y), cb(1), 15: PAINT (r21x, r21y), cb(2), 15:
+    PAINT (r31x, r31y), cb(3), 15:
+ELSEIF lb = 2 THEN
+    PAINT (r12x, r12y), cb(1), 15: PAINT (r22x, r22y), cb(2), 15:
+    PAINT (r32x, r32y), cb(3), 15:
+ELSEIF lb = 3 THEN
+    PAINT (r13x, r13y), cb(1), 15: PAINT (r23x, r23y), cb(2), 15:
+    PAINT (r33x, r33y), cb(3), 15:
+END IF
+RETURN
+REM Sub 51: Draws setup for magic pentagram
+REM 1,2,3,4,5/6,7,8,9,10 are outer/inner vertices of pentagram
+REM 1 is highest point and 2,3,4,5 follow it in ccw order
+REM lines of pentagram are 1673,26105,2784,3895,11094
+51 xc = 65: yc = 60: r = 18: d = 40: r0 = 2: d2 = 2 * d
+lcx = xc - d: lcy = yc: rcx = xc + d: rcy = yc
+pi = 3.14159: th = pi / 5: lp = r * COS(2 * th) / COS(th)
+l1x = lcx: l1y = lcy + r
+l2x = lcx - r * SIN(2 * th): l2y = lcy + r * COS(2 * th)
+l3x = lcx - r * SIN(4 * th): l3y = lcy + r * COS(4 * th)
+l4x = lcx + r * SIN(4 * th): l4y = l3y
+l5x = lcx + r * SIN(2 * th): l5y = l2y
+l6x = lcx - lp * SIN(th): l6y = lcy + lp * COS(th)
+l10x = lcx + lp * SIN(th): l10y = l6y
+l7x = lcx - lp * SIN(2 * th): l7y = lcy - lp * COS(2 * th)
+l8x = lcx: l8y = lcy - lp
+l9x = lcx + lp * SIN(2 * th): l9y = l7y
+ltx(1, 1) = l1x: ltx(1, 2) = l6x: ltx(1, 3) = l7x: ltx(1, 4) = l3x
+ltx(2, 1) = l2x: ltx(2, 2) = l6x: ltx(2, 3) = l10x: ltx(2, 4) = l5x
+ltx(3, 1) = l2x: ltx(3, 2) = l7x: ltx(3, 3) = l8x: ltx(3, 4) = l4x
+ltx(4, 1) = l3x: ltx(4, 2) = l8x: ltx(4, 3) = l9x: ltx(4, 4) = l5x
+ltx(5, 1) = l4x: ltx(5, 2) = l9x: ltx(5, 3) = l10x: ltx(5, 4) = l1x
+lty(1, 1) = l1y: lty(1, 2) = l6y: lty(1, 3) = l7y: lty(1, 4) = l3y
+lty(2, 1) = l2y: lty(2, 2) = l6y: lty(2, 3) = l10y: lty(2, 4) = l5y
+lty(3, 1) = l2y: lty(3, 2) = l7y: lty(3, 3) = l8y: lty(3, 4) = l4y
+lty(4, 1) = l3y: lty(4, 2) = l8y: lty(4, 3) = l9y: lty(4, 4) = l5y
+lty(5, 1) = l4y: lty(5, 2) = l9y: lty(5, 3) = l10y: lty(5, 4) = l1y
+FOR i = 1 TO 5
+    FOR j = 1 TO 4
+        rtx(i, j) = ltx(i, j) + d2
+        rty(i, j) = lty(i, j)
+    NEXT
+NEXT
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+CIRCLE (xc, yc + 5), 4.5
+FOR i = 1 TO 5
+    LINE (ltx(i, 1), lty(i, 1))-(ltx(i, 4), lty(i, 4))
+    LINE (rtx(i, 1), rty(i, 1))-(rtx(i, 4), rty(i, 4))
+NEXT
+FOR i = 1 TO 5
+    FOR j = 1 TO 4
+        CIRCLE (ltx(i, j), lty(i, j)), 2, 14
+        PAINT (ltx(i, j), lty(i, j)), 0, 14
+        CIRCLE (ltx(i, j), lty(i, j)), 2, 15
+        CIRCLE (rtx(i, j), rty(i, j)), 2, 14
+        PAINT (rtx(i, j), rty(i, j)), 0, 14
+        CIRCLE (rtx(i, j), rty(i, j)), 2, 15
+    NEXT
+NEXT
+LOCATE 3, 28: PRINT "MERMIN'S MAGIC PENTAGRAMS"
+LOCATE 5, 13: PRINT "ALICE"
+LOCATE 5, 62: PRINT "BOB"
+LOCATE 9, 39: PRINT "S"
+COLOR 15
+RETURN
+REM Sub 53: Outputs colors of Alice and Bob's panels in any run
+REM Alice's colors are encoded in ca(i) and Bob's in cb(i)
+53 REM First fix Alice's colors
+RANDOMIZE TIMER: rva = INT(RND * 8) + 1
+IF rva = 1 THEN
+    ca(1) = 4: ca(2) = 2: ca(3) = 2: ca(4) = 2
+ELSEIF rva = 2 THEN
+    ca(1) = 2: ca(2) = 4: ca(3) = 2: ca(4) = 2
+ELSEIF rva = 3 THEN
+    ca(1) = 2: ca(2) = 2: ca(3) = 4: ca(4) = 2
+ELSEIF rva = 4 THEN
+    ca(1) = 2: ca(2) = 2: ca(3) = 2: ca(4) = 4
+ELSEIF rva = 5 THEN
+    ca(1) = 4: ca(2) = 4: ca(3) = 4: ca(4) = 2
+ELSEIF rva = 6 THEN
+    ca(1) = 4: ca(2) = 4: ca(3) = 2: ca(4) = 4
+ELSEIF rva = 7 THEN
+    ca(1) = 4: ca(2) = 2: ca(3) = 4: ca(4) = 4
+ELSEIF rva = 8 THEN
+    ca(1) = 2: ca(2) = 4: ca(3) = 4: ca(4) = 4
+END IF
+IF la = lb THEN
+    cb(1) = ca(1): cb(2) = ca(2): cb(3) = ca(3): cb(4) = ca(4)
+ELSE
+    RANDOMIZE TIMER: rb1 = INT(RND * 2) + 1
+    RANDOMIZE TIMER: rb2 = INT(RND * 2) + 1
+    IF la = 1 AND lb = 2 THEN
+        cb(2) = ca(2): cb(1) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 1 AND lb = 3 THEN
+        cb(2) = ca(3): cb(1) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 1 AND lb = 4 THEN
+        cb(1) = ca(4): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 1 AND lb = 5 THEN
+        cb(4) = ca(1): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(4) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(1) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(1) = 2
+    ELSEIF la = 2 AND lb = 1 THEN
+        cb(2) = ca(2): cb(1) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 2 AND lb = 3 THEN
+        cb(1) = ca(1): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 2 AND lb = 4 THEN
+        cb(4) = ca(4): cb(1) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(4) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(2) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(2) = 2
+    ELSEIF la = 2 AND lb = 5 THEN
+        cb(3) = ca(3): cb(1) = 2 + (rb1 - 1) * 2: cb(2) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 3 AND lb = 1 THEN
+        cb(3) = ca(2): cb(1) = 2 + (rb1 - 1) * 2: cb(2) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 3 AND lb = 2 THEN
+        cb(1) = ca(1): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 3 AND lb = 4 THEN
+        cb(2) = ca(3): cb(1) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 3 AND lb = 5 THEN
+        cb(1) = ca(4): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 4 AND lb = 1 THEN
+        cb(4) = ca(1): cb(1) = 2 + (rb1 - 1) * 2: cb(2) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(4)
+        IF cbx = 6 OR cbx = 10 THEN cb(3) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(3) = 2
+    ELSEIF la = 4 AND lb = 2 THEN
+        cb(4) = ca(4): cb(1) = 2 + (rb1 - 1) * 2: cb(2) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(4)
+        IF cbx = 6 OR cbx = 10 THEN cb(3) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(3) = 2
+    ELSEIF la = 4 AND lb = 3 THEN
+        cb(3) = ca(2): cb(1) = 2 + (rb1 - 1) * 2: cb(2) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 4 AND lb = 5 THEN
+        cb(2) = ca(3): cb(1) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 5 AND lb = 1 THEN
+        cb(1) = ca(4): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 5 AND lb = 2 THEN
+        cb(3) = ca(3): cb(1) = 2 + (rb1 - 1) * 2: cb(2) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    ELSEIF la = 5 AND lb = 3 THEN
+        cb(4) = ca(1): cb(2) = 2 + (rb1 - 1) * 2: cb(3) = 2 + (rb2 - 1) * 2
+        cbx = cb(4) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(1) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(1) = 2
+    ELSEIF la = 5 AND lb = 4 THEN
+        cb(3) = ca(2): cb(2) = 2 + (rb1 - 1) * 2: cb(1) = 2 + (rb2 - 1) * 2
+        cbx = cb(1) + cb(2) + cb(3)
+        IF cbx = 6 OR cbx = 10 THEN cb(4) = 4
+        IF cbx = 8 OR cbx = 12 THEN cb(4) = 2
+    END IF
+END IF
+RETURN
+REM Sub 54: Paints in colors of Alice and Bob's squares
+54 IF clab = 0 THEN
+    ca(1) = 0: ca(2) = 0: ca(3) = 0: ca(4) = 0
+    cb(1) = 0: cb(2) = 0: cb(3) = 0: cb(4) = 0
+END IF
+FOR k = 1 TO 5
+    IF la = k THEN
+        FOR kk = 1 TO 4
+            PAINT (ltx(k, kk), lty(k, kk)), ca(kk), 15
+        NEXT
+    END IF
+NEXT
+FOR k = 1 TO 5
+    IF lb = k THEN
+        FOR kk = 1 TO 4
+            PAINT (rtx(k, kk), rty(k, kk)), cb(kk), 15
+        NEXT
+    END IF
+NEXT
+RETURN
+REM Sub 61: Draws setup for CHSH demonstration
+61 xc = 65: yc = 70: h = 10: d = 44: pi = 3.14159
+lcx = xc - d: lcy = yc: rcx = xc + d: rcy = yc
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+lcx1 = lcx: lcy1 = lcy + h
+lcx2 = lcx + h: lcy2 = lcy
+LINE (lcx, lcy)-(lcx1, lcy1)
+LINE (lcx, lcy)-(lcx2, lcy2)
+CIRCLE (lcx1, lcy1), 2, 14: PAINT (lcx1, lcy1), 0, 14: CIRCLE (lcx1, lcy1), 2, 15
+CIRCLE (lcx2, lcy2), 2, 14: PAINT (lcx2, lcy2), 0, 14: CIRCLE (lcx2, lcy2), 2, 15
+rcx1 = rcx + h / SQR(2): rcy1 = rcy + h / SQR(2)
+rcx2 = rcx - h / SQR(2): rcy2 = rcy1
+LINE (rcx, rcy)-(rcx1, rcy1)
+LINE (rcx, rcy)-(rcx2, rcy2)
+CIRCLE (rcx1, rcy1), 2, 14: PAINT (rcx1, rcy1), 0, 14: CIRCLE (rcx1, rcy1), 2, 15
+CIRCLE (rcx2, rcy2), 2, 14: PAINT (rcx2, rcy2), 0, 14: CIRCLE (rcx2, rcy2), 2, 15
+CIRCLE (xc, yc), 5
+LOCATE 7, 11: PRINT "Y": LOCATE 7, 58: PRINT "Y'"
+LOCATE 11, 19: PRINT "X": LOCATE 7, 72: PRINT "X'"
+LOCATE 3, 31: PRINT "CHSH DEMONSTRATION"
+LOCATE 5, 11: PRINT "ALICE"
+LOCATE 5, 64: PRINT "BOB"
+LOCATE 7, 39: PRINT "S"
+COLOR 15
+RETURN
+REM Sub 63: Outputs colors of A and B's circles in any run
+REM Colors are encoded in ca(1) and cb(1)
+63 RANDOMIZE TIMER: r1 = INT(RND * 2) + 1
+pi = 3.14159: cx = COS(pi / 8): cx = cx ^ 2
+RANDOMIZE TIMER: r2 = RND
+ca(1) = 2 + (r1 - 1) * 2
+IF la = 1 AND ca(1) = 2 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 2
+    IF lb = 1 AND r2 > cx THEN cb(1) = 4
+    IF lb = 2 AND r2 < cx THEN cb(1) = 4
+    IF lb = 2 AND r2 > cx THEN cb(1) = 2
+ELSEIF la = 1 AND ca(1) = 4 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 4
+    IF lb = 1 AND r2 > cx THEN cb(1) = 2
+    IF lb = 2 AND r2 < cx THEN cb(1) = 2
+    IF lb = 2 AND r2 > cx THEN cb(1) = 4
+ELSEIF la = 2 AND ca(1) = 2 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 2
+    IF lb = 1 AND r2 > cx THEN cb(1) = 4
+    IF lb = 2 AND r2 < cx THEN cb(1) = 2
+    IF lb = 2 AND r2 > cx THEN cb(1) = 4
+ELSEIF la = 2 AND ca(1) = 4 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 4
+    IF lb = 1 AND r2 > cx THEN cb(1) = 2
+    IF lb = 2 AND r2 < cx THEN cb(1) = 4
+    IF lb = 2 AND r2 > cx THEN cb(1) = 2
+END IF
+RETURN
+REM Sub 64: Paints in colors of A and B's circles
+64 IF clab = 0 THEN
+    ca(1) = 0: cb(1) = 0
+END IF
+IF la = 1 THEN PAINT (lcx2, lcy2), ca(1), 15
+IF la = 2 THEN PAINT (lcx1, lcy1), ca(1), 15
+IF lb = 1 THEN PAINT (rcx1, rcy1), cb(1), 15
+IF lb = 2 THEN PAINT (rcx2, rcy2), cb(1), 15
+RETURN
+

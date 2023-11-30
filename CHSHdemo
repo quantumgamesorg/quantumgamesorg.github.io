@@ -1,0 +1,129 @@
+REM CHSH demonstration
+60 GOSUB 61
+LOCATE 15, 7: PRINT "Total   XX'+   XX'-   XY'+   XY'-   YX'+   YX'-   YY'+   YY'-"
+LOCATE 18, 17: PRINT "<XX'>": LOCATE 18, 31: PRINT "<XY'>"
+LOCATE 18, 45: PRINT "<YX'>": LOCATE 18, 59: PRINT "<YY'>"
+LOCATE 22, 17: PRINT "|<XX'>-<XY'>+<YX'>+<YY'>| ="
+LOCATE 28, 6: PRINT "Press Cntrl+Break to end show"
+N = 0: xxp = 0: xxm = 0: xyp = 0: xym = 0: yxp = 0: yxm = 0: yyp = 0: yym = 0
+66 SLEEP 10
+N = N + 1
+PAINT (xc, yc), 14, 15
+SLEEP 1
+RANDOMIZE TIMER: la = INT(RND * 2) + 1
+RANDOMIZE TIMER: lb = INT(RND * 2) + 1
+GOSUB 63
+IF la = 1 AND lb = 1 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        xxm = xxm + 1
+    ELSE
+        xxp = xxp + 1
+    END IF
+ELSEIF la = 1 AND lb = 2 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        xym = xym + 1
+    ELSE
+        xyp = xyp + 1
+    END IF
+ELSEIF la = 2 AND lb = 1 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        yxm = yxm + 1
+    ELSE
+        yxp = yxp + 1
+    END IF
+ELSEIF la = 2 AND lb = 2 THEN
+    IF ca(1) + cb(1) = 6 THEN
+        yym = yym + 1
+    ELSE
+        yyp = yyp + 1
+    END IF
+END IF
+IF (xxp + xxm) > 0 THEN
+    xxa = (xxp - xxm) / (xxp + xxm)
+    xxat = INT(100 * xxa) / 100
+ELSE
+    xxa = 0: xxat = 0
+END IF
+IF (xyp + xym) > 0 THEN
+    xya = (xyp - xym) / (xyp + xym)
+    xyat = INT(100 * xya) / 100
+ELSE
+    xya = 0: xyat = 0
+END IF
+IF (yxp + yxm) > 0 THEN
+    yxa = (yxp - yxm) / (yxp + yxm)
+    yxat = INT(100 * yxa) / 100
+ELSE
+    yxa = 0: yxat = 0
+END IF
+IF (yyp + yym) > 0 THEN
+    yya = (yyp - yym) / (yyp + yym)
+    yyat = INT(100 * yya) / 100
+ELSE
+    yya = 0: yyat = 0
+END IF
+bell = ABS(xxa - xya + yxa + yya)
+bellt = INT(100 * bell) / 100
+clab = 1: GOSUB 64
+REM Sub 61: Draws setup for CHSH demonstration
+61 xc = 65: yc = 70: h = 10: d = 44: pi = 3.14159
+lcx = xc - d: lcy = yc: rcx = xc + d: rcy = yc
+CLS: SCREEN 12: WINDOW (0, 0)-(135, 100): COLOR 15
+lcx1 = lcx: lcy1 = lcy + h
+lcx2 = lcx + h: lcy2 = lcy
+LINE (lcx, lcy)-(lcx1, lcy1)
+LINE (lcx, lcy)-(lcx2, lcy2)
+CIRCLE (lcx1, lcy1), 2, 14: PAINT (lcx1, lcy1), 0, 14: CIRCLE (lcx1, lcy1), 2, 15
+CIRCLE (lcx2, lcy2), 2, 14: PAINT (lcx2, lcy2), 0, 14: CIRCLE (lcx2, lcy2), 2, 15
+rcx1 = rcx + h / SQR(2): rcy1 = rcy + h / SQR(2)
+rcx2 = rcx - h / SQR(2): rcy2 = rcy1
+LINE (rcx, rcy)-(rcx1, rcy1)
+LINE (rcx, rcy)-(rcx2, rcy2)
+CIRCLE (rcx1, rcy1), 2, 14: PAINT (rcx1, rcy1), 0, 14: CIRCLE (rcx1, rcy1), 2, 15
+CIRCLE (rcx2, rcy2), 2, 14: PAINT (rcx2, rcy2), 0, 14: CIRCLE (rcx2, rcy2), 2, 15
+CIRCLE (xc, yc), 5
+LOCATE 7, 11: PRINT "Y": LOCATE 7, 58: PRINT "Y'"
+LOCATE 11, 19: PRINT "X": LOCATE 7, 72: PRINT "X'"
+LOCATE 3, 31: PRINT "CHSH DEMONSTRATION"
+LOCATE 5, 11: PRINT "ALICE"
+LOCATE 5, 64: PRINT "BOB"
+LOCATE 7, 39: PRINT "S"
+COLOR 15
+RETURN
+REM Sub 63: Outputs colors of A and B's circles in any run
+REM Colors are encoded in ca(1) and cb(1)
+63 RANDOMIZE TIMER: r1 = INT(RND * 2) + 1
+pi = 3.14159: cx = COS(pi / 8): cx = cx ^ 2
+RANDOMIZE TIMER: r2 = RND
+ca(1) = 2 + (r1 - 1) * 2
+IF la = 1 AND ca(1) = 2 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 2
+    IF lb = 1 AND r2 > cx THEN cb(1) = 4
+    IF lb = 2 AND r2 < cx THEN cb(1) = 4
+    IF lb = 2 AND r2 > cx THEN cb(1) = 2
+ELSEIF la = 1 AND ca(1) = 4 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 4
+    IF lb = 1 AND r2 > cx THEN cb(1) = 2
+    IF lb = 2 AND r2 < cx THEN cb(1) = 2
+    IF lb = 2 AND r2 > cx THEN cb(1) = 4
+ELSEIF la = 2 AND ca(1) = 2 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 2
+    IF lb = 1 AND r2 > cx THEN cb(1) = 4
+    IF lb = 2 AND r2 < cx THEN cb(1) = 2
+    IF lb = 2 AND r2 > cx THEN cb(1) = 4
+ELSEIF la = 2 AND ca(1) = 4 THEN
+    IF lb = 1 AND r2 < cx THEN cb(1) = 4
+    IF lb = 1 AND r2 > cx THEN cb(1) = 2
+    IF lb = 2 AND r2 < cx THEN cb(1) = 4
+    IF lb = 2 AND r2 > cx THEN cb(1) = 2
+END IF
+RETURN
+REM Sub 64: Paints in colors of A and B's circles
+64 IF clab = 0 THEN
+    ca(1) = 0: cb(1) = 0
+END IF
+IF la = 1 THEN PAINT (lcx2, lcy2), ca(1), 15
+IF la = 2 THEN PAINT (lcx1, lcy1), ca(1), 15
+IF lb = 1 THEN PAINT (rcx1, rcy1), cb(1), 15
+IF lb = 2 THEN PAINT (rcx2, rcy2), cb(1), 15
+RETURN
