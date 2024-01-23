@@ -8,8 +8,7 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 let circleMap = [];
 boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 // Reset button
-document.querySelectorAll("#upperLeft button")[0].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true
-;  reset();}
+document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
 // // TODO: these extra solve buttons are temporary
 //var solutionElements = document.querySelectorAll('#upperLeft option');
 //for (let i = 0; i < solutionElements.length; ++i) {
@@ -18,9 +17,9 @@ document.querySelectorAll("#upperLeft button")[0].onclick = () => {document.quer
 // // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
 // // comment from my friend: "Who fucking wrote this?"
 
-document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[3].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
 document.querySelectorAll(".person").forEach((e, i) => {
