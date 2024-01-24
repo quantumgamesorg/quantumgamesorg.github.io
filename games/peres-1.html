@@ -24,15 +24,14 @@
 
                     <div class="leftArea">
                         <h3>Menu</h3>
-                        <button class="infoButton">Origin of game <img src="../assets/window_icon.png" style="height: 10px; width: 11.667px" alt="Popup window icon"></button>
+                        <button>Origin of game &ShortDownArrow;</button>
                         <br>
                         <button class="infoButton">Rules <img src="../assets/window_icon.png" style="height: 10px; width: 11.667px" alt="Popup window icon"></button>
                         <br>
                         <button> Personalities &ShortDownArrow;</button>
                         <button> Explanation &ShortDownArrow;</button>
-                        <!-- <button>Personalities &ShortDownArrow;</button>
-                        <button>Credits &ShortDownArrow;</button>
-                        <button>Further Reading &ShortDownArrow;</button> -->
+                        <!-- <button> Credits &ShortDownArrow;</button> -->
+                        <!-- <button>Further Reading &ShortDownArrow;</button> -->
                     </div>
 
                     <div class="leftArea">
@@ -55,16 +54,12 @@
                         </div>
                         <div id="win_rules" class="window hidden">
                             <h3>Rules</h3>
-                            <b>*PLACEHOLDER TEXT*</b>
-                            <p>The gameboard consists of 24 circles containing the numbers from 1 to 24, with each circle containing four numbers and each number occurring in four different circles.</p>
-                            <p>The two outer circles in line with a pair of inner circles contain complementary mixes of the numbers in the inner circles.</p>
-                            <p>To play the game you must make a series of moves, each of which consists of placing your cursor over a circle and clicking, causing the circle and its contents to light up in red.</p>
-                            <p>You win the game if you can light up an odd number of circles in such a way that each of the numbers that occurs in those circles occurs in an even number of them. A number to the right of the gameboard tells you how many moves you have made, with an odd number being shown in green and an even number in red. You can win only if this number is odd (green).</p>
-                            <p>The scoreboard at the bottom shows you how many times each of the numbers in the circles you have picked appears in them. Numbers that occur an odd number of times (1 or 3) are shown in red while those that occur an even number of times (2 or 4) are shown in green. You win the game only if the numbers lit up on the scoreboard are all green.</p>
-                            <p>When you win the game the header at the top changes from "Does God play dice?" in red to "God does play dice!" in green.</p>
-                            <p>If you make 15 moves without winning, you have lost and must start over again.</p>
-                            <p>You can undo any previous moves simply by clicking on the lighted circles. You can also reset the game to START at any time if you wish.</p>
-                            <p>There are many different ways of winning the game and a simple strategy that will always allow you to win. Can you figure it out?</p>
+                            <p>The gameboard consists of 24 circles containing the numbers 1 to 24, with each circle containing four numbers and each number occurring in four circles. </p>
+                            <p>The object of the game is to pick an odd number of circles in such a way that each of the numbers that occurs in them occurs in an even number of them. There are many different ways of winning the game, but they all involve picking nine or more circles. Click on “Display a solution” in the menu to see a random example of a winning pattern. </p>
+                            <p>To play the game, place your cursor on a circle and click, causing it to light up red. Continue clicking on circles until you either win the game or are forced to quit. The moves box shows the number of circles picked, with odd numbers indicated in green and an even numbers in red. The scoreboard at the bottom shows how often each of the numbers occurs in the circles you have picked, with odd occurrences shown in red and even ones in green. You win the game only when the moves box and the scoreboard are lit up green. When you win, the title at the top changes from “Does God play dice?” to “Yes, God does play dice!”  </p>
+                            <p>You can undo earlier moves by clicking on the lighted circles. Thus, there is no need to start again from the beginning if you think you made one or more false moves. If you make your cursor hover over any lighted circle, all the numbers in it are shown in bold font in the scoreboard below, allowing you to better plan your later moves.  </p>
+                            <p>There is a simple strategy for winning the game. Can you find it? </p>
+                            <p>Click on “Explanation” in the sidebar for a non-technical account of why winning the game proves Einstein wrong in his views about quantum mechanics</p>
                         </div>
                     </div>
                 </div>
@@ -110,14 +105,7 @@
             <p>The theoretical arguments of Bell, Kochen and Specker were refined and generalized in a number of ways in the years ahead. In particular, Peres found a simple way of arriving at their conclusions that sidestepped the technical difficulties of their original arguments. If you play the game Peres-1 and win, you would have succeeded in reconstructing Peres’ proof of the so-called Bell-Kochen-Specker theorem that enshrines one of their principal conclusions. </p>
             <p>If you’re curious to learn why winning Peres-1 proves Einstein wrong, click on Explanation in the sidebar for a non-technical explanation of why this is so. However, it helps to have played the game a few times and become familiar with the winning patterns, as that might make the explanation easier to follow. </p>
 
-            <h2>Rules of the game</h2>
-
-            <p>The gameboard consists of 24 circles containing the numbers 1 to 24, with each circle containing four numbers and each number occurring in four circles. </p>
-            <p>The object of the game is to pick an odd number of circles in such a way that each of the numbers that occurs in them occurs in an even number of them. There are many different ways of winning the game, but they all involve picking nine or more circles. Click on “Display a solution” in the menu to see a random example of a winning pattern. </p>
-            <p>To play the game, place your cursor on a circle and click, causing it to light up red. Continue clicking on circles until you either win the game or are forced to quit. The moves box shows the number of circles picked, with odd numbers indicated in green and an even numbers in red. The scoreboard at the bottom shows how often each of the numbers occurs in the circles you have picked, with odd occurrences shown in red and even ones in green. You win the game only when the moves box and the scoreboard are lit up green. When you win, the title at the top changes from “Does God play dice?” to “Yes, God does play dice!”  </p>
-            <p>You can undo earlier moves by clicking on the lighted circles. Thus, there is no need to start again from the beginning if you think you made one or more false moves. If you make your cursor hover over any lighted circle, all the numbers in it are shown in bold font in the scoreboard below, allowing you to better plan your later moves.  </p>
-            <p>There is a simple strategy for winning the game. Can you find it? </p>
-            <p>Click on “Explanation” in the sidebar for a non-technical account of why winning the game proves Einstein wrong in his views about quantum mechanics</p>
+            <button onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Back to Top &ShortUpArrow;</button>
 
             <h2>Personalities</h2> 
             <div id="peopleContainer">
@@ -147,6 +135,8 @@
                 Peres reworked the arguments of Bell, Kochen and Specker into the form on which this game is based.
             </p>
 
+            <button onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Back to Top &ShortUpArrow;</button>
+
             <h2>Explanation: Why winning Peres-1 proves Einstein wrong</h2>
 
             <p>The numbers 1 to 24 in the game each represent a yes-no question that can be asked of a quantum system. Each question amounts to asking the system if it possesses a certain property or not, and the system replies with either a “yes” or a “no” (and never a “I don’t know”)**. The four questions in any circle represent a compatible set of questions, i.e., ones that can all be posed of a quantum system using the same experimental arrangement. By contrast, any four questions that do not occur together in a circle constitute an incompatible set, in the sense that there is no experimental arrangement that allows them all to be posed to the system at the same time.  </p>
@@ -164,9 +154,28 @@
             <p>And, with that, we will bring this all too brief account to a close.  </p>
             <p>**If this game is realized as an experiment in the laboratory, then this standard cannot always be met (with the system often saying “I don’t know” in answer to the question). However, the game is based on a “thought experiment” that is perfectly possible in principle (although difficult to realize in practice) and whose purpose is to establish an important point. Accounting for all the imperfections of a real experiment and still drawing weighty and valid conclusions is a difficult task that took three Nobel laureates and their research teams many years of hard work to do.  </p>
         
+            <button onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Back to Top &ShortUpArrow;</button>
+
+            <h2>Credits</h2>
+
+            <p>Maecenas bibendum turpis eros, non mattis enim sagittis sit amet. Nunc lacinia nulla sit amet condimentum blandit. Curabitur ullamcorper faucibus sem, nec tincidunt neque facilisis a. Cras vestibulum nisi id diam lobortis accumsan. Aenean fermentum massa et mattis suscipit. Phasellus pellentesque tellus sit amet urna auctor, in condimentum ante tincidunt. Suspendisse elementum, nisi vitae efficitur ornare, lorem leo consectetur mi, non egestas orci massa ultrices lacus. Sed faucibus congue sem in gravida. Donec urna ligula, molestie sit amet ipsum ut, rhoncus aliquet nibh. Maecenas sed velit in lectus facilisis dapibus. Donec diam massa, condimentum nec risus quis, viverra feugiat sapien. Duis diam lorem, hendrerit et vestibulum at, dictum non neque.</p>
+            <p>In metus ante, pretium vestibulum lectus vel, aliquam mattis augue. Donec aliquet nibh ac fringilla facilisis. Curabitur id pellentesque tellus. Duis luctus, lorem a maximus euismod, risus ligula commodo dolor, id pretium lorem neque eget leo. Mauris rutrum justo sit amet orci cursus, a fermentum magna efficitur. Donec maximus tempor neque maximus tempus. Sed volutpat feugiat nisi, eu vulputate orci varius id. Nulla facilisi. Vivamus quis elementum ex. Suspendisse euismod iaculis varius.</p>
+            
+            <button onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Back to Top &ShortUpArrow;</button>
+
+            <h2>Further Reading</h2>
+            <p>Vestibulum et sapien tellus. Pellentesque pulvinar vestibulum vestibulum. Cras ac porta dui. Morbi maximus pharetra tellus nec aliquam. Suspendisse orci nisl, euismod et ultricies ut, tincidunt ut libero.</p>
+            
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Another Link</a></li>
+                <li><a href="#">Third One</a></li>
+                <li><a href="#">The Final Link</a></li>
+            </ul>
+
         </div>
         <footer>
-            <button id="toTop">Back to Top &ShortUpArrow;</button>
+            <button onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Back to Top &ShortUpArrow;</button>
             <br>
             Copyright info, contact info, etc.
         </footer>
