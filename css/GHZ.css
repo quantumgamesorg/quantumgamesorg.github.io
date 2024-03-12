@@ -15,7 +15,7 @@
   justify-content: space-evenly;
   min-width: 800px;
   width: 800px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .detectorContainer {
@@ -48,7 +48,8 @@
 }
 
 #explanationContainer p {
-  font-size: 18pt;
+  font-size: 16pt;
+  text-align: center;
 }
 
 /*# sourceMappingURL=merminPentagrams.css.map */

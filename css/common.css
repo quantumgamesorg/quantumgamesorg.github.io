@@ -42,9 +42,10 @@ footer {
   align-items: center;
 }
 #content > p {
-  width: 800px;
+  width: 1200px;
   max-width: 90%;
   line-height: 16pt;
+  margin: 5pt;
 }
 #content > hr {
   width: 850px;
