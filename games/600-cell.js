@@ -4,6 +4,7 @@ let content = document.getElementById("content");
 
 let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
+// const defaultBoardContainerSize = { width: , height: };
 
 let circleMap = [];
 boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);

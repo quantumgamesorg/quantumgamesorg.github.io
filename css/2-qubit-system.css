@@ -6,13 +6,14 @@
   align-self: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 20px;
+  justify-content: space-around; 
+  margin-bottom: 10px;
   height: 80vh;
   width: 100vh;
   min-width: 200px;
   scroll-snap-align: end;
   scroll-snap-stop: normal;
-  justify-content: space-between; }
+}
   #boardContainer .moveCounter {
     display: flex;
     flex-direction: column;
@@ -27,11 +28,13 @@
     background-color: #fcc;
     font-size: 20pt;
     font-size: calc(min(6vw, 24pt));
-    text-align: center; }
+    text-align: center; 
+  }
     @media (max-width: 650px) {
       #boardContainer .moveCounter {
         top: calc(2%);
-        right: calc(3%); } }
+        right: calc(3%); } 
+    }
     #boardContainer .moveCounter::before {
       position: absolute;
       width: 200%;
@@ -41,11 +44,14 @@
       font-size: calc(min(4vw, 14pt));
       text-align: center;
       transform: translate(-50%);
-      content: "moves"; }
+      content: "moves"; 
+    }
     #boardContainer .moveCounter.even {
-      background-color: #fcc; }
+      background-color: #fcc; 
+    }
     #boardContainer .moveCounter.odd {
-      background-color: #cfc; }
+      background-color: #cfc; 
+    }
   #boardContainer .board {
     display: flex;
     position: relative;
@@ -54,11 +60,13 @@
     min-width: 200px;
     min-height: 75vh;
     display: flex;
-    flex-direction: column; }
+    flex-direction: column; 
+  }
     @media (max-width: 650px) {
       #boardContainer .board {
         padding-bottom: 95%;
-        max-width: 95%; } }
+        max-width: 95%; } 
+      }
     #boardContainer .board .gridRow {
       display: flex;
       flex-direction: row;
@@ -71,7 +79,8 @@
       font-size: calc(min(2vw, 1.75vh));
       order: 2;
       background-color: #ddd;
-      user-select: none; }
+      user-select: none; 
+    }
       #boardContainer .board .gridRow .gridSpot {
         display: flex;
         flex-direction: column;
@@ -79,9 +88,11 @@
         height: 100%;
         border: 1px solid black;
         padding-left: calc(20% * 0.025);
-        padding-right: calc(20% * 0.025); }
+        padding-right: calc(20% * 0.025); 
+      }
         #boardContainer .board .gridRow .gridSpot:nth-child(4n) {
-          border-right: 1px solid black; }
+          border-right: 1px solid black; 
+        }
         #boardContainer .board .gridRow .gridSpot .basis {
           display: flex;
           flex-direction: row;
@@ -90,16 +101,20 @@
           margin-bottom: 2.5%;
           background-color: #eee;
           border-radius: 2vh;
-          border: 1px solid #666; }
+          border: 1px solid #666; 
+        }
           #boardContainer .board .gridRow .gridSpot .basis.selected {
-            background-color: #bfb; }
+            background-color: #bfb; 
+          }
           #boardContainer .board .gridRow .gridSpot .basis .val {
             width: 25%;
             text-align: center;
-            cursor: pointer; }
+            cursor: pointer; 
+          }
             #boardContainer .board .gridRow .gridSpot .basis .val.hover {
               transform: scale(1.5);
-              text-shadow: #995 0 0 0.25vh; }
+              text-shadow: #995 0 0 0.25vh; 
+            }
               #boardContainer .board .gridRow .gridSpot .basis .val.hover::after {
                 position: absolute;
                 top: 45%;
@@ -109,25 +124,32 @@
                 transform: translate(-50%, -50%);
                 border: 1px dashed #0008;
                 border-radius: 50%;
-                content: ""; }
+                content: ""; 
+              }
             #boardContainer .board .gridRow .gridSpot .basis .val.highlight {
               transform: scale(1.1, 1.1);
               border: 2px solid #885;
-              font-weight: bold; }
+              font-weight: bold; 
+            }
   #boardContainer.won .board .circle.selected {
-    background-color: #cfc; }
+    background-color: #cfc; 
+  }
   #boardContainer svg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; }
+    z-index: 1; 
+  }
 
 #score {
   display: flex;
   flex-direction: column;
-  font-size: 16pt; }
+  font-size: 16pt; 
+  max-width: fit-content;
+  margin-top: 20px;
+}
 
 #numBasis {
   display: flex;
@@ -138,7 +160,7 @@
   padding-right: 5px;
   padding-bottom: 0px;
   border: 1px solid #666;
-  font-size: 20pt;
+  font-size: 30pt;
   text-align: center;
   background-color: #fbb; }
   #numBasis.odd {

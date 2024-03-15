@@ -6,13 +6,14 @@
   align-self: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 20px;
-  height: 60vh;
-  width: 100vh;
+  justify-content: space-around;
+  margin: 10px;
+  height: 72vh;
+  width: 120vh;
   min-width: 200px;
-  scroll-snap-align: end;
+  scroll-snap-align: center;
   scroll-snap-stop: normal;
-  justify-content: space-between;
+  font-size: max(min(3vw, 2vh), 7pt);
 }
 #boardContainer .moveCounter {
   display: flex;
@@ -149,6 +150,8 @@
   flex-direction: column;
   font-size: 16pt;
   margin-top: 10px;
+  max-width: fit-content;
+  margin-top: 20px;
 }
 
 #numBasis {
@@ -160,7 +163,7 @@
   padding-right: 5px;
   padding-bottom: 0px;
   border: 1px solid #666;
-  font-size: 20pt;
+  font-size: 30pt;
   text-align: center;
   background-color: #fbb;
 }
@@ -179,7 +182,6 @@
   width: 10vw;
   max-width: 80vh;
   order: 2;
-  font-size: 16pt;
   font-size: max(min(3vw, 2vh), 7pt);
   box-shadow: #0002 2px 2px 5px;
   color: black;
