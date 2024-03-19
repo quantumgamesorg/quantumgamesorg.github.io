@@ -1,0 +1,11 @@
+log-2024-02-27{
+    600-cell => H4 polytope => E8 symmetry => representation?
+    
+    Besides geometrical considerations, what physical systems would be realized
+    with a Hilbert space with the structure given by 600-cell?
+
+    A rather elementary quesiton: what do orthogonality and completeness conditions
+    represent in a representational framework of Hilbert spaces?
+
+    
+}
