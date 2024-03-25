@@ -2,6 +2,15 @@
 
 let content = document.getElementById("content");
 
+//buttons
+document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#second_board").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[3].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
+document.querySelectorAll("#upperLeft button")[4].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+
+
 let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
@@ -16,11 +25,6 @@ document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.quer
 //}
 // // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
 // // comment from my friend: "Who fucking wrote this?"
-
-document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
 document.querySelectorAll(".person").forEach((e, i) => {
     e.onmouseenter = ev => {
