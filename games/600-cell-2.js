@@ -10,22 +10,7 @@ document.querySelectorAll("#upperLeft button")[3].onclick = () => window.scrollT
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 document.querySelectorAll("#upperLeft button")[4].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
 
-
-let boardContainer = document.getElementById("boardContainer");
-const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
-
-let circleMap = [];
-boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
-// Reset button
-document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
-// // TODO: these extra solve buttons are temporary
-//var solutionElements = document.querySelectorAll('#upperLeft option');
-//for (let i = 0; i < solutionElements.length; ++i) {
-//    solutionElements[i].onclick = () => solve(solutionElements[i].value);
-//}
-// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
-// // comment from my friend: "Who fucking wrote this?"
-
+//people
 document.querySelectorAll(".person").forEach((e, i) => {
     e.onmouseenter = ev => {
         document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
@@ -35,6 +20,14 @@ document.querySelectorAll(".person").forEach((e, i) => {
     };
 });
 
+let boardContainer = document.getElementById("boardContainer");
+let boardContainer2 = document.getElementById("boardContainer2");
+const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
+const defaultBoardContainerSize2 = { width: parseInt(getComputedStyle(boardContainer2).width), height: parseInt(getComputedStyle(boardContainer2).height) };
+
+let circleMap = [];
+boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
+boardContainer2.insertBefore(makeBoard(100), boardContainer2.firstChild);
 
 
 function makeBoard(outerRadius) {
