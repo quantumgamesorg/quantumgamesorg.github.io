@@ -158,9 +158,9 @@ function makeBoard() {
 
 function makeBoard2(outerRadius) {
     const Yblocks = 6;
-    const Xblocks = 1;
+    const Xblocks = 6;
     const numsinYblocks = 5;
-    const numsinXblocks = 12;
+    const numsinXblocks = 2;
     const vals = [
         [1,	    4,	2,	3,	5,	7,	6,	8,	9,	10,	11,	12],
         [15,	14,	16,	13,	18,	20,	17,	19,	24,	23,	22,	21],
@@ -208,6 +208,8 @@ function makeBoard2(outerRadius) {
             let gridSpot = document.createElement("div");
             gridSpot.classList.add("gridSpot2");
 
+            let gridSpot_vals = []
+
             //nums within a block along y axis (grouped as a basis)
             for(let y = 0; y < numsinYblocks; y++) {
         
@@ -226,50 +228,50 @@ function makeBoard2(outerRadius) {
         
                     val_el.innerText = val;
                     
-                    // val_el.onmouseenter = e => {
-                    //     [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                    //         if(e !== val_el) {
-                    //             e.classList.toggle("hover", true);
-                    //         }
-                    //     });
-                    // };
+                    val_el.onmouseenter = e => {
+                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+                            if(e !== val_el) {
+                                e.classList.toggle("hover", true);
+                            }
+                        });
+                    };
 
-                    // val_el.onmouseleave = e => {
-                    //     [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                    //         if(e !== val_el) {
-                    //             e.classList.toggle("hover", false);
-                    //         }
-                    //     });
-                    // };
+                    val_el.onmouseleave = e => {
+                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+                            if(e !== val_el) {
+                                e.classList.toggle("hover", false);
+                            }
+                        });
+                    };
         
                     basis.appendChild(val_el);
                 }
-        
+                
+                gridSpot_vals.push(basis_vals);
                 gridSpot.appendChild(basis);
 
-                basis.onclick = () => {
-                    if(basis.classList.toggle("selected")) {
-                        addValues(basis_vals);
-                    } else {
-                        removeValues(basis_vals);
-                    }
-                    updateScore();
-                };
-
-                // basis.onmouseenter = () => {
-                //     basis_vals.forEach(v => {
-                //         document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
-                //     });
-                // };
-            
-                // basis.onmouseleave = () => {
-                //     basis_vals.forEach(v => {
-                //         document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
-                //     });
-                // };
-
-             
             }
+
+            gridSpot.onclick = () => {
+                if(gridSpot.classList.toggle("selected")) {
+                    addValues(gridSpot_vals);
+                } else {
+                    removeValues(gridSpot_vals);
+                }
+                updateScore();
+            };
+
+            gridSpot.onmouseenter = () => {
+                gridSpot_vals.forEach(v => {
+                    document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
+                });
+            };
+        
+            gridSpot.onmouseleave = () => {
+                gridSpot_vals.forEach(v => {
+                    document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
+                });
+            };
 
             gridRow.appendChild(gridSpot);
         }
