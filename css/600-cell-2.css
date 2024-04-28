@@ -63,6 +63,7 @@
   width: 100%;
   min-width: 200px;
   min-height: 200px;
+  border: 1px solid black;
 }
 @media (max-width: 650px) {
   #boardContainer .board {
@@ -162,17 +163,19 @@
   flex-direction: column;
   justify-content: top;
   /* margin: 70px; */
-  height: 60vh;
+
+  height: 64vh;
   width: 100vh;
   max-width: 100%;
   min-width: 200px;
+
   scroll-snap-align: center;
   scroll-snap-stop: normal;
-  font-size: max(min(3vw, 2vh), 7pt);
+  /* font-size: max(min(3vw, 2vh), 7pt); */
 
   /* border-style: dotted; */
 }
-#boardContainer2 .moveCounter {
+/* #boardContainer2 .moveCounter {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -210,23 +213,64 @@
 }
 #boardContainer2 .moveCounter.odd {
   background-color: #cfc;
-}
+} */
 #boardContainer2 .board {
-  display: flex;
-  position: relative;
-  width: 100%;
-  max-width: 95%;
+  /* grid container */
+  display: grid;
+  /* same num as blocks on y axis */
+  grid-template-columns: auto auto auto auto auto auto;
+  border: .5px solid rgba(0, 0, 0, 0.8);
+
+  /* same as boardContainer2 */
+  height: 64vh;
+  width: 100vh;
+  max-width: 100%;
   min-width: 200px;
-  min-height: 200px;
+}
+#boardContainer2 .board .block {
+  /* grid item */
+  border: .5px solid rgba(0, 0, 0, 0.8);
+  /* background-color: rgba(210, 51, 51, 0.8); */
+
+  padding: 2px;
+  font-size: 14pt;
+  font-size: min(2vw, 1.75vh);
+  text-align: center;
+
+  max-width: 100px;
+  /* height: 10vh; */
+}
+#boardContainer2 .board .block .blockRow {
+  /* making the numbers in the block appear in two columns */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  /* padding-left: 1%;
+  padding-right: 1%; */
+  /* margin-top: 1px;
+  margin-bottom: 1px; */
 }
-@media (max-width: 650px) {
-  #boardContainer .board {
-    padding-bottom: 95%;
-    max-width: 95%;
-  }
+#boardContainer2 .board .block .val.hover {
+  transform: scale(1.5);
+  text-shadow: #995 0 0 0.25vh;
 }
+#boardContainer2 .board .block .val.hover::after {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 2.5vh;
+  height: 2.5vh;
+  transform: translate(-50%, -50%);
+  border: 1px dashed #0008;
+  border-radius: 50%;
+  content: "";
+}
+#boardContainer2 .board .block.selected {
+  background-color: #bfb;
+}
+
+
 #boardContainer2 .board .gridRow2 {
   display: flex;
   flex-direction: row;
@@ -268,32 +312,12 @@
   /* border-radius: 2vh; */
   /* border: 1px solid #666; */
 }
-#boardContainer2 .board .gridRow2 .gridSpot2 .basis.selected {
-  background-color: #bfb;
-}
-#boardContainer2 .board .gridRow2 .gridSpot.selected {
-  background-color: #bfb;
-}
 #boardContainer2 .board .gridRow2 .gridSpot2 .basis .val {
   width: 25%;
   text-align: center;
   cursor: pointer;
 }
-#boardContainer2 .board .gridRow2 .gridSpot2 .basis .val.hover {
-  transform: scale(1.5);
-  text-shadow: #995 0 0 0.25vh;
-}
-#boardContainer2 .board .gridRow2 .gridSpot2 .basis .val.hover::after {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  width: 2.5vh;
-  height: 2.5vh;
-  transform: translate(-50%, -50%);
-  border: 1px dashed #0008;
-  border-radius: 50%;
-  content: "";
-}
+
 #boardContainer2 .board .gridRow2 .gridSpot2 .basis .val.highlight {
   transform: scale(1.1, 1.1);
   border: 2px solid #885;
@@ -310,6 +334,9 @@
   height: 100%;
   z-index: 1;
 }
+
+
+
 #score {
   display: flex;
   flex-direction: column;

@@ -5,10 +5,13 @@ let content = document.getElementById("content");
 //buttons
 document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => document.querySelector("#second_board").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[3].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+
+document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
-document.querySelectorAll("#upperLeft button")[4].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+
+//reset button
+document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+
 
 //people
 document.querySelectorAll(".person").forEach((e, i) => {
@@ -27,7 +30,7 @@ const defaultBoardContainerSize2 = { width: parseInt(getComputedStyle(boardConta
 
 let circleMap = [];
 boardContainer.insertBefore(makeBoard(), boardContainer.firstChild);
-boardContainer2.insertBefore(makeBoard2(100), boardContainer2.firstChild);
+boardContainer2.insertBefore(makeBoard2(), boardContainer2.firstChild);
 
 
 function makeBoard() {
@@ -76,7 +79,7 @@ function makeBoard() {
                 //nums in that basis
                 let basis_vals = []
                 for(let x = 0; x < numsinXblocks; x++) {
-                    let val = vals[y + gy * 3][x + gx * 4];
+                    let val = vals[y + gy * numsinYblocks][x + gx * numsinXblocks];
                     basis_vals.push(val);
 
                     let val_el = document.createElement("div");
@@ -156,7 +159,7 @@ function makeBoard() {
     return board;
 }
 
-function makeBoard2(outerRadius) {
+function makeBoard2() {
     const Yblocks = 6;
     const Xblocks = 6;
     const numsinYblocks = 5;
@@ -195,41 +198,43 @@ function makeBoard2(outerRadius) {
     ];
 
     let board = document.createElement("div");
-    board.classList.add("board");
+    board.classList.add("board"); 
 
     //blocks of nums along the y axis
     for(let gy = 0; gy < Yblocks; gy++) {
 
-        let gridRow = document.createElement("div");
-        gridRow.classList.add("gridRow2");
+        //add a column num?
 
         //blocks of nums along the x axis
         for(let gx = 0; gx < Xblocks; gx++) {
-            let gridSpot = document.createElement("div");
-            gridSpot.classList.add("gridSpot2");
 
-            let gridSpot_vals = []
+            //add a row num?
 
-            //nums within a block along y axis (grouped as a basis)
+            let block = document.createElement("div");
+            block.classList.add("block");
+
+            let block_vals = []
+
+            //nums in block along y axis
             for(let y = 0; y < numsinYblocks; y++) {
-        
-                let basis = document.createElement("div");
-                basis.classList.add("basis");
+
+                let blockRow = document.createElement("div");
+                blockRow.classList.add("blockRow");
                 
-                //nums in that basis
-                let basis_vals = []
+                //nums in block along x axis
                 for(let x = 0; x < numsinXblocks; x++) {
-                    let val = vals[y + gy * 5][x + gx * 2];
-                    basis_vals.push(val);
+                    let val = vals[y + gy * numsinYblocks][x + gx * numsinXblocks];
+                    block_vals.push(val);
+
 
                     let val_el = document.createElement("div");
                     val_el.classList.add("val");
                     val_el.classList.add(val);
-        
+
                     val_el.innerText = val;
                     
                     val_el.onmouseenter = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+                        [...document.querySelectorAll(".block .val")].filter(e => e.innerText == "" + val).forEach(e => {
                             if(e !== val_el) {
                                 e.classList.toggle("hover", true);
                             }
@@ -237,63 +242,62 @@ function makeBoard2(outerRadius) {
                     };
 
                     val_el.onmouseleave = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+                        [...document.querySelectorAll(".block .val")].filter(e => e.innerText == "" + val).forEach(e => {
                             if(e !== val_el) {
                                 e.classList.toggle("hover", false);
                             }
                         });
                     };
         
-                    basis.appendChild(val_el);
+                    blockRow.appendChild(val_el);
                 }
-                
-                gridSpot_vals.push(basis_vals);
-                gridSpot.appendChild(basis);
+
+                block.appendChild(blockRow);
 
             }
 
-            gridSpot.onclick = () => {
-                if(gridSpot.classList.toggle("selected")) {
-                    addValues(gridSpot_vals);
+            block.onclick = () => {
+                if(block.classList.toggle("selected")) {
+                    // addValues(block_vals);
+
                 } else {
-                    removeValues(gridSpot_vals);
+                    // removeValues(block_vals);
                 }
                 updateScore();
             };
 
-            gridSpot.onmouseenter = () => {
-                gridSpot_vals.forEach(v => {
-                    document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
-                });
-            };
+            // block.onmouseenter = () => {
+            //     block_vals.forEach(v => {
+            //         document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
+            //     });
+            // };
         
-            gridSpot.onmouseleave = () => {
-                gridSpot_vals.forEach(v => {
-                    document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
-                });
-            };
+            // block.onmouseleave = () => {
+            //     block_vals.forEach(v => {
+            //         document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
+            //     });
+            // };
 
-            gridRow.appendChild(gridSpot);
+
+            board.appendChild(block);
         }
-
-        board.appendChild(gridRow);
     }
 
-    document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
-        let val_elems = document.getElementsByClassName(`val ${i + 1}`);
-        el.onmouseenter = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                //console.log(i);
-                val_elems[j].classList.toggle("hover", true);
-            }
-        };
+    // document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
+    //     let val_elems = document.getElementsByClassName(`val ${i + 1}`);
+    //     el.onmouseenter = () => {
+    //         for (let j = 0; j < val_elems.length; ++j) {
+    //             //console.log(i);
+    //             val_elems[j].classList.toggle("hover", true);
+    //         }
+    //     };
 
-        el.onmouseleave = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                val_elems[j].classList.toggle("hover", false);
-            }
-        };
-    })
+    //     el.onmouseleave = () => {
+    //         for (let j = 0; j < val_elems.length; ++j) {
+    //             val_elems[j].classList.toggle("hover", false);
+    //         }
+    //     };
+    // })
 
  
     return board;
