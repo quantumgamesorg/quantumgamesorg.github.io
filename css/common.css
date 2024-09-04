@@ -34,25 +34,48 @@ footer {
   padding-top: 10px;
 }
 
-#content {
+#game_content {
   display: flex;
   padding-bottom: 20px;
   background-color: #eee;
   flex-direction: column;
   align-items: center;
 }
-#content > p {
+#game_content > p {
   width: 1200px;
   max-width: 90%;
   line-height: 16pt;
   margin: 5pt;
 }
-#content > hr {
+#game_content > hr {
   width: 850px;
   max-width: 92%;
   line-height: 16pt;
 }
-#content > ul {
+#game_content > ul {
+  padding-left: 5px;
+  margin-top: 5px;
+}
+
+#common {
+  display: flex;
+  padding-bottom: 20px;
+  background-color: #eee;
+  flex-direction: column;
+  align-items: center;
+}
+#common > p {
+  width: 1200px;
+  max-width: 90%;
+  line-height: 16pt;
+  margin: 5pt;
+}
+#common > hr {
+  width: 850px;
+  max-width: 92%;
+  line-height: 16pt;
+}
+#common > ul {
   padding-left: 5px;
   margin-top: 5px;
 }
