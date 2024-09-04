@@ -2,11 +2,15 @@
 // The main culpret is the use of let, so we use it here to prevent loading twice
 let LOAD_RERUN_PROTECTION = true;
 
+// adding ?game=600-cell-2 will load the 600-cell-2 game automatically
 let params = new URL(document.location.toString()).searchParams;
 let game = params.get("game");
 
-// used for dreamweaver preview
-if (game == null) game = "600-cell-2";
+// used for dreamweaver preview / quickload
+if (game == null) {
+	console.log("Adding default game");
+	game = "600-cell-2";
+}
 
 function FetchGame(url) {
 	console.log("Loading Game: " + url)
@@ -34,8 +38,6 @@ Array.from(elm.querySelectorAll("script"))
 		if (oldScriptEl.src == "" || oldScriptEl.src.includes("/static/")) {
 			return;
 		}
-		console.log(oldScriptEl);
-	
 		const newScriptEl = document.createElement("script");
 
 		Array.from(oldScriptEl.attributes).forEach( attr => {
