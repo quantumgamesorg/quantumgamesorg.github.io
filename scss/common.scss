@@ -18,7 +18,7 @@ header {
   background-color: #aaa;
   padding-left: 20px;
   
-	ul {
+	#NavBar {
 		padding-left: 0px;
 		list-style-type: none;
 		li {
@@ -40,22 +40,83 @@ header {
 			.navList {
 				position: absolute;
 				top: 85px;
-				background-color: #00FBFF;
+				background-color: #555;
 				border: medium double #000000;
+				padding-left: 0px;
 				li {
 					border-style: none;
 					display: block;
+					a {
+						color: #ddd;
+						text-decoration: none;
+						text-align: center;
+
+						&:hover {
+						  color: #771;
+						}
+
+						&:active {
+						  color: #BB6;
+						}
+					}
 				}
 			}
 		}
 	}
 }
 
-#content {
-  display: flex;
-  padding-bottom: 20px;
+#common {
+    flex-direction: column;
+    align-items: center;
+	display: flex;
+	padding-bottom: 20px;
+	background-color: #eee;
 
-  background-color: #eee;
+    > p {
+        width: 800px;
+        max-width: 90%;
+    
+        line-height: 16pt;
+    }
+
+    > hr {
+        width: 850px;
+        max-width: 92%;
+    
+        line-height: 16pt;
+    }
+
+    > ul {
+        padding-left: 5px;
+        margin-top: 5px;
+    }
+}
+
+#game_content {
+    flex-direction: column;
+    align-items: center;
+	display: flex;
+	padding-bottom: 20px;
+	background-color: #eee;
+	
+    > p {
+        width: 800px;
+        max-width: 90%;
+    
+        line-height: 16pt;
+    }
+
+    > hr {
+        width: 850px;
+        max-width: 92%;
+    
+        line-height: 16pt;
+    }
+
+    > ul {
+        padding-left: 5px;
+        margin-top: 5px;
+    }
 }
 
 footer {

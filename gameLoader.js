@@ -7,10 +7,10 @@ let params = new URL(document.location.toString()).searchParams;
 let game = params.get("game");
 
 // used for dreamweaver preview / quickload
-if (game == null && document.location.pathname.startsWith("/content/")) {
+/*if (game == null && document.location.pathname.startsWith("/content/")) {
 	console.log("Using default game");
 	game = "600-cell-2";
-}
+}*/
 
 function fetchGame(url) {
 	console.log("Loading Game: " + url)
@@ -53,7 +53,7 @@ function setInnerHTML(elm, html) {
 }
 
 function fetchGames() {
-	fetch("games.json" + url)
+	fetch("games.json")
 		.then((response) => {
 			if (!response.ok) {
 				throw new Error(`HTTP error: ${response.status}`);
@@ -62,16 +62,49 @@ function fetchGames() {
 		})
 		.then((json) => CreateGameMenu(json))
 		.catch((error) => {
-			el.innerHTML = `Could not fetch game: ${error}`;
+			console.log(`Could not fetch: ${error}`);
 		})
 }
 
+/*<li>
+	<div>Sec1</div>
+	<ul class="navList">
+		<li><a href = "games.html?game=600-cell">e</a></li>
+		<li><a href = "games.html?game=600-cell-2">a</a></li>
+		<li><a href = "games.html?game=600-cell-2">sports</a></li>
+	</ul>
+</li>*/
 function CreateGameMenu(games) {
-	console.log(games)
+	var el = document.getElementById("NavBar");
+	games.forEach((x) => createGameList(el, x.name, x.games));
+}
+function createGameList(navbar, name, games) {
+	var liNav = document.createElement("li");
+	navbar.appendChild(liNav);
+	
+	var divName = document.createElement("div");
+	divName.appendChild(document.createTextNode(name));
+	liNav.appendChild(divName);
+	
+	var ulNav = document.createElement("ul");
+	ulNav.classList.add("navList");
+	liNav.appendChild(ulNav);
+	
+	games.forEach((game) => {
+		console.log(game);
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.href = "games.html?game="+game.file;
+		a.appendChild(document.createTextNode(game.name));
+		li.appendChild(a);
+		ulNav.appendChild(li);
+	})
 }
 
-window.onload = () => {
+function PostLoadInit() {
 	fetchGames();
-	if (game != null) FetchGame(game + ".html");
+	if (game != null) fetchGame(game + ".html");
 }
+
+window.onload = PostLoadInit();
 

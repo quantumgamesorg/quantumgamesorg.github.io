@@ -17,46 +17,105 @@ header {
   padding-left: 20px;
 }
 
-header ul {
+header #NavBar {
   padding-left: 0px;
   list-style-type: none;
 }
 
-header ul li {
+header #NavBar li {
   border-right: thin solid #000000;
   display: inline-block;
 }
 
-header ul li a {
+header #NavBar li a {
   color: #000;
   text-decoration: none;
   text-align: center;
 }
 
-header ul li a:hover {
+header #NavBar li a:hover {
   color: #332;
 }
 
-header ul li a:active {
+header #NavBar li a:active {
   color: #554;
 }
 
-header ul li .navList {
+header #NavBar li .navList {
   position: absolute;
   top: 85px;
-  background-color: #00FBFF;
+  background-color: #555;
   border: medium double #000000;
+  padding-left: 0px;
 }
 
-header ul li .navList li {
+header #NavBar li .navList li {
   border-style: none;
   display: block;
 }
 
-#content {
+header #NavBar li .navList li a {
+  color: #ddd;
+  text-decoration: none;
+  text-align: center;
+}
+
+header #NavBar li .navList li a:hover {
+  color: #771;
+}
+
+header #NavBar li .navList li a:active {
+  color: #BB6;
+}
+
+#common {
+  flex-direction: column;
+  align-items: center;
   display: flex;
   padding-bottom: 20px;
   background-color: #eee;
+}
+
+#common > p {
+  width: 800px;
+  max-width: 90%;
+  line-height: 16pt;
+}
+
+#common > hr {
+  width: 850px;
+  max-width: 92%;
+  line-height: 16pt;
+}
+
+#common > ul {
+  padding-left: 5px;
+  margin-top: 5px;
+}
+
+#game_content {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  padding-bottom: 20px;
+  background-color: #eee;
+}
+
+#game_content > p {
+  width: 800px;
+  max-width: 90%;
+  line-height: 16pt;
+}
+
+#game_content > hr {
+  width: 850px;
+  max-width: 92%;
+  line-height: 16pt;
+}
+
+#game_content > ul {
+  padding-left: 5px;
+  margin-top: 5px;
 }
 
 footer {

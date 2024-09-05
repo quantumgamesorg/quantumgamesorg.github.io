@@ -4,6 +4,15 @@
 		"games":[
 			{
 				"name":"600 Cell",
+				"file":"600-cell"
+			}
+		]
+	},
+	{
+		"name":"In Development",
+		"games":[
+			{
+				"name":"600 Cell",
 				"file":"600-cell-2"
 			}
 		]
