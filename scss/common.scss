@@ -17,18 +17,27 @@ header {
   border-bottom: 2px solid #666;
   background-color: #aaa;
   padding-left: 20px;
+  
+	ul {
+		list-style-type: none;
+		li {
+			border-right: thin solid #000000;
+			display: inline-block;
+			a {
+				color: #000;
+				text-decoration: none;
+				text-align: center;
 
-  a {
-    color: #000;
+				&:hover {
+				  color: #332;
+				}
 
-    &:hover {
-      color: #332;
-    }
-
-    &:active {
-      color: #554;
-    }
-  }
+				&:active {
+				  color: #554;
+				}
+			}
+		}
+	}
 }
 
 #content {

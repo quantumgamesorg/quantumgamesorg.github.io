@@ -2,17 +2,17 @@
 // The main culpret is the use of let, so we use it here to prevent loading twice
 let LOAD_RERUN_PROTECTION = true;
 
-// adding ?game=600-cell-2 will load the 600-cell-2 game automatically
+// adding ?game=600-cell-2 to the url will load the 600-cell-2 game automatically
 let params = new URL(document.location.toString()).searchParams;
 let game = params.get("game");
 
 // used for dreamweaver preview / quickload
-if (game == null) {
-	console.log("Adding default game");
+if (game == null && document.location.pathname.startsWith("/content/")) {
+	console.log("Using default game");
 	game = "600-cell-2";
 }
 
-function FetchGame(url) {
+function fetchGame(url) {
 	console.log("Loading Game: " + url)
 	var el = document.getElementById("game_content");
 	fetch("games_content/" + url)
@@ -31,25 +31,47 @@ function FetchGame(url) {
 }
 
 function setInnerHTML(elm, html) {
-elm.innerHTML = html;
+	elm.innerHTML = html;
 
-Array.from(elm.querySelectorAll("script"))
-	.forEach( oldScriptEl => {
-		if (oldScriptEl.src == "" || oldScriptEl.src.includes("/static/")) {
-			return;
-		}
-		const newScriptEl = document.createElement("script");
+	Array.from(elm.querySelectorAll("script"))
+		.forEach( oldScriptEl => {
+			if (oldScriptEl.src == "" || oldScriptEl.src.includes("/static/")) {
+				return;
+			}
+			const newScriptEl = document.createElement("script");
+		
 
-		Array.from(oldScriptEl.attributes).forEach( attr => {
-			newScriptEl.setAttribute(attr.name, attr.value) 
+			Array.from(oldScriptEl.attributes).forEach( attr => {
+				newScriptEl.setAttribute(attr.name, attr.value) 
+			});
+
+			const scriptText = document.createTextNode(oldScriptEl.innerHTML);
+			newScriptEl.appendChild(scriptText);
+
+			oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
 		});
-
-		const scriptText = document.createTextNode(oldScriptEl.innerHTML);
-		newScriptEl.appendChild(scriptText);
-
-		oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
-	});
 }
 
-window.onload = FetchGame(game + ".html");
+function fetchGames() {
+	fetch("games.json" + url)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(`HTTP error: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then((json) => CreateGameMenu(json))
+		.catch((error) => {
+			el.innerHTML = `Could not fetch game: ${error}`;
+		})
+}
+
+function CreateGameMenu(games) {
+	console.log(games)
+}
+
+window.onload = () => {
+	fetchGames();
+	if (game != null) FetchGame(game + ".html");
+}
 

@@ -20,7 +20,7 @@
   max-height: min(600px, 60vh);
   background-color: #eee;
   border: 2px solid #666;
-  box-shadow: #0004 6px 6px 10px;
+  box-shadow: rgba(0, 0, 0, 0.2666666667) 6px 6px 10px;
   pointer-events: all;
   resize: both;
   overflow: hidden;
