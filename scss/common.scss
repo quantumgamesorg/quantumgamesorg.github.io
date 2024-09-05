@@ -19,6 +19,7 @@ header {
   padding-left: 20px;
   
 	ul {
+		padding-left: 0px;
 		list-style-type: none;
 		li {
 			border-right: thin solid #000000;
@@ -34,6 +35,16 @@ header {
 
 				&:active {
 				  color: #554;
+				}
+			}
+			.navList {
+				position: absolute;
+				top: 85px;
+				background-color: #00FBFF;
+				border: medium double #000000;
+				li {
+					border-style: none;
+					display: block;
 				}
 			}
 		}
