@@ -53,29 +53,48 @@ function makeBoard(outerRadius) {
         [57, 58, 59, 60, 44, 33, 5, 23, 1, 20, 38, 29, 31, 37, 18, 2, 22, 7, 36, 42]
     ];
 
+    let boardTable = document.createElement("table");
+    boardTable.style = "width:100%";
+
     let board = document.createElement("div");
     board.classList.add("board");
 
     for(let gy = 0; gy < 5; gy++) {
 
+        let gridTableRow = document.createElement("tr");
+        gridTableRow.style = "height:20%";
         let gridRow = document.createElement("div");
         gridRow.classList.add("gridRow");
 
         for(let gx = 0; gx < 5; gx++) {
-            let gridSpot = document.createElement("div");
-            gridSpot.classList.add("gridSpot");
+
+            let gridTableSpot = document.createElement("td");
+            gridTableSpot.style="width:20%;height:100%";
+
+            let gridTableSpotTable = document.createElement("table");
+            gridTableSpotTable.style="width:100%;height:100%";
+
+            //let gridSpot = document.createElement("div");
+            //gridSpot.classList.add("gridSpot");
+            gridTableSpotTable.classList.add("gridSpot");
 
             for(let y = 0; y < 3; y++) {
         
-                let basis = document.createElement("div");
-                basis.classList.add("basis");
+                //let basis = document.createElement("div");
+                //basis.classList.add("basis");
+                //basis.style = "display:inline-block;";
                 
+                let basisRow = document.createElement("tr");
+                basisRow.style="height:33%";
+                basisRow.classList.add("basis");
+
+
                 let basis_vals = []
                 for(let x = 0; x < 4; x++) {
                     let val = vals[y + gy * 3][x + gx * 4];
                     basis_vals.push(val);
 
-                    let val_el = document.createElement("div");
+                    let val_el = document.createElement("td");
                     val_el.classList.add("val");
                     val_el.classList.add(val);
         
@@ -97,13 +116,15 @@ function makeBoard(outerRadius) {
                         });
                     };
         
-                    basis.appendChild(val_el);
+                    basisRow.appendChild(val_el);
                 }
         
-                gridSpot.appendChild(basis);
+                //gridSpot.appendChild(basis);
+                gridTableSpotTable.appendChild(basisRow);
+                
 
-                basis.onclick = () => {
-                    if(basis.classList.toggle("selected")) {
+                basisRow.onclick = () => {
+                    if(basisRow.classList.toggle("selected")) {
                         addValues(basis_vals);
                     } else {
                         removeValues(basis_vals);
@@ -111,13 +132,13 @@ function makeBoard(outerRadius) {
                     updateScore();
                 };
 
-                basis.onmouseenter = () => {
+                basisRow.onmouseenter = () => {
                     basis_vals.forEach(v => {
                         document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
                     });
                 };
             
-                basis.onmouseleave = () => {
+                basisRow.onmouseleave = () => {
                     basis_vals.forEach(v => {
                         document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
                     });
@@ -125,11 +146,14 @@ function makeBoard(outerRadius) {
 
              
             }
+            gridTableSpot.appendChild(gridTableSpotTable);
+            gridTableRow.appendChild(gridTableSpot);
 
-            gridRow.appendChild(gridSpot);
+            //gridRow.appendChild(gridSpot);
         }
 
-        board.appendChild(gridRow);
+        boardTable.appendChild(gridTableRow);
+        //board.appendChild(gridRow);
     }
 
     document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
@@ -149,7 +173,7 @@ function makeBoard(outerRadius) {
     })
 
  
-    return board;
+    return boardTable;
 }
 
 function addValues(values) {
