@@ -1,4 +1,4 @@
-// Dreamweaver (or something else locally) likes to run scripts twice, which breaks games loading as it can run their scripts twice
+// something likes to run scripts twice, which breaks games loading as it can run their scripts twice
 // The main culpret is the use of let, so we use it here to prevent loading twice
 let LOAD_RERUN_PROTECTION = true;
 

@@ -25,22 +25,21 @@
 }
 
 #upperArea {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  width: 100%;
-  margin-left: -14.5vw;
-  min-width: 1200px;
-  margin-bottom: -70px;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	width: 100%;
+	margin-left: -14.5vw;
+	min-width: 1200px;
+	margin-bottom: -70px;
 }
 
 #upperLeft, #upperRight {
-  width: 180px;
-  margin: 0px 20px 20px 20px;
-  display: flex;
-  flex-direction: column;
+	width: 180px;
+	margin: 0px 20px 20px 20px;
+	flex-direction: column;
+	float: left;
 }
 
 #upperLeft .leftArea > button {

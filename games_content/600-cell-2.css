@@ -1,3 +1,6 @@
+#gameArea {
+	list-style-type: none;	
+}
 
 #boardContainer {
   position: relative;
@@ -33,6 +36,7 @@
   font-size: min(6vw, 24pt);
   text-align: center;
 }
+
 @media (max-width: 650px) {
   #boardContainer .moveCounter {
     top: 2%;
