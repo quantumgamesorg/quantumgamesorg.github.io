@@ -7,7 +7,7 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 // const defaultBoardContainerSize = { width: , height: };
 
 let circleMap = [];
-makeBoard(100);
+makeBoard();
 // Reset button
 document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
 // // TODO: these extra solve buttons are temporary
@@ -34,7 +34,7 @@ document.querySelectorAll(".person").forEach((e, i) => {
 
 
 
-function makeBoard(outerRadius) {
+function makeBoard() {
     const vals = [
         [1, 2, 3, 4, 31, 42, 51, 16, 22, 60, 39, 28, 57, 23, 27, 40, 44, 29, 15, 52],
         [5, 6, 7, 8, 38, 24, 58, 25, 18, 47, 33, 55, 36, 53, 20, 46, 59, 26, 37, 21],
@@ -53,8 +53,7 @@ function makeBoard(outerRadius) {
         [57, 58, 59, 60, 44, 33, 5, 23, 1, 20, 38, 29, 31, 37, 18, 2, 22, 7, 36, 42]
     ];
 
-    let boardTable = document.getElementById("boardContainer");
-    boardTable.classList.add("board");
+    boardContainer.classList.add("board");
 
     for(let gy = 0; gy < 5; gy++) {
 
@@ -139,7 +138,7 @@ function makeBoard(outerRadius) {
             //gridRow.appendChild(gridSpot);
         }
 
-        boardTable.appendChild(gridTableRow);
+        boardContainer.appendChild(gridTableRow);
         //board.appendChild(gridRow);
     }
 
@@ -177,9 +176,6 @@ function makeBoard(outerRadius) {
 		
 		
 	}
-
- 
-    return boardTable;
 }
 
 function addValues(values) {
@@ -328,3 +324,14 @@ function solve(size) {
     }
 
 }
+
+/*window.onresize = () => {
+	let h = boardContainer.clientHeight / 5;
+	let children = boardContainer.children;
+	for(let i = 0; i < children.length; i++) {
+		var style = children[i].currentStyle || window.getComputedStyle(children[i]);
+		console.log(style);
+		let h1 = h - style;
+		children[i].style.height = h1 + "px";
+	}
+}*/
