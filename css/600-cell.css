@@ -25,7 +25,7 @@
 	padding-right: 3px;
 	width: 20%;
 }
-#boardContainer .basis {
+#boardContainer .gridSpot > div {
 	margin-top: 5%;
 	margin-bottom: 5%;
 	background-color: #eee;
@@ -35,7 +35,7 @@
 	padding-left: 3px;
 	padding-right: 3px;
 }
-#boardContainer .basis .val {
+#boardContainer .val {
 	width: 25%;
 	padding-right: 5px;
 	padding-left: 5px;
@@ -54,7 +54,7 @@
 	transform: scale(1.5);
 	text-shadow: #995 0 0 0.25vh;
 }
-#boardContainer .basis .val.hover::after {
+#boardContainer .val.hover::after {
 	position: absolute;
 	top: 45%;
 	left: 50%;
@@ -65,7 +65,7 @@
 	border-radius: 50%;
 	content: "";
 }
-#boardContainer .basis .val.highlight {
+#boardContainer .val.highlight {
 	transform: scale(1.1, 1.1);
 	border: 2px solid #885;
 	font-weight: bold;

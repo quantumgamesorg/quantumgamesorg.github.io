@@ -73,7 +73,6 @@ function makeBoard() {
                 //basis.classList.add("basis");
                 
                 let basisRow = document.createElement("div");
-                basisRow.classList.add("basis");
 
 
                 let basis_vals = []
