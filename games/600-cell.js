@@ -7,7 +7,7 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 // const defaultBoardContainerSize = { width: , height: };
 
 let circleMap = [];
-boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
+makeBoard(100);
 // Reset button
 document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
 // // TODO: these extra solve buttons are temporary
@@ -53,39 +53,27 @@ function makeBoard(outerRadius) {
         [57, 58, 59, 60, 44, 33, 5, 23, 1, 20, 38, 29, 31, 37, 18, 2, 22, 7, 36, 42]
     ];
 
-    let boardTable = document.createElement("table");
-    boardTable.style = "width:100%";
-
-    let board = document.createElement("div");
-    board.classList.add("board");
+    let boardTable = document.getElementById("boardContainer");
+    boardTable.classList.add("board");
 
     for(let gy = 0; gy < 5; gy++) {
 
         let gridTableRow = document.createElement("tr");
-        gridTableRow.style = "height:20%";
-        let gridRow = document.createElement("div");
-        gridRow.classList.add("gridRow");
 
         for(let gx = 0; gx < 5; gx++) {
 
             let gridTableSpot = document.createElement("td");
-            gridTableSpot.style="width:20%;height:100%";
-
-            let gridTableSpotTable = document.createElement("table");
-            gridTableSpotTable.style="width:100%;height:100%";
 
             //let gridSpot = document.createElement("div");
             //gridSpot.classList.add("gridSpot");
-            gridTableSpotTable.classList.add("gridSpot");
+            gridTableSpot.classList.add("gridSpot");
 
             for(let y = 0; y < 3; y++) {
         
                 //let basis = document.createElement("div");
                 //basis.classList.add("basis");
-                //basis.style = "display:inline-block;";
                 
-                let basisRow = document.createElement("tr");
-                basisRow.style="height:33%";
+                let basisRow = document.createElement("div");
                 basisRow.classList.add("basis");
 
 
@@ -94,7 +82,7 @@ function makeBoard(outerRadius) {
                     let val = vals[y + gy * 3][x + gx * 4];
                     basis_vals.push(val);
 
-                    let val_el = document.createElement("td");
+                    let val_el = document.createElement("div");
                     val_el.classList.add("val");
                     val_el.classList.add(val);
         
@@ -120,7 +108,7 @@ function makeBoard(outerRadius) {
                 }
         
                 //gridSpot.appendChild(basis);
-                gridTableSpotTable.appendChild(basisRow);
+                gridTableSpot.appendChild(basisRow);
                 
 
                 basisRow.onclick = () => {
@@ -134,19 +122,18 @@ function makeBoard(outerRadius) {
 
                 basisRow.onmouseenter = () => {
                     basis_vals.forEach(v => {
-                        document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
+                        document.getElementsByClassName(`ray ${v}`)[0].classList.add("highlight");
                     });
                 };
             
                 basisRow.onmouseleave = () => {
                     basis_vals.forEach(v => {
-                        document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
+                        document.getElementsByClassName(`ray ${v}`)[0].classList.remove("highlight");
                     });
                 };
 
              
             }
-            gridTableSpot.appendChild(gridTableSpotTable);
             gridTableRow.appendChild(gridTableSpot);
 
             //gridRow.appendChild(gridSpot);
@@ -156,21 +143,40 @@ function makeBoard(outerRadius) {
         //board.appendChild(gridRow);
     }
 
-    document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
-        let val_elems = document.getElementsByClassName(`val ${i + 1}`);
-        el.onmouseenter = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                //console.log(i);
-                val_elems[j].classList.toggle("hover", true);
-            }
-        };
+    let scoreTable = document.getElementById("scoreboard");
+	for (let gy = 0; gy < 12; gy++) {
+		let gridTableRow = document.createElement("tr");
+		
+		for (let gx = 0; gx < 5; gx++) {
+			let index = 1 + gy + gx * 12;
+			
+			let gridTableSpot = document.createElement("td");
+			gridTableSpot.classList.add("ray");
+			gridTableSpot.classList.add(index);
+			
+			gridTableSpot.innerHTML=`<div>${index}</div><div>(0)</div>`
+			
+			let val_elems = document.getElementsByClassName(`val ${index}`);
+			gridTableSpot.onmouseenter = () => {
+				for (let j = 0; j < val_elems.length; ++j) {
+					//console.log(i);
+					val_elems[j].classList.toggle("hover", true);
+				}
+			};
 
-        el.onmouseleave = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                val_elems[j].classList.toggle("hover", false);
-            }
-        };
-    })
+			gridTableSpot.onmouseleave = () => {
+				for (let j = 0; j < val_elems.length; ++j) {
+					val_elems[j].classList.toggle("hover", false);
+				}
+			};
+			
+			gridTableRow.appendChild(gridTableSpot);
+		}
+		
+		scoreTable.appendChild(gridTableRow);
+		
+		
+	}
 
  
     return boardTable;
@@ -178,7 +184,7 @@ function makeBoard(outerRadius) {
 
 function addValues(values) {
     values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
+        let entry = document.getElementsByClassName(`ray ${v}`)[0];
         let current = entry.children[1].innerText;
         let current_n = parseInt(current.substr(1, current.length-2));
 
@@ -193,7 +199,7 @@ function addValues(values) {
 
 function removeValues(values) {
     values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
+        let entry = document.getElementsByClassName(`ray ${v}`)[0];
         let current = entry.children[1].innerText;
         let current_n = parseInt(current.substr(1, current.length-2));
 
@@ -232,36 +238,6 @@ function updateScore() {
     }
 
     //window.alert("You have won the game!")
-}
-
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
 }
 
 function checkWon() {
