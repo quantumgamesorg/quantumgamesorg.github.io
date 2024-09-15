@@ -7,6 +7,7 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 
 let circleMap = [];
 let circleTops = [];
+let circleLefts = [];
 makeBoard(45);
 
 
@@ -50,8 +51,9 @@ function makeBoard(outerRadius) {
         const thru = i / outerVals.length * (2 * Math.PI);
 
 		circleTops[j] = 50 - outerRadius * Math.cos(thru);
+		circleLefts[j] = 50 + outerRadius * Math.sin(thru);
 		
-        let circle = makeCircle(vals, "calc(50% + " + (outerRadius * Math.sin(thru)) + "%)", circleTops[j] + "%");
+        let circle = makeCircle(vals, circleLefts[j] + "%", circleTops[j] + "%");
         vals.forEach(e => {
             if(typeof(circleMap[e]) === 'undefined') {
                 circleMap[e] = [];
@@ -67,8 +69,9 @@ function makeBoard(outerRadius) {
         const thru = i / innerVals.length * (2 * Math.PI);
 
 		circleTops[j] = 50 - innerRadius * Math.cos(thru);
+		circleLefts[j] = 50 + innerRadius * Math.sin(thru);
 		
-        let circle = makeCircle(vals, "calc(50% + " + (innerRadius * Math.sin(thru)) + "%)", circleTops[j] + "%");
+        let circle = makeCircle(vals, circleLefts[j] + "%", circleTops[j] + "%");
         vals.forEach(e => {
             if(typeof(circleMap[e]) === 'undefined') {
                 circleMap[e] = [];
@@ -293,11 +296,14 @@ function ResizeWindow() {
 	let rect = svg.getBoundingClientRect();
 	
     boardContainer.querySelectorAll("#board .circle").forEach((el, i) => {
-		let elrect = el.getBoundingClientRect()
 		
-		let top = rect.height * circleTops[i] / 100 - rect.height;
+		let top = rect.top + (rect.height * circleTops[i] / 100);
+		let left = rect.left + (rect.width * circleLefts[i] / 100);
 		el.style.top = top + "px";
-		el.style.marginBottom = -elrect.height + "px";
+		el.style.left = left + "px";
+		
+		el.style.width = (rect.width * .12) + "px";
+		el.style.height = (rect.height * .12) + "px";
 	})
 }
 

@@ -59,11 +59,11 @@
   transform: scale(1.1, 1.1);
 }
 #boardContainer #board {
-	min-width: 700px;
+	min-width: 400px;
 	display: inline-block;
 }
 #boardContainer #board .circle {
-	position: relative;
+	position: absolute;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
