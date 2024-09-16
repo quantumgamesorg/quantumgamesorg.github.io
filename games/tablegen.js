@@ -15,6 +15,7 @@ function makeBoard(boardContainer, vals) {
             for(let y = 0; y < 3; y++) {
                 
                 let basisRow = document.createElement("div");
+				basisRow.classList.add("basis");
 
 
                 let basis_vals = []

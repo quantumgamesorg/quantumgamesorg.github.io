@@ -16,7 +16,7 @@
 }
 #boardContainer tr {
 	font-size: 14pt;
-	font-size: min(2vw, 1.75vh);
+	font-size: min(2vw, 2.4vh);
 	user-select: none;
 }
 #boardContainer tr td:not(.val) {
