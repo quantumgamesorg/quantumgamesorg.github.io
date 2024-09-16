@@ -43,7 +43,7 @@
 	align-items: center;
 	justify-content: center;
 }
-#boardContainer .selected {
+#boardContainer .gridSpot .selected {
 	background-color: #bfb;
 }
 #boardContainer .val {

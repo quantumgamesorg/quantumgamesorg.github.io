@@ -81,7 +81,7 @@ function loadScript(url, callback)
     head.appendChild(script);
 }
 
-loadScript("tablegen.js", function() {alert("hi!"); setupBoard();});
+loadScript("tablegen.js", function() {setupBoard();});
 
 
 
