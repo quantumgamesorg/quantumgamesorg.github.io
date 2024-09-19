@@ -202,7 +202,7 @@ function removeValues(values) {
 }
 
 function checkWon() {
-    const allEven = Array.prototype.slice.call(boardContainer.querySelector(".scoreboard").children).every(e => !e.classList.contains("odd"));
+    const allEven = Array.prototype.slice.call(document.querySelectorAll(".scoreboard .ray")).every(e => !e.classList.contains("odd"));
     const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
 
     boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
@@ -216,7 +216,7 @@ function checkWon() {
 }
 
 function reset() {
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".scoreboard .ray")).forEach(e => {
+    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .ray")).forEach(e => {
         e.children[1].innerText = "(0)";
         e.classList.remove("even");
         e.classList.remove("odd");
