@@ -83,7 +83,7 @@ function makeBoard(boardContainer, vals) {
         //board.appendChild(gridRow);
     }
 
-    buildScoreboard(12, 5);
+    buildScoreboard(15, 4);
 }
 
 function buildScoreboard(height, width) {
