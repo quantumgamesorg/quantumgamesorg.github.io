@@ -64,6 +64,7 @@
 }
 #upperRight {
 	opacity: 1;
+	width: auto;
 }
 #upperRight .scoreboard .ray.odd {
   background-color: #fbb;
