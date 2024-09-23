@@ -145,55 +145,6 @@
   height: 100%;
   z-index: 1;
 }
-.scoreboard {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  height: 80vh;
-  width: max(100%, min(250px, 14vw));
-  max-width: 80vh;
-  order: 2;
-  margin-top: 40px;
-  font-size: 16pt;
-  font-size: max(min(4vw, 2.5vh), 8pt);
-  box-shadow: #0002 2px 2px 5px;
-  color: black;
-}
-.scoreboard .entry {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 12.5%;
-  width: 20%;
-  border: 1px solid #666;
-  background-color: #dfd;
-  transition: transform ease-out 0.1s, font-weight ease 0.1s;
-}
-.scoreboard .entry.odd {
-  background-color: #fbb;
-}
-.scoreboard .entry.even {
-  background-color: #bfb;
-}
-.scoreboard .entry.highlight {
-  font-weight: bold;
-  border: 1px solid #995;
-  transform: scale(1.1, 1.1);
-}
-.scoreboard .entry div {
-  text-align: center;
-}
-@media (max-width: 650px) {
-  .scoreboard {
-    flex-direction: row;
-    height: 150px;
-  }
-  .scoreboard .entry {
-    height: 33.33%;
-    width: 12.5%;
-  }
-}
 
 .window h3 {
   text-align: center;

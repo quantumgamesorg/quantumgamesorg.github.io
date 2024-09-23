@@ -83,12 +83,16 @@ function makeBoard(boardContainer, vals) {
         //board.appendChild(gridRow);
     }
 
+    buildScoreboard(12, 5);
+}
+
+function buildScoreboard(height, width) {
     let scoreTable = document.getElementById("scoreboard");
-	for (let gy = 0; gy < 12; gy++) {
+	for (let gy = 0; gy < height; gy++) {
 		let gridTableRow = document.createElement("tr");
 		
-		for (let gx = 0; gx < 5; gx++) {
-			let index = 1 + gy + gx * 12;
+		for (let gx = 0; gx < width; gx++) {
+			let index = 1 + gy + gx * height;
 			
 			let gridTableSpot = document.createElement("td");
 			gridTableSpot.classList.add("ray");

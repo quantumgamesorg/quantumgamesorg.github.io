@@ -6,7 +6,28 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.appendChild(makeBoard(45));
+boardContainer.appendChild(makeCircleBoard(45));
+
+
+// https://stackoverflow.com/a/950146
+function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    var head = document.head;
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    head.appendChild(script);
+}
+
+loadScript("tablegen.js", function() { buildScoreboard(8, 5); })
 
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 // document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -31,7 +52,7 @@ document.querySelectorAll(".person").forEach((e, i) => {
 
 
 
-function makeBoard(outerRadius) {
+function makeCircleBoard(outerRadius) {
     const innerRadius = outerRadius * 0.55;
     const innerVals = [...Array(5).keys()].map(i => [...Array(8).keys()].map(n => n + 8 * i + 1));
     const outerVals = [[ 1, 2, 13, 14, 15, 16, 3, 4 ]    , [ 1, 2, 19, 20, 23, 24, 5, 6 ]    , [ 1, 3, 26, 28, 30, 32, 5, 7 ]    , [ 1, 4, 37, 38, 39, 40, 6, 7 ],
@@ -180,6 +201,7 @@ function makeCircle(vals, x, y) {
         } else {
             removeValues(vals);
         }
+        checkWon();
     };
 
     circle.onmouseenter = () => {
@@ -244,69 +266,6 @@ function drawLines(outerRadius, innerRadius) {
     // svg.line(svgSize/2 + circlePos(), svgSize/2 - outerRadius, svgSize/2,  svgSize/2 + outerRadius);
     
     return svg;
-}
-
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.querySelector(".scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.querySelector(".scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    checkWon();
-}
-
-function checkWon() {
-    const allEven = Array.prototype.slice.call(document.querySelector(".scoreboard").children).every(e => !e.classList.contains("odd"));
-    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
-    boardContainer.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
-    boardContainer.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
-
-    const won = allEven && numTurns % 2 == 1;
-    boardContainer.classList.toggle("won", won);
-
-    document.querySelector("#does").classList.toggle("won", won);
-}
-
-function reset() {
-    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .entry")).forEach(e => {
-        e.children[1].innerText = "(0)";
-        e.classList.remove("even");
-        e.classList.remove("odd");
-    });
-
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .circle")).forEach(e => {
-        e.classList.remove("selected");
-    });
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = "0";
-    boardContainer.querySelector(".moveCounter").classList.remove("even");
-    boardContainer.querySelector(".moveCounter").classList.remove("odd");
-
-    boardContainer.classList.remove("won");
-    document.querySelector("#does").classList.remove("won");
 }
 
 function solve() {
