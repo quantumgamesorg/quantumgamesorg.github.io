@@ -118,16 +118,13 @@
 }
 
 #game #scoreboard {
-	max-width: 80vh;
-	font-size: max(min(3vw, 2vh), 7pt);
+	font-size: min(2vw, 2.4vh);
 	box-shadow: #0002 2px 2px 5px;
 	color: black;
 	height: 100%;
 	margin-left: 30px;
 }
 #scoreboard .ray {
-	align-items: center;
-	justify-content: center;
 	background-color: #dfd;
 	border: 1px solid #666;
 	padding: 2px;
@@ -147,8 +144,15 @@
 #scoreboard .ray div {
 	text-align: center;
 	display: inline-block;
-	margin-left: 2px;
-	margin-right: 2px;
+	width: 55%;
+	padding-left: 1px;
+	padding-right: 1px;
+	margin-top: .31vh;
+	margin-bottom: .31vh;
+}
+#scoreboard .ray div:nth-child(2) {
+	font-size: min(1.5vw, 1.8vh);
+	width: 45%;
 }
 @media (max-width: 650px) {
 	#scoreboard {
