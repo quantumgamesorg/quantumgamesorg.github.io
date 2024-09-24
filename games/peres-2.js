@@ -34,7 +34,7 @@ loadScript("tablegen.js", function() { buildScoreboard(8, 5); })
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[1].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.querySelectorAll("#upperLeft button")[2].onclick = () => reset();
+document.querySelectorAll("#upperLeft button")[2].onclick = () => circleReset();
 document.querySelectorAll("#upperLeft button")[3].onclick = () => solve();
 // document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 // document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
@@ -111,13 +111,14 @@ function makeCircleBoard(outerRadius) {
 
     board.appendChild(drawLines(outerRadius, innerRadius));
 
-    document.querySelectorAll(".scoreboard .entry").forEach((el, i) => {
+    boardContainer.querySelectorAll(".ray").forEach(el => {
+		let i = el.children[0].innerText;
         el.onmouseenter = () => {
-            circleMap[i + 1].forEach(c => c.classList.add("highlight"));
+            circleMap[i].forEach(c => c.classList.add("highlight"));
         };
 
         el.onmouseleave = () => {
-            circleMap[i + 1].forEach(c => c.classList.remove("highlight"));
+            circleMap[i].forEach(c => c.classList.remove("highlight"));
         };
     })
 
@@ -127,7 +128,7 @@ function makeCircleBoard(outerRadius) {
 function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
     let innerXOffset = 1;
     let innerYOffset = 1;
-    console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
+    //console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
     if(type === 'outer'){
         let spread = 2.5;
         const angleRelativeToCenter = Math.floor(index/numOuter) * 2 * Math.PI / numInner;
@@ -135,8 +136,8 @@ function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
         const alignTerm = ((numOuter - 1)/numOuter * spread) / 2;
         const angleRelativeToInnerCircle = ((index % numOuter) * spread / numOuter) - alignTerm;
 
-        console.log(`Index: ${index} Index/Outer = ${index/numOuter} Num outer ${numOuter}`)
-        console.log(`Index: ${index} Center: ${angleRelativeToCenter * 360.0/Math.PI} Inner: ${angleRelativeToInnerCircle * 360.0/Math.PI}`)
+        //console.log(`Index: ${index} Index/Outer = ${index/numOuter} Num outer ${numOuter}`)
+        //console.log(`Index: ${index} Center: ${angleRelativeToCenter * 360.0/Math.PI} Inner: ${angleRelativeToInnerCircle * 360.0/Math.PI}`)
 
         let baseX = (innerRadius * Math.sin(angleRelativeToCenter));
         let baseY = (innerRadius * -Math.cos(angleRelativeToCenter));
@@ -150,16 +151,16 @@ function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
         // var outerXOffset = 1.17;
         // var outerYOffset = 0.91;
         
-        console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
+        //console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
         return [baseX * innerXOffset + deltaBx * outerXOffset, baseY  * innerYOffset + deltaBy * outerYOffset]
     }else{//type is inner
         const angleRelativeToCenter = index/numInner * 2 * Math.PI;
         let baseX = (innerRadius * Math.sin(angleRelativeToCenter))
         let baseY = (innerRadius * -Math.cos(angleRelativeToCenter))
-        console.log(`[circlePos]: Returning ${baseX * innerXOffset}, ${baseY * innerYOffset}`)
+        //console.log(`[circlePos]: Returning ${baseX * innerXOffset}, ${baseY * innerYOffset}`)
         return [baseX * innerXOffset,  baseY * innerYOffset]
     }
-};
+}
 
 function makeCircle(vals, x, y) {
     let circle = document.createElement("div");
@@ -206,13 +207,13 @@ function makeCircle(vals, x, y) {
 
     circle.onmouseenter = () => {
         vals.forEach(v => {
-            document.querySelector(".scoreboard").children[v - 1].classList.add("highlight");
+			document.getElementsByClassName("ray " + v)[0].classList.add("highlight");
         });
     };
 
     circle.onmouseleave = () => {
         vals.forEach(v => {
-            document.querySelector(".scoreboard").children[v - 1].classList.remove("highlight");
+			document.getElementsByClassName("ray " + v)[0].classList.remove("highlight");
         });
     };
 
@@ -227,8 +228,8 @@ function drawLines(outerRadius, innerRadius) {
     svg.setAttribute('height', svgSize);
 
     svg.line = (x1, y1, x2, y2, addClass) => {
-        console.log(`Typeof x1 ${typeof(x1)} Typeof x2 ${typeof(x2)} Typeof y1 ${typeof(y1)} Typeof y2 ${typeof(y2)}`)
-        console.log(`Valueof x1 ${x1} Valueof x2 ${x2} Valueof y1 ${y1} Valueof y2 ${y2}`)
+        //console.log(`Typeof x1 ${typeof(x1)} Typeof x2 ${typeof(x2)} Typeof y1 ${typeof(y1)} Typeof y2 ${typeof(y2)}`)
+        //console.log(`Valueof x1 ${x1} Valueof x2 ${x2} Valueof y1 ${y1} Valueof y2 ${y2}`)
 
         let newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
         if(typeof(addClass) !== 'undefined') newLine.classList.add(addClass);
@@ -268,8 +269,9 @@ function drawLines(outerRadius, innerRadius) {
     return svg;
 }
 
+
 function solve() {
-    reset();
+    circleReset();
 
     let circles = boardContainer.querySelectorAll(".board .circle");
     [[0,7], [1,10], [2,13], [3,16], [4,11], [5,14], [6,17], [8,15], [9,18], [12,19]].forEach(pair => {
@@ -280,9 +282,8 @@ function solve() {
         }
     });
 
-    let score = document.querySelectorAll(".scoreboard .entry");
     for(let i = 0; i < 5; i++) {
-        if(score[i * 8].classList.contains("odd")){
+        if(document.getElementsByClassName("ray " + ((i * 8) + 1))[0].classList.contains("odd")){
             circles[[20, 21, 22, 23, 24][i]].click();
         }
     }

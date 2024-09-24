@@ -2,39 +2,30 @@
 #boardContainer {
   position: relative;
   display: flex;
-  max-width: 95%;
   align-self: center;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin-bottom: 20px;
-  height: calc(100vh - 50px);
-  width: calc(100vh - 100px);
   min-width: 200px;
   scroll-snap-align: end;
   scroll-snap-stop: normal;
 }
 #boardContainer .moveCounter {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  padding: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border: 1px solid #666;
-  background-color: #fcc;
-  font-size: 20pt;
-  font-size: min(6vw, 24pt);
-  text-align: center;
-}
-@media (max-width: 650px) {
-  #boardContainer .moveCounter {
-    top: 2%;
-    right: 3%;
-  }
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	padding: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid #666;
+	background-color: #fcc;
+	font-size: 20pt;
+	font-size: min(6vw, 24pt);
+	text-align: center;
 }
 #boardContainer .moveCounter::before {
   position: absolute;
@@ -56,17 +47,9 @@
 #boardContainer .board {
   display: flex;
   position: relative;
-  width: 100%;
-  padding-bottom: 95%;
-  max-width: 95%;
-  min-width: 200px;
-  min-height: 200px;
-}
-@media (max-width: 650px) {
-  #boardContainer .board {
-    padding-bottom: 95%;
-    max-width: 95%;
-  }
+	height: 75vh;
+	width: 75vh;
+	margin: 3.5vh;
 }
 #boardContainer .board .circle {
   display: flex;
@@ -89,25 +72,6 @@
   z-index: 5;
   user-select: none;
   transition: transform ease-out 0.1s, font-weight ease 0.1s;
-}
-@media (max-width: 650px) {
-  #boardContainer .board .circle {
-    font-weight: bold;
-  }
-}
-@media (max-height: 650px) {
-  #boardContainer .board .circle {
-    font-weight: bold;
-  }
-}
-#boardContainer .board .circle::before {
-  content: "";
-  position: absolute;
-  left: -15%;
-  top: -15%;
-  right: -15%;
-  bottom: -15%;
-  border-radius: 50%;
 }
 #boardContainer .board .circle.selected {
   background-color: #fcc;
@@ -138,12 +102,43 @@
   background-color: #cfc;
 }
 #boardContainer svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+#upperRight {
+	height: 78.5vh;
+}
+#upperRight .scoreboard {
+	width: 100%;
+	font-size: 16pt;
+	font-size: max(min(4vw, 2.5vh), 8pt);
+	box-shadow: #0002 2px 2px 5px;
+}
+#upperRight .scoreboard .ray {
+	border: 1px solid #666;
+	background-color: #dfd;
+	transition: transform ease-out 0.1s, font-weight ease 0.1s;
+	padding: 5px;
+}
+#upperRight .scoreboard .ray.odd {
+  background-color: #fbb;
+}
+#upperRight .scoreboard .ray.even {
+  background-color: #bfb;
+}
+#upperRight .scoreboard .ray.highlight {
+  font-weight: bold;
+  border: 1px solid #995;
+  transform: scale(1.1, 1.1);
+}
+#upperRight .scoreboard .ray div {
+	padding: 1.85px;
+	text-align: center;
 }
 
 .window h3 {

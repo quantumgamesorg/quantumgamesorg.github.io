@@ -160,10 +160,12 @@ function updateScore() {
 
     let numBasis = document.getElementsByClassName("basis selected").length
     let basisDiv = document.getElementById("numBasis");
-    basisDiv.innerHTML = numBasis;
+	if (basisDiv != null) {
+		basisDiv.innerHTML = numBasis;
 
-    basisDiv.classList.toggle("even", numBasis%2 == 0);
-    basisDiv.classList.toggle("odd", numBasis%2 == 1);
+		basisDiv.classList.toggle("even", numBasis%2 == 0);
+		basisDiv.classList.toggle("odd", numBasis%2 == 1);
+	}
 
     let rays = document.getElementsByClassName("ray");
 
@@ -207,4 +209,23 @@ function reset() {
     });
 
     updateScore();
+}
+
+function circleReset() {
+    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .ray")).forEach(e => {
+        e.children[1].innerText = "(0)";
+        e.classList.remove("even");
+        e.classList.remove("odd");
+    });
+
+    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .circle")).forEach(e => {
+        e.classList.remove("selected");
+    });
+
+    boardContainer.querySelector(".moveCounter .inner").innerText = "0";
+    boardContainer.querySelector(".moveCounter").classList.remove("even");
+    boardContainer.querySelector(".moveCounter").classList.remove("odd");
+
+    boardContainer.classList.remove("won");
+    document.querySelector("#does").classList.remove("won");
 }

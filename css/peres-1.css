@@ -27,12 +27,6 @@
   font-size: min(6vw, 24pt);
   text-align: center;
 }
-@media (max-width: 650px) {
-  #boardContainer .moveCounter {
-    top: 2%;
-    right: 3%;
-  }
-}
 #boardContainer .moveCounter::before {
   position: absolute;
   width: 200%;
@@ -61,10 +55,6 @@
 	background-color: #dfd;
 	transition: transform ease-out 0.1s, font-weight ease 0.1s;
 	padding: 5px;
-}
-#upperRight {
-	opacity: 1;
-	width: auto;
 }
 #upperRight .scoreboard .ray.odd {
   background-color: #fbb;
