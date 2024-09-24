@@ -47,21 +47,18 @@
 #boardContainer .board {
   display: flex;
   position: relative;
-	height: 75vh;
-	width: 75vh;
+	height: 70vh;
+	width: 70vh;
 	margin: 3.5vh;
 }
 #boardContainer .board .circle {
-  display: flex;
-  flex-direction: column;
   position: absolute;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   width: 14%;
   height: 14%;
   transform: translate(-50%, -50%);
-  padding: 1%;
+  padding: 1.5%;
   font-size: 14pt;
   font-size: min(2vw, 1.75vh);
   border: 1px solid #666;
@@ -81,22 +78,15 @@
   border: 2px solid #885;
   font-weight: bold;
 }
-#boardContainer .board .circle .rowOfValues {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+#boardContainer .board .circle tr {
+	height: 33.333%;
+	width: 100%;
 }
-#boardContainer .board .circle .rowOfValues .value {
-  width: 50%;
+#boardContainer .board .circle td {
+	width: 33.333%;
   text-align: center;
   margin-left: 2px;
   margin-right: 2px;
-}
-#boardContainer .board .circle .topVals, #boardContainer .board .circle .bottomVals {
-  width: 50%;
-}
-#boardContainer .board .circle .midVals {
-  width: 100%;
 }
 #boardContainer.won .board .circle.selected {
   background-color: #cfc;

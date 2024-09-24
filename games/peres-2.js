@@ -163,35 +163,28 @@ function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
 }
 
 function makeCircle(vals, x, y) {
-    let circle = document.createElement("div");
+    let circle = document.createElement("table");
     circle.classList.add("circle");
 
     circle.style.left = x;
     circle.style.top = y;
 
-    let topVals = document.createElement("div")
-    let midVals = document.createElement("div")
-    let botVals = document.createElement("div")
-
-    topVals.classList.add("topVals");
-    midVals.classList.add("midVals");
-    botVals.classList.add("bottomVals");
-
-    topVals.classList.add("rowOfValues");
-    midVals.classList.add("rowOfValues");
-    botVals.classList.add("rowOfValues");
+    let topVals = document.createElement("tr")
+    let midVals = document.createElement("tr")
+    let botVals = document.createElement("tr")
 
 
     for(let i = 0; i < vals.length; ++i) {
-        let valElement = document.createElement("div");
+        let valElement = document.createElement("td");
         valElement.innerText = vals[i];
-        valElement.classList.add("value");
-        if(i < 2) {topVals.appendChild(valElement);}
-        else if (i < 6) { midVals.appendChild(valElement);}
+        if(i < 3) {topVals.appendChild(valElement);}
+        else if (i < 5) {
+			midVals.appendChild(valElement);
+			if(i == 3) { midVals.appendChild(document.createElement("td")); }
+		}
         else {botVals.appendChild(valElement);}
     }
     
-
     circle.appendChild(topVals);
     circle.appendChild(midVals);
     circle.appendChild(botVals);
