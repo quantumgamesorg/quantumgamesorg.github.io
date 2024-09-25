@@ -44,32 +44,16 @@
 #boardContainer .moveCounter.odd {
   background-color: #cfc;
 }
-#upperRight .scoreboard {
+#upperRight #scoreboard {
 	width: 100%;
 	font-size: 16pt;
 	font-size: max(min(4vw, 2.5vh), 8pt);
-	box-shadow: #0002 2px 2px 5px;
 }
-#upperRight .scoreboard .ray {
-	border: 1px solid #666;
-	background-color: #dfd;
-	transition: transform ease-out 0.1s, font-weight ease 0.1s;
+#upperRight #scoreboard .ray {
 	padding: 5px;
 }
-#upperRight .scoreboard .ray.odd {
-  background-color: #fbb;
-}
-#upperRight .scoreboard .ray.even {
-  background-color: #bfb;
-}
-#upperRight .scoreboard .ray.highlight {
-  font-weight: bold;
-  border: 1px solid #995;
-  transform: scale(1.1, 1.1);
-}
-#upperRight .scoreboard .ray div {
+#upperRight #scoreboard .ray div {
 	padding: 1.85px;
-	text-align: center;
 }
 #boardContainer .board {
 	height: 65vh;

@@ -50,28 +50,7 @@ function makeBoard(boardContainer, vals) {
         
                 gridTableSpot.appendChild(basisRow);
                 
-
-                basisRow.onclick = () => {
-                    if(basisRow.classList.toggle("selected")) {
-                        addValues(basis_vals);
-                    } else {
-                        removeValues(basis_vals);
-                    }
-                    updateScore();
-                };
-
-                basisRow.onmouseenter = () => {
-                    basis_vals.forEach(v => {
-                        document.getElementsByClassName(`ray ${v}`)[0].classList.add("highlight");
-                    });
-                };
-            
-                basisRow.onmouseleave = () => {
-                    basis_vals.forEach(v => {
-                        document.getElementsByClassName(`ray ${v}`)[0].classList.remove("highlight");
-                    });
-                };
-
+				addListener(basisRow, basis_vals);
              
             }
             gridTableRow.appendChild(gridTableSpot);
@@ -123,6 +102,33 @@ function buildScoreboard(height, width) {
 	}
 }
 
+
+let listeners = [];
+function addListener(el, vals) {
+	el.onclick = () => {
+        if(el.classList.toggle("selected")) {
+            addValues(vals);
+        } else {
+            removeValues(vals);
+        }
+        checkWon();
+    };
+
+    el.onmouseenter = () => {
+        vals.forEach(v => {
+			document.getElementsByClassName("ray " + v)[0].classList.add("highlight");
+        });
+    };
+
+    el.onmouseleave = () => {
+        vals.forEach(v => {
+			document.getElementsByClassName("ray " + v)[0].classList.remove("highlight");
+        });
+    };
+	
+	listeners.push(el);
+}
+
 function addValues(values) {
     values.forEach(v => {
         let entry = document.getElementsByClassName("ray " + v)[0];
@@ -140,7 +146,7 @@ function addValues(values) {
 
 function removeValues(values) {
     values.forEach(v => {
-        let entry = document.getElementsByClassName("ray " + v)[0];;
+        let entry = document.getElementsByClassName("ray " + v)[0];
         let current = entry.children[1].innerText;
         let current_n = parseInt(current.substr(1, current.length-2));
 
@@ -186,15 +192,21 @@ function updateScore() {
 function checkWon() {
     const allEven = Array.prototype.slice.call(document.getElementsByClassName("ray")).every(e => !e.classList.contains("odd"));
     const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
+	
+	const won = allEven && numTurns % 2 == 1;
+	
+	if(boardContainer != null) {
+		boardContainer.classList.toggle("won", won);
+	}
+	if(document.querySelector(".moveCounter") != null) {
+		document.querySelector(".moveCounter .inner").innerText = numTurns;
+		document.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
+		document.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
+	}
 
-    boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
-    boardContainer.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
-    boardContainer.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
-
-    const won = allEven && numTurns % 2 == 1;
-    boardContainer.classList.toggle("won", won);
-
-    document.querySelector("#does").classList.toggle("won", won);
+	if(document.querySelector("#does") != null) {
+    	document.querySelector("#does").classList.toggle("won", won);
+	}
 }
 
 function reset() {
@@ -204,28 +216,22 @@ function reset() {
         e.classList.remove("odd");
     });
 
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .basis")).forEach(e => {
+    listeners.forEach(e => {
         e.classList.remove("selected");
     });
-
+	
+	if(document.querySelector(".moveCounter") != null) {
+		document.querySelector(".moveCounter .inner").innerText = "0";
+		document.querySelector(".moveCounter").classList.remove("even");
+		document.querySelector(".moveCounter").classList.remove("odd");
+	}
+	
+	if(boardContainer != null) {
+		boardContainer.classList.remove("won");
+	}
+	if(document.querySelector("#does") != null) {
+		document.querySelector("#does").classList.remove("won");
+	}
+	
     updateScore();
-}
-
-function circleReset() {
-    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .ray")).forEach(e => {
-        e.children[1].innerText = "(0)";
-        e.classList.remove("even");
-        e.classList.remove("odd");
-    });
-
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .circle")).forEach(e => {
-        e.classList.remove("selected");
-    });
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = "0";
-    boardContainer.querySelector(".moveCounter").classList.remove("even");
-    boardContainer.querySelector(".moveCounter").classList.remove("odd");
-
-    boardContainer.classList.remove("won");
-    document.querySelector("#does").classList.remove("won");
 }

@@ -8,33 +8,14 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 let circleMap = [];
 boardContainer.appendChild(makeCircleBoard(45));
 
-
-// https://stackoverflow.com/a/950146
-function loadScript(url, callback)
-{
-    // Adding the script tag to the head as suggested before
-    var head = document.head;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
-
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
-    script.onreadystatechange = callback;
-    script.onload = callback;
-
-    // Fire the loading
-    head.appendChild(script);
-}
-
-loadScript("tablegen.js", function() { buildScoreboard(8, 5); })
+buildScoreboard(8, 5);
 
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 // document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[1].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.querySelectorAll("#upperLeft button")[2].onclick = () => circleReset();
+document.querySelectorAll("#upperLeft button")[2].onclick = () => reset();
 document.querySelectorAll("#upperLeft button")[3].onclick = () => solve();
 // document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 // document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
@@ -189,26 +170,7 @@ function makeCircle(vals, x, y) {
     circle.appendChild(midVals);
     circle.appendChild(botVals);
 
-    circle.onclick = () => {
-        if(circle.classList.toggle("selected")) {
-            addValues(vals);
-        } else {
-            removeValues(vals);
-        }
-        checkWon();
-    };
-
-    circle.onmouseenter = () => {
-        vals.forEach(v => {
-			document.getElementsByClassName("ray " + v)[0].classList.add("highlight");
-        });
-    };
-
-    circle.onmouseleave = () => {
-        vals.forEach(v => {
-			document.getElementsByClassName("ray " + v)[0].classList.remove("highlight");
-        });
-    };
+    addListener(circle, vals);
 
     return circle;
 }
@@ -264,7 +226,7 @@ function drawLines(outerRadius, innerRadius) {
 
 
 function solve() {
-    circleReset();
+    reset();
 
     let circles = boardContainer.querySelectorAll(".board .circle");
     [[0,7], [1,10], [2,13], [3,16], [4,11], [5,14], [6,17], [8,15], [9,18], [12,19]].forEach(pair => {
