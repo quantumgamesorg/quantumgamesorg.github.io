@@ -1,15 +1,17 @@
 #boardContainer {
-  position: relative;
-  display: flex;
-  max-width: 95%;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-  min-width: 200px;
-  scroll-snap-align: end;
-  scroll-snap-stop: normal;
+	position: relative;
+	display: flex;
+	max-width: 95%;
+	align-self: center;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 20px;
+	min-width: 200px;
+	scroll-snap-align: end;
+	scroll-snap-stop: normal;
+	margin-left: 20px;
+	margin-right: 40px;
 }
 #boardContainer .moveCounter {
   display: flex;

@@ -1,12 +1,12 @@
 function makeBoard(boardContainer, vals) {
 
     boardContainer.classList.add("board");
-
-    for(let gy = 0; gy < 5; gy++) {
+	
+    for(let gy = 0; gy < vals.length / 3; gy++) {
 
         let gridTableRow = document.createElement("tr");
 
-        for(let gx = 0; gx < 5; gx++) {
+        for(let gx = 0; gx < vals[gy].length / 4; gx++) {
 
             let gridTableSpot = document.createElement("td");
 
@@ -61,8 +61,6 @@ function makeBoard(boardContainer, vals) {
         boardContainer.appendChild(gridTableRow);
         //board.appendChild(gridRow);
     }
-
-    buildScoreboard(15, 4, true);
 }
 
 function buildScoreboard(height, width, trans = false) {

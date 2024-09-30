@@ -26,6 +26,8 @@ makeBoard(boardContainer, [
         [53, 54, 55, 56, 26, 12, 46, 13, 6, 35, 21, 43, 24, 41, 8, 34, 47, 14, 25, 9],
         [57, 58, 59, 60, 44, 33, 5, 23, 1, 20, 38, 29, 31, 37, 18, 2, 22, 7, 36, 42]
     ]);
+buildScoreboard(15, 4, true);
+
 // Reset button
 document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
 // // TODO: these extra solve buttons are temporary
