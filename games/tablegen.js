@@ -62,16 +62,19 @@ function makeBoard(boardContainer, vals) {
         //board.appendChild(gridRow);
     }
 
-    buildScoreboard(15, 4);
+    buildScoreboard(15, 4, true);
 }
 
-function buildScoreboard(height, width) {
+function buildScoreboard(height, width, trans = false) {
     let scoreTable = document.getElementById("scoreboard");
 	for (let gy = 0; gy < height; gy++) {
 		let gridTableRow = document.createElement("tr");
 		
 		for (let gx = 0; gx < width; gx++) {
 			let index = 1 + gy + gx * height;
+			if(trans) {
+				index = 1 + gx + gy * width;
+			}
 			
 			let gridTableSpot = document.createElement("td");
 			gridTableSpot.classList.add("ray");
