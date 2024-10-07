@@ -143,6 +143,7 @@ function addValues(values) {
         entry.classList.toggle("odd", current_n % 2 == 1);
     });
     //checkWon();
+    updateScore();
 }
 
 function removeValues(values) {
@@ -158,6 +159,7 @@ function removeValues(values) {
         entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
     });
     //checkWon();
+    updateScore();
 }
 
 function updateScore() {
