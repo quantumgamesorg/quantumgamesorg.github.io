@@ -6,35 +6,8 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
-// Reset button
-document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
-// TODO: these extra solve buttons are temporary
-// var solutionElements = document.querySelectorAll('#upperLeft option');
-// for (let i = 0; i < solutionElements.length; ++i) {
-//     solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
-// }
-// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
-// // comment from my friend: "Who fucking wrote this?"
-
-document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
-
-document.querySelectorAll(".person").forEach((e, i) => {
-    e.onmouseenter = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
-    };
-    e.onmouseleave = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
-    };
-});
-
-
-
-function makeBoard(outerRadius) {
-    const vals = [
+function setupBoard() {
+    makeBoard(boardContainer, [
         [ 1,  2,  3,  4,     5,  6,  7,  8,     9, 10, 11, 12,    13, 14, 15, 16,    17, 18, 19, 20],  
         [21, 22, 23, 24,    25, 26, 27, 28,    29, 30, 31, 32,    33, 34, 35, 36,    37, 38, 39, 40],  
         [41, 42, 43, 44,    45, 46, 47, 48,    49, 50, 51, 52,    53, 54, 55, 56,    57, 58, 59, 60],  
@@ -62,222 +35,37 @@ function makeBoard(outerRadius) {
         [ 2,  3, 49, 50,     6,  7, 45, 48,    11, 12, 33, 34,    14, 15, 53, 54,    30, 31, 57, 59],  
         [22, 24, 29, 31,    17, 19, 26, 28,     2,  4, 29, 31,    34, 35, 58, 59,    38, 40, 57, 59], 
         [42, 43, 49, 50,    46, 47, 49, 51,    38, 39, 50, 51,    13, 16, 39, 40,    46, 48, 57, 58],  
-    ];
+    ]);
+buildScoreboard(15, 4, true);
+    // Reset button
+document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+// TODO: these extra solve buttons are temporary
+// var solutionElements = document.querySelectorAll('#upperLeft option');
+// for (let i = 0; i < solutionElements.length; ++i) {
+//     solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
+// }
+// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
+// // comment from my friend: "Who fucking wrote this?"
 
-    let board = document.createElement("div");
-    board.classList.add("board");
+document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
+document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
-    for(let gy = 0; gy < 7; gy++) {
-
-        let gridRow = document.createElement("div");
-        gridRow.classList.add("gridRow");
-
-        for(let gx = 0; gx < 5; gx++) {
-            let gridSpot = document.createElement("div");
-            gridSpot.classList.add("gridSpot");
-
-            for(let y = 0; y < 3; y++) {
-        
-                let basis = document.createElement("div");
-                basis.classList.add("basis");
-                
-                let basis_vals = []
-                for(let x = 0; x < 4; x++) {
-                    let val = vals[y + gy * 3][x + gx * 4];
-                    basis_vals.push(val);
-
-                    let val_el = document.createElement("div");
-                    val_el.classList.add("val");
-                    val_el.classList.add(val);
-        
-                    val_el.innerText = val;
-                    
-                    val_el.onmouseenter = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                            if(e !== val_el) {
-                                e.classList.toggle("hover", true);
-                            }
-                        });
-                    };
-
-                    val_el.onmouseleave = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                            if(e !== val_el) {
-                                e.classList.toggle("hover", false);
-                            }
-                        });
-                    };
-        
-                    basis.appendChild(val_el);
-                }
-        
-                gridSpot.appendChild(basis);
-
-                basis.onclick = () => {
-                    if(basis.classList.toggle("selected")) {
-                        addValues(basis_vals);
-                    } else {
-                        removeValues(basis_vals);
-                    }
-                    updateScore();
-                };
-
-                basis.onmouseenter = () => {
-                    basis_vals.forEach(v => {
-                        document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
-                    });
-                };
-            
-                basis.onmouseleave = () => {
-                    basis_vals.forEach(v => {
-                        document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
-                    });
-                };
-
-             
-            }
-
-            gridRow.appendChild(gridSpot);
-        }
-
-        board.appendChild(gridRow);
-    }
-
-    document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
-        let val_elems = document.getElementsByClassName(`val ${i + 1}`);
-        el.onmouseenter = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                //console.log(i);
-                val_elems[j].classList.toggle("hover", true);
-            }
-        };
-
-        el.onmouseleave = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                val_elems[j].classList.toggle("hover", false);
-            }
-        };
-    })
-
- 
-    return board;
+document.querySelectorAll(".person").forEach((e, i) => {
+    e.onmouseenter = ev => {
+        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
+    };
+    e.onmouseleave = ev => {
+        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
+    };
+});
 }
+//boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
+setupBoard();
 
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
 
-        entry.classList.toggle("even", current_n % 2 == 0);
-        entry.classList.toggle("odd", current_n % 2 == 1);
-    });
-    //checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function updateScore() {
-    let even = document.getElementsByClassName("ray even").length
-    let odd = document.getElementsByClassName("ray odd").length
-    //console.log(`Num even = ${even} Num odd = ${odd}`);
-
-    let numBasis = document.getElementsByClassName("basis selected").length
-    let basisDiv = document.getElementById("numBasis");
-    basisDiv.innerHTML = numBasis;
-
-    basisDiv.classList.toggle("even", numBasis%2 == 0);
-    basisDiv.classList.toggle("odd", numBasis%2 == 1);
-
-    let rays = document.getElementById("scoreboard").children;
-
-    //the following code checks if the user has won
-    for (let i = 0; i < rays.length; ++i) {
-        if (rays[i].classList.contains("odd")) {
-            return;
-        }
-    }
-
-    if (numBasis % 2 == 0) {
-        return;
-    }
-
-    //window.alert("You have won the game!")
-}
-
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function checkWon() {
-    const allEven = Array.prototype.slice.call(document.getElementById("scoreboard").children).every(e => !e.classList.contains("odd"));
-    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
-    boardContainer.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
-    boardContainer.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
-
-    const won = allEven && numTurns % 2 == 1;
-    boardContainer.classList.toggle("won", won);
-
-    document.querySelector("#does").classList.toggle("won", won);
-}
-
-function reset() {
-    Array.prototype.slice.call(document.querySelectorAll("#scoreboard .ray")).forEach(e => {
-        e.children[1].innerText = "(0)";
-        e.classList.remove("even");
-        e.classList.remove("odd");
-    });
-
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .basis")).forEach(e => {
-        e.classList.remove("selected");
-    });
-
-    updateScore();
-}
 
 var conversions = [
     0, 3, 6, 9, 12, 1, 4, 7, 10, 13, 2, 5, 8, 11, 14, 15, 75, 27, 52, 42, 45, 87, 90, 72, 97, 60, 30, 78, 18, 24, 39, 48, 82, 93, 37, 69, 84, 33, 63, 38, 51, 21, 28, 40, 23, 85, 68, 66, 73, 83, 96, 41, 25, 101, 54, 56, 99, 70, 86, 81, 94, 29, 43, 74, 88, 49, 36, 16, 46, 31, 80, 76, 35, 91, 61, 19, 79, 64,34, 22, 57, 67, 102, 26, 55, 71, 100, 44, 58, 53, 98, 103, 89, 17, 77, 47, 92, 32, 62, 20, 59, 50, 95, 104, 65  

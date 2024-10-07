@@ -7,7 +7,7 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 
 let circleMap = [];
 boardContainer.appendChild(makeBoard(45));
-
+buildScoreboard(8,3)
 
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
@@ -71,13 +71,14 @@ function makeBoard(outerRadius) {
 
     board.appendChild(drawLines(outerRadius, innerRadius));
 
-    boardContainer.querySelectorAll(".scoreboard .entry").forEach((el, i) => {
+    boardContainer.querySelectorAll(".ray").forEach(el => {
+		let i = el.children[0].innerText;
         el.onmouseenter = () => {
-            circleMap[i + 1].forEach(c => c.classList.add("highlight"));
+            circleMap[i].forEach(c => c.classList.add("highlight"));
         };
 
         el.onmouseleave = () => {
-            circleMap[i + 1].forEach(c => c.classList.remove("highlight"));
+            circleMap[i].forEach(c => c.classList.remove("highlight"));
         };
     })
 
@@ -98,25 +99,7 @@ function makeCircle(vals, x, y) {
         circle.appendChild(valElement);
     });
 
-    circle.onclick = () => {
-        if(circle.classList.toggle("selected")) {
-            addValues(vals);
-        } else {
-            removeValues(vals);
-        }
-    };
-
-    circle.onmouseenter = () => {
-        vals.forEach(v => {
-            boardContainer.querySelector(".scoreboard").children[v - 1].classList.add("highlight");
-        });
-    };
-
-    circle.onmouseleave = () => {
-        vals.forEach(v => {
-            boardContainer.querySelector(".scoreboard").children[v - 1].classList.remove("highlight");
-        });
-    };
+    addListener(circle, vals);
 
     return circle;
 }
@@ -170,69 +153,6 @@ function drawLines(outerRadius, innerRadius) {
     return svg;
 }
 
-function addValues(values) {
-    values.forEach(v => {
-        let entry = boardContainer.querySelector(".scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = boardContainer.querySelector(".scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    checkWon();
-}
-
-function checkWon() {
-    const allEven = Array.prototype.slice.call(boardContainer.querySelector(".scoreboard").children).every(e => !e.classList.contains("odd"));
-    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
-    boardContainer.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
-    boardContainer.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
-
-    const won = allEven && numTurns % 2 == 1;
-    boardContainer.classList.toggle("won", won);
-
-    document.querySelector("#does").classList.toggle("won", won);
-}
-
-function reset() {
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".scoreboard .entry")).forEach(e => {
-        e.children[1].innerText = "(0)";
-        e.classList.remove("even");
-        e.classList.remove("odd");
-    });
-
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .circle")).forEach(e => {
-        e.classList.remove("selected");
-    });
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = "0";
-    boardContainer.querySelector(".moveCounter").classList.remove("even");
-    boardContainer.querySelector(".moveCounter").classList.remove("odd");
-
-    boardContainer.classList.remove("won");
-    document.querySelector("#does").classList.remove("won");
-}
-
 function solve() {
     reset();
 
@@ -245,9 +165,8 @@ function solve() {
         }
     });
 
-    let score = boardContainer.querySelectorAll(".scoreboard .entry");
     for(let i = 0; i < 6; i++) {
-        if(score[i * 4].classList.contains("odd")){
+        if(document.getElementsByClassName("ray " + ((i * 4) + 1))[0].classList.contains("odd")){
             circles[[18, 22, 20, 21, 19, 23][i]].click();
         }
     }
