@@ -194,7 +194,8 @@ function updateScore() {
 
 function checkWon() {
     const allEven = Array.prototype.slice.call(document.getElementsByClassName("ray")).every(e => !e.classList.contains("odd"));
-    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
+    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length
+				   + boardContainer.querySelectorAll(".basis.selected").length;
 	
 	const won = allEven && numTurns % 2 == 1;
 	
