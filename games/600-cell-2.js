@@ -29,16 +29,7 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 const defaultBoardContainerSize2 = { width: parseInt(getComputedStyle(boardContainer2).width), height: parseInt(getComputedStyle(boardContainer2).height) };
 
 let circleMap = [];
-boardContainer.insertBefore(makeBoard(), boardContainer.firstChild);
-boardContainer2.insertBefore(makeBoard2(), boardContainer2.firstChild);
-
-
-function makeBoard() {
-    const Yblocks = 5;
-    const Xblocks = 5;
-    const numsinYblocks = 3;
-    const numsinXblocks = 4;
-    const vals = [
+makeBoard(boardContainer, [
         [1, 2, 3, 4, 31, 42, 51, 16, 22, 60, 39, 28, 57, 23, 27, 40, 44, 29, 15, 52],
         [5, 6, 7, 8, 38, 24, 58, 25, 18, 47, 33, 55, 36, 53, 20, 46, 59, 26, 37, 21],
         [9, 10, 11, 12, 56, 45, 17, 35, 13, 32, 50, 41, 43, 49, 30, 14, 34, 19, 48, 54],
@@ -54,156 +45,124 @@ function makeBoard() {
         [49, 50, 51, 52, 19, 30, 39, 4, 10, 48, 27, 16, 45, 11, 15, 28, 32, 17, 3, 40],
         [53, 54, 55, 56, 26, 12, 46, 13, 6, 35, 21, 43, 24, 41, 8, 34, 47, 14, 25, 9],
         [57, 58, 59, 60, 44, 33, 5, 23, 1, 20, 38, 29, 31, 37, 18, 2, 22, 7, 36, 42]
-    ];
+    ], false);
+makeBoard2(boardContainer2);
 
-    let board = document.createElement("div");
-    board.classList.add("board");
-
-    //blocks of nums along the y axis
-    for(let gy = 0; gy < Yblocks; gy++) {
-
-        let gridRow = document.createElement("div");
-        gridRow.classList.add("gridRow");
-
-        //blocks of nums along the x axis
-        for(let gx = 0; gx < Xblocks; gx++) {
-            let gridSpot = document.createElement("div");
-            gridSpot.classList.add("gridSpot");
-
-            //nums within a block along y axis (grouped as a basis)
-            for(let y = 0; y < numsinYblocks; y++) {
-        
-                let basis = document.createElement("div");
-                basis.classList.add("basis");
-                
-                //nums in that basis
-                let basis_vals = []
-                for(let x = 0; x < numsinXblocks; x++) {
-                    let val = vals[y + gy * numsinYblocks][x + gx * numsinXblocks];
-                    basis_vals.push(val);
-
-                    let val_el = document.createElement("div");
-                    val_el.classList.add("val");
-                    val_el.classList.add(val);
-        
-                    val_el.innerText = val;
-                    
-                    val_el.onmouseenter = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                            if(e !== val_el) {
-                                e.classList.toggle("hover", true);
-                            }
-                        });
-                    };
-
-                    val_el.onmouseleave = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                            if(e !== val_el) {
-                                e.classList.toggle("hover", false);
-                            }
-                        });
-                    };
-        
-                    basis.appendChild(val_el);
-                }
-        
-                gridSpot.appendChild(basis);
-
-                basis.onclick = () => {
-                    if(basis.classList.toggle("selected")) {
-                        addValues(basis_vals);
-                    } else {
-                        removeValues(basis_vals);
-                    }
-                    updateScore();
-                };
-
-                basis.onmouseenter = () => {
-                    basis_vals.forEach(v => {
-                        document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
-                    });
-                };
-            
-                basis.onmouseleave = () => {
-                    basis_vals.forEach(v => {
-                        document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
-                    });
-                };
-
-             
-            }
-
-            gridRow.appendChild(gridSpot);
-        }
-
-        board.appendChild(gridRow);
-    }
-
-    document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
-        let val_elems = document.getElementsByClassName(`val ${i + 1}`);
-        el.onmouseenter = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                //console.log(i);
-                val_elems[j].classList.toggle("hover", true);
-            }
-        };
-
-        el.onmouseleave = () => {
-            for (let j = 0; j < val_elems.length; ++j) {
-                val_elems[j].classList.toggle("hover", false);
-            }
-        };
-    })
-
- 
-    return board;
-}
-
-function makeBoard2() {
+function makeBoard2(boardContainer) {
     const Yblocks = 6;
     const Xblocks = 6;
     const numsinYblocks = 5;
     const numsinXblocks = 2;
     const vals = [
-        [1,	    4,	2,	3,	5,	7,	6,	8,	9,	10,	11,	12],
-        [15,	14,	16,	13,	18,	20,	17,	19,	24,	23,	22,	21],
-        [56,	55,	54,	53,	59,	58,	57,	60,	50,	52,	51,	49],
-        [47,	45,	46,	48,	38,	37,	39,	40,	44,	41,	43,	42],
-        [30,	29,	32,	31,	36,	33,	34,	35,	27,	25,	26,	28],
-        [2,	    3,	1,	4,	6,	8,	5,	7,	11,	12,	9,	10],
-        [43,	44,	41,	42,	47,	46,	45,	48,	40,	38,	37,	39],
-        [33,	35,	36,	34,	26,	25,	27,	28,	29,	32,	30,	31],
-        [17,	18,	19,	20,	24,	21,	22,	23,	13,	15,	16,	14],
-        [52,	49,	51,	50,	53,	55,	54,	56,	58,	57,	60,	59],
-        [5,	    6,	7,	8,	9,	12,	10,	11,	1,	3,	2,	4],
-        [21,	23,	24,	22,	13,	14,	15,	16,	17,	20,	19,	18],
-        [31,	32,	29,	30,	34,	35,	33,	36,	28,	26,	27,	25],
-        [50,	51,	49,	52,	56,	54,	53,	55,	59,	60,	58,	57],
-        [40,	37,	39,	38,	43,	41,	42,	44,	46,	45,	47,	48],
-        [7,	    8,	5,	6,	10,	11,	9,	12,	2,	4,	1,	3],
-        [26,	27,	25,	28,	32,	30,	29,	31,	36,	35,	33,	34],
-        [16,	13,	15,	14,	19,	17,	18,	20,	21,	22,	24,	23],
-        [41,	42,	43,	44,	45,	48,	46,	47,	39,	37,	40,	38],
-        [57,	59,	60,	58,	49,	50,	51,	52,	56,	53,	54,	55],
-        [9,     11,	10,	12,	1,	2,	3,	4,	5,	8,	6,	7],
-        [19,	20,	18,	17,	22,	23,	21,	24,	16,	14,	13,	15],
-        [38,	39,	40,	37,	44,	42,	41,	43,	47,	48,	45,	46],
-        [28,	25,	26,	27,	31,	29,	30,	32,	34,	33,	36,	35],
-        [53,	54,	56,	55,	57,	60,	58,	59,	49,	51,	52,	50],
-        [10,	12,	9,	11,	3,	4,	1,	2,	6,	7,	5,	8],
-        [34,	36,	33,	35,	27,	28,	25,	26,	30,	31,	29,	32],
-        [58,	60,	57,	59,	51,	52,	49,	50,	54,	55,	53,	56],
-        [22,	24,	21,	23,	15,	16,	13,	14,	18,	19,	17,	20],
-        [46,	48,	45,	47,	39,	40,	37,	38,	42,	43,	41,	44],
-    ];
+		[ 1, 4,15,14,56,55,47,45,30,29,],
+		[ 2, 3,16,13,54,53,46,48,32,31,],
+		[ 5, 7,18,20,59,58,38,37,36,33,],
+		[ 6, 8,17,19,57,60,39,40,34,35,],
+		[ 9,10,24,23,50,52,44,41,27,25,],
+		[11,12,22,21,51,49,43,42,26,28,],
+		[ 2, 3,43,44,33,35,17,18,52,49,],
+		[ 1, 4,41,42,36,34,19,20,51,50,],
+		[ 6, 8,47,46,26,25,24,21,53,55,],
+		[ 5, 7,45,48,27,28,22,23,54,56,],
+		[11,12,40,38,29,32,13,15,58,57,],
+		[ 9,10,37,39,30,31,16,14,60,59,],
+		[ 5, 6,21,23,31,32,50,51,40,37,],
+		[ 7, 8,24,22,29,30,49,52,39,38,],
+		[ 9,12,13,14,34,35,56,54,43,41,],
+		[10,11,15,16,33,36,53,55,42,44,],
+		[ 1, 3,17,20,28,26,59,60,46,45,],
+		[ 2, 4,19,18,27,25,58,57,47,48,],
+		[ 7, 8,26,27,16,13,41,42,57,59,],
+		[ 5, 6,25,28,15,14,43,44,60,58,],
+		[10,11,32,30,19,17,45,48,49,50,],
+		[ 9,12,29,31,18,20,46,47,51,52,],
+		[ 2, 4,36,35,21,22,39,37,56,53,],
+		[ 1, 3,33,34,24,23,40,38,54,55,],
+		[ 9,11,19,20,38,39,28,25,53,54,],
+		[10,12,18,17,40,37,26,27,56,55,],
+		[ 1, 2,22,23,44,42,31,29,57,60,],
+		[ 3, 4,21,24,41,43,30,32,58,59,],
+		[ 5, 8,16,14,47,48,34,33,49,51,],
+		[ 6, 7,13,15,45,46,36,35,52,50,],
+		[10,12,34,36,58,60,22,24,46,48,],
+		[ 9,11,33,35,57,59,21,23,45,47,],
+		[ 3, 4,27,28,51,52,15,16,39,40,],
+		[ 1, 2,25,26,49,50,13,14,37,38,],
+		[ 6, 7,30,31,54,55,18,19,42,43,],
+		[ 5, 8,29,32,53,56,17,20,41,44,],
+	]
 
+	boardContainer.classList.add("board");
+	
+    for(let gy = 0; gy < Yblocks; gy++) {
+
+        let gridTableRow = document.createElement("tr");
+
+        for(let gx = 0; gx < Xblocks; gx++) {
+
+            let gridTableSpot = document.createElement("td");
+
+            gridTableSpot.classList.add("gridSpot");
+			let gridTable = document.createElement("table");
+			
+            for(let y = 0; y < numsinYblocks; y++) {
+                
+                let basisRow = document.createElement("tr");
+				basisRow.classList.add("basis");
+
+
+                let basis_vals = []
+                for(let x = 0; x < numsinXblocks; x++) {
+                    let val = vals[gx + gy * Xblocks][x + y * numsinXblocks];
+                    basis_vals.push(val);
+
+                    let val_el = document.createElement("td");
+                    val_el.classList.add("val");
+                    val_el.classList.add(val);
+        
+                    val_el.innerText = val;
+                    
+					val_el.onmouseenter = e => {
+						[...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+							if(e !== val_el) {
+								e.classList.toggle("hover", true);
+							}
+						});
+					};
+
+					val_el.onmouseleave = e => {
+						[...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+							if(e !== val_el) {
+								e.classList.toggle("hover", false);
+							}
+						});
+					};
+        
+                    basisRow.appendChild(val_el);
+                }
+        
+                gridTable.appendChild(basisRow);
+                
+				//addListener(basisRow, basis_vals);
+				//replace with custom addListener
+             
+            }
+            gridTableSpot.appendChild(gridTable);
+            gridTableRow.appendChild(gridTableSpot);
+
+            //gridRow.appendChild(gridSpot);
+        }
+
+        boardContainer.appendChild(gridTableRow);
+        //board.appendChild(gridRow);
+	}
+	
+	return;
     let board = document.createElement("div");
     board.classList.add("board"); 
 
     //blocks of nums along the y axis
     for(let gy = 0; gy < Yblocks; gy++) {
-
-        //add a column num?
 
         //blocks of nums along the x axis
         for(let gx = 0; gx < Xblocks; gx++) {

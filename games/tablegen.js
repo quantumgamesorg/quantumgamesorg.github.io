@@ -1,4 +1,4 @@
-function makeBoard(boardContainer, vals) {
+function makeBoard(boardContainer, vals, addListeners = true) {
 
     boardContainer.classList.add("board");
 	
@@ -29,28 +29,32 @@ function makeBoard(boardContainer, vals) {
         
                     val_el.innerText = val;
                     
-                    val_el.onmouseenter = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                            if(e !== val_el) {
-                                e.classList.toggle("hover", true);
-                            }
-                        });
-                    };
+					if(addListeners) {
+						val_el.onmouseenter = e => {
+							[...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+								if(e !== val_el) {
+									e.classList.toggle("hover", true);
+								}
+							});
+						};
 
-                    val_el.onmouseleave = e => {
-                        [...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
-                            if(e !== val_el) {
-                                e.classList.toggle("hover", false);
-                            }
-                        });
-                    };
+						val_el.onmouseleave = e => {
+							[...document.querySelectorAll(".basis .val")].filter(e => e.innerText == "" + val).forEach(e => {
+								if(e !== val_el) {
+									e.classList.toggle("hover", false);
+								}
+							});
+						};
+					}
         
                     basisRow.appendChild(val_el);
                 }
         
                 gridTableSpot.appendChild(basisRow);
                 
-				addListener(basisRow, basis_vals);
+				if(addListeners){
+					addListener(basisRow, basis_vals);
+				}
              
             }
             gridTableRow.appendChild(gridTableSpot);
