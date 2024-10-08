@@ -6,7 +6,9 @@ let boardContainer = document.getElementById("boardContainer");
 const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
 
 let circleMap = [];
-boardContainer.appendChild(makeBoard(45));
+boardContainer.appendChild(makeCircleBoard(45));
+
+buildScoreboard(8, 5);
 
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 // document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -31,7 +33,7 @@ document.querySelectorAll(".person").forEach((e, i) => {
 
 
 
-function makeBoard(outerRadius) {
+function makeCircleBoard(outerRadius) {
     const innerRadius = outerRadius * 0.55;
     const innerVals = [...Array(5).keys()].map(i => [...Array(8).keys()].map(n => n + 8 * i + 1));
     const outerVals = [[ 1, 2, 13, 14, 15, 16, 3, 4 ]    , [ 1, 2, 19, 20, 23, 24, 5, 6 ]    , [ 1, 3, 26, 28, 30, 32, 5, 7 ]    , [ 1, 4, 37, 38, 39, 40, 6, 7 ],
@@ -90,13 +92,14 @@ function makeBoard(outerRadius) {
 
     board.appendChild(drawLines(outerRadius, innerRadius));
 
-    document.querySelectorAll(".scoreboard .entry").forEach((el, i) => {
+    boardContainer.querySelectorAll(".ray").forEach(el => {
+		let i = el.children[0].innerText;
         el.onmouseenter = () => {
-            circleMap[i + 1].forEach(c => c.classList.add("highlight"));
+            circleMap[i].forEach(c => c.classList.add("highlight"));
         };
 
         el.onmouseleave = () => {
-            circleMap[i + 1].forEach(c => c.classList.remove("highlight"));
+            circleMap[i].forEach(c => c.classList.remove("highlight"));
         };
     })
 
@@ -106,7 +109,7 @@ function makeBoard(outerRadius) {
 function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
     let innerXOffset = 1;
     let innerYOffset = 1;
-    console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
+    //console.log(`[circlePos]: Received index ${index}, numInner ${numInner}, numOuter ${numOuter}, innerRadius ${innerRadius}, outerRadius ${outerRadius}, type ${type}`)
     if(type === 'outer'){
         let spread = 2.5;
         const angleRelativeToCenter = Math.floor(index/numOuter) * 2 * Math.PI / numInner;
@@ -114,8 +117,8 @@ function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
         const alignTerm = ((numOuter - 1)/numOuter * spread) / 2;
         const angleRelativeToInnerCircle = ((index % numOuter) * spread / numOuter) - alignTerm;
 
-        console.log(`Index: ${index} Index/Outer = ${index/numOuter} Num outer ${numOuter}`)
-        console.log(`Index: ${index} Center: ${angleRelativeToCenter * 360.0/Math.PI} Inner: ${angleRelativeToInnerCircle * 360.0/Math.PI}`)
+        //console.log(`Index: ${index} Index/Outer = ${index/numOuter} Num outer ${numOuter}`)
+        //console.log(`Index: ${index} Center: ${angleRelativeToCenter * 360.0/Math.PI} Inner: ${angleRelativeToInnerCircle * 360.0/Math.PI}`)
 
         let baseX = (innerRadius * Math.sin(angleRelativeToCenter));
         let baseY = (innerRadius * -Math.cos(angleRelativeToCenter));
@@ -129,70 +132,45 @@ function circlePos (index, numInner, numOuter, innerRadius, outerRadius, type) {
         // var outerXOffset = 1.17;
         // var outerYOffset = 0.91;
         
-        console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
+        //console.log(`[circlePos]: Returning ${(baseX * innerXOffset + deltaBx * outerXOffset)}, ${(baseY  * innerYOffset + deltaBy * outerYOffset)}`)
         return [baseX * innerXOffset + deltaBx * outerXOffset, baseY  * innerYOffset + deltaBy * outerYOffset]
     }else{//type is inner
         const angleRelativeToCenter = index/numInner * 2 * Math.PI;
         let baseX = (innerRadius * Math.sin(angleRelativeToCenter))
         let baseY = (innerRadius * -Math.cos(angleRelativeToCenter))
-        console.log(`[circlePos]: Returning ${baseX * innerXOffset}, ${baseY * innerYOffset}`)
+        //console.log(`[circlePos]: Returning ${baseX * innerXOffset}, ${baseY * innerYOffset}`)
         return [baseX * innerXOffset,  baseY * innerYOffset]
     }
-};
+}
 
 function makeCircle(vals, x, y) {
-    let circle = document.createElement("div");
+    let circle = document.createElement("table");
     circle.classList.add("circle");
 
     circle.style.left = x;
     circle.style.top = y;
 
-    let topVals = document.createElement("div")
-    let midVals = document.createElement("div")
-    let botVals = document.createElement("div")
-
-    topVals.classList.add("topVals");
-    midVals.classList.add("midVals");
-    botVals.classList.add("bottomVals");
-
-    topVals.classList.add("rowOfValues");
-    midVals.classList.add("rowOfValues");
-    botVals.classList.add("rowOfValues");
+    let topVals = document.createElement("tr")
+    let midVals = document.createElement("tr")
+    let botVals = document.createElement("tr")
 
 
     for(let i = 0; i < vals.length; ++i) {
-        let valElement = document.createElement("div");
+        let valElement = document.createElement("td");
         valElement.innerText = vals[i];
-        valElement.classList.add("value");
-        if(i < 2) {topVals.appendChild(valElement);}
-        else if (i < 6) { midVals.appendChild(valElement);}
+        if(i < 3) {topVals.appendChild(valElement);}
+        else if (i < 5) {
+			midVals.appendChild(valElement);
+			if(i == 3) { midVals.appendChild(document.createElement("td")); }
+		}
         else {botVals.appendChild(valElement);}
     }
     
-
     circle.appendChild(topVals);
     circle.appendChild(midVals);
     circle.appendChild(botVals);
 
-    circle.onclick = () => {
-        if(circle.classList.toggle("selected")) {
-            addValues(vals);
-        } else {
-            removeValues(vals);
-        }
-    };
-
-    circle.onmouseenter = () => {
-        vals.forEach(v => {
-            document.querySelector(".scoreboard").children[v - 1].classList.add("highlight");
-        });
-    };
-
-    circle.onmouseleave = () => {
-        vals.forEach(v => {
-            document.querySelector(".scoreboard").children[v - 1].classList.remove("highlight");
-        });
-    };
+    addListener(circle, vals);
 
     return circle;
 }
@@ -205,8 +183,8 @@ function drawLines(outerRadius, innerRadius) {
     svg.setAttribute('height', svgSize);
 
     svg.line = (x1, y1, x2, y2, addClass) => {
-        console.log(`Typeof x1 ${typeof(x1)} Typeof x2 ${typeof(x2)} Typeof y1 ${typeof(y1)} Typeof y2 ${typeof(y2)}`)
-        console.log(`Valueof x1 ${x1} Valueof x2 ${x2} Valueof y1 ${y1} Valueof y2 ${y2}`)
+        //console.log(`Typeof x1 ${typeof(x1)} Typeof x2 ${typeof(x2)} Typeof y1 ${typeof(y1)} Typeof y2 ${typeof(y2)}`)
+        //console.log(`Valueof x1 ${x1} Valueof x2 ${x2} Valueof y1 ${y1} Valueof y2 ${y2}`)
 
         let newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
         if(typeof(addClass) !== 'undefined') newLine.classList.add(addClass);
@@ -246,68 +224,6 @@ function drawLines(outerRadius, innerRadius) {
     return svg;
 }
 
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.querySelector(".scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.querySelector(".scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    checkWon();
-}
-
-function checkWon() {
-    const allEven = Array.prototype.slice.call(document.querySelector(".scoreboard").children).every(e => !e.classList.contains("odd"));
-    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
-    boardContainer.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
-    boardContainer.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
-
-    const won = allEven && numTurns % 2 == 1;
-    boardContainer.classList.toggle("won", won);
-
-    document.querySelector("#does").classList.toggle("won", won);
-}
-
-function reset() {
-    Array.prototype.slice.call(document.querySelectorAll(".scoreboard .entry")).forEach(e => {
-        e.children[1].innerText = "(0)";
-        e.classList.remove("even");
-        e.classList.remove("odd");
-    });
-
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .circle")).forEach(e => {
-        e.classList.remove("selected");
-    });
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = "0";
-    boardContainer.querySelector(".moveCounter").classList.remove("even");
-    boardContainer.querySelector(".moveCounter").classList.remove("odd");
-
-    boardContainer.classList.remove("won");
-    document.querySelector("#does").classList.remove("won");
-}
 
 function solve() {
     reset();
@@ -321,9 +237,8 @@ function solve() {
         }
     });
 
-    let score = document.querySelectorAll(".scoreboard .entry");
     for(let i = 0; i < 5; i++) {
-        if(score[i * 8].classList.contains("odd")){
+        if(document.getElementsByClassName("ray " + ((i * 8) + 1))[0].classList.contains("odd")){
             circles[[20, 21, 22, 23, 24][i]].click();
         }
     }

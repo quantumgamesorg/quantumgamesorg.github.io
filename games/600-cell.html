@@ -8,13 +8,14 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/600-cell.css">
+        <link rel="stylesheet" href="../css/scoreboard.css">
         <link rel="stylesheet" href="../css/windowManager.css">
     </head>
     <body>
         <noscript></noscript>
         <header>
             <h1>Quantum Games, Tricks, and Patterns</h1>
-            <a href = "../index.html">Introduction</a> | <a href="peres-1.html">Peres-1</a> | <a href="peres-2.html">Peres-2</a> | <a href="PMSquare.html">Peres-Mermin Square</a> | <a href="GHZ.html">GHZ-Mermin Pentagram</a> | <a href="600-cell.html">600-cell</a>  | <a href="2-qubit-system.html">Two-qubit System</a>        
+            <a href = "../index.html">Introduction</a> | <a href="peres-1.html">Peres-1</a> | <a href="peres-2.html">Peres-2</a> | <a href="PMSquare.html">Peres-Mermin Square</a> | <a href="GHZ.html">GHZ-Mermin Pentagram</a> | <a href="600-cell.html">600-cell</a>  | <a href="2-qubit-system.html">Two-qubit System </a> | <a href="600-cell-2.html">600-cell-2</a> 
         </header>
         <div id="content">
             <br style="margin-bottom:10px;">
@@ -64,9 +65,7 @@
                             <option class="solution" value="54-27">54-27</option>
                         </select>
                         <br>
-                        
                     </div>
-
 
                     <div id="windowContainer">
                         <div id="win_about" class="window hidden">
@@ -92,79 +91,17 @@
                             <p>There are many different ways of winning the game and a simple strategy that will always allow you to win. Can you figure it out?</p>
                         </div>
                     </div>
-                </div>
-                <div id="boardContainer">
-                    <div id="score" class="even">
-                        Basis Counter: 
-                        <div id="numBasis">0</div>
-                    </div>
-                </div>
 
-                <div id="upperRight">
-                    <div id="scoreboard">
-                        <div class="ray"><div>1</div><div>(0)</div></div>
-                        <div class="ray"><div>2</div><div>(0)</div></div>
-                        <div class="ray"><div>3</div><div>(0)</div></div>
-                        <div class="ray"><div>4</div><div>(0)</div></div>
-                        <div class="ray"><div>5</div><div>(0)</div></div>
-                        <div class="ray"><div>6</div><div>(0)</div></div>
-                        <div class="ray"><div>7</div><div>(0)</div></div>
-                        <div class="ray"><div>8</div><div>(0)</div></div>
-                        <div class="ray"><div>9</div><div>(0)</div></div>
-                        <div class="ray"><div>10</div><div>(0)</div></div>
-                        <div class="ray"><div>11</div><div>(0)</div></div>
-                        <div class="ray"><div>12</div><div>(0)</div></div>
-                        <div class="ray"><div>13</div><div>(0)</div></div>
-                        <div class="ray"><div>14</div><div>(0)</div></div>
-                        <div class="ray"><div>15</div><div>(0)</div></div>
-                        <div class="ray"><div>16</div><div>(0)</div></div>
-                        <div class="ray"><div>17</div><div>(0)</div></div>
-                        <div class="ray"><div>18</div><div>(0)</div></div>
-                        <div class="ray"><div>19</div><div>(0)</div></div>
-                        <div class="ray"><div>20</div><div>(0)</div></div>
-                        <div class="ray"><div>21</div><div>(0)</div></div>
-                        <div class="ray"><div>22</div><div>(0)</div></div>
-                        <div class="ray"><div>23</div><div>(0)</div></div>
-                        <div class="ray"><div>24</div><div>(0)</div></div>
-                        <div class="ray"><div>25</div><div>(0)</div></div>
-                        <div class="ray"><div>26</div><div>(0)</div></div>
-                        <div class="ray"><div>27</div><div>(0)</div></div>
-                        <div class="ray"><div>28</div><div>(0)</div></div>
-                        <div class="ray"><div>29</div><div>(0)</div></div>
-                        <div class="ray"><div>30</div><div>(0)</div></div>
-                        <div class="ray"><div>31</div><div>(0)</div></div>
-                        <div class="ray"><div>32</div><div>(0)</div></div>
-                        <div class="ray"><div>33</div><div>(0)</div></div>
-                        <div class="ray"><div>34</div><div>(0)</div></div>
-                        <div class="ray"><div>35</div><div>(0)</div></div>
-                        <div class="ray"><div>36</div><div>(0)</div></div>
-                        <div class="ray"><div>37</div><div>(0)</div></div>
-                        <div class="ray"><div>38</div><div>(0)</div></div>
-                        <div class="ray"><div>39</div><div>(0)</div></div>
-                        <div class="ray"><div>40</div><div>(0)</div></div>
-                        <div class="ray"><div>41</div><div>(0)</div></div>
-                        <div class="ray"><div>42</div><div>(0)</div></div>
-                        <div class="ray"><div>43</div><div>(0)</div></div>
-                        <div class="ray"><div>44</div><div>(0)</div></div>
-                        <div class="ray"><div>45</div><div>(0)</div></div>
-                        <div class="ray"><div>46</div><div>(0)</div></div>
-                        <div class="ray"><div>47</div><div>(0)</div></div>
-                        <div class="ray"><div>48</div><div>(0)</div></div>
-                        <div class="ray"><div>49</div><div>(0)</div></div>
-                        <div class="ray"><div>50</div><div>(0)</div></div>
-                        <div class="ray"><div>51</div><div>(0)</div></div>
-                        <div class="ray"><div>52</div><div>(0)</div></div>
-                        <div class="ray"><div>53</div><div>(0)</div></div>
-                        <div class="ray"><div>54</div><div>(0)</div></div>
-                        <div class="ray"><div>55</div><div>(0)</div></div>
-                        <div class="ray"><div>56</div><div>(0)</div></div>
-                        <div class="ray"><div>57</div><div>(0)</div></div>
-                        <div class="ray"><div>58</div><div>(0)</div></div>
-                        <div class="ray"><div>59</div><div>(0)</div></div>
-                        <div class="ray"><div>60</div><div>(0)</div></div>
+                    <div id="score" class="moveCounter even">
+                        Basis Counter: 
+                        <div id="numBasis" class="inner">0</div>
                     </div>
                 </div>
-            </div>
+				<div id="game">
+					<table id="boardContainer"></table>
+					<table id="scoreboard"></table>
+				</div>
+			</div>
             <hr>
             <h1>More Information</h1>
 
@@ -224,7 +161,7 @@
             Vestibulum et sapien tellus. Pellentesque pulvinar vestibulum vestibulum. Cras ac porta dui. Morbi maximus pharetra tellus nec aliquam. Suspendisse orci nisl, euismod et ultricies ut, tincidunt ut libero.
             </p>
             <ul>
-                <li><a href="#">Link 1</a></li>
+                <li><a href="https://arxiv.org/abs/1010.4353">Parity proofs of the Bell-Kochen-Specker theorem based on the 600-cell</a></li>
                 <li><a href="#">Another Link</a></li>
                 <li><a href="#">Third One</a></li>
                 <li><a href="#">The Final Link</a></li>
@@ -235,7 +172,8 @@
             <br>
             Copyright info, contact info, etc.
         </footer>
-        <script src="../windowManager.js" async defer></script>
-        <script src="600-cell.js" async defer></script>
+        <script src="../windowManager.js"></script>
+        <script src="tablegen.js"></script>
+        <script src="600-cell.js"></script>
     </body>
 </html>

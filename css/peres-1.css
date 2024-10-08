@@ -1,16 +1,17 @@
-
 #boardContainer {
-  position: relative;
-  display: flex;
-  max-width: 95%;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-  min-width: 200px;
-  scroll-snap-align: end;
-  scroll-snap-stop: normal;
+	position: relative;
+	display: flex;
+	max-width: 95%;
+	align-self: center;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 20px;
+	min-width: 200px;
+	scroll-snap-align: end;
+	scroll-snap-stop: normal;
+	margin-left: 20px;
+	margin-right: 40px;
 }
 #boardContainer .moveCounter {
   display: flex;
@@ -27,12 +28,6 @@
   font-size: 20pt;
   font-size: min(6vw, 24pt);
   text-align: center;
-}
-@media (max-width: 650px) {
-  #boardContainer .moveCounter {
-    top: 2%;
-    right: 3%;
-  }
 }
 #boardContainer .moveCounter::before {
   position: absolute;
@@ -51,69 +46,28 @@
 #boardContainer .moveCounter.odd {
   background-color: #cfc;
 }
-#boardContainer .scoreboard {
-  display: flex;
-  flex-wrap: wrap;
-  height: 15vh;
-  width: 100%;
-  order: 2;
-  margin-top: 20px;
-  font-size: 16pt;
-  font-size: max(min(4vw, 2.5vh), 8pt);
-  box-shadow: #0002 2px 2px 5px;
+#upperRight #scoreboard {
+	width: 100%;
+	font-size: 16pt;
+	font-size: max(min(4vw, 2.5vh), 8pt);
 }
-#boardContainer .scoreboard .entry {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
-  width: 8.3333333333%;
-  border: 1px solid #666;
-  background-color: #dfd;
-  transition: transform ease-out 0.1s, font-weight ease 0.1s;
+#upperRight #scoreboard .ray {
+	padding: 5px;
 }
-#boardContainer .scoreboard .entry.odd {
-  background-color: #fbb;
-}
-#boardContainer .scoreboard .entry.even {
-  background-color: #bfb;
-}
-#boardContainer .scoreboard .entry.highlight {
-  font-weight: bold;
-  border: 1px solid #995;
-  transform: scale(1.1, 1.1);
-}
-#boardContainer .scoreboard .entry div {
-  text-align: center;
-}
-@media (max-width: 650px) {
-  #boardContainer .scoreboard {
-    height: 150px;
-  }
-  #boardContainer .scoreboard .entry {
-    height: 33.33%;
-    width: 12.5%;
-  }
+#upperRight #scoreboard .ray div {
+	padding: 1.85px;
 }
 #boardContainer .board {
-  display: flex;
-  position: relative;
-  width: 100%;
+	height: 65vh;
+	width: 65vh;
   padding-bottom: 95%;
   max-width: 95%;
   min-width: 200px;
   min-height: 200px;
 }
-@media (max-width: 650px) {
-  #boardContainer .board {
-    padding-bottom: 95%;
-    max-width: 95%;
-  }
-}
 #boardContainer .board .circle {
-  display: flex;
   position: absolute;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;

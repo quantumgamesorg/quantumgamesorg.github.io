@@ -2,26 +2,18 @@
 
 let content = document.getElementById("content");
 
-let boardContainer = document.getElementById("boardContainer");
-const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
-
-let circleMap = [];
-boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
-// Reset button
-document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
-// // TODO: these extra solve buttons are temporary
-//var solutionElements = document.querySelectorAll('#upperLeft option');
-//for (let i = 0; i < solutionElements.length; ++i) {
-//    solutionElements[i].onclick = () => solve(solutionElements[i].value);
-//}
-// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
-// // comment from my friend: "Who fucking wrote this?"
-
+//buttons
 document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
 document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
+
 document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
+//reset button
+document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+
+
+//people
 document.querySelectorAll(".person").forEach((e, i) => {
     e.onmouseenter = ev => {
         document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
@@ -31,9 +23,21 @@ document.querySelectorAll(".person").forEach((e, i) => {
     };
 });
 
+let boardContainer = document.getElementById("boardContainer");
+let boardContainer2 = document.getElementById("boardContainer2");
+const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
+const defaultBoardContainerSize2 = { width: parseInt(getComputedStyle(boardContainer2).width), height: parseInt(getComputedStyle(boardContainer2).height) };
+
+let circleMap = [];
+boardContainer.insertBefore(makeBoard(), boardContainer.firstChild);
+boardContainer2.insertBefore(makeBoard2(), boardContainer2.firstChild);
 
 
-function makeBoard(outerRadius) {
+function makeBoard() {
+    const Yblocks = 5;
+    const Xblocks = 5;
+    const numsinYblocks = 3;
+    const numsinXblocks = 4;
     const vals = [
         [1, 2, 3, 4, 31, 42, 51, 16, 22, 60, 39, 28, 57, 23, 27, 40, 44, 29, 15, 52],
         [5, 6, 7, 8, 38, 24, 58, 25, 18, 47, 33, 55, 36, 53, 20, 46, 59, 26, 37, 21],
@@ -55,23 +59,27 @@ function makeBoard(outerRadius) {
     let board = document.createElement("div");
     board.classList.add("board");
 
-    for(let gy = 0; gy < 5; gy++) {
+    //blocks of nums along the y axis
+    for(let gy = 0; gy < Yblocks; gy++) {
 
         let gridRow = document.createElement("div");
         gridRow.classList.add("gridRow");
 
-        for(let gx = 0; gx < 5; gx++) {
+        //blocks of nums along the x axis
+        for(let gx = 0; gx < Xblocks; gx++) {
             let gridSpot = document.createElement("div");
             gridSpot.classList.add("gridSpot");
 
-            for(let y = 0; y < 3; y++) {
+            //nums within a block along y axis (grouped as a basis)
+            for(let y = 0; y < numsinYblocks; y++) {
         
                 let basis = document.createElement("div");
                 basis.classList.add("basis");
                 
+                //nums in that basis
                 let basis_vals = []
-                for(let x = 0; x < 4; x++) {
-                    let val = vals[y + gy * 3][x + gx * 4];
+                for(let x = 0; x < numsinXblocks; x++) {
+                    let val = vals[y + gy * numsinYblocks][x + gx * numsinXblocks];
                     basis_vals.push(val);
 
                     let val_el = document.createElement("div");
@@ -146,6 +154,150 @@ function makeBoard(outerRadius) {
             }
         };
     })
+
+ 
+    return board;
+}
+
+function makeBoard2() {
+    const Yblocks = 6;
+    const Xblocks = 6;
+    const numsinYblocks = 5;
+    const numsinXblocks = 2;
+    const vals = [
+        [1,	    4,	2,	3,	5,	7,	6,	8,	9,	10,	11,	12],
+        [15,	14,	16,	13,	18,	20,	17,	19,	24,	23,	22,	21],
+        [56,	55,	54,	53,	59,	58,	57,	60,	50,	52,	51,	49],
+        [47,	45,	46,	48,	38,	37,	39,	40,	44,	41,	43,	42],
+        [30,	29,	32,	31,	36,	33,	34,	35,	27,	25,	26,	28],
+        [2,	    3,	1,	4,	6,	8,	5,	7,	11,	12,	9,	10],
+        [43,	44,	41,	42,	47,	46,	45,	48,	40,	38,	37,	39],
+        [33,	35,	36,	34,	26,	25,	27,	28,	29,	32,	30,	31],
+        [17,	18,	19,	20,	24,	21,	22,	23,	13,	15,	16,	14],
+        [52,	49,	51,	50,	53,	55,	54,	56,	58,	57,	60,	59],
+        [5,	    6,	7,	8,	9,	12,	10,	11,	1,	3,	2,	4],
+        [21,	23,	24,	22,	13,	14,	15,	16,	17,	20,	19,	18],
+        [31,	32,	29,	30,	34,	35,	33,	36,	28,	26,	27,	25],
+        [50,	51,	49,	52,	56,	54,	53,	55,	59,	60,	58,	57],
+        [40,	37,	39,	38,	43,	41,	42,	44,	46,	45,	47,	48],
+        [7,	    8,	5,	6,	10,	11,	9,	12,	2,	4,	1,	3],
+        [26,	27,	25,	28,	32,	30,	29,	31,	36,	35,	33,	34],
+        [16,	13,	15,	14,	19,	17,	18,	20,	21,	22,	24,	23],
+        [41,	42,	43,	44,	45,	48,	46,	47,	39,	37,	40,	38],
+        [57,	59,	60,	58,	49,	50,	51,	52,	56,	53,	54,	55],
+        [9,     11,	10,	12,	1,	2,	3,	4,	5,	8,	6,	7],
+        [19,	20,	18,	17,	22,	23,	21,	24,	16,	14,	13,	15],
+        [38,	39,	40,	37,	44,	42,	41,	43,	47,	48,	45,	46],
+        [28,	25,	26,	27,	31,	29,	30,	32,	34,	33,	36,	35],
+        [53,	54,	56,	55,	57,	60,	58,	59,	49,	51,	52,	50],
+        [10,	12,	9,	11,	3,	4,	1,	2,	6,	7,	5,	8],
+        [34,	36,	33,	35,	27,	28,	25,	26,	30,	31,	29,	32],
+        [58,	60,	57,	59,	51,	52,	49,	50,	54,	55,	53,	56],
+        [22,	24,	21,	23,	15,	16,	13,	14,	18,	19,	17,	20],
+        [46,	48,	45,	47,	39,	40,	37,	38,	42,	43,	41,	44],
+    ];
+
+    let board = document.createElement("div");
+    board.classList.add("board"); 
+
+    //blocks of nums along the y axis
+    for(let gy = 0; gy < Yblocks; gy++) {
+
+        //add a column num?
+
+        //blocks of nums along the x axis
+        for(let gx = 0; gx < Xblocks; gx++) {
+
+            //add a row num?
+
+            let block = document.createElement("div");
+            block.classList.add("block");
+
+            let block_vals = []
+
+            //nums in block along y axis
+            for(let y = 0; y < numsinYblocks; y++) {
+
+                let blockRow = document.createElement("div");
+                blockRow.classList.add("blockRow");
+                
+                //nums in block along x axis
+                for(let x = 0; x < numsinXblocks; x++) {
+                    let val = vals[y + gy * numsinYblocks][x + gx * numsinXblocks];
+                    block_vals.push(val);
+
+
+                    let val_el = document.createElement("div");
+                    val_el.classList.add("val");
+                    val_el.classList.add(val);
+
+                    val_el.innerText = val;
+                    
+                    val_el.onmouseenter = e => {
+                        [...document.querySelectorAll(".block .val")].filter(e => e.innerText == "" + val).forEach(e => {
+                            if(e !== val_el) {
+                                e.classList.toggle("hover", true);
+                            }
+                        });
+                    };
+
+                    val_el.onmouseleave = e => {
+                        [...document.querySelectorAll(".block .val")].filter(e => e.innerText == "" + val).forEach(e => {
+                            if(e !== val_el) {
+                                e.classList.toggle("hover", false);
+                            }
+                        });
+                    };
+        
+                    blockRow.appendChild(val_el);
+                }
+
+                block.appendChild(blockRow);
+
+            }
+
+            block.onclick = () => {
+                if(block.classList.toggle("selected")) {
+                    // addValues(block_vals);
+
+                } else {
+                    // removeValues(block_vals);
+                }
+                updateScore();
+            };
+
+            // block.onmouseenter = () => {
+            //     block_vals.forEach(v => {
+            //         document.getElementById("scoreboard").children[v - 1].classList.add("highlight");
+            //     });
+            // };
+        
+            // block.onmouseleave = () => {
+            //     block_vals.forEach(v => {
+            //         document.getElementById("scoreboard").children[v - 1].classList.remove("highlight");
+            //     });
+            // };
+
+
+            board.appendChild(block);
+        }
+    }
+
+    // document.querySelectorAll("#scoreboard .ray").forEach((el, i) => {
+    //     let val_elems = document.getElementsByClassName(`val ${i + 1}`);
+    //     el.onmouseenter = () => {
+    //         for (let j = 0; j < val_elems.length; ++j) {
+    //             //console.log(i);
+    //             val_elems[j].classList.toggle("hover", true);
+    //         }
+    //     };
+
+    //     el.onmouseleave = () => {
+    //         for (let j = 0; j < val_elems.length; ++j) {
+    //             val_elems[j].classList.toggle("hover", false);
+    //         }
+    //     };
+    // })
 
  
     return board;
