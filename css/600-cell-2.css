@@ -8,38 +8,43 @@
 
 #boardContainer2 {
 	background-color: #ddd;
-}
-#boardContainer2 tr {
+	margin-left: 10px;
 	font-size: 14pt;
 	font-size: min(1.5vw, 1.5vh);
 	user-select: none;
 }
-#boardContainer2 tr td:not(.val) {
+#boardContainer2 > tr > td {
 	border: 1px solid black;
 	padding-left: 3px;
 	padding-right: 3px;
 	width: 20%;
 }
-#boardContainer2 .gridSpot > div {
+#boardContainer2 .gridSpot {
 	margin-top: 5%;
 	margin-bottom: 5%;
 	background-color: #eee;
-	border-radius: 2vh;
 	border: 1px solid #666;
-	width: 100%;
 	padding-left: 3px;
 	padding-right: 3px;
 }
 #boardContainer2 .val {
 	width: 50%;
-	padding-right: 5px;
-	padding-left: 5px;
-	display: inline-block;
+	padding-right: 3px;
+	padding-left: 3px;
 	align-items: center;
 	justify-content: center;
 }
-#boardContainer2 .gridSpot .selected {
+#boardContainer2 .gridSpot.selected {
 	background-color: #bfb;
+}
+#boardContainer2 .gridSpot.rselected {
+	background-color: #fbb;
+}
+#boardContainer .gridSpot .rselected {
+	background-color: #fbb;
+}
+#boardContainer2 .gridSpot.dselected {
+	background-color: #ddd;
 }
 #boardContainer2 .val {
 	text-align: center;
@@ -64,9 +69,6 @@
 	transform: scale(1.1, 1.1);
 	border: 2px solid #885;
 	font-weight: bold;
-}
-#boardContainer2.won .circle.selected {
-	background-color: #cfc;
 }
 
 #boardContainer2_OLD {
