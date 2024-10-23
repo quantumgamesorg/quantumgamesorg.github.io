@@ -275,13 +275,13 @@ function makeBoard2(boardContainer, vals) {
 }
 
 function addListener2(el, index, pos){
-    states.push({selected: 0, pos: pos});
+    states.push({selected: 0, index: index, pos: pos});
     el.onclick = () => {
         if(el.classList.toggle("dselected")) {
             return;
         }
 
-        
+
 
         updateScore();
     };
