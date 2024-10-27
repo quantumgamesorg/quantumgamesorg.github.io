@@ -2,26 +2,25 @@ function makeBoard(boardContainer, vals, addListeners = true) {
 
     boardContainer.classList.add("board");
 	
-    for(let gy = 0; gy < vals.length / 3; gy++) {
+    for(let gy = 0; gy < vals.length; gy++) {
 
         let gridTableRow = document.createElement("tr");
 
-        for(let gx = 0; gx < vals[gy].length / 4; gx++) {
+        for(let gx = 0; gx < vals[gy].length; gx++) {
 
             let gridTableSpot = document.createElement("td");
 
             gridTableSpot.classList.add("gridSpot");
 
-            for(let y = 0; y < 3; y++) {
+            for(let y = 0; y < vals[gy][gx].length; y++) {
                 
                 let basisRow = document.createElement("div");
 				basisRow.classList.add("basis");
 
 
-                let basis_vals = []
-                for(let x = 0; x < 4; x++) {
-                    let val = vals[y + gy * 3][x + gx * 4];
-                    basis_vals.push(val);
+                let basis_vals = vals[gy][gx][y];
+                for(let x = 0; x < basis_vals.length; x++) {
+                    let val = basis_vals[x];
 
                     let val_el = document.createElement("div");
                     val_el.classList.add("val");
