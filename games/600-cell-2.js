@@ -312,7 +312,6 @@ function addListener2(el, index, pos){
         
         updateStates();
 		updateBoard();
-        console.log(pos.x, ', ', pos.y, ' was pressed\n');
         //updateScore();
     };
 }
@@ -410,7 +409,6 @@ function updateBoard() {
 }
 
 function reset() {
-    console.log("Resetting");
     let selected = states.filter(state => {return state.status==1;})
     for(let i=0;i<selected.length;i++){
         selected[i].status = 0;
