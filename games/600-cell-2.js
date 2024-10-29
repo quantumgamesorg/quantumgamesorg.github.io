@@ -88,7 +88,11 @@ const board2 = [
     [ 6, 7,30,31,54,55,18,19,42,43,],
     [ 5, 8,29,32,53,56,17,20,41,44,],
 ];
+
+//the states of each cell on board2
+//elements of the form {elem, status, index, pos:{x, y}}
 let states = [];
+
 
 let circleMap = [];
 makeBoard(boardContainer, board1, false);
@@ -275,16 +279,111 @@ function makeBoard2(boardContainer, vals) {
 }
 
 function addListener2(el, index, pos){
-    states.push({selected: 0, index: index, pos: pos});
+    states.push({elem:el, status: 0, index: index, pos: pos});
     el.onclick = () => {
-        if(el.classList.toggle("dselected")) {
+        if(el.classList.contains("dselected" || el.classList.contains("rselected"))) {
             return;
         }
-
-
-
-        updateScore();
+        if(el.classList.toggle("selected")){
+            states[index].status = 1;
+        }else{
+            states[index].status = 0;
+        }
+        
+        updateStates();
+        console.log(pos.x, ', ', pos.y, ' was pressed\n');
+        //updateScore();
     };
+}
+
+function updateStates(){
+    let selected = states.filter(state => {return state.status==1;})
+    if(selected.length == 0){
+        for(let i=0;i<states.length;i++){
+            states[i].status = 0;
+            states[i].elem.classList.remove("dselected");
+            states[i].elem.classList.remove("rselected");
+            states[i].elem.classList.remove("selected");
+            console.log("Attempted to remove classes");
+            
+        }
+    }else if(selected.length == 1){
+        for(let i=0;i<states.length;i++){
+            if(selected[0].pos.x!=states[i].pos.x&&selected[0].pos.y!=states[i].pos.y){
+                //not in same row or colum, disable selected
+                states[i].status = -1;
+                states[i].elem.classList.add("dselected");
+            }else if(selected[0].pos.x!=states[i].pos.x||selected[0].pos.y!=states[i].pos.y){
+                //in same row or colum, unselected
+                states[i].status = 0;
+                states[i].elem.classList.remove("dselected");
+                states[i].elem.classList.remove("rselected");//might not be needed
+                console.log("Attempted to remove classes");
+            }
+            //else would be the element itself which is already selected
+        }
+    }else if(selected.length == 2){
+        if(selected[0].pos.x==selected[1].pos.x){
+            //same row
+            for(let i=0;i<states.length;i++){
+                if(selected[0].pos.x!=states[i].pos.x){
+                    //not in same row, disable selected
+                    states[i].status = -1;
+                    states[i].elem.classList.add("dselected");
+                }else if(states[i].pos.y!=selected[0].pos.y&&states[i].pos.y!=selected[1].pos.y){
+                    //in the same row
+                    states[i].status = 0;
+                    states[i].elem.classList.remove("dselected");
+                    states[i].elem.classList.remove("rselected");
+                    console.log("Attempted to remove classes");
+                }
+            }
+        }else if(selected[0].pos.y==selected[1].pos.y){
+            //same column
+            for(let i=0;i<states.length;i++){
+                if(selected[0].pos.y!=states[i].pos.y){
+                    //not in same col, disable selected
+                    states[i].status = -1;
+                    states[i].elem.classList.add("dselected");
+                }else if(states[i].pos.x!=selected[0].pos.x&&states[i].pos.x!=selected[1].pos.x){
+                    //in the same col
+                    states[i].status = 0;
+                    states[i].elem.classList.remove("dselected");
+                    states[i].elem.classList.remove("rselected");
+                    console.log("Attempted to remove classes");
+                }
+            }
+        }
+
+    }else if(selected.length == 3){
+        if(selected[0].pos.x==selected[1].pos.x){
+            //same row
+            for(let i=0;i<states.length;i++){
+                if(selected[0].pos.x!=states[i].pos.x){
+                    //not in same row, disable selected
+                    states[i].status = -1;
+                    states[i].elem.classList.add("dselected");
+                }else if(states[i].pos.y!=selected[0].pos.y&&states[i].pos.y!=selected[1].pos.y&&states[i].pos.y!=selected[2].pos.y){
+                    //in the same row, but not selected
+                    states[i].status = 0;
+                    states[i].elem.classList.add("rselected");
+                }
+            }
+        }else if(selected[0].pos.y==selected[1].pos.y){
+            //same column
+            for(let i=0;i<states.length;i++){
+                if(selected[0].pos.y!=states[i].pos.y){
+                    //not in same col, disable selected
+                    states[i].status = -1;
+                    states[i].elem.classList.add("dselected");
+                }else if(states[i].pos.x!=selected[0].pos.x&&states[i].pos.x!=selected[1].pos.x&&states[i].pos.x!=selected[2].pos.x){   
+                    //in the same col
+                    states[i].status = 0;
+                    states[i].elem.classList.add("rselected");
+                }
+            }
+        }
+    }
 }
 
 function addValues(values) {
