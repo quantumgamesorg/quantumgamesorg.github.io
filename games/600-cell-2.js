@@ -311,6 +311,7 @@ function addListener2(el, index, pos){
         }
         
         updateStates();
+		updateBoard();
         console.log(pos.x, ', ', pos.y, ' was pressed\n');
         //updateScore();
     };
@@ -406,106 +407,10 @@ function updateStates(){
     }
 }
 
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0);
-        entry.classList.toggle("odd", current_n % 2 == 1);
-    });
-    //checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function updateScore() {
-    let even = document.getElementsByClassName("ray even").length
-    let odd = document.getElementsByClassName("ray odd").length
-    //console.log(`Num even = ${even} Num odd = ${odd}`);
-
-    let numBasis = document.getElementsByClassName("basis selected").length
-    let basisDiv = document.getElementById("numBasis");
-    basisDiv.innerHTML = numBasis;
-
-    basisDiv.classList.toggle("even", numBasis%2 == 0);
-    basisDiv.classList.toggle("odd", numBasis%2 == 1);
-
-    let rays = document.getElementById("scoreboard").children;
-
-    //the following code checks if the user has won
-    for (let i = 0; i < rays.length; ++i) {
-        if (rays[i].classList.contains("odd")) {
-            return;
-        }
-    }
-
-    if (numBasis % 2 == 0) {
-        return;
-    }
-
-    //window.alert("You have won the game!")
-}
-
-function addValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n++;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function removeValues(values) {
-    values.forEach(v => {
-        let entry = document.getElementById("scoreboard").children[v - 1];
-        let current = entry.children[1].innerText;
-        let current_n = parseInt(current.substr(1, current.length-2));
-
-        current_n--;
-        entry.children[1].innerText = "(" + current_n + ")";
-
-        entry.classList.toggle("even", current_n % 2 == 0 && current_n > 0);
-        entry.classList.toggle("odd", current_n % 2 == 1 && current_n > 0);
-    });
-    //checkWon();
-}
-
-function checkWon() {
-    const allEven = Array.prototype.slice.call(document.getElementById("scoreboard").children).every(e => !e.classList.contains("odd"));
-    const numTurns = boardContainer.querySelectorAll(".board .circle.selected").length;
-
-    boardContainer.querySelector(".moveCounter .inner").innerText = numTurns;
-    boardContainer.querySelector(".moveCounter").classList.toggle("even", numTurns % 2 == 0 && numTurns > 0);
-    boardContainer.querySelector(".moveCounter").classList.toggle("odd", numTurns % 2 == 1 && numTurns > 0);
-
-    const won = allEven && numTurns % 2 == 1;
-    boardContainer.classList.toggle("won", won);
-
-    document.querySelector("#does").classList.toggle("won", won);
+function updateBoard() {
+    let selected = states.filter(state => {return state.status==1;})
+    let rselected = states.filter(state => {return state.status==2;})
+	
 }
 
 function reset() {
