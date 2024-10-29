@@ -7,59 +7,83 @@ const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContai
 
 let circleMap = [];
 function setupBoard() {
-    makeBoard(boardContainer, [
-        [ 1,  2,  3,  4,     5,  6,  7,  8,     9, 10, 11, 12,    13, 14, 15, 16,    17, 18, 19, 20],  
-        [21, 22, 23, 24,    25, 26, 27, 28,    29, 30, 31, 32,    33, 34, 35, 36,    37, 38, 39, 40],  
-        [41, 42, 43, 44,    45, 46, 47, 48,    49, 50, 51, 52,    53, 54, 55, 56,    57, 58, 59, 60],  
+	let boardVals = [
+		[
+			[[ 1,  2,  3,  4], [21, 22, 23, 24], [41, 42, 43, 44]],
+			[[ 5,  6,  7,  8], [25, 26, 27, 28], [45, 46, 47, 48]],
+			[[ 9, 10, 11, 12], [29, 30, 31, 32], [49, 50, 51, 52]],
+			[[13, 14, 15, 16], [33, 34, 35, 36], [53, 54, 55, 56]],
+			[[17, 18, 19, 20], [37, 38, 39, 40], [57, 58, 59, 60]],
+		],
+		[
+			[[ 1,  2, 15, 16], [21, 22, 35, 36], [41, 42, 54, 56]],
+			[[ 5,  6, 31, 32], [25, 28, 46, 48], [45, 46, 53, 56]],
+			[[ 9, 11, 18, 20], [29, 32, 38, 40], [ 9, 12, 49, 52]],
+			[[ 5,  7, 14, 16], [13, 15, 34, 36], [33, 36, 42, 44]],
+			[[ 1,  3, 22, 24], [ 9, 11, 26, 28], [17, 20, 43, 44]],
+		],
+		[
+			[[ 3,  4, 25, 26], [21, 24, 47, 48], [42, 44, 58, 59]],
+			[[ 7,  8, 17, 18], [26, 27, 57, 58], [22, 23, 54, 55]],
+			[[19, 20, 29, 30], [ 6,  7, 49, 51], [ 9, 10, 23, 24]],
+			[[ 5,  7, 34, 36], [ 9, 12, 38, 39], [13, 14, 27, 28]],
+			[[ 1,  4, 42, 43], [17, 20, 54, 56], [37, 38, 55, 56]],
+		],
+		[
+			[[ 1,  4, 51, 52], [21, 23, 30, 32], [41, 44, 51, 52]],
+			[[ 5,  8, 46, 47], [18, 20, 25, 27], [45, 48, 50, 52]],
+			[[ 9, 10, 35, 36], [ 1,  3, 30, 32], [37, 40, 49, 52]],
+			[[13, 16, 55, 56], [33, 36, 57, 60], [14, 15, 37, 38]],
+			[[29, 32, 58, 60], [37, 39, 58, 60], [45, 47, 59, 60]],
+		],
+		[
+			[[ 3,  4, 13, 14], [23, 24, 33, 34], [43, 44, 53, 55]],
+			[[ 7,  8, 29, 30], [26, 27, 45, 47], [47, 48, 54, 55]],
+			[[10, 12, 17, 19], [30, 31, 37, 39], [10, 11, 50, 51]],
+			[[ 6,  8, 13, 15], [14, 16, 33, 35], [34, 35, 41, 43]],
+			[[ 2,  4, 21, 23], [10, 12, 25, 27], [18, 19, 41, 42]],
+		],
+		[
+			[[ 1,  2, 27, 28], [22, 23, 45, 46], [41, 43, 57, 60]],
+			[[ 5,  6, 19, 20], [25, 28, 59, 60], [21, 24, 53, 56]],
+			[[17, 18, 31, 32], [ 5,  8, 50, 52], [11, 12, 21, 22]],
+			[[ 6,  8, 33, 35], [10, 11, 37, 40], [15, 16, 25, 26]],
+			[[ 2,  3, 41, 44], [18, 19, 53, 55], [39, 40, 53, 54]],
+		],
+		[
+			[[ 2,  3, 49, 50], [22, 24, 29, 31], [42, 43, 49, 50]],
+			[[ 6,  7, 45, 48], [17, 19, 26, 28], [46, 47, 49, 51]],
+			[[11, 12, 33, 34], [ 2,  4, 29, 31], [38, 39, 50, 51]],
+			[[14, 15, 53, 54], [34, 35, 58, 59], [13, 16, 39, 40]],
+			[[30, 31, 57, 59], [38, 40, 57, 59], [46, 48, 57, 58]],
+		],
+	];
+    makeBoard(boardContainer, boardVals);
+	buildScoreboard(15, 4, true);
 
-        [ 1,  2, 15, 16,     5,  6, 31, 32,     9, 11, 18, 20,     5,  7, 14, 16,     1,  3, 22, 24],  
-        [21, 22, 35, 36,    25, 28, 46, 48,    29, 32, 38, 40,    13, 15, 34, 36,     9, 11, 26, 28],  
-        [41, 42, 54, 56,    45, 46, 53, 56,     9, 12, 49, 52,    33, 36, 42, 44,    17, 20, 43, 44], 
-        
-        [ 3,  4, 25, 26,     7,  8, 17, 18,    19, 20, 29, 30,     5,  7, 34, 36,     1,  4, 42, 43],  
-        [21, 24, 47, 48,    26, 27, 57, 58,     6,  7, 49, 51,     9, 12, 38, 39,    17, 20, 54, 56],  
-        [42, 44, 58, 59,    22, 23, 54, 55,     9, 10, 23, 24,    13, 14, 27, 28,    37, 38, 55, 56],  
+	// Reset button
+	document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+	// TODO: these extra solve buttons are temporary
+	// var solutionElements = document.querySelectorAll('#upperLeft option');
+	// for (let i = 0; i < solutionElements.length; ++i) {
+	//     solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
+	// }
+	// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
+	// // comment from my friend: "Who fucking wrote this?"
 
-        [ 1,  4, 51, 52,     5,  8, 46, 47,     9, 10, 35, 36,    13, 16, 55, 56,    29, 32, 58, 60],  
-        [21, 23, 30, 32,    18, 20, 25, 27,     1,  3, 30, 32,    33, 36, 57, 60,    37, 39, 58, 60],  
-        [41, 44, 51, 52,    45, 48, 50, 52,    37, 40, 49, 52,    14, 15, 37, 38,    45, 47, 59, 60],  
+	document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
+	document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
+	document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
+	document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
-        [ 3,  4, 13, 14,     7,  8, 29, 30,    10, 12, 17, 19,     6,  8, 13, 15,     2,  4, 21, 23], 
-        [23, 24, 33, 34,    26, 27, 45, 47,    30, 31, 37, 39,    14, 16, 33, 35,    10, 12, 25, 27], 
-        [43, 44, 53, 55,    47, 48, 54, 55,    10, 11, 50, 51,    34, 35, 41, 43,    18, 19, 41, 42],  
-
-        [ 1,  2, 27, 28,     5,  6, 19, 20,    17, 18, 31, 32,     6,  8, 33, 35,     2,  3, 41, 44],  
-        [22, 23, 45, 46,    25, 28, 59, 60,     5,  8, 50, 52,    10, 11, 37, 40,    18, 19, 53, 55],  
-        [41, 43, 57, 60,    21, 24, 53, 56,    11, 12, 21, 22,    15, 16, 25, 26,    39, 40, 53, 54], 
-        
-        [ 2,  3, 49, 50,     6,  7, 45, 48,    11, 12, 33, 34,    14, 15, 53, 54,    30, 31, 57, 59],  
-        [22, 24, 29, 31,    17, 19, 26, 28,     2,  4, 29, 31,    34, 35, 58, 59,    38, 40, 57, 59], 
-        [42, 43, 49, 50,    46, 47, 49, 51,    38, 39, 50, 51,    13, 16, 39, 40,    46, 48, 57, 58],  
-    ]);
-buildScoreboard(15, 4, true);
-    // Reset button
-document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
-// TODO: these extra solve buttons are temporary
-// var solutionElements = document.querySelectorAll('#upperLeft option');
-// for (let i = 0; i < solutionElements.length; ++i) {
-//     solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
-// }
-// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
-// // comment from my friend: "Who fucking wrote this?"
-
-document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
-
-document.querySelectorAll(".person").forEach((e, i) => {
-    e.onmouseenter = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
-    };
-    e.onmouseleave = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
-    };
-});
+	document.querySelectorAll(".person").forEach((e, i) => {
+		e.onmouseenter = ev => {
+			document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
+		};
+		e.onmouseleave = ev => {
+			document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
+		};
+	});
 }
 //boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
