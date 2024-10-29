@@ -10,7 +10,7 @@ document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollT
 document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
 //reset button
-document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
+document.querySelectorAll("#upperLeft button")[3].onclick = () => {reset();}
 
 
 
@@ -318,14 +318,13 @@ function addListener2(el, index, pos){
 }
 
 function updateStates(){
-    let selected = states.filter(state => {return state.status==1;})
+    let selected = states.filter(state => {return state.status==1;});
     if(selected.length == 0){
         for(let i=0;i<states.length;i++){
             states[i].status = 0;
             states[i].elem.classList.remove("dselected");
             states[i].elem.classList.remove("rselected");
             states[i].elem.classList.remove("selected");
-            console.log("Attempted to remove classes");
             
         }
     }else if(selected.length == 1){
@@ -339,7 +338,6 @@ function updateStates(){
                 states[i].status = 0;
                 states[i].elem.classList.remove("dselected");
                 states[i].elem.classList.remove("rselected");//might not be needed
-                console.log("Attempted to remove classes");
             }
             //else would be the element itself which is already selected
         }
@@ -356,7 +354,6 @@ function updateStates(){
                     states[i].status = 0;
                     states[i].elem.classList.remove("dselected");
                     states[i].elem.classList.remove("rselected");
-                    console.log("Attempted to remove classes");
                 }
             }
         }else if(selected[0].pos.y==selected[1].pos.y){
@@ -371,7 +368,6 @@ function updateStates(){
                     states[i].status = 0;
                     states[i].elem.classList.remove("dselected");
                     states[i].elem.classList.remove("rselected");
-                    console.log("Attempted to remove classes");
                 }
             }
         }
@@ -414,17 +410,14 @@ function updateBoard() {
 }
 
 function reset() {
-    Array.prototype.slice.call(document.querySelectorAll("#scoreboard .ray")).forEach(e => {
-        e.children[1].innerText = "(0)";
-        e.classList.remove("even");
-        e.classList.remove("odd");
-    });
+    console.log("Resetting");
+    let selected = states.filter(state => {return state.status==1;})
+    for(let i=0;i<selected.length;i++){
+        selected[i].status = 0;
+        states[i].elem.classList.remove("selected");
+    }
 
-    Array.prototype.slice.call(boardContainer.querySelectorAll(".board .basis")).forEach(e => {
-        e.classList.remove("selected");
-    });
-
-    updateScore();
+    updateStates();
 }
 
 function solve(size) {
