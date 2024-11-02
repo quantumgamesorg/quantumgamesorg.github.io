@@ -381,7 +381,7 @@ function updateStates(){
                     states[i].elem.classList.add("dselected");
                 }else if(states[i].pos.y!=selected[0].pos.y&&states[i].pos.y!=selected[1].pos.y&&states[i].pos.y!=selected[2].pos.y){
                     //in the same row, but not selected
-                    states[i].status = 0;
+                    states[i].status = 2;
                     states[i].elem.classList.add("rselected");
                 }
             }
@@ -394,7 +394,7 @@ function updateStates(){
                     states[i].elem.classList.add("dselected");
                 }else if(states[i].pos.x!=selected[0].pos.x&&states[i].pos.x!=selected[1].pos.x&&states[i].pos.x!=selected[2].pos.x){   
                     //in the same col
-                    states[i].status = 0;
+                    states[i].status = 2;
                     states[i].elem.classList.add("rselected");
                 }
             }
@@ -406,6 +406,38 @@ function updateBoard() {
     let selected = states.filter(state => {return state.status==1;})
     let rselected = states.filter(state => {return state.status==2;})
 	
+	boardContainer.querySelectorAll(".basis").forEach((el) => {
+		el.classList.remove("selected");
+		el.classList.remove("rselected");
+	});
+	
+	if(selected.length < 3) return;
+	
+	let selVals = new Set();
+	selected.forEach((el) => {
+		board2[el.index].forEach((v) => selVals.add(v));
+	});
+	let rselVals = new Set();
+	rselected.forEach((el) => {
+		board2[el.index].forEach((v) => rselVals.add(v));
+	});
+	
+	for (let y = 0; y < boardContainer.childElementCount; y++) {
+		let gridRow = boardContainer.children[y];
+		for (let x = 0; x < gridRow.childElementCount; x++) {
+			let gridSpot = gridRow.children[x];
+			for (let b = 0; b < gridSpot.childElementCount; b++) {
+				let basis = gridSpot.children[b];
+				let vals = board1[y][x][b];
+				if(vals.every((v) => selVals.has(v))) {
+					basis.classList.add("selected");
+				}
+				else if(vals.every((v) => rselVals.has(v))) {
+					basis.classList.add("rselected");
+				}
+			}
+		}
+	}
 }
 
 function reset() {
