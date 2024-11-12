@@ -437,7 +437,7 @@ function updateBoard() {
 					basis.classList.add("rselected");
 				}
 				else {
-					//basis.classList.add("dselected");
+					basis.classList.add("dselected");
 				}
 			}
 		}
