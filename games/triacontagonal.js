@@ -10,6 +10,8 @@ let points = [];
 let allLines = [];
 let bases = [];
 
+let svgEl;
+
 let oldBasesToNewBases = {"1    2    3    4":   [     1 ,  12  , 51  , 52], 
     "5    6    7    8":   [    59 ,  14  , 25  , 40], 
     "9   10   11   12":   [    24 ,  26  , 36  , 44], 
@@ -164,8 +166,8 @@ function makeRing(root, radius, startingAngle, angleInterval) {
     let count = 15;
     for (let i = 0; i < count; i++) {
         let angle = startingAngle + angleInterval * i;
-        //angle += 24;
-        let angleRads = Math.PI * angle / 180.0;
+        //angle += 24 * 3;
+        let angleRads = -Math.PI * angle / 180.0;
         let x = Math.cos(angleRads) * radius + 50;
         let y = Math.sin(angleRads) * radius + 50;
 
@@ -184,11 +186,19 @@ function addLine(startInd, endInd, svg) {
     points[line.eInd].lines.push(lineInd);
 }
 
+function getLineIndsForBasis(basis) {
+    return [
+        [arr[0] - 1, arr[1] - 1]
+    ];
+}
+
 function addBasis(arr, svg) {
-    for (let i = 0; i < arr.length - 1; i++) {
-        addLine(arr[i] - 1, arr[i + 1] - 1, svg);
-    }
-    addLine(arr[arr.length - 1] - 1, arr[0] - 1, svg);
+    addLine(arr[0] - 1, arr[1] - 1, svg);
+    addLine(arr[1] - 1, arr[2] - 1, svg);
+    addLine(arr[2] - 1, arr[3] - 1, svg);
+    addLine(arr[3] - 1, arr[0] - 1, svg);
+    addLine(arr[0] - 1, arr[2] - 1, svg);
+    addLine(arr[1] - 1, arr[3] - 1, svg);
 }
 
 function addBases(arr, svg) {
@@ -242,8 +252,33 @@ function oldBasisToNewBasis(oldBasis) {
     return oldBasesToNewBases[oldBasis];
 }
 
+function addN(starting, n) {
+    n = n % 15;
+    let res = [];
+    for (let i = 0; i < starting.length; i++) {
+        let newBlah = starting[i] + n;
+        let firstRing = Math.floor((starting[i] - 1) / 15);
+        let newRing = Math.floor((newBlah - 1) / 15);
+        if (newRing != firstRing) {
+            newBlah = newBlah - 15;
+        }
+        res.push(newBlah);
+    }
+    console.log(res);
+    return res;
+}
+
+function generate15(starting) {
+    let sols = [];
+    for (let i = 0; i < 15; i++) {
+        sols.push(addN(starting, i));
+    }
+    return sols;
+}
+
 function makeTriacontagonalProjection(outerRadius) {
     let svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svgEl = svg;
     const svgSize = 100;
     svg.setAttribute('width', svgSize);
     svg.setAttribute('height', svgSize);
@@ -254,13 +289,25 @@ function makeTriacontagonalProjection(outerRadius) {
     makeRing(svg, 0.6728, 6, 24);
     makeRing(svg, 0.3383, 0, 24);
 
-    addBases(    [ [  1,  12,  51 , 52 ],
-        [ 59,  14,  25 , 40 ],
-        [ 24,  26,  36 , 44 ],
-        [ 37,  58,  10 , 28 ],
-        [ 15,  48,  18 , 42 ],
-        [ 53,  23,   5 , 32 ],
-        [ 39,  19,  31 , 21 ],
+    addBases(
+        generate15([1, 12, 51, 52])
+        //generate15([59, 14, 25, 40])
+        //generate15([24, 26, 36, 44])
+        //generate15([37, 58, 10, 28])
+        //generate15([15, 38, 18, 42])
+        
+        //[
+        
+        //[ 1,  12,  51 , 52 ],
+        
+        //[ 59,  14,  25 , 40 ],
+
+        //[ 24,  26,  36 , 44 ],
+        //[ 37,  58,  10 , 28 ],
+        //[ 15,  48,  18 , 42 ],
+        //[ 53,  23,   5 , 32 ],
+        //[1, 5, 55, 56],
+        /*[ 39,  19,  31 , 21 ],
         [ 46,   7,  47 , 11 ],
         [  9,  20,  54 , 35 ],
        [  8,  27,  33 , 50 ],
@@ -328,14 +375,15 @@ function makeTriacontagonalProjection(outerRadius) {
        [ 26,  49,  32 ,  7 ],
        [ 11,  15,  51 , 50 ],
        [ 13,  58,  39 , 24 ],
-       [ 23,  25,  35 , 43 ],
-       ], svg);
+       [ 23,  25,  35 , 43 ],*/
+       //]
+       , svg);
 
     return svg;
 }
 
 function makePlotARed() {
-    makeOldBasesRed(["1     5    55    56",
+    makeBasesRed(["1     5    55    56",
         "1    12    51    52",
         "2     6    56    57",
         "2    13    52    53",
