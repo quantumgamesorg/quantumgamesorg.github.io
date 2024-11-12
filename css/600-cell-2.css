@@ -46,6 +46,9 @@
 #boardContainer2 .gridSpot.dselected {
 	background-color: #ddd;
 }
+#boardContainer .gridSpot .dselected {
+	background-color: #ddd;
+}
 #boardContainer2 .val {
 	text-align: center;
 	cursor: pointer;

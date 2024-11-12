@@ -409,6 +409,7 @@ function updateBoard() {
 	boardContainer.querySelectorAll(".basis").forEach((el) => {
 		el.classList.remove("selected");
 		el.classList.remove("rselected");
+		el.classList.remove("dselected");
 	});
 	
 	if(selected.length < 3) return;
@@ -435,6 +436,9 @@ function updateBoard() {
 				else if(vals.every((v) => rselVals.has(v))) {
 					basis.classList.add("rselected");
 				}
+				else {
+					//basis.classList.add("dselected");
+				}
 			}
 		}
 	}
@@ -448,6 +452,7 @@ function reset() {
     }
 
     updateStates();
+	updateBoard();
 }
 
 function solve(size) {
