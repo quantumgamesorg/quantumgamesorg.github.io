@@ -12,84 +12,9 @@ let bases = [];
 
 let svgEl;
 
-let oldBasesToNewBases = {"1    2    3    4":   [     1 ,  12  , 51  , 52], 
-    "5    6    7    8":   [    59 ,  14  , 25  , 40], 
-    "9   10   11   12":   [    24 ,  26  , 36  , 44], 
-    "13   14   15   16":   [    37 ,  58  , 10  , 28], 
-    "17   18   19   20":   [    15 ,  48  , 18  , 42], 
-    "21   22   23   24":   [    53 ,  23  ,  5  , 32], 
-    "25   26   27   28":   [    39 ,  19  , 31  , 21], 
-    "29   30   31   32":   [    46 ,   7  , 47  , 11], 
-    "33   34   35   36":   [     9 ,  20  , 54  , 35], 
-    "37   38   39   40":   [     8 ,  27  , 33  , 50], 
-    "41   42   43   44":   [    22 ,  43  ,  3  , 60], 
-    "45   46   47   48":   [    55 ,  17  , 13  , 38], 
-    "49   50   51   52":   [    57 ,  56  ,  2  ,  6], 
-    "53   54   55   56":   [    30 ,  45  , 49  ,  4], 
-    "57   58   59   60":   [    16 ,  29  , 34  , 41], 
-    "31   42   51   16":   [    47 ,  43  ,  2  , 28], 
-    "38   24   58   25":   [    27 ,  32  , 29  , 39], 
-    "56   45   17   35":   [     4 ,  55  , 15  , 54], 
-    "43   54    3   28":   [     3 ,  45  , 51  , 21], 
-    "50   36   10   37":   [    56 ,  35  , 26  ,  8], 
-    "8   57   29   47":   [    40 ,  16  , 46  , 13], 
-    "55    6   15   40":   [    49 ,  14  , 10  , 50], 
-    "2   48   22   49":   [    12 ,  38  , 23  , 57], 
-    "20    9   41   59":   [    42 ,  24  , 22  , 34], 
-    "7   18   27   52":   [    25 ,  48  , 31  ,  6], 
-    "14   60   34    1":   [    58 ,  41  , 20  ,  1], 
-    "32   21   53   11":   [    11 ,  53  , 30  , 36], 
-    "19   30   39    4":   [    18 ,   7  , 33  , 52], 
-    "26   12   46   13":   [    19 ,  44  , 17  , 37], 
-    "44   33    5   23":   [    60 ,   9  , 59  ,  5], 
-    "22   60   39   28":   [    23 ,  41  , 33  , 21], 
-    "18   47   33   55":   [    48 ,  13  ,  9  , 49], 
-    "13   32   50   41":   [    37 ,  11  , 56  , 22], 
-    "34   12   51   40":   [    20 ,  44  ,  2  , 50], 
-    "30   59   45    7":   [     7 ,  34  , 55  , 25], 
-    "25   44    2   53":   [    39 ,  60  , 12  , 30], 
-    "46   24    3   52":   [    17 ,  32  , 51  ,  6], 
-    "42   11   57   19":   [    43 ,  36  , 16  , 18], 
-    "37   56   14    5":   [     8 ,   4  , 58  , 59], 
-    "58   36   15    4":   [    29 ,  35  , 10  , 52], 
-    "54   23    9   31":   [    45 ,   5  , 24  , 47], 
-    "49    8   26   17":   [    57 ,  40  , 19  , 15], 
-    "10   48   27   16":   [    26 ,  38  , 31  , 28], 
-    "6   35   21   43":   [    14 ,  54  , 53  ,  3], 
-    "1   20   38   29":   [     1 ,  42  , 27  , 46], 
-    "57   23   27   40":   [    16 ,   5  , 31  , 50], 
-    "36   53   20   46":   [    35 ,  30  , 42  , 17], 
-    "43   49   30   14":   [     3 ,  57  ,  7  , 58], 
-    "9   35   39   52":   [    24 ,  54  , 33  ,  6], 
-    "48    5   32   58":   [    38 ,  59  , 11  , 29], 
-    "55    1   42   26":   [    49 ,   1  , 43  , 19], 
-    "21   47   51    4":   [    53 ,  13  ,  2  , 52], 
-    "60   17   44   10":   [    41 ,  15  , 60  , 26], 
-    "7   13   54   38":   [    25 ,  37  , 45  , 27], 
-    "33   59    3   16":   [     9 ,  34  , 51  , 28], 
-    "12   29   56   22":   [    44 ,  46  ,  4  , 23], 
-    "19   25    6   50":   [    18 ,  39  , 14  , 56], 
-    "45   11   15   28":   [    55 ,  36  , 10  , 21], 
-    "24   41    8   34":   [    32 ,  22  , 40  , 20], 
-    "31   37   18    2":   [    47 ,   8  , 48  , 12], 
-    "44   29   15   52":   [    60 ,  46  , 10  ,  6], 
-    "59   26   37   21":   [    34 ,  19  ,  8  , 53], 
-    "34   19   48   54":   [    20 ,  18  , 38  , 45], 
-    "56   41   27    4":   [     4 ,  22  , 31  , 52], 
-    "11   38   49   33":   [    36 ,  27  , 57  ,  9], 
-    "46   31   60    6":   [    17 ,  47  , 41  , 14], 
-    "8   53   39   16":   [    40 ,  30  , 33  , 28], 
-    "23   50    1   45":   [     5 ,  56  ,  1  , 55], 
-    "58   43   12   18":   [    29 ,   3  , 44  , 48], 
-    "20    5   51   28":   [    42 ,  59  ,  2  , 21], 
-    "35    2   13   57":   [    54 ,  12  , 37  , 16], 
-    "10   55   24   30":   [    26 ,  49  , 32  ,  7], 
-    "32   17    3   40":   [    11 ,  15  , 51  , 50], 
-    "47   14   25    9":   [    13 ,  58  , 39  , 24], 
-    "22    7   36   42":   [    23 ,  25  , 35  , 43]};
-
-let blackLineWidth = "0.1%";
-let redLineWidth = "0.2%";
+let blackLineWidth = 0.1;
+let blueLineWidth = 0.2;
+let redLineWidth = 0.2;
 
 
 let circleMap = [];
@@ -118,6 +43,12 @@ document.querySelectorAll(".person").forEach((e, i) => {
     };
 });
 
+function pickFillColorFromUses(uses) {
+    if (uses === 0) return "#000000";
+    if (uses % 2 === 1) return "#FF0000";
+    return "#00FF00";
+}
+
 function makePoint(x, y, width) {
     let circ = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circ.setAttribute("cx", x + "%");
@@ -128,8 +59,16 @@ function makePoint(x, y, width) {
         x: x,
         y: y,
         element: circ,
+        uses: 0,
         lines: [],
-        update: () => {
+        updateColor: function() {
+            circ.setAttribute("fill", pickFillColorFromUses(this.uses));
+        },
+        addUse: function() {
+            this.uses++;
+        },
+        removeUse: function() {
+            this.uses--;
         }
     };
 }
@@ -144,24 +83,49 @@ function makeLine(startInd, endInd) {
     line.setAttribute("y1", sPt.y + "%");
     line.setAttribute("x2", ePt.x + "%");
     line.setAttribute("y2", ePt.y + "%");
-    line.setAttribute("stroke", "black");
-    line.setAttribute("stroke-width", blackLineWidth);
+    line.setAttribute("stroke", "none");
+    line.setAttribute("stroke-width", blackLineWidth + "%");
     return {
         sInd: startInd,
         eInd: endInd,
         element: line,
-        makeBlack: () => {
+        uses: 0,
+        makeColor: (col, width) => {
+            line.setAttribute("stroke", col);
+            line.setAttribute("stroke-width", width + "%");
+        },
+        updateColor: function(overrideWidth) {
+            if (this.uses === 0) {
+                this.makeBlack(overrideWidth);
+            }
+            else {
+                if (overrideWidth === undefined) {
+                    overrideWidth = blueLineWidth;
+                }
+                this.makeColor("blue", overrideWidth);
+            }
+        },
+        addUse: function() {
+            this.uses++;
+        },
+        removeUse: function() {
+            this.uses--;
+        },
+        makeBlack: (overrideWidth) => {
             line.setAttribute("stroke", "black");
-            line.setAttribute("stroke-width", blackLineWidth);
+            if (overrideWidth === undefined) {
+                overrideWidth = blackLineWidth;
+            }
+            line.setAttribute("stroke-width", blackLineWidth + "%");
         },
         makeRed: () => {
             line.setAttribute("stroke", "red");
-            line.setAttribute("stroke-width", redLineWidth);
+            line.setAttribute("stroke-width", redLineWidth + "%");
         }
     };
 }
 
-function makeRing(root, radius, startingAngle, angleInterval) {
+function makeRing(radius, startingAngle, angleInterval) {
     radius *= 45;
     let count = 15;
     for (let i = 0; i < count; i++) {
@@ -172,24 +136,26 @@ function makeRing(root, radius, startingAngle, angleInterval) {
         let y = Math.sin(angleRads) * radius + 50;
 
         let newPt = makePoint(x, y, 1);
-        root.appendChild(newPt.element);
+        //root.appendChild(newPt.element);
         points.push(newPt);
     }
 }
 
+function appendPointsToDOM(root) {
+    for (let i = 0; i < points.length; i++) {
+        root.appendChild(points[i].element);
+    }
+}
+
 function addLine(startInd, endInd, svg) {
+    let ind = findLine(startInd, endInd);
+    if (ind !== -1) return;
     let line = makeLine(startInd, endInd);
     svg.appendChild(line.element);
     let lineInd = allLines.length;
     allLines.push(line);
     points[line.sInd].lines.push(lineInd);
     points[line.eInd].lines.push(lineInd);
-}
-
-function getLineIndsForBasis(basis) {
-    return [
-        [arr[0] - 1, arr[1] - 1]
-    ];
 }
 
 function addBasis(arr, svg) {
@@ -205,6 +171,48 @@ function addBases(arr, svg) {
     for (let i = 0; i < arr.length; i++) {
         addBasis(arr[i], svg);
     }
+}
+
+function addBasesGeneratedBy(basis, svg) {
+    addBases(generate15(basis), svg);
+}
+
+function getLineInds(basis, addToInds) {
+    if (addToInds === undefined) addToInds = 0;
+
+    return [
+        findLine(basis[0] + addToInds, basis[1] + addToInds),
+        findLine(basis[1] + addToInds, basis[2] + addToInds),
+        findLine(basis[2] + addToInds, basis[3] + addToInds),
+        findLine(basis[3] + addToInds, basis[0] + addToInds),
+        findLine(basis[0] + addToInds, basis[2] + addToInds),
+        findLine(basis[3] + addToInds, basis[1] + addToInds)
+    ];
+}
+
+function setBasisColor(basis, color, width) {
+    let inds = getLineInds(basis);
+    for (let i = 0; i < inds.length; i++) {
+        allLines[inds[i]].makeColor(color, width);
+    }
+}
+
+function foreachLineInBasis(basis, fun) {
+    let inds = getLineInds(basis);
+    for (let i = 0; i < inds.length; i++) {
+        fun(allLines[inds[i]]);
+    }
+}
+
+function foreachPointInBasis(basis, fun) {
+    for (let i = 0; i < basis.length; i++) {
+        fun(points[basis[i]]);
+    }
+}
+
+function foreachPartOfBasis(basis, lineFun, pointFun) {
+    foreachLineInBasis(basis, lineFun);
+    foreachPointInBasis(basis, pointFun);
 }
 
 function findDirLine(sInd, eInd) {
@@ -225,31 +233,7 @@ function findLine(a, b) {
 }
 
 function makeLineRed(a, b) {
-    console.log("" + a + " " + b);
     allLines[findLine(a, b)].makeRed();
-}
-
-function makeBasisRed(arr) {
-    for (let i = 0; i < arr.length - 1; i++) {
-        makeLineRed(arr[i] - 1, arr[i + 1] - 1);
-    }
-    makeLineRed(arr[arr.length - 1], 0);
-}
-
-function makeBasesRed(arrs) {
-    for (let i = 0; i < arrs.length; i++) {
-        makeBasisRed(arrs[i]);
-    }
-}
-
-function makeOldBasesRed(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        makeBasisRed(oldBasisToNewBasis(arr[i]));
-    }
-}
-
-function oldBasisToNewBasis(oldBasis) {
-    return oldBasesToNewBases[oldBasis];
 }
 
 function addN(starting, n) {
@@ -264,7 +248,14 @@ function addN(starting, n) {
         }
         res.push(newBlah);
     }
-    console.log(res);
+    return res;
+}
+
+function shiftBackBy1(basis) {
+    let res = [];
+    for (let i = 0; i < basis.length; i++) {
+        res.push(basis[i] - 1);
+    }
     return res;
 }
 
@@ -276,6 +267,126 @@ function generate15(starting) {
     return sols;
 }
 
+function animateBasisPlusN(starting, delay, n, next) {
+    setBasisColor(shiftBackBy1(addN(starting, n)), "black", blackLineWidth);
+    if (n === 15) {
+        if (next) {
+            next();
+        }
+        return;
+    }
+    setTimeout(() => {animateBasisPlusN(starting, delay, n + 1, next);}, delay);
+}
+
+function animatedColor15(starting, next) {
+    animateBasisPlusN(starting, 600, 0, next);
+}
+
+function animatedColor15s(motifs) {
+    if (motifs.length === 0) return;
+    animatedColor15(motifs[0], () => {animatedColor15s(motifs.slice(1));})
+}
+
+function animatedUseBasisPlusN(starting, delay, n, stopN, next) {
+    if (n === stopN) {
+        if (next) {
+            next();
+        }
+        return;
+    }
+    tryAddBasis(addN(starting, n));
+    setTimeout(() => {animatedUseBasisPlusN(starting, delay, n + 1, stopN, next);}, delay);
+}
+
+function animatedUseBasisN(starting, delay, stopN, next) {
+    animatedUseBasisPlusN(starting, delay, 0, stopN, next);
+}
+
+function canonicalize(basis) {
+    return [...basis].sort();
+}
+
+function canonicalBasesEqual(basis1, basis2) {
+    return  basis1[0] === basis2[0] &&
+            basis1[1] === basis2[1] &&
+            basis1[2] === basis2[2] &&
+            basis1[3] === basis2[3];
+}
+
+function findCanonicalBasisIndexIfPresent(basis) {
+    for (let i = 0; i < bases.length; i++) {
+        if (canonicalBasesEqual(bases[i], basis)) return i;
+    }
+    return -1;
+}
+
+function reasonablyUpdateLines(basis) {
+    foreachLineInBasis(basis, line => {
+        line.updateColor();
+    });
+}
+
+function temporarilyEngorgeLine(basis, bigWidth, time) {
+    foreachLineInBasis(shiftBackBy1(basis), line => {
+        line.updateColor(bigWidth);
+    });
+
+    setTimeout(() => {reasonablyUpdateLines(shiftBackBy1(basis));}, time);
+}
+
+function markBasisUsed(basis) {
+
+    bases.push(basis);
+
+    foreachPartOfBasis(shiftBackBy1(basis), (line) => {
+        line.addUse();
+        //line.makeColor("yellow", 1);
+        line.updateColor();
+    }, (point) => {
+        point.addUse();
+        point.updateColor();
+    });
+
+    temporarilyEngorgeLine(basis, 1, 300);
+}
+
+function markBasisUnused(basis) {
+    foreachPartOfBasis(shiftBackBy1(basis), (line) => {
+        line.removeUse();
+        line.updateColor();
+    }, (point) => {
+        point.removeUse();
+        point.updateColor();
+    });
+}
+
+function tryAddCanonicalBasis(basis) {
+    if (findCanonicalBasisIndexIfPresent(basis) >= 0) return;
+
+    markBasisUsed(basis);
+}
+
+function tryAddBasis(basis) {
+    tryAddCanonicalBasis(canonicalize(basis));
+}
+
+function tryRemoveCanonicalBasis(basis) {
+    let ind = findCanonicalBasisIndexIfPresent(basis);
+    if (ind < 0) return;
+
+    bases.splice(ind, 1);
+
+    markBasisUnused(basis);
+}
+
+function tryRemoveBasis(basis) {
+    tryRemoveCanonicalBasis(canonicalize(basis));
+}
+
+function removeBasis(basis) {
+    [...basis].sort();
+}
+
 function makeTriacontagonalProjection(outerRadius) {
     let svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svgEl = svg;
@@ -284,120 +395,38 @@ function makeTriacontagonalProjection(outerRadius) {
     svg.setAttribute('height', svgSize);
     svg.setAttribute("viewBox", "0 0 100 100")
     
-    makeRing(svg, 1.0, 0, 24);
-    makeRing(svg, 0.8135, 6, 24);
-    makeRing(svg, 0.6728, 6, 24);
-    makeRing(svg, 0.3383, 0, 24);
+    makeRing(1.0, 0, 24);
+    makeRing(0.8135, 6, 24);
+    makeRing(0.6728, 6, 24);
+    makeRing(0.3383, 0, 24);
 
-    addBases(
-        generate15([1, 12, 51, 52])
-        //generate15([59, 14, 25, 40])
-        //generate15([24, 26, 36, 44])
-        //generate15([37, 58, 10, 28])
-        //generate15([15, 38, 18, 42])
-        
-        //[
-        
-        //[ 1,  12,  51 , 52 ],
-        
-        //[ 59,  14,  25 , 40 ],
+    addBasesGeneratedBy([1, 12, 51, 52], svg);
+    addBasesGeneratedBy([59, 14, 25, 40], svg);
+    addBasesGeneratedBy([24, 26, 36, 44], svg);
+    addBasesGeneratedBy([37, 58, 10, 28], svg);
+    addBasesGeneratedBy([15, 38, 18, 42], svg);
 
-        //[ 24,  26,  36 , 44 ],
-        //[ 37,  58,  10 , 28 ],
-        //[ 15,  48,  18 , 42 ],
-        //[ 53,  23,   5 , 32 ],
-        //[1, 5, 55, 56],
-        /*[ 39,  19,  31 , 21 ],
-        [ 46,   7,  47 , 11 ],
-        [  9,  20,  54 , 35 ],
-       [  8,  27,  33 , 50 ],
-       [ 22,  43,   3 , 60 ],
-       [ 55,  17,  13 , 38 ],
-       [ 57,  56,   2 ,  6 ],
-       [ 30,  45,  49 ,  4 ],
-       [ 16,  29,  34 , 41 ],
-       [ 47,  43,   2 , 28 ],
-       [ 27,  32,  29 , 39 ],
-       [  4,  55,  15 , 54 ],
-       [  3,  45,  51 , 21 ],
-       [ 56,  35,  26 ,  8 ],
-       [ 40,  16,  46 , 13 ],
-       [ 49,  14,  10 , 50 ],
-       [ 12,  38,  23 , 57 ],
-       [ 42,  24,  22 , 34 ],
-       [ 25,  48,  31 ,  6 ],
-       [ 58,  41,  20 ,  1 ],
-       [ 11,  53,  30 , 36 ],
-       [ 18,   7,  33 , 52 ],
-       [ 19,  44,  17 , 37 ],
-       [ 60,   9,  59 ,  5 ],
-       [ 23,  41,  33 , 21 ],
-       [ 48,  13,   9 , 49 ],
-       [ 37,  11,  56 , 22 ],
-       [ 20,  44,   2 , 50 ],
-       [  7,  34,  55 , 25 ],
-       [ 39,  60,  12 , 30 ],
-       [ 17,  32,  51 ,  6 ],
-       [ 43,  36,  16 , 18 ],
-       [  8,   4,  58 , 59 ],
-       [ 29,  35,  10 , 52 ],
-       [ 45,   5,  24 , 47 ],
-       [ 57,  40,  19 , 15 ],
-       [ 26,  38,  31 , 28 ],
-       [ 14,  54,  53 ,  3 ],
-       [  1,  42,  27 , 46 ],
-       [ 16,   5,  31 , 50 ],
-       [ 35,  30,  42 , 17 ],
-       [  3,  57,   7 , 58 ],
-       [ 24,  54,  33 ,  6 ],
-       [ 38,  59,  11 , 29 ],
-       [ 49,   1,  43 , 19 ],
-       [ 53,  13,   2 , 52 ],
-       [ 41,  15,  60 , 26 ],
-       [ 25,  37,  45 , 27 ],
-       [  9,  34,  51 , 28 ],
-       [ 44,  46,   4 , 23 ],
-       [ 18,  39,  14 , 56 ],
-       [ 55,  36,  10 , 21 ],
-       [ 32,  22,  40 , 20 ],
-       [ 47,   8,  48 , 12 ],
-       [ 60,  46,  10 ,  6 ],
-       [ 34,  19,   8 , 53 ],
-       [ 20,  18,  38 , 45 ],
-       [  4,  22,  31 , 52 ],
-       [ 36,  27,  57 ,  9 ],
-       [ 17,  47,  41 , 14 ],
-       [ 40,  30,  33 , 28 ],
-       [  5,  56,   1 , 55 ],
-       [ 29,   3,  44 , 48 ],
-       [ 42,  59,   2 , 21 ],
-       [ 54,  12,  37 , 16 ],
-       [ 26,  49,  32 ,  7 ],
-       [ 11,  15,  51 , 50 ],
-       [ 13,  58,  39 , 24 ],
-       [ 23,  25,  35 , 43 ],*/
-       //]
-       , svg);
+    appendPointsToDOM(svg);
+
+    /*
+    animatedColor15s([[1, 12, 51, 52],
+        [59, 14, 25, 40],
+[24, 26, 36, 44],
+[37, 58, 10, 28],
+[15, 38, 18, 42]
+    ]);
+    */
+   // animatedUseBasisN([1, 5, 55, 56], 600, 16);
 
     return svg;
 }
 
-function makePlotARed() {
-    makeBasesRed(["1     5    55    56",
-        "1    12    51    52",
-        "2     6    56    57",
-        "2    13    52    53",
-        "3     7    57    58",
-        "3    14    53    54",
-        "4     8    58    59",
-        "4    15    54    55",
-        "5     9    59    60",
-        "6    10    46    60",
-        "7    11    46    47",
-        "8    12    47    48",
-        "9    13    48    49",
-        "10    14    49    50",
-        "11    15    50    51"]);
+function usePlotA() {
+    animatedUseBasisN([1, 5, 55, 56], 1500, 15);
+}
+
+function usePlotB() {
+    animatedUseBasisN([16, 18, 36, 43], 1500, 15);
 }
 
 function makeCircleBoard(outerRadius) {
