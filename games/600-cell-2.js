@@ -460,7 +460,7 @@ function solve() {
     reset();
     for (let i = 0; i < 3; i++) {
         let spots = document.getElementById("boardContainer2").getElementsByClassName("gridSpot");
-        console.log(Array.from(spots));
+        //console.log(Array.from(spots));
         let avspots = Array.from(spots).filter(
             (elem) => !(elem.classList.contains("selected") || elem.classList.contains("dselected") || elem.classList.contains("relected"))
         );
