@@ -101,6 +101,12 @@ boardContainer.appendChild(makeCircleBoard(45));
 
 buildScoreboard(8, 5);
 
+
+tbases.forEach((b) => {
+	console.log(b);
+	tryAddBasis(b);
+});
+
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 // document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
@@ -483,7 +489,7 @@ function makeTriacontagonalProjection(outerRadius) {
     addBasesGeneratedBy([59, 14, 25, 40], svg);
     addBasesGeneratedBy([24, 26, 36, 44], svg);
     addBasesGeneratedBy([37, 58, 10, 28], svg);
-    addBasesGeneratedBy([15, 38, 18, 42], svg);
+    addBasesGeneratedBy([1, 20, 41, 58], svg);
 
     appendPointsToDOM(svg);
 
@@ -721,8 +727,3 @@ function solve() {
     }
 
 }
-
-tbases.forEach((b) => {
-	console.log(b);
-	tryAddBasis(b);
-});
