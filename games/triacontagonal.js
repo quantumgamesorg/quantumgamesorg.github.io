@@ -372,6 +372,18 @@ function animatedColor15s(motifs) {
     animatedColor15(motifs[0], () => {animatedColor15s(motifs.slice(1));})
 }
 
+function animateUseBasisList(bases, delay, next) {
+    if (bases.length === 0) {
+        if (next) {
+            next();
+        }
+        return;
+    }
+    let basisToUse = bases.splice(0, 1)[0];
+    tryAddBasis(basisToUse);
+    setTimeout(() => {animateUseBasisList(bases, delay, next);}, delay);
+}
+
 function animatedUseBasisPlusN(starting, delay, n, stopN, next) {
     if (n === stopN) {
         if (next) {
