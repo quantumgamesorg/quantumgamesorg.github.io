@@ -709,7 +709,13 @@ function drawLines(outerRadius, innerRadius) {
 
 
 function solve() {
+
+    addBases(tbases);
+    return;
+
+
     reset();
+
 
     let circles = boardContainer.querySelectorAll(".board .circle");
     [[0,7], [1,10], [2,13], [3,16], [4,11], [5,14], [6,17], [8,15], [9,18], [12,19]].forEach(pair => {
