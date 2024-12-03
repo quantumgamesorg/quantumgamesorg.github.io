@@ -181,7 +181,8 @@ function makeLine(startInd, endInd) {
         },
         updateColor: function(overrideWidth) {
             if (this.uses === 0) {
-                this.makeBlack(overrideWidth);
+                //this.makeBlack(overrideWidth);
+                this.makeColor("none", blackLineWidth);
             }
             else {
                 if (overrideWidth === undefined) {
@@ -481,8 +482,10 @@ function tryRemoveBasis(basis) {
     tryRemoveCanonicalBasis(canonicalize(basis));
 }
 
-function removeBasis(basis) {
-    [...basis].sort();
+function clearBases() {
+    while (bases.length > 0) {
+        tryRemoveBasis(bases[0]);
+    }
 }
 
 function makeTriacontagonalProjection(outerRadius) {
