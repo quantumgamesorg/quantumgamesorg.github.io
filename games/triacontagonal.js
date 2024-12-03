@@ -103,7 +103,7 @@ buildScoreboard(8, 5);
 
 
 tbases.forEach((b) => {
-	console.log(b);
+	//console.log(b);
 	tryAddBasis(b);
 });
 
