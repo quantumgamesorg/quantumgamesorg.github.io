@@ -373,6 +373,7 @@ function animatedColor15s(motifs) {
 }
 
 function animateUseBasisList(bases, delay, next) {
+    bases = [...bases];
     if (bases.length === 0) {
         if (next) {
             next();
