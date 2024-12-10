@@ -66,8 +66,75 @@ let helperTable = [
 	[59,40,46,11,30, 4,15,42,22,60,],
 ]
 
+let fiveFold = [
+    [    2,   6,  56,  57], 
+    [    2,  28,  43,  47], 
+    [    3,  14,  53,  54], 
+    [    3,  22,  43,  60], 
+    [    5,   9,  59,  60], 
+    [    5,  16,  31,  50], 
+    [    6,  25,  31,  48], 
+    [    8,  12,  47,  48], 
+    [    8,  19,  34,  53], 
+   [    9,  28,  34,  51], 
+   [   11,  15,  50,  51], 
+   [   11,  22,  37,  56], 
+   [   12,  16,  37,  54], 
+   [   14,  25,  40,  59], 
+   [   15,  19,  40,  57]
+];
 
-let dbasis = [
+let fiveFoldMotifs = [
+    [2, 6, 56, 57],
+    [    2,  28,  43,  47],
+    [    3,  22,  43,  60], 
+];
+
+let threeFold = [
+[    1,  19,  43,  49],
+[    1,  27,  42,  46],
+[    2,  20,  44,  50],
+[    2,  21,  42,  59],
+[    3,  14,  53,  54],
+[    3,  21,  45,  51],
+[    3,  22,  43,  60],
+[    3,  29,  44,  48],
+[    4,   8,  58,  59],
+[    4,  30,  45,  49],
+[    6,  17,  32,  51],
+[    6,  24,  33,  54],
+[    7,  25,  34,  55],
+[    7,  26,  32,  49],
+[    8,  19,  34,  53],
+[    8,  26,  35,  56],
+[    8,  27,  33,  50],
+[    9,  13,  48,  49],
+[    9,  20,  35,  54],
+[   11,  22,  37,  56],
+[   11,  29,  38,  59],
+[   12,  16,  37,  54],
+[   12,  30,  39,  60],
+[   13,  16,  40,  46],
+[   13,  17,  38,  55],
+[   13,  24,  39,  58],
+[   14,  25,  40,  59],
+
+];
+
+let threeFoldMotifs = [
+    [    1,  19,  43,  49],
+    [    1,  27,  42,  46],
+    [    2,  20,  44,  50],
+    [    2,  21,  42,  59],
+    [    3,  14,  53,  54],
+    [    3,  21,  45,  51],
+    [    3,  22,  43,  60],
+    [    3,  29,  44,  48],
+    [    4,  30,  45,  49],
+];
+
+let tbases = [
+    /*
 	[ 1, 2, 3, 4],
 	[13,14,15,16],
 	[21,22,23,24],
@@ -87,9 +154,26 @@ let dbasis = [
 	[44,29,15,52],
 	[35, 2,13,57],
 	[32,17, 3,40]
+    */
+
+    [    2,   6,  56,  57], 
+    [    2,  28,  43,  47], 
+    [    3,  14,  53,  54], 
+    [    3,  22,  43,  60], 
+    [    5,   9,  59,  60], 
+    [    5,  16,  31,  50], 
+    [    6,  25,  31,  48], 
+    [    8,  12,  47,  48], 
+    [    8,  19,  34,  53], 
+   [    9,  28,  34,  51], 
+   [   11,  15,  50,  51], 
+   [   11,  22,  37,  56], 
+   [   12,  16,  37,  54], 
+   [   14,  25,  40,  59], 
+   [   15,  19,  40,  57]
 ];
-let tbases = dbasis.map((b) => canonicalize(b.map((v) => transmap[v - 1])));
-console.log(tbases)
+//let tbases = dbasis.map((b) => canonicalize(b.map((v) => transmap[v - 1])));
+//console.log(tbases)
 
 let blackLineWidth = 0.1;
 let blueLineWidth = 0.2;
@@ -101,11 +185,42 @@ boardContainer.appendChild(makeCircleBoard(45));
 
 buildScoreboard(8, 5);
 
+tbases = fiveFold;
+let myMotif = threeFoldMotifs;
 
 tbases.forEach((b) => {
-	//console.log(b);
+	console.log(b);
 	tryAddBasis(b);
 });
+
+myMotif.forEach(b => {
+    foreachLineInBasis(shiftBackBy1(b), l => {
+        l.makeBlack(0.7);
+    });
+});
+
+/*
+
+let proofGenerator =
+    //[1, 5, 55, 56]
+    [16, 18, 36, 43]
+    ;
+
+generate15(proofGenerator).forEach(b => {
+    tryAddBasis(b);
+});
+
+setTimeout(() => {
+    let b = proofGenerator;
+//generate15([1, 12, 51, 52]).forEach((b) => {
+    foreachLineInBasis(shiftBackBy1(b), l => {
+        //l.makeBlack(2.0);
+        l.makeBlack(0.7);
+    });
+//});
+}, 1000);
+
+*/
 
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 // document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -201,7 +316,7 @@ function makeLine(startInd, endInd) {
             if (overrideWidth === undefined) {
                 overrideWidth = blackLineWidth;
             }
-            line.setAttribute("stroke-width", blackLineWidth + "%");
+            line.setAttribute("stroke-width", overrideWidth + "%");
         },
         makeRed: () => {
             line.setAttribute("stroke", "red");
@@ -424,6 +539,7 @@ function markBasisUsed(basis) {
     bases.push(basis);
 
     foreachPartOfBasis(shiftBackBy1(basis), (line) => {
+        console.log(line.sInd + " " + line.eInd);
         line.addUse();
         //line.makeColor("yellow", 1);
         line.updateColor();
@@ -493,14 +609,14 @@ function makeTriacontagonalProjection(outerRadius) {
 
     appendPointsToDOM(svg);
 
-    /*
-    animatedColor15s([[1, 12, 51, 52],
+    
+    /*animatedColor15s([[1, 12, 51, 52],
         [59, 14, 25, 40],
 [24, 26, 36, 44],
 [37, 58, 10, 28],
-[15, 38, 18, 42]
-    ]);
-    */
+[1, 20, 41, 58]
+    ]);*/
+    
    // animatedUseBasisN([1, 5, 55, 56], 600, 16);
 
     return svg;
