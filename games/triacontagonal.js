@@ -102,10 +102,10 @@ boardContainer.appendChild(makeCircleBoard(45));
 buildScoreboard(8, 5);
 
 
-tbases.forEach((b) => {
-	//console.log(b);
-	tryAddBasis(b);
-});
+// tbases.forEach((b) => {
+// 	console.log(b);
+// 	tryAddBasis(b);
+// });
 
 // document.querySelectorAll("#upperLeft button")[0].onclick = () => reset();
 // document.querySelectorAll("#upperLeft button")[1].onclick = () => solve();
@@ -710,7 +710,12 @@ function drawLines(outerRadius, innerRadius) {
 
 function solve() {
 
-    addBases(tbases);
+    //addBases(tbases);
+    if(Math.random() >= 0.5) {
+        usePlotA();
+    }else{
+        usePlotB();
+    }
     return;
 
 
