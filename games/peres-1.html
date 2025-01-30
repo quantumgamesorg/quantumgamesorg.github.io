@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/peres-1.css">
+        <link rel="stylesheet" href="../css/scoreboard.css">
         <link rel="stylesheet" href="../css/windowManager.css">
         <script src="../windowManager.js"></script>
     </head>
@@ -42,35 +43,12 @@
                     </div>
                 </div>
                 <div id="boardContainer">
-                    <div class="scoreboard">
-                        <div class="entry"><div>1</div><div>(0)</div></div>
-                        <div class="entry"><div>2</div><div>(0)</div></div>
-                        <div class="entry"><div>3</div><div>(0)</div></div>
-                        <div class="entry"><div>4</div><div>(0)</div></div>
-                        <div class="entry"><div>5</div><div>(0)</div></div>
-                        <div class="entry"><div>6</div><div>(0)</div></div>
-                        <div class="entry"><div>7</div><div>(0)</div></div>
-                        <div class="entry"><div>8</div><div>(0)</div></div>
-                        <div class="entry"><div>9</div><div>(0)</div></div>
-                        <div class="entry"><div>10</div><div>(0)</div></div>
-                        <div class="entry"><div>11</div><div>(0)</div></div>
-                        <div class="entry"><div>12</div><div>(0)</div></div>
-                        <div class="entry"><div>13</div><div>(0)</div></div>
-                        <div class="entry"><div>14</div><div>(0)</div></div>
-                        <div class="entry"><div>15</div><div>(0)</div></div>
-                        <div class="entry"><div>16</div><div>(0)</div></div>
-                        <div class="entry"><div>17</div><div>(0)</div></div>
-                        <div class="entry"><div>18</div><div>(0)</div></div>
-                        <div class="entry"><div>19</div><div>(0)</div></div>
-                        <div class="entry"><div>20</div><div>(0)</div></div>
-                        <div class="entry"><div>21</div><div>(0)</div></div>
-                        <div class="entry"><div>22</div><div>(0)</div></div>
-                        <div class="entry"><div>23</div><div>(0)</div></div>
-                        <div class="entry"><div>24</div><div>(0)</div></div>
-                    </div>
                     <div class="moveCounter"><div class="inner">0</div></div>
                 </div>
-                <div id="upperRight"><!-- <h3>Right side</h3>(room for something here if needed) --></div>
+                <div id="upperRight">
+                    <table id="scoreboard">
+                    </table>
+				</div>
             </div>
         </div>
         <footer>
@@ -78,6 +56,7 @@
             <br>
             Copyright info, contact info, etc.
         </footer>
-        <script src="peres-1.js" async defer></script>
+        <script src="tablegen.js"></script>
+        <script src="peres-1.js"></script>
     </body>
 </html>

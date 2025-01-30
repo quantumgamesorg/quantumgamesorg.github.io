@@ -1,0 +1,39 @@
+
+#scoreboard {
+	max-width: 80vh;
+	font-size: max(min(3vw, 2vh), 7pt);
+	box-shadow: #0002 2px 2px 5px;
+	color: black;
+	height: 100%;
+}
+#scoreboard .ray {
+	align-items: center;
+	justify-content: center;
+	background-color: #dfd;
+	border: 1px solid #666;
+	transition: transform ease-out 0.1s, font-weight ease 0.1s;
+}
+#scoreboard .ray.odd {
+	background-color: #fbb;
+}
+#scoreboard .ray.even {
+	background-color: #bfb;
+}
+#scoreboard .ray.highlight {
+	font-weight: bold;
+	border: 1px solid #995;
+	transform: scale(1.1, 1.1);
+}
+#scoreboard .ray div {
+	text-align: center;
+}
+@media (max-width: 650px) {
+	#scoreboard {
+		flex-direction: row;
+		height: 150px;
+	}
+	#scoreboard .entry {
+		height: 33.33%;
+		width: 12.5%;
+	}
+}

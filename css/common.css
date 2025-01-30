@@ -87,7 +87,6 @@ footer {
 }
 
 #upperLeft, #upperRight {
-  width: 180px;
   margin: 0px 20px 20px 20px;
   display: flex;
   flex-direction: column;
@@ -142,8 +141,8 @@ footer {
   background-color: #ffa;
 }
 
-#upperRight {
-  opacity: 0.5;
+#upperLeft {
+  width: 180px;
 }
 
 @media (max-width: calc(100vh - 100px + 460px)) {
