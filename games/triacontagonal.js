@@ -185,7 +185,7 @@ boardContainer.appendChild(makeCircleBoard(45));
 
 buildScoreboard(8, 5);
 
-tbases = fiveFold;
+tbases = threeFold;
 let myMotif = threeFoldMotifs;
 
 tbases.forEach((b) => {
@@ -193,11 +193,13 @@ tbases.forEach((b) => {
 	tryAddBasis(b);
 });
 
+setTimeout( () => {
 myMotif.forEach(b => {
     foreachLineInBasis(shiftBackBy1(b), l => {
         l.makeBlack(0.7);
     });
 });
+}, 1000);
 
 /*
 
