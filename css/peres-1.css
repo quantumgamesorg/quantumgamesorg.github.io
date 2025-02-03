@@ -14,20 +14,20 @@
 	margin-right: 40px;
 }
 #boardContainer .moveCounter {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  padding: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border: 1px solid #666;
-  background-color: #fcc;
-  font-size: 20pt;
-  font-size: min(6vw, 24pt);
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	top: 2.5%;
+	right: 2.5%;
+	padding: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid #666;
+	background-color: #fcc;
+	font-size: 20pt;
+	font-size: min(6vw, 24pt);
+	text-align: center;
 }
 #boardContainer .moveCounter::before {
   position: absolute;
