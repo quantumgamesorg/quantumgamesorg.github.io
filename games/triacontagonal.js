@@ -185,14 +185,21 @@ boardContainer.appendChild(makeCircleBoard(45));
 
 buildScoreboard(8, 5);
 
-tbases = threeFold;
-let myMotif = threeFoldMotifs;
+tbases =
+    //fiveFold;
+    //threeFold;
+    [];
+usePlotA();
+//usePlotB();
+let myMotif = fiveFoldMotifs;
 
 tbases.forEach((b) => {
 	console.log(b);
 	tryAddBasis(b);
 });
 
+// COLOR MOTIF
+/*
 setTimeout( () => {
 myMotif.forEach(b => {
     foreachLineInBasis(shiftBackBy1(b), l => {
@@ -200,6 +207,7 @@ myMotif.forEach(b => {
     });
 });
 }, 1000);
+*/
 
 /*
 
@@ -379,17 +387,73 @@ function addBasesGeneratedBy(basis, svg) {
     addBases(generate15(basis), svg);
 }
 
+function makeVecFromTo(a, b) {
+    return {x: b.x - a.x, y: b.y - a.y};
+}
+
 function getLineInds(basis, addToInds) {
     if (addToInds === undefined) addToInds = 0;
 
-    return [
+    // all lines
+    /*
+    let availableLines = [
         findLine(basis[0] + addToInds, basis[1] + addToInds),
         findLine(basis[1] + addToInds, basis[2] + addToInds),
         findLine(basis[2] + addToInds, basis[3] + addToInds),
         findLine(basis[3] + addToInds, basis[0] + addToInds),
         findLine(basis[0] + addToInds, basis[2] + addToInds),
         findLine(basis[3] + addToInds, basis[1] + addToInds)
-    ];
+    ];*/
+
+    // available indices
+    let pointInds = [basis[0] + addToInds, basis[1] + addToInds, basis[2] + addToInds, basis[3] + addToInds];
+    let linesToRet = [];
+    let startingPointInd = pointInds[0];
+
+    // Find the leftmost position:
+    for (let i = 0; i < pointInds.length; i++) {
+        if (points[pointInds[i]].x < points[startingPointInd].x) {
+            startingPointInd = pointInds[i];
+        }
+    }
+
+    let startingPoint = points[startingPointInd];
+
+    // https://en.wikipedia.org/wiki/Gift_wrapping_algorithm
+    for (let i = 0; i < pointInds.length; i++) {
+        // ... pick the next point
+        let endpointInd = pointInds[0];
+        for (let j = 0; j < pointInds.length; j++) {
+            if (endpointInd == startingPointInd) {
+                endpointInd = pointInds[j];
+                continue;
+            }
+
+            let candidatePointInd = pointInds[j];
+            let candidatePoint = points[candidatePointInd];
+            if (candidatePoint.x == startingPoint.x && candidatePoint.y == startingPoint.y) continue;
+
+            let vecToEndpoint = makeVecFromTo(startingPoint, points[endpointInd]);
+
+            let delta = makeVecFromTo(startingPoint, candidatePoint);
+            let deltMag = Math.sqrt(delta.x * delta.x + delta.y * delta.y);
+            delta.x /= deltMag;
+            delta.y /= deltMag;
+
+            let sineOfAngle = vecToEndpoint.x * delta.y - vecToEndpoint.y * delta.x;
+            // on left
+            if (sineOfAngle < 0) {
+                endpointInd = pointInds[j];
+                continue;
+            }
+        }
+        console.log("Linking", startingPointInd, endpointInd);
+        linesToRet.push(findLine(startingPointInd, endpointInd));
+        startingPointInd = endpointInd;
+        startingPoint = points[startingPointInd];
+    }
+    console.log("Returning lines", linesToRet);
+    return linesToRet;
 }
 
 function setBasisColor(basis, color, width) {
@@ -418,6 +482,7 @@ function foreachPartOfBasis(basis, lineFun, pointFun) {
 }
 
 function findDirLine(sInd, eInd) {
+    console.log(sInd);
     let lines = points[sInd].lines;
     for (let i = 0; i < lines.length; i++) {
         if (allLines[lines[i]].eInd === eInd) {
@@ -625,11 +690,11 @@ function makeTriacontagonalProjection(outerRadius) {
 }
 
 function usePlotA() {
-    animatedUseBasisN([1, 5, 55, 56], 1500, 15);
+    animatedUseBasisN([1, 5, 55, 56], 200, 15);
 }
 
 function usePlotB() {
-    animatedUseBasisN([16, 18, 36, 43], 1500, 15);
+    animatedUseBasisN([16, 18, 36, 43], 200, 15);
 }
 
 function makeCircleBoard(outerRadius) {
