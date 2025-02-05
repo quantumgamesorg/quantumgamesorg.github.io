@@ -25,20 +25,14 @@
                 <div id="upperLeft">
                     <div class="leftArea">
                         <h3>Menu</h3>
-                        <!-- <button class="infoButton">About <img src="../assets/window_icon.png" style="height: 10px; width: 11.667px" alt="Popup window icon"></button>
-                        <br> -->
-                        <button class="infoButton">Rules <img src="../assets/window_icon.png" style="height: 10px; width: 11.667px" alt="Popup window icon"></button>
-                        <br>
-                        <button>More &ShortDownArrow;</button>
-                        <!-- <button>Personalities &ShortDownArrow;</button>
-                        <button>Credits &ShortDownArrow;</button>
-                        <button>Further Reading &ShortDownArrow;</button> -->
+                        <button onClick="OpenWindow({url:'explainations/peres-2.html', width:500, height:450})">Explanation</button><br>
+                        <button onClick="OpenWindow({url:'notes/peres-2.html', width:500, height:288})">Notes</button>
                     </div>
                     <div class="leftArea">
                         <h3>Actions</h3>
-                        <button class="resetButton">Reset</button>
+                        <button class="resetButton" onClick="reset()">Reset</button>
                         <br>
-                        <button class="solveButton">Display a Solution</button>
+                        <button class="solveButton" onClick="solve()">Display a Solution</button>
                         <br>
                     </div>
                     <div id="windowContainer">
@@ -67,52 +61,6 @@
                     </table>
                 </div>
             </div>
-            <hr>
-            <h1>More Information</h1>
-
-            <p>The explanation for why winning this game proves Einstein wrong is like that given earlier for Peres-1, which you can see by going to <a href="peres-1.html">the page for that game</a>. </p>
-
-            <h2>Personalities</h2>
-            <div id="peopleContainer">
-                <svg width="100" height="100">
-                    <line x1="50%" y1="15%" x2="18%" y2="68%" stroke="black"/>
-                    <line x1="18%" y1="68%" x2="82%" y2="68%" stroke="black"/>
-                    <line x1="82%" y1="68%" x2="50%" y2="15%" stroke="black"/>
-                    <line x1="50%" y1="85%" x2="18%" y2="32%" stroke="black"/>
-                    <line x1="18%" y1="32%" x2="82%" y2="32%" stroke="black"/>
-                    <line x1="82%" y1="32%" x2="50%" y2="85%" stroke="black"/>
-                </svg>
-                <div class="person"><img src="../assets/einstein.jpg"><div>Albert Einstein</br>1879-1955</div></div>
-                <div class="person"><img src="../assets/podolsky.jpg"><div>Boris Podolsky</br>1896-1966</div></div>
-                <div class="person"><img src="../assets/rosen.jpg"><div>Nathan Rosen</br>1909-1995</div></div>
-                <div class="person"><img src="../assets/bell.jpg"><div>John Bell</br>1928-1990</div></div>
-                <div class="person"><img src="../assets/kochen.jpg"><div>Simon Kochen</br>1934-</div></div>
-                <div class="person"><img src="../assets/specker.jpg"><div>Ernst Specker</br>1920-2011</div></div>
-                <div class="person"><img src="../assets/peres.jpg"><div>Asher Peres</br>1934-2005</div></div>
-            </div>
-            <p class="center personDesc">
-                Einstein, Podolsky and Rosen raised deep questions about quantum mechanics.
-            </p>
-            <p class="center personDesc">
-                Bell, Kochen and Specker answered those questions.
-            </p>
-            <p class="center personDesc">
-                Peres reworked the arguments of Bell, Kochen and Specker into the form on which this game is based.
-            </p>
-
-            <h2>Notes</h2>
-            <p>The idea of this demonstration was proposed in Kernaghan, M. and Peres A, Phys. Lett. A, <b>198</b>: 1, 1995. </p>
-            <p>The gameboard for this demonstration is taken from Waegell, M., Aravind, P.K. (2021). <i>GHZ, As Seen Through the Looking Glass.</i> In: Jaeger, G., Simon, D., Sergienko, A.V., Greenberger, D., Zeilinger, A. (eds) Quantum Arrangements. Fundamental Theories of Physics, vol 203. Springer, Cham. https://doi.org/10.1007/978-3-030-77367-0_10. </p>
-            
-            <h2>Further Reading</h2>
-            <p>Vestibulum et sapien tellus. Pellentesque pulvinar vestibulum vestibulum. Cras ac porta dui. Morbi maximus pharetra tellus nec aliquam. Suspendisse orci nisl, euismod et ultricies ut, tincidunt ut libero.</p>
-            <ul>
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Another Link</a></li>
-                <li><a href="#">Third One</a></li>
-                <li><a href="#">The Final Link</a></li>
-            </ul>
-
         </div>
         <footer>
             <button id="toTop">Back to Top &ShortUpArrow;</button>

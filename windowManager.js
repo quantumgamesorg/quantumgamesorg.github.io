@@ -12,7 +12,7 @@ function OpenWindow({url, name='subwindow', width=600, height=800}={}) {
 		activeWindow.resizeTo(width, height)
 	}
 	catch(e) {
-		Log.error(e)
+		console.error(e)
 	}
 }
 
