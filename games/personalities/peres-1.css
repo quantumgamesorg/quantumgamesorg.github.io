@@ -1,0 +1,29 @@
+
+#peopleContainer .person:nth-of-type(1) {
+  top: 15%;
+  left: 50%;
+}
+#peopleContainer .person:nth-of-type(2) {
+  top: 68%;
+  left: 18%;
+}
+#peopleContainer .person:nth-of-type(3) {
+  top: 68%;
+  left: 82%;
+}
+#peopleContainer .person:nth-of-type(4) {
+  top: 85%;
+  left: 50%;
+}
+#peopleContainer .person:nth-of-type(5) {
+  top: 32%;
+  left: 18%;
+}
+#peopleContainer .person:nth-of-type(6) {
+  top: 32%;
+  left: 82%;
+}
+#peopleContainer .person:nth-of-type(7) {
+  top: 50%;
+  left: 50%;
+}
