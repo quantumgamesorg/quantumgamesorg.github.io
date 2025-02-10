@@ -4,7 +4,7 @@
         {
             "label": "SCSS",
             "type": "shell",
-            "command": "sass --watch scss:css",
+            "[disable]command": "sass --watch scss:css",
             "runOptions": { "runOn": "folderOpen" }
         }
     ]
