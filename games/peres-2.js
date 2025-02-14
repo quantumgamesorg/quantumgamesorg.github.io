@@ -10,16 +10,6 @@ boardContainer.appendChild(makeCircleBoard(45));
 
 buildScoreboard(8, 5);
 
-document.querySelectorAll(".person").forEach((e, i) => {
-    e.onmouseenter = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
-    };
-    e.onmouseleave = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
-    };
-});
-
-
 
 function makeCircleBoard(outerRadius) {
     const innerRadius = outerRadius * 0.55;

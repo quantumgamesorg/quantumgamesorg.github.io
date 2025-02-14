@@ -7,7 +7,7 @@ function OpenWindow({url, name='subwindow', width=600, height=800}={}) {
 	try {
 		activeWindow = window.open(url, name, `width=${width}px, height=${height}px`)
 		if (activeWindow == null) {
-			console.warn("OpenWindow failed")
+			console.warn(`OpenWindow ${url} failed`)
 			return;
 		}
 		// resize corrections, add another 15 to width for scroll bar
