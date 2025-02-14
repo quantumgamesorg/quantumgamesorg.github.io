@@ -3,20 +3,22 @@
 var intervalID = 0;
 var state = 0;
 
+var btnPause = document.getElementById('pauseButton')
+
 function startSimulation(e) {
     // state = 0;
     // document.getElementById("emmiter").style.backgroundColor = 'white';
     // clearDetectors();
     intervalID = window.setInterval(simulate, 1500);
-    this.innerHTML = 'Pause'
-    this.onclick = pauseSimulation;
+    btnPause.innerHTML = 'Pause'
+    btnPause.onclick = pauseSimulation;
     if(e !== undefined) e.stopImmediatePropagation();
 }  
 
 function pauseSimulation(e) {
     window.clearInterval(intervalID); 
-    this.innerHTML = 'Resume'
-    this.onclick = startSimulation;
+    btnPause.innerHTML = 'Resume'
+    btnPause.onclick = startSimulation;
     if(e !== undefined) e.stopImmediatePropagation();
 }
 
@@ -294,14 +296,6 @@ window.onload = () => {
 
     let boardContainer = document.getElementById("boardContainer");
     //const defaultBoardContainerSize = { width: parseInt(getComputedStyle(boardContainer).width), height: parseInt(getComputedStyle(boardContainer).height) };
-
-    document.getElementById("pauseButton").onclick = pauseSimulation;
-    document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-    document.querySelectorAll("#upperLeft button")[1].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-    // document.querySelectorAll("#upperLeft button")[4].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[1].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-    // document.querySelectorAll("#upperLeft button")[5].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[2].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-    // document.querySelectorAll("#upperLeft button")[6].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > h2")[3].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-    document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
     let upperArea = document.getElementById('upperArea');
     upperArea.appendChild(setupSimulation(300));

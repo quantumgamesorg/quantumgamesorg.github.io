@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/GHZ.css">
-        <link rel="stylesheet" href="../css/windowManager.css">
     </head>
     <body>
         <header>
@@ -21,105 +20,27 @@
                 <div id="upperLeft">
                     <div class="leftArea">
                         <h3>Menu</h3>
-                        <button class="infoButton">About <img src="../assets/window_icon.png" style="height: 10px; width: 11.667px" alt="Popup window icon"></button>
-                        <br>
-                        <button>Explanation &ShortDownArrow;</button>
-                        <!-- <button>Personalities &ShortDownArrow;</button>
-                        <button>Credits &ShortDownArrow;</button>
-                        <button>Further Reading &ShortDownArrow;</button> -->
+                        <button onClick="OpenWindow({url:'about/GHZ.html', width:600, height:600})">About</button><br>
+                        <button onClick="OpenWindow({url:'explainations/GHZ.html'})">Explaination</button><br>
+                        <button onClick="OpenWindow({url:'personalities/GHZ.html'})">Personalities</button><br>
+                        <button onClick="OpenWindow({url:'notes/GHZ.html', width:500, height:350})">Notes</button>
                     </div>
                     <div class="leftArea">
                         <h3>Actions</h3>
                         <button id="pauseButton">Pause</button>
                         <br>
                     </div>
-
-
-                    <div id="windowContainer">
-                        <div id="win_about" class="window hidden">
-                            <h3>About</h3>
-                            <p>The source S periodically sends out particles to Alice and Bob that reach them simultaneously.</p> 
-                            <p>Alice and Bob each choose one of the lines of four circles on their detector to fire in any run. They do this independently and randomly, just before the particles arrive.</p> 
-                            <p>The number of panels that light up red in the chosen line of Alice’s or Bob’s detector is always odd.</p> 
-                            <p>The one common panel that lights up on both Alice’s and Bob’s detectors always has the same color on both. </p> 
-                            <p>The pattern of lights observed on the detectors illustrates the phenomenon of quantum entanglement, which is a correlation between events at distant locations that cannot be traced back to a common cause in the past.</p>
-                            <p>Click on “Explanation” to learn how this demonstration reveals entanglement.</p> 
-                            <p>This demonstration is linked closely to the game Peres-2, although the connection is not obvious.</p> 
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div id='explanationContainer'>
+            <div id="explanationContainer">
                 <p>An odd number of red panels always lights up on each detector</p>
                 <p>The lighted panel(s) common to both detectors always has (have) the same color(s) on both</p>
             </div>
-            <hr>
-            <h1>More Information</h1>
-
-            <h2>Explanation</h2>
-
-            <p>It seems reasonable to assume that the detectors are triggered by the particles they get from the source. If they are triggered by some other agency, then that agency must play the role of the particles in the explanation below.</p> 
-            <p>There is no telling what the common panel on the two detectors will be in any run, since Alice and Bob make their choice of detector settings independently (and just before the particles arrive!). The common panel could therefore easily be any of the ten.</p> 
-            <p>But if the common panel is always to light up the same color on both detectors, the particles going to them must ensure that their corresponding panels always light up the same colors (so that no matter what the common panel is, it always lights up the same color on both).</p> 
-            <p>Call the common colors assigned to the panels of the two detectors in any run an instruction set. Then the particles going out from the source must convey identical instruction sets to both detectors in any run.</p> 
-            <p>Because each line on a detector is required to have an odd number of red panels, the total number of red panels obtained by summing them over all the five lines has to be odd. </p> 
-            <p>But because each panel occurs at the intersection of two lines, each red panel gets counted twice in the sum over the lines, causing the total number of red panels over all the five lines to be even. </p> 
-            <p>However, the sum of the red panels over the five lines of a given instruction set cannot be both even and odd, showing that viable instruction sets accounting for all the features of this demonstration simply do not exist.</p> 
-            <p>The only explanation for this experiment would seem to be that when one of the detectors fires it instantly communicates its pattern of lights to the other which then adjusts its response to be in accordance with all the required conditions. But this is nothing other than “spooky action at a distance”!</p> 
-
-            <h2>Personalities</h2>
-            <div id="peopleContainer">
-                <svg width="100" height="100">
-                    <line x1="50%" y1="15%" x2="18%" y2="68%" stroke="black"/>
-                    <line x1="18%" y1="68%" x2="82%" y2="68%" stroke="black"/>
-                    <line x1="82%" y1="68%" x2="50%" y2="15%" stroke="black"/>
-                    <line x1="50%" y1="85%" x2="18%" y2="32%" stroke="black"/>
-                    <line x1="18%" y1="32%" x2="82%" y2="32%" stroke="black"/>
-                    <line x1="82%" y1="32%" x2="50%" y2="85%" stroke="black"/>
-                </svg>
-                <div class="person"><img src="../assets/einstein.jpg"><div>Albert Einstein</br>1879-1955</div></div>
-                <div class="person"><img src="../assets/podolsky.jpg"><div>Boris Podolsky</br>1896-1966</div></div>
-                <div class="person"><img src="../assets/rosen.jpg"><div>Nathan Rosen</br>1909-1995</div></div>
-                <div class="person"><img src="../assets/bell.jpg"><div>John Bell</br>1928-1990</div></div>
-                <div class="person"><img src="../assets/kochen.jpg"><div>Simon Kochen</br>1934-</div></div>
-                <div class="person"><img src="../assets/specker.jpg"><div>Ernst Specker</br>1920-2011</div></div>
-                <div class="person"><img src="../assets/peres.jpg"><div>Asher Peres</br>1934-2005</div></div>
-            </div>
-            <p class="center personDesc">
-                Einstein, Podolsky and Rosen raised deep questions about quantum mechanics.
-            </p>
-            <p class="center personDesc">
-                Bell, Kochen and Specker answered those questions.
-            </p>
-            <p class="center personDesc">
-                Peres reworked the arguments of Bell, Kochen and Specker into the form on which this game is based.
-            </p>
-
-            <button onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Back to Top &ShortUpArrow;</button>
-
-            <h2>Credits</h2>
-            <p>
-            Maecenas bibendum turpis eros, non mattis enim sagittis sit amet. Nunc lacinia nulla sit amet condimentum blandit. Curabitur ullamcorper faucibus sem, nec tincidunt neque facilisis a. Cras vestibulum nisi id diam lobortis accumsan. Aenean fermentum massa et mattis suscipit. Phasellus pellentesque tellus sit amet urna auctor, in condimentum ante tincidunt. Suspendisse elementum, nisi vitae efficitur ornare, lorem leo consectetur mi, non egestas orci massa ultrices lacus. Sed faucibus congue sem in gravida. Donec urna ligula, molestie sit amet ipsum ut, rhoncus aliquet nibh. Maecenas sed velit in lectus facilisis dapibus. Donec diam massa, condimentum nec risus quis, viverra feugiat sapien. Duis diam lorem, hendrerit et vestibulum at, dictum non neque.
-            </p><p>
-            In metus ante, pretium vestibulum lectus vel, aliquam mattis augue. Donec aliquet nibh ac fringilla facilisis. Curabitur id pellentesque tellus. Duis luctus, lorem a maximus euismod, risus ligula commodo dolor, id pretium lorem neque eget leo. Mauris rutrum justo sit amet orci cursus, a fermentum magna efficitur. Donec maximus tempor neque maximus tempus. Sed volutpat feugiat nisi, eu vulputate orci varius id. Nulla facilisi. Vivamus quis elementum ex. Suspendisse euismod iaculis varius.
-            </p>
-            <h2>Further Reading</h2>
-            <p>
-            Vestibulum et sapien tellus. Pellentesque pulvinar vestibulum vestibulum. Cras ac porta dui. Morbi maximus pharetra tellus nec aliquam. Suspendisse orci nisl, euismod et ultricies ut, tincidunt ut libero.
-            </p>
-            <ul>
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Another Link</a></li>
-                <li><a href="#">Third One</a></li>
-                <li><a href="#">The Final Link</a></li>
-            </ul>
         </div>
         <footer>
-            <button id="toTop">Back to Top &ShortUpArrow;</button>
-            <br>
             Copyright info, contact info, etc.
         </footer>
-        <script src="../windowManager.js" async defer></script>
+        <script src="windowManager.js"></script>
         <script src="GHZ.js" async defer></script>
     </body>
 </html>

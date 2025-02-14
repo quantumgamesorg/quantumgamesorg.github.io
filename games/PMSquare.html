@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/PMSquare.css">
-        <link rel="stylesheet" href="../css/windowManager.css">
     </head>
     <body>
         <header>
@@ -20,31 +19,15 @@
                 <div id="upperLeft">
                     <div class="leftArea">
                         <h3>Menu</h3>
-                        <button onClick="OpenWindow({url:'origins/PMSquare.html', width:600, height:625})">Origin of game</button><br>
+                        <button onClick="OpenWindow({url:'about/PMSquare.html', width:600, height:625})">About</button><br>
                         <button onClick="OpenWindow({url:'explainations/PMSquare.html'})">Explanation</button><br>
+                        <button onClick="OpenWindow({url:'personalities/PMSquare.html'})">Personalities</button><br>
                         <button onClick="OpenWindow({url:'notes/PMSquare.html', width:600, height:625})">Notes</button>
                     </div>
                     <div class="leftArea">
                         <h3>Actions</h3>
                         <button id="pauseButton">Pause</button>
                         <br>
-                    </div>
-                    <div id="windowContainer">
-                        <div id="win_about" class="window hidden">
-                            <h3>About</h3>
-                            <!-- <p>The number of red panels on Alice's detector is always even</p>
-                            <p>The number of red panels on Bob's detector is always odd</p>
-                            <p>The single lighted panel common to both detectors always has the same color on both</p> -->
-                            <p>The source S periodically sends out particles to Alice and Bob that reach them simultaneously. 
-                            <p>Alice chooses one of the rows R1, R2 or R3 of her detector to fire and Bob one of the columns C1, C2 or C3 of his. They do this independently and randomly, just before the particles arrive. </p>
-                            <p>The number of panels that light up red in the chosen row of Alice’s detector is always even. </p>
-                            <p>The number of panels that light up red in the chosen column of Bob’s detector is always odd. </p>
-                            <p>The one common panel that lights up on both detectors always has the same color on both. </p>
-                            <p>The pattern of lights observed on the detectors illustrates the phenomenon of quantum entanglement, which is a correlation between events at distant locations that cannot be traced back to a common cause in the past. </p>
-                            <p>Click on “Explanation” to learn how this demonstration reveals entanglement.</p>
-                            <p>This demonstration is linked closely to the game Peres-1, although the connection is not obvious. </p> 
-                            
-                        </div>
                     </div>
                 </div>
                 <div id="simulationContainer">
@@ -99,7 +82,7 @@
         <footer>
             Copyright info, contact info, etc.
         </footer>
-        <script src="../windowManager.js" async defer></script>
-        <script src="PMSquare.js" async defer></script>
+        <script src="windowManager.js"></script>
+        <script src="PMSquare.js"></script>
     </body>
 </html>
