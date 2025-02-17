@@ -20,7 +20,4 @@ function OpenWindow({url, name='subwindow', width=600, height=800}={}) {
 	}
 }
 
-OpenWindow()
-if (activeWindow != null) activeWindow.close()
-
 window.onbeforeunload = () => { if(activeWindow != null) activeWindow.close() }
