@@ -172,6 +172,47 @@ let tbases = [
    [   14,  25,  40,  59], 
    [   15,  19,  40,  57]
 ];
+
+
+let celesteFiveFold = [
+    [59, 14, 25, 40],
+    [39, 19, 31, 21],
+    [8, 27, 33, 50],
+    [47, 43, 2, 28],
+    [42, 24, 22, 34],
+    [11, 53, 30, 36],
+    [37, 11, 56, 22],
+    [43, 36, 16, 18],
+    [45, 5, 24, 47],
+    [16, 5, 31, 50],
+    [25, 37, 45, 27],
+    [18, 39, 14, 56],
+    [34, 19, 8, 53],
+    [40, 30, 33, 28],
+    [42, 59, 2, 21]];
+
+let celesteFiveFoldBases = [
+    
+];
+
+let celesteThreeFold = [
+    [24, 26, 36, 44], 
+    [39, 19, 31, 21], 
+    [16, 29, 34, 41], 
+    [4, 55, 15, 54], 
+    [49, 14, 10, 50], 
+    [60, 9, 59, 5], 
+    [48, 13, 9, 49], 
+    [8, 4, 58, 59], 
+    [14, 54, 53, 3], 
+    [16, 5, 31, 50], 
+    [41, 15, 60, 26],
+    [55, 36, 10, 21],
+    [34, 19, 8, 53],
+    [29, 3, 44, 48],
+    [13, 58, 39, 24]]
+;
+
 //let tbases = dbasis.map((b) => canonicalize(b.map((v) => transmap[v - 1])));
 //console.log(tbases)
 
@@ -188,8 +229,12 @@ buildScoreboard(8, 5);
 let includeDiagonals = false;
 
 tbases =
-    fiveFold;
+    //[fiveFoldMotifs[1]]
+    //[fiveFold[7]]; //1, 3
+    //fiveFold;
     //threeFold;
+    //celesteFiveFold;
+    celesteThreeFold;
     [];
 //usePlotA();
 //usePlotB();
@@ -198,7 +243,8 @@ let myMotif = [
     //[16, 18, 36, 43]
 ];
 myMotif = //threeFoldMotifs;
-        fiveFoldMotifs;
+        //fiveFoldMotifs;
+        //[threeFoldMotifs[0]];
         [];
 
 tbases.forEach((b) => {
