@@ -185,6 +185,8 @@ boardContainer.appendChild(makeCircleBoard(45));
 
 buildScoreboard(8, 5);
 
+let includeDiagonals = false;
+
 tbases =
     fiveFold;
     //threeFold;
@@ -195,7 +197,9 @@ let myMotif = [
     //[1, 5, 55, 56]
     //[16, 18, 36, 43]
 ];
-myMotif = fiveFoldMotifs;
+myMotif = //threeFoldMotifs;
+        fiveFoldMotifs;
+        [];
 
 tbases.forEach((b) => {
 	console.log(b);
@@ -415,7 +419,6 @@ function getLineInds(basis, addToInds) {
     if (addToInds === undefined) addToInds = 0;
 
     // all lines
-    /*
     let availableLines = [
         findLine(basis[0] + addToInds, basis[1] + addToInds),
         findLine(basis[1] + addToInds, basis[2] + addToInds),
@@ -423,7 +426,10 @@ function getLineInds(basis, addToInds) {
         findLine(basis[3] + addToInds, basis[0] + addToInds),
         findLine(basis[0] + addToInds, basis[2] + addToInds),
         findLine(basis[3] + addToInds, basis[1] + addToInds)
-    ]; */
+    ];
+    if (includeDiagonals) {
+        return availableLines;
+    }
 
     // available indices
     let pointInds = [basis[0] + addToInds, basis[1] + addToInds, basis[2] + addToInds, basis[3] + addToInds];
