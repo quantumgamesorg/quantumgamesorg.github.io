@@ -186,12 +186,16 @@ boardContainer.appendChild(makeCircleBoard(45));
 buildScoreboard(8, 5);
 
 tbases =
-    //fiveFold;
+    fiveFold;
     //threeFold;
     [];
-usePlotA();
+//usePlotA();
 //usePlotB();
-let myMotif = fiveFoldMotifs;
+let myMotif = [
+    //[1, 5, 55, 56]
+    //[16, 18, 36, 43]
+];
+myMotif = fiveFoldMotifs;
 
 tbases.forEach((b) => {
 	console.log(b);
@@ -199,7 +203,7 @@ tbases.forEach((b) => {
 });
 
 // COLOR MOTIF
-/*
+
 setTimeout( () => {
 myMotif.forEach(b => {
     foreachLineInBasis(shiftBackBy1(b), l => {
@@ -207,7 +211,7 @@ myMotif.forEach(b => {
     });
 });
 }, 1000);
-*/
+
 
 /*
 
@@ -391,6 +395,22 @@ function makeVecFromTo(a, b) {
     return {x: b.x - a.x, y: b.y - a.y};
 }
 
+function magSquare(v) {
+    return v.x * v.x + v.y * v.y;
+}
+
+function vecmag(v) {
+    return Math.sqrt(magSquare(v));
+}
+
+function scaleVec(v, s) {
+    return {x: v.x * s, y: v.y * s};
+}
+
+function vecdot(v, w) {
+    return v.x * w.x + v.y * w.y;
+}
+
 function getLineInds(basis, addToInds) {
     if (addToInds === undefined) addToInds = 0;
 
@@ -403,11 +423,12 @@ function getLineInds(basis, addToInds) {
         findLine(basis[3] + addToInds, basis[0] + addToInds),
         findLine(basis[0] + addToInds, basis[2] + addToInds),
         findLine(basis[3] + addToInds, basis[1] + addToInds)
-    ];*/
+    ]; */
 
     // available indices
     let pointInds = [basis[0] + addToInds, basis[1] + addToInds, basis[2] + addToInds, basis[3] + addToInds];
     let linesToRet = [];
+    let pointsToPut = [];
     let startingPointInd = pointInds[0];
 
     // Find the leftmost position:
@@ -447,11 +468,97 @@ function getLineInds(basis, addToInds) {
                 continue;
             }
         }
-        console.log("Linking", startingPointInd, endpointInd);
+        
+        if (startingPointInd === pointsToPut[0]) {
+            break;
+        }
+        //console.log("Linking", startingPointInd, endpointInd);
+        pointsToPut.push(startingPointInd);
         linesToRet.push(findLine(startingPointInd, endpointInd));
         startingPointInd = endpointInd;
         startingPoint = points[startingPointInd];
     }
+
+    if (pointsToPut.length == 3) {
+        let lastPoint = undefined;
+        for (let i = 0; i < pointInds.length; i++) {
+            let seen = false;
+            for (let j = 0; j < pointsToPut.length; j++) {
+                if (pointsToPut[j] === pointInds[i]) {
+                    seen = true;
+                    break;
+                }
+            }
+            if (seen) {
+                continue;
+            }
+            lastPoint = pointInds[i];
+            break;
+        }
+
+        if (lastPoint === undefined) {
+            console.log("BIG ERROR");
+        }
+        else {
+            console.log("Missing point identified");
+            
+            let medPt = points[lastPoint];
+
+            let bestDot = -Infinity;
+            let bestI = 0;
+
+            for (let i = 0; i < pointsToPut.length; i++) {
+                let pt1 = points[pointsToPut[i]];
+                let nextI = (i + 1) % pointsToPut.length;
+                let pt2 = points[pointsToPut[nextI]];
+
+                let v1 = makeVecFromTo(pt1, pt2);
+                v1 = scaleVec(v1, 1.0 / vecmag(v1));
+
+                let v2 = makeVecFromTo(pt1, medPt);
+                v2 = scaleVec(v2, 1.0 / vecmag(v2));
+
+                let curDot = vecdot(v1, v2);
+                if (curDot > bestDot) {
+                    bestDot = curDot;
+                    bestI = i;
+                }
+            }
+
+            linesToRet = [];
+
+            for (let i = 0; i < pointsToPut.length; i++) {
+                if (i == bestI) {
+                    let pt1 = pointsToPut[i];
+                    let nextI = (i + 1) % pointsToPut.length;
+                    let pt3 = pointsToPut[nextI];
+                    let pt2 = lastPoint;
+                    linesToRet.push(findLine(pt1, pt2));
+                    linesToRet.push(findLine(pt2, pt3));
+                    continue;
+                }
+
+                let curPt = pointsToPut[i];
+                let nextI = (i + 1) % pointsToPut.length;
+                let nextPt = pointsToPut[nextI];
+                linesToRet.push(findLine(curPt, nextPt));
+            }
+
+            if (linesToRet.length == 4) {
+                console.log("w");
+            }
+            else {
+                console.log("Line count wrong");
+            }
+        }
+    }
+    else if (pointsToPut.length == 4) {
+        console.log("Success amnt!");
+    }
+    else {
+        console.log("Unhandled count error");
+    }
+
     console.log("Returning lines", linesToRet);
     return linesToRet;
 }
@@ -482,7 +589,7 @@ function foreachPartOfBasis(basis, lineFun, pointFun) {
 }
 
 function findDirLine(sInd, eInd) {
-    console.log(sInd);
+    //console.log(sInd);
     let lines = points[sInd].lines;
     for (let i = 0; i < lines.length; i++) {
         if (allLines[lines[i]].eInd === eInd) {
