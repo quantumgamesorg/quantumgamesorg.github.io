@@ -27,9 +27,9 @@
                     </div>
                     <div class="leftArea">
                         <h3>Actions</h3>
-                        <button class="resetButton" onClick="reset()">Reset</button>
+                        <button class="resetButton" onClick="{document.querySelectorAll('.solveButton option')[0].selected = true; reset();}">Reset</button>
                         <br>
-                        <label for="cars">Display a solution:</label>
+                        <label for="solveButton">Display a solution:</label>
                         <br>
                         <select name="solveButton" class="solveButton" onchange = "solve(this.value)">
                             <option class="solution" value='-' selected>-</option>
