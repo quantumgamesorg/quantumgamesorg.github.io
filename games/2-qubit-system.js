@@ -36,32 +36,8 @@ function setupBoard() {
         [22, 24, 29, 31,    17, 19, 26, 28,     2,  4, 29, 31,    34, 35, 58, 59,    38, 40, 57, 59], 
         [42, 43, 49, 50,    46, 47, 49, 51,    38, 39, 50, 51,    13, 16, 39, 40,    46, 48, 57, 58],  
     ]);
-buildScoreboard(15, 4, true);
-    // Reset button
-document.querySelectorAll("#upperLeft button")[3].onclick = () => {document.querySelectorAll('#upperLeft option')[0].selected = true;  reset();}
-// TODO: these extra solve buttons are temporary
-// var solutionElements = document.querySelectorAll('#upperLeft option');
-// for (let i = 0; i < solutionElements.length; ++i) {
-//     solutionElements[i].onclick = () => solve(solutionElements[i].innerHTML);
-// }
-// // shitty code - unnecessary for loop - resolved by calling javascript function from dropdown
-// // comment from my friend: "Who fucking wrote this?"
-
-document.querySelectorAll("#upperLeft button")[0].onclick = () => document.querySelector("#win_about").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[1].onclick = () => document.querySelector("#win_rules").classList.toggle("hidden");
-document.querySelectorAll("#upperLeft button")[2].onclick = () => window.scrollTo({top: document.querySelectorAll("#content > hr")[0].getBoundingClientRect().top + window.pageYOffset - 40, behavior: "smooth"});
-document.getElementById("toTop").onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
-
-document.querySelectorAll(".person").forEach((e, i) => {
-    e.onmouseenter = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", true);
-    };
-    e.onmouseleave = ev => {
-        document.querySelectorAll(".personDesc")[Math.floor(i / 3)].classList.toggle("highlight", false);
-    };
-});
+	buildScoreboard(15, 4, true);
 }
-//boardContainer.insertBefore(makeBoard(100), boardContainer.firstChild);
 
 setupBoard();
 
