@@ -217,7 +217,7 @@ let celesteThreeFold = [
 //console.log(tbases)
 
 let blackLineWidth = 0.1;
-let blueLineWidth = 0.2;
+let blueLineWidth = 0.4;
 let redLineWidth = 0.2;
 
 
@@ -234,19 +234,91 @@ tbases =
     //fiveFold;
     //threeFold;
     //celesteFiveFold;
-    celesteThreeFold;
+    //celesteThreeFold;
     [];
 //usePlotA();
 //usePlotB();
-let myMotif = [
-    //[1, 5, 55, 56]
-    //[16, 18, 36, 43]
-];
-myMotif = //threeFoldMotifs;
-        //fiveFoldMotifs;
-        //[threeFoldMotifs[0]];
-        [];
 
+
+
+
+
+// Fivefold Flower
+let myMotif = [
+    [1, 5, 55, 56],
+    [1, 19, 43, 49],
+    [2, 28, 43, 47]
+];
+
+myMotif = [
+
+    [1, 5, 55, 56], // AADD
+    [1, 19, 43, 49], // ABCD 1
+    [2, 28, 43, 47] // ABCD 2
+
+    //[1, 5, 55, 56],
+    //addN([1, 19, 43, 49], 6),
+    //addN([2, 28, 43, 47], 0),
+
+    //addN([3, 14, 53, 54], 0),
+    //addN([4, 15, 54, 55], 5),
+    
+    //addN([3, 29, 44, 48], 0),
+    //addN([5, 16, 31, 50], 5),
+    //[16, 29, 34, 41]
+
+    /*
+    [3, 14, 53, 54], //AADD
+    [4, 15, 54, 55],
+    [3, 29, 44, 48], //ABCD
+    [5, 16, 31, 50],
+    [16, 29, 34, 41] //BBCC
+    */
+
+    /*
+    [    1,  19,  43,  49], //ABCD 1
+    [    1,  27,  42,  46], //ABCD 2
+    [    2,  21,  42,  59], // ABCD 3 nonconvex
+    [    2,  20,  44,  50],
+    [    3,  21,  45,  51],
+    [    3,  29,  44,  48],
+    [    4,  30,  45,  49],
+    [    3,  22,  43,  60],
+    [    3,  14,  53,  54], //AADD 1
+    */
+];
+let rotationColors = 
+    //["#0000FF"];
+    //["#FF0000"];
+    ["#FF0000", "#1b960e", "#d4d00f", "#0000FF", "#e00dc4"];
+    //["#FF0000", "#0000FF", "#05b32b"];
+
+/*
+// Threefold
+let myMotif = [
+    [3, 14, 53, 54],
+    [3, 29, 44, 48],
+    [4, 15, 54, 55],
+    [5, 16, 31, 50],
+    [16, 29, 34, 41]
+];
+let rotationColors = ["#FF0000", "#0000FF", "#05b32b"];
+*/
+
+let showOnly = "#0000FF";
+showOnly = undefined;
+
+let foldSymmetry = rotationColors.length;
+let stepSize = 15 / foldSymmetry;
+
+for (let i = 0; i < foldSymmetry; i++) {
+    let col = rotationColors[i];
+    let amnt = stepSize * i;
+    for (let j = 0 ; j < myMotif.length; j++) {
+        tryAddBasis(addN(myMotif[j], amnt), col);
+    }
+}
+/*
 tbases.forEach((b) => {
 	console.log(b);
 	tryAddBasis(b);
@@ -261,7 +333,7 @@ myMotif.forEach(b => {
     });
 });
 }, 1000);
-
+*/
 
 /*
 
@@ -307,7 +379,7 @@ document.querySelectorAll(".person").forEach((e, i) => {
     };
 });
 
-function pickFillColorFromUses(uses) {
+function pickFillColorFromUses(uses, col) {
     if (uses === 0) return "#000000";
     if (uses % 2 === 1) return "#FF0000";
     return "#00FF00";
@@ -324,9 +396,10 @@ function makePoint(x, y, width) {
         y: y,
         element: circ,
         uses: 0,
+        color: "#FF0000",
         lines: [],
         updateColor: function() {
-            circ.setAttribute("fill", pickFillColorFromUses(this.uses));
+            circ.setAttribute("fill", pickFillColorFromUses(this.uses, this.color));
         },
         addUse: function() {
             this.uses++;
@@ -353,10 +426,13 @@ function makeLine(startInd, endInd) {
         sInd: startInd,
         eInd: endInd,
         element: line,
+        color: "blue",
         uses: 0,
         makeColor: (col, width) => {
+            if (showOnly === undefined || col == showOnly) {
             line.setAttribute("stroke", col);
             line.setAttribute("stroke-width", width + "%");
+            }
         },
         updateColor: function(overrideWidth) {
             if (this.uses === 0) {
@@ -366,7 +442,10 @@ function makeLine(startInd, endInd) {
                 if (overrideWidth === undefined) {
                     overrideWidth = blueLineWidth;
                 }
-                this.makeColor("blue", overrideWidth);
+                if (this.color === undefined) {
+                    this.color = "blue";
+                }
+                this.makeColor(this.color, overrideWidth);
             }
         },
         addUse: function() {
@@ -760,13 +839,14 @@ function temporarilyEngorgeLine(basis, bigWidth, time) {
     setTimeout(() => {reasonablyUpdateLines(shiftBackBy1(basis));}, time);
 }
 
-function markBasisUsed(basis) {
+function markBasisUsed(basis, col) {
 
     bases.push(basis);
 
     foreachPartOfBasis(shiftBackBy1(basis), (line) => {
         console.log(line.sInd + " " + line.eInd);
         line.addUse();
+        line.color = col;
         //line.makeColor("yellow", 1);
         line.updateColor();
     }, (point) => {
@@ -774,7 +854,7 @@ function markBasisUsed(basis) {
         point.updateColor();
     });
 
-    temporarilyEngorgeLine(basis, 1, 300);
+    //temporarilyEngorgeLine(basis, 1, 300);
 }
 
 function markBasisUnused(basis) {
@@ -787,14 +867,14 @@ function markBasisUnused(basis) {
     });
 }
 
-function tryAddCanonicalBasis(basis) {
+function tryAddCanonicalBasis(basis, col) {
     if (findCanonicalBasisIndexIfPresent(basis) >= 0) return;
 
-    markBasisUsed(basis);
+    markBasisUsed(basis, col);
 }
 
-function tryAddBasis(basis) {
-    tryAddCanonicalBasis(canonicalize(basis));
+function tryAddBasis(basis, col) {
+    tryAddCanonicalBasis(canonicalize(basis), col);
 }
 
 function tryRemoveCanonicalBasis(basis) {
