@@ -65,7 +65,7 @@ footer {
   width: 400px !important;
 }
 
-#does {
+#does, .gameHeader {
   margin-bottom: 20px;
   color: #600;
 }
