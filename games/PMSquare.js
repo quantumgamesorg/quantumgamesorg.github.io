@@ -14,7 +14,7 @@ function startSimulation(e) {
 
 function pauseSimulation(e) {
     window.clearInterval(intervalID); 
-    btnPause.innerHTML = 'Resume'
+    this.innerHTML = 'Resume'
     this.onclick = startSimulation;
     if(e !== undefined) e.stopImmediatePropagation();
 }
