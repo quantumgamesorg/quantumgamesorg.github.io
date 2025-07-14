@@ -2,20 +2,22 @@ var intervalID = 0;
 
 var state = 0;
 
+var btnPause = document.getElementById('pauseButton')
+
 function startSimulation(e) {
     // state = 0;
     // document.getElementById("emmiter").style.backgroundColor = 'white';
     // clearDetectors();
     intervalID = window.setInterval(simulate, 1500);
-    this.innerHTML = 'Pause'
-    this.onclick = pauseSimulation;
+    btnPause.innerText = 'Pause'
+    btnPause.onclick = pauseSimulation;
     if(e !== undefined) e.stopImmediatePropagation();
 }  
 
 function pauseSimulation(e) {
     window.clearInterval(intervalID); 
-    this.innerHTML = 'Resume'
-    this.onclick = startSimulation;
+    btnPause.innerText = 'Resume'
+    btnPause.onclick = startSimulation;
     if(e !== undefined) e.stopImmediatePropagation();
 }
 
