@@ -8,3 +8,10 @@ The scss has not been updated in a while so running this command will build an o
 Alternatively, use `sass --watch scss:css` to recompile the css automatically (if you are using VSCode, there is a task set up to do this automatically on load; the first time you will need to do Ctrl+Shift+P and run `Tasks: Manage Automatic Tasks in Folder` to enable it)~~
 
 # To-Do List/Log
+
+
+# Development
+
+* Install python
+* Run ```python -m http.server 8000``` from main folder
+* Open in browser
