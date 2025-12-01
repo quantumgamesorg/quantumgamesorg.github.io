@@ -27,6 +27,109 @@
 #scoreboard .ray div {
 	text-align: center;
 }
+
+
+/* Follows styling of scoreboard */
+#displaySolutionContainer {
+	max-width: 100%;
+	margin-top: 10px;
+}
+#displaySolutionContainer .ray {
+	align-items: center;
+	justify-content: center;
+	background-color: #dfd;
+	border: 1px solid #666;
+	transition: transform ease-out 0.1s, font-weight ease 0.1s;
+	padding: 6px 8px;
+	border-radius: 6px;
+	box-shadow: 0 2px 0 #9997 inset, 0 2px 4px #0002;
+	min-width: 30px;
+	height: 30px;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 2px;
+}
+#displaySolutionContainer .ray .bit {
+	color: #222;
+	opacity: 0.9;
+	font-size: 0.9em;
+}
+
+#displaySolutionContainer .ray.selected {
+	background-color: #f88;
+	box-shadow: inset 0 2px 0 #c66, 0 1px 3px #0002;
+	transform: translateY(1px);
+	color: #600;
+}
+
+.displaySolutionControls {
+	margin-top: 8px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+.power.set {
+	background: linear-gradient(#dff8e8, #bff4c7);
+	border-color: #3a3;
+	color: #063;
+}
+.displaySolutionControls button {
+	padding: 6px 10px;
+}
+
+.power {
+	appearance: none;
+	border-radius: 6px;
+	padding: 6px 10px;
+	margin-right: 8px;
+	border: 1px solid #666;
+	background: linear-gradient(#eee, #ddd);
+	box-shadow: 0 2px 0 #0002, inset 0 1px 0 #fff;
+	cursor: pointer;
+}
+.power.off {
+	background: linear-gradient(#f8d8d8, #f2bfbf);
+	border-color: #c44;
+	color: #600;
+}
+.power.on {
+	background: linear-gradient(#dff8e8, #bff4c7);
+	border-color: #3a3;
+	color: #063;
+}
+
+#displaySolutionContainer.disabled .ray {
+	opacity: 0.45;
+	pointer-events: none;
+}
+
+#displaySolutionContainer {
+	width: 100%;
+}
+
+#displaySolution {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+#displaySolutionContainer tr {
+	display: flex;
+	gap: 6px;
+	flex-wrap: nowrap;
+}
+
+#displaySolutionContainer .ray div:first-child {
+	font-weight: 600;
+	font-size: 0.8em;
+	opacity: 0.85;
+}
+
+#displaySolutionContainer .ray .bit {
+	font-weight: 700;
+	font-size: 1.05em;
+}
+
 @media (max-width: 650px) {
 	#scoreboard {
 		flex-direction: row;

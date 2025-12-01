@@ -30,6 +30,15 @@ function setupBoard() {
 }
 setupBoard();
 
+let displaySolutionContainer = document.getElementById("displaySolutionContainer");
+
+// Binary solution displayer as a 1x33 array
+function setupDisplaySolution() {
+
+    buildDisplaySolution(1, 33);
+}
+setupDisplaySolution();
+
 
 function solve(size) {
     reset();
