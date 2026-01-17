@@ -13,5 +13,5 @@ Alternatively, use `sass --watch scss:css` to recompile the css automatically (i
 # Development
 
 * Install python
-* Run ```python -m http.server 8000``` from main folder
+* Run ```python3 -m http.server 8000``` from main folder
 * Open in browser
