@@ -1,5 +1,23 @@
 
+#game {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 20px;
+}
+
+#rightPanel {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+#game #score {
+	text-align: center;
+	margin-left: 13%; /* Manual adjustment */
+}
+
 #game #scoreboard {
-	padding-top: 11.5%;
+	padding-top: 0;
 	box-shadow: none;
 }
