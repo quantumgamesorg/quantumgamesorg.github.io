@@ -175,6 +175,7 @@ function setDisplayBit(index, on) {
 function setDisplaySolution() {
     const display = document.getElementById('displaySolutionContainer');
     if (!display) return;
+    if (display.classList.contains('disabled')) return;
     // Reset the board state but keep the display bits intact so the
     // newly selected pattern is applied to a cleared board.
     reset(false);
@@ -486,7 +487,8 @@ function reset(clearDisplay = true) {
     // reset displaySolution (optional)
     if (clearDisplay) {
         Array.prototype.slice.call(document.querySelectorAll("#displaySolutionContainer .ray")).forEach(e => {
-            if(e.children[1]) e.children[1].innerText = "0";
+            const bit = e.querySelector('.bit');
+            if (bit) bit.innerText = '0';
             e.classList.remove("selected");
         });
     }
