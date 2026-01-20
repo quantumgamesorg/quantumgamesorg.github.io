@@ -355,11 +355,52 @@ function displaySolution2qubit(rays, bits) {
         return out;
     })();
 
+    let num_bases_clicked = 0;
 
     picked.forEach(idx => {
         const basisEl = bases[idx];
         basisEl.click();
+        num_bases_clicked += 1;
     });
+
+
+
+    let num_twos = 0;
+    let num_fours = 0;
+    let num_sixes = 0;
+
+    // let rays_scoreboard = document.getElementsByClassName("ray");
+    for (let i = 0; i < document.getElementById("scoreboard").childElementCount; i++) {
+        for (let i2 = 0; i2 < document.getElementById("scoreboard").children[i].cells.length; i2++) {
+            let num_occurences = parseInt(document.getElementById("scoreboard").children[i].cells[i2].children[1].innerHTML.substring(1, 2));
+            if (num_occurences == 2) {
+                num_twos += 1;
+            } else if (num_occurences == 4) {
+                num_fours += 1;
+            } else if (num_occurences == 6) {
+                num_sixes += 1;
+            }
+        }
+    }
+
+
+
+    const two_ray_elem = document.getElementById("2_rays");
+    const four_ray_elem = document.getElementById("4_rays");
+    const six_ray_elem = document.getElementById("6_rays");
+    const bases_elem = document.getElementById("bases_formula");
+    if (two_ray_elem) {
+        document.getElementById("2_rays").textContent = num_twos;
+    }
+    if (four_ray_elem) {
+        document.getElementById("4_rays").textContent = num_fours;
+    }
+    if (six_ray_elem) {
+        document.getElementById("6_rays").textContent = num_sixes;
+    }
+    if (bases_elem) {
+        document.getElementById("bases_formula").textContent = num_bases_clicked;
+    }
 }
 
 function displaySolution600(rays, bits) {
@@ -463,11 +504,43 @@ function displaySolution600(rays, bits) {
         return out;
     })();
 
+    let num_bases_clicked = 0;
 
     picked.forEach(idx => {
         const basisEl = bases[idx];
         basisEl.click();
+        num_bases_clicked += 1;
     });
+
+    let num_twos = 0;
+    let num_fours = 0;
+
+    // let rays_scoreboard = document.getElementsByClassName("ray");
+    for (let i = 0; i < document.getElementById("scoreboard").childElementCount; i++) {
+        for (let i2 = 0; i2 < document.getElementById("scoreboard").children[i].cells.length; i2++) {
+            let num_occurences = parseInt(document.getElementById("scoreboard").children[i].cells[i2].children[1].innerHTML.substring(1, 2));
+            if (num_occurences == 2) {
+                num_twos += 1;
+            } else if (num_occurences == 4) {
+                num_fours += 1;
+            }
+        }
+    }
+
+
+
+    const two_ray_elem = document.getElementById("2_rays");
+    const four_ray_elem = document.getElementById("4_rays");
+    const bases_elem = document.getElementById("bases_formula");
+    if (two_ray_elem) {
+        document.getElementById("2_rays").textContent = num_twos;
+    }
+    if (four_ray_elem) {
+        document.getElementById("4_rays").textContent = num_fours;
+    }
+    if (bases_elem) {
+        document.getElementById("bases_formula").textContent = num_bases_clicked;
+    }
 }
 
 // Add binary strings w/ no carry over
@@ -624,6 +697,29 @@ function updateScore() {
 	}
 
     let rays = document.getElementsByClassName("ray");
+    for (let i = 0; i < document.getElementById("scoreboard").childElementCount; i++) {
+        for (let i2 = 0; i2 < document.getElementById("scoreboard").children[i].cells.length; i2++) {
+            let num_occurences = parseInt(document.getElementById("scoreboard").children[i].cells[i2].children[1].innerHTML.substring(1, 2));
+            if (num_occurences == 0) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#e1ffe1";
+            } else if (num_occurences == 1) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ffa4a4";
+            } else if (num_occurences == 2) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#9bff9b";
+            } else if (num_occurences == 3) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ff6d6d";
+            } else if (num_occurences == 4) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#7fff7f";
+            } else if (num_occurences == 5) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ff2f2f";
+            } else if (num_occurences == 6) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#00ff00";
+            } else if (num_occurences == 7) {
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ff0000";
+            } 
+        }
+    }
+
 
     //the following code checks if the user has won
     for (let i = 0; i < rays.length; ++i) {
@@ -693,4 +789,21 @@ function reset(clearDisplay = true) {
         });
     }
     updateScore();
+
+    const two_ray_elem = document.getElementById("2_rays");
+    const four_ray_elem = document.getElementById("4_rays");
+    const six_ray_elem = document.getElementById("6_rays");
+    const bases_elem = document.getElementById("bases_formula");
+    if (two_ray_elem) {
+        document.getElementById("2_rays").textContent = 0;
+    }
+    if (four_ray_elem) {
+        document.getElementById("4_rays").textContent = 0;
+    }
+    if (six_ray_elem) {
+        document.getElementById("6_rays").textContent = 0;
+    }
+    if (bases_elem) {
+        document.getElementById("bases_formula").textContent = 0;
+    }
 }

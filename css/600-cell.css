@@ -1,3 +1,11 @@
+h3 {
+  font-size: 24px;
+}
+
+math {
+  font-size: 25px;
+}
+
 #game {
   display: flex;
   flex-direction: row;
