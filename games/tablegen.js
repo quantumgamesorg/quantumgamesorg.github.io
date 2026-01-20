@@ -63,12 +63,22 @@ function makeBoard(boardContainer, vals) {
     }
 }
 
-function buildDisplaySolution(height, width) {
+function buildDisplaySolution(height, width, buttonLayout = 'side') {
     let displaySolution = document.getElementById("displaySolutionContainer");
     displaySolution.innerHTML = "";
 
+    // Set data attribute for button layout
+    displaySolution.setAttribute('data-button-layout', buttonLayout);
+    
+    // Also set it on the parent displaySolution div for CSS targeting
+    const parentDiv = displaySolution.parentElement;
+    parentDiv.setAttribute('data-button-layout', buttonLayout);
+
     let controlsWrapper = document.createElement("div");
     controlsWrapper.classList.add("displaySolutionControls");
+    if (buttonLayout === 'below') {
+        controlsWrapper.classList.add('below');
+    }
     // For the "On/off" and "Set" buttons
 
     for (let gy = 0; gy < height; gy++) {
@@ -94,20 +104,29 @@ function buildDisplaySolution(height, width) {
         displaySolution.appendChild(gridTableRow);
     }
 
-    const parentDiv = displaySolution.parentElement;
+    // On button
     let existingPower = parentDiv.querySelector('#displaySolutionPower');
     if(!existingPower) {
         let powerBtn = document.createElement('button');
         powerBtn.id = 'displaySolutionPower';
         powerBtn.classList.add('power','on');
         powerBtn.innerText = 'ON';
-        parentDiv.insertBefore(powerBtn, displaySolution);
+        
+        if (buttonLayout === 'below') {
+            controlsWrapper.appendChild(powerBtn);
+        } else {
+            parentDiv.insertBefore(powerBtn, displaySolution);
+        }
         // Default: On
 
         powerBtn.onclick = () => {
             const enabled = !displaySolution.classList.contains('disabled');
             setDisplayEnabled(!enabled);
         };
+    } else if (buttonLayout === 'below') {
+        // Move existing power button to controls wrapper
+        existingPower.remove();
+        controlsWrapper.appendChild(existingPower);
     }
 
     // Set button

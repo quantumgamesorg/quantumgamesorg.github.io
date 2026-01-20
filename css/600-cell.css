@@ -165,4 +165,8 @@
 	height: 300px;
 }
 
+#displaySolutionContainer .ray {
+	padding: 6px 8px;
+}
+
 /*# sourceMappingURL=qudoku3.css.map */

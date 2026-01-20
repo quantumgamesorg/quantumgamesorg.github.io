@@ -41,6 +41,13 @@ function setupBoard() {
 
 setupBoard();
 
+let displaySolutionContainer = document.getElementById("displaySolutionContainer");
+
+// Binary solution displayer as an 8x8 grid
+function setupDisplaySolution() {
+    buildDisplaySolution(8, 8, 'below');
+}
+setupDisplaySolution();
 
 
 var conversions = [

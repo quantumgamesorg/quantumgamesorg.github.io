@@ -41,8 +41,8 @@
                         <h3>Actions</h3>
                         <button class="resetButton" onClick="{document.querySelectorAll('.solveButton option')[0].selected = true; reset();}">Reset</button>
                         <br>
-                        <label>Display a solution:</label><br>
-                        <select name="solveButton" class="solveButton" onchange = "solve(this.value)">
+                        <label for="solveButton">Display a solution:</label><br>
+                        <select id="solveButton" name="solveButton" class="solveButton" onchange = "solve(this.value)">
                             <option class="solution" value="-" selected>-</option>
                             <option class="solution" value="18-9">18-9</option>
                             <option class="solution" value="20-11">20-11</option>
@@ -169,6 +169,11 @@
                             <option class="solution" value="60-39">60-39</option>
                             <option class="solution" value="60-41">60-41</option>
                         </select>
+                    </div>
+                    <div class="leftArea">
+                        <div id="displaySolution">
+                            <table id="displaySolutionContainer"></table>
+                        </div>
                     </div>
                 </div>
 				<div id="game">

@@ -40,14 +40,15 @@
 	background-color: #dfd;
 	border: 1px solid #666;
 	transition: transform ease-out 0.1s, font-weight ease 0.1s;
-	padding: 6px 8px;
+	padding: 3px 4px;
 	border-radius: 6px;
 	box-shadow: 0 2px 0 #9997 inset, 0 2px 4px #0002;
 	min-width: 20px;
 	height: 30px;
-	display: inline-flex;
+	display: flex;
 	flex-direction: column;
 	gap: 2px;
+	margin: 1px 0px;
 }
 #displaySolutionContainer .ray .bit {
 	color: #222;
@@ -67,6 +68,12 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
+}
+.displaySolutionControls.below {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 12px;
 }
 .power.set {
 	background: linear-gradient(#dff8e8, #bff4c7);

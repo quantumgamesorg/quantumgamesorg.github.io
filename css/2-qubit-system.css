@@ -21,3 +21,28 @@
 	padding-top: 0;
 	box-shadow: none;
 }
+
+/* Display solution grid styling for 2-qubit system */
+#displaySolution {
+	margin-top: 10px;
+	margin-left: 0;
+	text-align: left;
+}
+
+#displaySolution #displaySolutionContainer {
+	width: auto;
+}
+
+#displaySolution[data-button-layout="below"] {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#displaySolution .displaySolutionControls {
+	display: none;
+}
+
+#displaySolution[data-button-layout="below"] .displaySolutionControls {
+	display: flex;
+}
