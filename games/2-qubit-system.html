@@ -41,8 +41,8 @@
                         <h3>Actions</h3>
                         <button class="resetButton" onClick="{document.querySelectorAll('.solveButton option')[0].selected = true; reset();}">Reset</button>
                         <br>
-                        <label>Display a solution:</label><br>
-                        <select name="solveButton" class="solveButton" onchange = "solve(this.value)">
+                        <label for="solveButton">Display a solution:</label><br>
+                        <select id="solveButton" name="solveButton" class="solveButton" onchange = "solve(this.value)">
                             <option class="solution" value="-" selected>-</option>
                             <option class="solution" value="18-9">18-9</option>
                             <option class="solution" value="20-11">20-11</option>
@@ -169,16 +169,32 @@
                             <option class="solution" value="60-39">60-39</option>
                             <option class="solution" value="60-41">60-41</option>
                         </select>
-                    </div>
-
-                    <div id="score" class="moveCounter even">
-                        Basis Counter: 
-                        <div id="numBasis" class="inner">0</div>
+                        <div id="displaySolution">
+                            <table id="displaySolutionContainer"></table>
+                        </div>
+                        <div>
+                            <h3>Formula</h3>
+                            <div id="formula">
+                                <math display="block">
+                                    <msub><mi id="2_rays">0</mi><mi>2</mi></msub>
+                                    <msub><mi id="4_rays">0</mi><mi>4</mi></msub>
+                                    <msub><mi id="6_rays">0</mi><mi>6</mi></msub>
+                                    <mo>-</mo>
+                                    <msub><mi id="bases_formula">0</mi><mi>4</mi></msub>
+                                </math>
+                            </div>
+                        </div>
                     </div>
                 </div>
 				<div id="game">
 					<table id="boardContainer"></table>
-					<table id="scoreboard"></table>
+					<div id="rightPanel">
+                        <div id="score" class="moveCounter even">
+                            <h3>Basis Counter</h3>
+                            <div id="numBasis" class="inner">0</div>
+                        </div>
+                        <table id="scoreboard"></table>
+					</div>
 				</div>
             </div>
 		</div>

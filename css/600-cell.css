@@ -1,3 +1,11 @@
+h3 {
+  font-size: 20px;
+}
+
+math {
+  font-size: 25px;
+}
+
 #game {
   display: flex;
   flex-direction: row;
@@ -163,6 +171,10 @@
 #win_rules {
 	width: 400px;
 	height: 300px;
+}
+
+#displaySolutionContainer .ray {
+	padding: 6px 8px;
 }
 
 /*# sourceMappingURL=qudoku3.css.map */
