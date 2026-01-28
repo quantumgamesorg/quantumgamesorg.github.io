@@ -67,10 +67,8 @@ function buildDisplaySolution(height, width, buttonLayout = 'side') {
     let displaySolution = document.getElementById("displaySolutionContainer");
     displaySolution.innerHTML = "";
 
-    // Set data attribute for button layout
     displaySolution.setAttribute('data-button-layout', buttonLayout);
     
-    // Also set it on the parent displaySolution div for CSS targeting
     const parentDiv = displaySolution.parentElement;
     parentDiv.setAttribute('data-button-layout', buttonLayout);
 
@@ -79,7 +77,6 @@ function buildDisplaySolution(height, width, buttonLayout = 'side') {
     if (buttonLayout === 'below') {
         controlsWrapper.classList.add('below');
     }
-    // For the "On/off" and "Set" buttons
 
     for (let gy = 0; gy < height; gy++) {
         let gridTableRow = document.createElement("tr");
@@ -206,10 +203,8 @@ function setDisplaySolution() {
     });
 
     if (document.title === "600-cell") {
-        console.log("600-cell");
         displaySolution600(rays, bits);
     } else {
-        console.log("2qubit");
         displaySolution2qubit(rays, bits);
     }
 
@@ -526,8 +521,6 @@ function displaySolution600(rays, bits) {
             }
         }
     }
-
-
 
     const two_ray_elem = document.getElementById("2_rays");
     const four_ray_elem = document.getElementById("4_rays");
