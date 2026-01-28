@@ -703,19 +703,19 @@ function updateScore() {
             if (num_occurences == 0) {
                 document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#e1ffe1";
             } else if (num_occurences == 1) {
-                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ffa4a4";
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ffbebe";
             } else if (num_occurences == 2) {
-                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#9bff9b";
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#76ff76";
             } else if (num_occurences == 3) {
                 document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ff6d6d";
             } else if (num_occurences == 4) {
-                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#7fff7f";
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#21cb21";
             } else if (num_occurences == 5) {
-                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ff2f2f";
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#cf2626";
             } else if (num_occurences == 6) {
-                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#00ff00";
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#009000";
             } else if (num_occurences == 7) {
-                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#ff0000";
+                document.getElementById("scoreboard").children[i].cells[i2].style.backgroundColor = "#7c0000";
             } 
         }
     }
