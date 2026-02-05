@@ -358,8 +358,13 @@ function displaySolution2qubit(rays, bits) {
         num_bases_clicked += 1;
     });
 
+    update2qubitFormula(num_bases_clicked);
 
 
+}
+
+
+function update2qubitFormula(num_bases_clicked) {
     let num_twos = 0;
     let num_fours = 0;
     let num_sixes = 0;
@@ -507,6 +512,11 @@ function displaySolution600(rays, bits) {
         num_bases_clicked += 1;
     });
 
+    update600cellFormula(num_bases_clicked);
+
+}
+
+function update600cellFormula(num_bases_clicked) {
     let num_twos = 0;
     let num_fours = 0;
 

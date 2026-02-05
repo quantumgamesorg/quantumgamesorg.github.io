@@ -55,7 +55,7 @@ var conversions = [
 ]
 
 var solutions = {
-    '18-9' : [16,18,22,53,55,68,71,86,99,],
+    '18-09' : [16,18,22,53,55,68,71,86,99,],
     '20-11' : [1,4,16,18,20,53,57,68,71,86,94,],
     '21-11' : [1,16,18,20,36,37,55,68,71,84,99,],
     '22-11' : [1,16,27,28,32,36,55,61,63,76,105,],
@@ -211,5 +211,7 @@ function solve(size) {
     for(var i in solution){
         document.querySelectorAll(".basis")[conversions[(solution[i]-1)]].click();
     }
+    
+    update2qubitFormula(Number(size.substring(3,5)));
 
 }

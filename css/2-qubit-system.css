@@ -17,6 +17,7 @@ math {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
+	height: fit-content;
 }
 
 #game #score {
@@ -27,6 +28,7 @@ math {
 #game #scoreboard {
 	padding-top: 0;
 	box-shadow: none;
+	height: fit-content;
 }
 
 #displaySolution {

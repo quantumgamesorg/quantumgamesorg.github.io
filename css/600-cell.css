@@ -9,11 +9,13 @@ math {
 #game {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 #game table {
 	display: inline-block;
-	height: 100%;
+	height: auto;
 	margin-left: 5px;
 	margin-right: 5px;
 }
@@ -21,6 +23,7 @@ math {
 #boardContainer {
 	font-size: max(min(3vw, 2vh), 7pt);
 	background-color: #ddd;
+	height: fit-content;
 }
 #boardContainer tr {
 	font-size: 14pt;
@@ -129,7 +132,7 @@ math {
 	font-size: min(2vw, 2.4vh);
 	box-shadow: #0002 2px 2px 5px;
 	color: black;
-	height: 100%;
+	height: fit-content;
 	margin-left: 30px;
 }
 #scoreboard .ray {
