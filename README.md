@@ -15,3 +15,50 @@ Alternatively, use `sass --watch scss:css` to recompile the css automatically (i
 * Install python
 * Run ```python3 -m http.server 8000``` from main folder
 * Open in browser
+
+
+# Dev checklist
+Check functionality of different games
+
+Peres-1:
+    * Display solution
+    * Reset
+    * Scoreboard changes
+    * Highlighting
+    * Win/loss
+    * All side buttons
+
+Peres-2:
+    * Display solution
+    * Reset
+    * Scoreboard changes
+    * Highlighting
+    * Win/loss
+    * All side buttons
+
+PM-Square:
+    * Basic playthrough
+    * All side buttons
+
+GHZ-Penta:
+    * Basic playthrough
+    * All side buttons
+
+600-cell:
+    * Display solution (both ways). Unique for bit buttons
+    * Reset
+    * Scoreboard changes
+    * Highlighting
+    * Basis counter
+    * Formula display
+    * All side buttons
+
+Two-qubit:
+    * Display solution (both ways). Unique for bit buttons
+    * Reset
+    * Scoreboard changes
+    * Highlighting
+    * Basis counter
+    * Formula display
+    * All side buttons
+    
