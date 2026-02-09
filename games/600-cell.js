@@ -99,4 +99,6 @@ function solve(size) {
         basisSol[convert_index(solution[i] - 1)].click();
     }
 
+    update600cellFormula(Number(size.substring(3,5)));
+
 }

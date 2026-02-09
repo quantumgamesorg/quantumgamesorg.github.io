@@ -337,10 +337,10 @@ function displaySolution2qubit(rays, bits) {
                 for (let gthird = 0; gthird < 3; gthird++) {
                     for (let gx = 0; gx < cols; gx++) {
                     let cell = null;
-                    if (document.title === "600-cell") {
-                        cell = rows[gy].querySelectorAll('.gridSpot')[gx];
-                    } else {
+                    if (document.title === "Two-Qubit System") {
                         cell = rows[gy].querySelectorAll('.gridSpot')[gx].querySelectorAll('.basis')[gthird];
+                    } else {
+                        cell = rows[gy].querySelectorAll('.gridSpot')[gx];
                     }
                     if (!cell) continue;
                     out.push(cell);
@@ -358,8 +358,13 @@ function displaySolution2qubit(rays, bits) {
         num_bases_clicked += 1;
     });
 
+    update2qubitFormula(num_bases_clicked);
 
 
+}
+
+
+function update2qubitFormula(num_bases_clicked) {
     let num_twos = 0;
     let num_fours = 0;
     let num_sixes = 0;
@@ -507,6 +512,11 @@ function displaySolution600(rays, bits) {
         num_bases_clicked += 1;
     });
 
+    update600cellFormula(num_bases_clicked);
+
+}
+
+function update600cellFormula(num_bases_clicked) {
     let num_twos = 0;
     let num_fours = 0;
 
@@ -601,32 +611,32 @@ function addListener(el, vals) {
         checkWon();
     };
 
-    if (document.title === "600-cell") {
-            el.onmouseenter = () => {
-                vals.forEach(v => {
-                    document.getElementsByClassName("ray " + v)[0].classList.add("highlight");
-                });
-            };
-        } else {
-            el.onmouseenter = () => {
-                vals.forEach(v => {
-                    document.getElementsByClassName("ray " + v)[1].classList.add("highlight");
-                });
-            };
+    if (document.title === "Two-Qubit System") {
+        el.onmouseenter = () => {
+            vals.forEach(v => {
+                document.getElementsByClassName("ray " + v)[1].classList.add("highlight");
+            });
+        };
+    } else {
+        el.onmouseenter = () => {
+            vals.forEach(v => {
+                document.getElementsByClassName("ray " + v)[0].classList.add("highlight");
+            });
+        };
     }
 
-    if (document.title === "600-cell") {
-            el.onmouseleave = () => {
-                vals.forEach(v => {
-                    document.getElementsByClassName("ray " + v)[0].classList.remove("highlight");
-                });
-            };
-        } else {
-            el.onmouseleave = () => {
-                vals.forEach(v => {
-                    document.getElementsByClassName("ray " + v)[1].classList.remove("highlight");
-                });
-            };
+    if (document.title === "Two-Qubit System") {
+        el.onmouseleave = () => {
+            vals.forEach(v => {
+                document.getElementsByClassName("ray " + v)[1].classList.remove("highlight");
+            });
+        };
+    } else {
+        el.onmouseleave = () => {
+            vals.forEach(v => {
+                document.getElementsByClassName("ray " + v)[0].classList.remove("highlight");
+            });
+        }; 
     }
 	
 	listeners.push(el);
@@ -635,10 +645,10 @@ function addListener(el, vals) {
 function addValues(values) {
     values.forEach(v => {
         let entry = null;
-        if (document.title === "600-cell") {
-            entry = document.getElementsByClassName("ray " + v)[0];
-        } else {
+        if (document.title === "Two-Qubit System") {
             entry = document.getElementsByClassName("ray " + v)[1];
+        } else {
+            entry = document.getElementsByClassName("ray " + v)[0];
         }
         let current = entry.children[1].innerText;
         let current_n = parseInt(current.substr(1, current.length-2));
@@ -656,10 +666,10 @@ function addValues(values) {
 function removeValues(values) {
     values.forEach(v => {
         let entry = null;
-        if (document.title === "600-cell") {
-            entry = document.getElementsByClassName("ray " + v)[0];
-        } else {
+        if (document.title === "Two-Qubit System") {
             entry = document.getElementsByClassName("ray " + v)[1];
+        } else {
+            entry = document.getElementsByClassName("ray " + v)[0];
         }
 
         let current = entry.children[1].innerText;
