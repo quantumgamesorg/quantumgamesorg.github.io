@@ -21,6 +21,7 @@ Alternatively, use `sass --watch scss:css` to recompile the css automatically (i
 Check functionality of different games
 
 Peres-1:
+    
     * Display solution
     * Reset
     * Scoreboard changes
@@ -29,6 +30,7 @@ Peres-1:
     * All side buttons
 
 Peres-2:
+    
     * Display solution
     * Reset
     * Scoreboard changes
@@ -37,14 +39,17 @@ Peres-2:
     * All side buttons
 
 PM-Square:
+    
     * Basic playthrough
     * All side buttons
 
 GHZ-Penta:
+    
     * Basic playthrough
     * All side buttons
 
 600-cell:
+    
     * Display solution (both ways). Unique for bit buttons
     * Reset
     * Scoreboard changes
@@ -54,6 +59,7 @@ GHZ-Penta:
     * All side buttons
 
 Two-qubit:
+    
     * Display solution (both ways). Unique for bit buttons
     * Reset
     * Scoreboard changes
