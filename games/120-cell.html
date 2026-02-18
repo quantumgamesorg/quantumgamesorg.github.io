@@ -27,72 +27,43 @@
         <div id="content">
             <br style="margin-bottom:10px;">
             <h1 class="gameHeader">The 120-cell</h1>
-            <div id="upperArea">
-                <div id="upperLeft">
-                    <div class="leftArea">
-                        <h3>Menu</h3>
-                        <button onClick="OpenWindow({url:'about/600-cell.html'})">The Demonstration</button><br>
-                        <button onClick="OpenWindow({url:'notes/600-cell.html', width:500, height:350})">Notes</button>
-                    </div>
-                    <div class="leftArea">
-                        <h3>Actions</h3>
-                        <button class="resetButton" onClick="{document.querySelectorAll('.solveButton option')[0].selected = true; reset();}">Reset</button>
-                        <br>
-                        <label for="solveButton">Display a solution:</label>
-                        <br>
-                        <select name="solveButton" class="solveButton" onchange = "solve(this.value)">
-                            <option class="solution" value='-' selected>-</option>
-                            <option class="solution" value="26-13">26-13</option>
-                            <option class="solution" value="30-15">30-15</option>
-                            <option class="solution" value="32-17">32-17</option>
-                            <option class="solution" value="33-17">33-17</option>
-                            <option class="solution" value="34-17">34-17</option>
-                            <option class="solution" value="36-19">36-19</option>
-                            <option class="solution" value="37-19">37-19</option>
-                            <option class="solution" value="38-19">38-19</option>
-                            <option class="solution" value="38-21">38-21</option>
-                            <option class="solution" value="39-21">39-21</option>
-                            <option class="solution" value="40-21">40-21</option>
-                            <option class="solution" value="41-21">41-21</option>
-                            <option class="solution" value="42-21">42-21</option>
-                            <option class="solution" value="43-23">43-23</option>
-                            <option class="solution" value="44-23">44-23</option>
-                            <option class="solution" value="45-23">45-23</option>
-                            <option class="solution" value="46-23">46-23</option>
-                            <option class="solution" value="48-25">48-25</option>
-                            <option class="solution" value="49-25">49-25</option>
-                            <option class="solution" value="50-25">50-25</option>
-                            <option class="solution" value="53-27">53-27</option>
-                            <option class="solution" value="54-27">54-27</option>
-                        </select>
-                    </div>
-                    <div id="score" class="moveCounter even">
-                        <h3>Basis Counter</h3>
-                        <div id="numBasis" class="inner">0</div>
-                    </div>
-                    <div>
-                        <h3>Formula</h3>
-                        <div id="formula">
-                            <math display="block">
-                                <msub><mi id="2_rays">0</mi><mi>2</mi></msub>
-                                <msub><mi id="4_rays">0</mi><mi>4</mi></msub>
-                                <mo>-</mo>
-                                <msub><mi id="bases_formula">0</mi><mi>4</mi></msub>
-                            </math>
-                        </div>
-                    </div>
-                </div>
-				<div id="game">
-					<table id="boardContainer"></table>
-					<table id="scoreboard"></table>
-				</div>
-                <div id="displaySolution">
-                    <table id="displaySolutionContainer"></table>
-                </div>
-			</div>
+            <p>
+                The 120-cell is the generalization of the regular dodecahedron in a space of four dimensions. Like the 600-cell and the two-qubit system, it has billions of patterns that provide instant proofs of the Bell-Kochen-Specker theorem. However, the table of numbers in which the patterns are embedded is too large to be shown on a computer screen and so they will be presented in an alternative form that still allows their validity to be checked.
+            </p>
+            <p>
+                First, a few basic facts about the 120-cell. It has 600 vertices lying on the surface of a sphere, with the vertices coming in antipodal pairs. The line through any antipodal pair of vertices will be termed a ray and the rays will be numbered from 1 to 300. A set of four rays that are in mutually orthogonal directions from the center of the 120-cell will be termed a basis, and a basis  will be specified by the numbers of the four rays in it. The 300 rays of the 120-cell form 675 bases, with each ray occurring in nine bases. The 120-cell thus has the ray-basis symbol 300_9 – 675_4, where the subscript on the left indicates the number of bases to which each ray belongs and that on the right the number rays in any basis; note that 300 x 9 = 675 x 4, so that the total ray count is the same whether done by the rays or the bases.
+            </p>
+            <p>
+                The rays will be numbered in a manner suggested by the “triacontagonal projection” of H.M.S.Coxeter, as that will greatly simplify the specification of the bases. In this scheme the rays are associated, in sets of fifteen, with twenty regular pentadecagons or (15-gons) which we will label by the capital letters A to T. Think of each ray as associated with a particular 15-gon, with the numbers increasing as one goes around the 15-gon in the counterclockwise direction; thus A accommodates rays 1 to 15, B rays 16 to 30 and so on, with T finally taking up rays 286 to 300.
+            </p>
+            <p>
+                This numbering of the rays makes it possible to present the bases in batches of fifteen, in the sense that all the members of a batch can be obtained from any of them simply by adding one to each of its rays but with the proviso that if a ray has the highest number in its 15-gon its number falls all the way down to that of the ray at the beginning of that 15-gon (in other words, ray 15 goes into 1 instead of 16 and ray 60 into 46 instead of 61, and so on). Each such set of fifteen bases will be termed an orbit. Each orbit will be labeled by a lower-case letter. The table below lists 45 orbits labeled by the lower-case letters a to z, followed by the primed letters all the way up to s’. If you slide your cursor over a letter, the fifteen bases associated with it will pop up for you to inspect. If you run your eye down each column of numbers, you will see that they are those of all the rays associated with the 15-gon whose label is at the top of the column. An alternative way of representing an orbit is by the capital letters of the 15-gons whose rays make up its bases, and this will be done in the next display that comes below.
+            </p>
+
+            <div id="game">
+                <table id="boardContainer"></table>
+            </div>
+
+
+
+            <br>
+            <br>
+            <br>
+            <p>
+                The patterns that prove the BKS theorem consist of an odd number of orbits with the property that each of the capital letters occurs an even number of times (including zero) over them. A valid pattern can thus be written as a word made up of an odd number of (distinct) lower-case letters with the property that each of the capital letters A through T occurs either 0,2,4,6 or 8 times over them.
+            </p>
+            <p>
+                You can call up all valid patterns using the display below.
+            </p>
+            <p>
+                In the last step, we replaced the letters within each pair of brackets by fifteen times the number of letters to get the number of rays represented by them. The number of bases in the pattern was obtained by multiplying the number of letters in its word by fifteen. The product of each number with its subscript, when summed over all the entries to the left of the dash equals the similar product on the right, indicating that all the counts are right.
+            </p>
+            <p>
+                It should be mentioned, in closing, that we have only constructed patterns of a special type, namely, those involving both rays and bases that are multiples of fifteen. The number of such patterns is 2^29.  The 120-cell has a vast number of patterns of other kinds that have been ignored here.
+            </p>
         </div>
         <script src="windowManager.js"></script>
         <script src="tablegen.js"></script>
-        <script src="600-cell.js"></script>
+        <script src="120-cell.js"></script>
     </body>
 </html>

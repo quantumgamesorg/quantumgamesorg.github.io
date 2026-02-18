@@ -5,8 +5,8 @@
 <option class="solution" value="22-13">22-13</option>
 <option class="solution" value="23-13">23-13</option>
 <option class="solution" value="24-13">24-13</option>
-<option class="solution" value="25-13">25-13</option>
 <option class="solution" value="26-13">26-13</option>
+<option class="solution" value="24-13">24-13</option>
 <option class="solution" value="24-15">24-15</option>
 <option class="solution" value="25-15">25-15</option>
 <option class="solution" value="26-15">26-15</option>
