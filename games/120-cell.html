@@ -28,38 +28,90 @@
             <br style="margin-bottom:10px;">
             <h1 class="gameHeader">The 120-cell</h1>
             <p>
-                The 120-cell is the generalization of the regular dodecahedron in a space of four dimensions. Like the 600-cell and the two-qubit system, it has billions of patterns that provide instant proofs of the Bell-Kochen-Specker theorem. However, the table of numbers in which the patterns are embedded is too large to be shown on a computer screen and so they will be presented in an alternative form that still allows their validity to be checked.
+                The 120-cell is the generalization of the regular dodecahedron in a space of four dimensions. Like the 600-cell and the two-qubit system, it has billions of simple patterns that give instant proofs of the Bell-Kochen-Specker theorem. However, the table of numbers in which the patterns are embedded is too large to be shown on a computer screen and the patterns will therefore be shown in a compressed form that allows their validity to be checked and from which the full patterns can be called up if desired.
             </p>
             <p>
-                First, a few basic facts about the 120-cell. It has 600 vertices lying on the surface of a sphere, with the vertices coming in antipodal pairs. The line through any antipodal pair of vertices will be termed a ray and the rays will be numbered from 1 to 300. A set of four rays that are in mutually orthogonal directions from the center of the 120-cell will be termed a basis, and a basis  will be specified by the numbers of the four rays in it. The 300 rays of the 120-cell form 675 bases, with each ray occurring in nine bases. The 120-cell thus has the ray-basis symbol 300_9 – 675_4, where the subscript on the left indicates the number of bases to which each ray belongs and that on the right the number rays in any basis; note that 300 x 9 = 675 x 4, so that the total ray count is the same whether done by the rays or the bases.
+                You should be familiar with the exhibit for the 600-cell before looking at this one, as that will make it much easier to understand. 
             </p>
             <p>
-                The rays will be numbered in a manner suggested by the “triacontagonal projection” of H.M.S.Coxeter, as that will greatly simplify the specification of the bases. In this scheme the rays are associated, in sets of fifteen, with twenty regular pentadecagons or (15-gons) which we will label by the capital letters A to T. Think of each ray as associated with a particular 15-gon, with the numbers increasing as one goes around the 15-gon in the counterclockwise direction; thus A accommodates rays 1 to 15, B rays 16 to 30 and so on, with T finally taking up rays 286 to 300.
+                To understand this exhibit, it is necessary to be familiar with a few facts about the 120-cell. It has 600 vertices lying on the surface of a sphere in four-dimensional space, with the vertices coming in antipodal pairs. The line through an antipodal pair of vertices will be termed a ray and the rays will be numbered from 1 to 300. A set of four rays in mutually orthogonal directions from the center of the 120-cell will be termed a basis, and a basis will be specified by the numbers of the rays in it. The 300 rays of the 120-cell form 675 bases, with each ray occurring in nine bases. The 120-cell therefore has the ray-basis symbol 300_9 – 675_4, with the subscript on the left indicating the number of bases to which each ray belongs and that on the right the number rays in each basis; note that 300 x 9 = 675 x 4, so that the total ray count is the same whether done by rays or bases.  
             </p>
             <p>
-                This numbering of the rays makes it possible to present the bases in batches of fifteen, in the sense that all the members of a batch can be obtained from any of them simply by adding one to each of its rays but with the proviso that if a ray has the highest number in its 15-gon its number falls all the way down to that of the ray at the beginning of that 15-gon (in other words, ray 15 goes into 1 instead of 16 and ray 60 into 46 instead of 61, and so on). Each such set of fifteen bases will be termed an orbit. Each orbit will be labeled by a lower-case letter. The table below lists 45 orbits labeled by the lower-case letters a to z, followed by the primed letters all the way up to s’. If you slide your cursor over a letter, the fifteen bases associated with it will pop up for you to inspect. If you run your eye down each column of numbers, you will see that they are those of all the rays associated with the 15-gon whose label is at the top of the column. An alternative way of representing an orbit is by the capital letters of the 15-gons whose rays make up its bases, and this will be done in the next display that comes below.
+                The compression alluded to above can be achieved by numbering the rays in a manner suggested by the “triacontagonal projection” of H.M.S.Coxeter.  In this scheme the rays are mapped, in sets of fifteen, into the vertices of twenty concentric regular pentadecagons or (15-gons) that all lie in a common plane. The 15-gons will be labeled by the letters A through T. The numbers of the rays increase in counterclockwise order around the 15-gons, beginning with A and ending with T; thus A has rays 1 through 15, B rays 16 through 30, and so on, with T finally accommodating rays 286 through 300.
             </p>
+            <p>
+                With this numbering of the rays, the bases become easy to specify because adding one to each of the rays of a basis always gives another basis, provided that one loops back to the ray at the beginning of a 15-gon when one overshoots the one at the end. To understand what this means, consider the basis consisting of the rays 18, 119, 223 and 248. Adding one to each ray gives the new basis 19, 120, 224, 249. However adding one to each ray of this basis gives 20, 106, 225, 250 and not 20, 121, 225, 250 as one might first think, because ray 120 is the last member of the 15-gon H and loops back into the ray 106 at the beginning of H rather than going into 121, the first member of I. From this property of the bases it is obvious that the bases break up into cycles of fifteen with the property that all the members of any cycle can be generated from any one of them and that no two cycles have any basis in common. One can pick a single basis from any cycle, the generator, which determines all the other members of the cycle. Any generator will be labeled by a lower-case letter. It turns out that all the 675 bases of the 120-cell can be obtained as the cycles of the 45 generators shown below:
+            </p>
+
+            <br>
+            <br>
 
             <div id="game">
                 <table id="boardContainer"></table>
             </div>
 
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
-
-            <br>
-            <br>
-            <br>
             <p>
-                The patterns that prove the BKS theorem consist of an odd number of orbits with the property that each of the capital letters occurs an even number of times (including zero) over them. A valid pattern can thus be written as a word made up of an odd number of (distinct) lower-case letters with the property that each of the capital letters A through T occurs either 0,2,4,6 or 8 times over them.
+                If you slide your cursor over any of the generators and click on it, the cycle of 15 bases associated with it will pop up for you to view. You will see, as you run your eye down any vertical column of numbers, that they make up all the rays of the 15-gon whose letter label is indicated at the top of the column. A generator can also be represented by the capital letters of the 15-gons whose rays make up the cycle of bases associated with it; thus a = ABST, b = ACRT, …, s’ = JJLL.
+            </p>
+            <p>
+                The patterns in the 120-cell that prove the BKS theorem can be written as “words” made up of an odd number of (distinct) letters, each representing one of the 45 generators above. Since each letter represents a cycle of 15 bases, a word with an odd number of letters corresponds to an odd number of bases, which is one of the characteristics of a valid pattern. However, not all odd-letter words are valid patterns because they must also satisfy the requirement that each ray occur an even number of times over all the bases of the pattern. Since only complete 15-gons of rays occur in the bases of a pattern, the latter requirement can be rephrased as the requirement that the capital letters that occur in a word each occur an even number of times over all the letters of the word.  This makes it easy to tell if a particular odd-letter word qualifies as a valid pattern or not. Consider the word    , for example. This word can be rewritten in terms of capital letters and then reorganized as follows:
+            </p>
+            <p>
+                In the second step, we count the number of times each of the letters occurs over the word and append it as a subscript to the letter, and the fact that all the subscripts are even guarantees that the word represents a valid pattern. The last step shows the ray-basis formula of the pattern. The ray counts are obtained by replacing each of the letters by 15 (the number of rays it brings in) and then totaling the numbers associated with each of the subscripts and the number of bases is just 15 times the number of letters in the word.
+            </p>
+            <p>
+                The odd-letter word   does not represent a valid pattern, as the following transformation of it shows:
+            </p>
+            <p>
+                The odd subscripts associated with xx of the letters shows that it doesn’t qualify.
+            </p>
+            <p>
+                The task of picking out all odd-letter words that give rise to valid patterns has been made easy for you. Simply enter a 0 or 1 in each of the 29 boxes below and click the Set button to the right of the second row. The letters of the pattern will then appear in the next row of boxes below. Clicking the set button to the right of the letters will show, in the boxes directly below them, how often each of the letters A through T occur over the word, with an even number shown on a green background and an odd number on a red one. If all the numbers are even, so that they all occur on a green background, one knows that the pattern is a valid one. The ray-basis formula of the pattern is shown below the colored boxes.
+            </p>
+            <p>
+                Instead of clicking the second Set button to the right of the word representing the pattern, you can click on its letters one by one and see the pattern building up. The colors in the boxes will alternate between red and green during the buildup, but when the entire word has been picked all the boxes below it should be green.
+            </p>
+            <p>
+                consist of an odd number of orbits with the property that each of the capital letters occurs an even number of times (including zero) over them. A valid pattern can thus be written as a word made up of an odd number of (distinct) lower-case letters with the property that each of the capital letters A through T occurs either 0,2,4,6 or 8 times over them.   
             </p>
             <p>
                 You can call up all valid patterns using the display below.
             </p>
+            
+            <div id="calculations">
+                <!-- Separate wrapper divs for the three calculation sets: top bits, big boxes, letter/number area -->
+                <div id="calc-bits-wrapper" class="calc-section"></div>
+                <div id="big-boxes-wrapper" class="calc-section"></div>
+                <div id="letter-area-wrapper" class="calc-section"></div>
+            </div>
+
+            <div style="text-align:left; margin-left:0;">
+                <h3>Formula: <math display="inline">
+                        <msub><mi id="2_rays">0</mi><mi>2</mi></msub>
+                        <msub><mi id="4_rays">0</mi><mi>4</mi></msub>
+                        <msub><mi id="6_rays">0</mi><mi>6</mi></msub>
+                        <msub><mi id="8_rays">0</mi><mi>8</mi></msub>
+                        <mo>-</mo>
+                        <msub><mi id="bases_formula">0</mi><mi>4</mi></msub>
+                    </math></h3>
+            </div>
+
             <p>
                 In the last step, we replaced the letters within each pair of brackets by fifteen times the number of letters to get the number of rays represented by them. The number of bases in the pattern was obtained by multiplying the number of letters in its word by fifteen. The product of each number with its subscript, when summed over all the entries to the left of the dash equals the similar product on the right, indicating that all the counts are right.
             </p>
             <p>
-                It should be mentioned, in closing, that we have only constructed patterns of a special type, namely, those involving both rays and bases that are multiples of fifteen. The number of such patterns is 2^29.  The 120-cell has a vast number of patterns of other kinds that have been ignored here.
+                It should be mentioned, in closing, that we have only constructed patterns of a special type, namely, those involving both rays and bases that are multiples of fifteen. The number of such patterns is 2^29.  The 120-cell has a vast number of patterns of other kinds that have been ignored here. 
             </p>
         </div>
         <script src="windowManager.js"></script>
