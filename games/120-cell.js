@@ -189,7 +189,6 @@ function make_120_Board(boardContainer, vals) {
                         el.classList.add('selected');
                         currentSelected = el;
                         // populate panel dynamically based on new rules
-                        console.log(el.dataset.key);
                         const dynamicPanelData = [];
 
                         // Row 1: Calculated based on the basis values
@@ -307,7 +306,6 @@ function createCalculationBits() {
 
     // New function to process the bits
     function processBits(bitsArray) {
-        console.log('Bits array:', bitsArray);
         // Add your logic here
 
         let s = [];
@@ -373,17 +371,6 @@ function createCalculationBits() {
             if (idx < SS.length) {
                 cell.textContent = SS[idx];
                 cell.className = 'big-cell off';
-                // make clickable
-                cell.addEventListener('click', () => {
-                    if (cell.classList.contains('on')) {
-                        cell.classList.remove('on');
-                        cell.classList.add('off');
-                    } else {
-                        cell.classList.remove('off');
-                        cell.classList.add('on');
-                    }
-                    printGreenLetters();
-                });
             } else {
                 cell.textContent = '';
                 cell.className = 'big-cell empty';
@@ -468,7 +455,6 @@ function createCalculationBits() {
 
         // collect and print all green letters
         const greenLetters = Array.from(document.querySelectorAll('.big-cell.on')).map(c => c.textContent).filter(text => text);
-        console.log('Green letters:', greenLetters);
         let uu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         for (const letter of greenLetters) {
             // translate letter to number: a=1, b=2, ..., z=26, A=27, B=28, ..., Z=52 and set uu[num] to 1
@@ -480,7 +466,6 @@ function createCalculationBits() {
             }
             uu[num] = 1;
         }
-        console.log('uu array:', uu);
 
         let vv = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -490,7 +475,6 @@ function createCalculationBits() {
             }
         }
 
-        console.log('vv array:', vv);
 
         // Update the number cells with vv values
         for (let i = 0; i < 20; i++) {
@@ -508,6 +492,28 @@ function createCalculationBits() {
             }
         }
 
+        let num_twos = 0;
+        let num_fours = 0;
+        let num_sixes = 0;
+        let num_eights = 0;
+        for (let i = 0; i < 20; i++) {
+            if (vv[i] == 2) num_twos++;
+            else if (vv[i] == 4) num_fours++;
+            else if (vv[i] == 6) num_sixes++;
+            else if (vv[i] == 8) num_eights++;
+        }
+
+        num_twos = num_twos * 15;
+        num_fours = num_fours * 15;
+        num_sixes = num_sixes * 15;
+        num_eights = num_eights * 15;
+
+        document.getElementById("2_rays").textContent = num_twos;
+        document.getElementById("4_rays").textContent = num_fours;
+        document.getElementById("6_rays").textContent = num_sixes;
+        document.getElementById("8_rays").textContent = num_eights;
+        document.getElementById("bases_formula").textContent = ((num_twos * 2+ num_fours * 4 + num_sixes * 6+ num_eights * 8) / 4);
+
     }
 
     // Inject styles for the calculation bits and the Set button
@@ -519,8 +525,8 @@ function createCalculationBits() {
             .calc-bits { display: inline-flex; flex-direction: column; gap: 6px; }
             .calc-row { display: flex; gap: 8px; }
             .calc-bit {
-                width: 34px;
-                height: 34px;
+                width: 38px;
+                height: 38px;
                 border-radius: 6px;
                 display: inline-flex;
                 align-items: center;
@@ -555,8 +561,8 @@ function createCalculationBits() {
             .big-boxes { display: flex; flex-direction: column; gap: 0; }
             .big-row { display: flex; gap: 0; }
             .big-cell {
-                width: 34px;
-                height: 34px;
+                width: 38px;
+                height: 38px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -578,12 +584,12 @@ function createCalculationBits() {
             .letter-block { display: flex; flex-direction: column; gap: 0; }
             .letter-row, .num-row { display: flex; gap: 0; }
             .letter-cell {
-                width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+                width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
                 border: 1px solid #000; box-sizing: border-box; font-weight: 700; margin: 0;
             }
             .letter-cell.on { background: #bfb; color: #063; border-color: #3a3; }
             .letter-cell.off { background: #fbb; color: #600; border-color: #c44; }
-            .num-cell { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #000; box-sizing: border-box; margin: 0; cursor: pointer; }
+            .num-cell { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #000; box-sizing: border-box; margin: 0; cursor: pointer; }
             .num-cell.on { background: #bfb; color: #063; border-color: #3a3; }
             .num-cell.off { background: #fbb; color: #600; border-color: #c44; }
             .big-controls { display: flex; flex-direction: column; gap: 8px; }
@@ -597,6 +603,26 @@ function createCalculationBits() {
                 font-weight: 700;
                 cursor: pointer;
                 box-shadow: 0 2px 0 #0002, inset 0 1px 0 #fff;
+            }
+            /* Reset button styles */
+            .resetButton {
+                appearance: none;
+                border: 1px solid #c44;
+                background-color: #fdd;
+                color: #000;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 2px 0 #0002, inset 0 1px 0 #fff;
+            }
+            .resetButton:hover {
+                background-color: #fcc;
+            }
+            .resetButton:active {
+                background-color: #faa;
+                box-shadow: #0004 1px 1px 4px;
+                transform: translate(1px, 1px);
             }
             /* spacing for the three main calculation sections */
             .calc-section { margin-bottom: 18px; }
@@ -688,6 +714,17 @@ function createCalculationBits() {
             const cell = document.createElement('div');
             cell.className = 'big-cell empty';
             cell.textContent = '';
+            cell.addEventListener('click', () => {
+                if (cell.classList.contains('empty')) return;
+                if (cell.classList.contains('on')) {
+                    cell.classList.remove('on');
+                    cell.classList.add('off');
+                } else {
+                    cell.classList.remove('off');
+                    cell.classList.add('on');
+                }
+                printGreenLetters();
+            });
             rowDiv.appendChild(cell);
         }
         boxesWrapper.appendChild(rowDiv);
@@ -766,21 +803,6 @@ function createCalculationBits() {
         if (numbers[i] !== undefined) {
             if (numbers[i] % 2 === 0) N.classList.add('on'); else N.classList.add('off');
         }
-        // clicking the number toggles parity (increment by 1) and updates the letter color
-        N.addEventListener('click', () => {
-            if (!N.textContent) return;
-            let val = parseInt(N.textContent, 10);
-            if (Number.isNaN(val)) return;
-            val = val + 1; // toggles parity
-            N.textContent = String(val);
-            if (val % 2 === 0) {
-                N.classList.remove('off'); N.classList.add('on');
-                letterCells[i].classList.remove('off'); letterCells[i].classList.add('on');
-            } else {
-                N.classList.remove('on'); N.classList.add('off');
-                letterCells[i].classList.remove('on'); letterCells[i].classList.add('off');
-            }
-        });
         numRow.appendChild(N);
         numCells.push(N);
     }
@@ -798,6 +820,35 @@ function createCalculationBits() {
     letterAreaTarget.appendChild(letterArea);
 
     container.dataset.calcBitsCreated = '1';
+}
+
+function reset() {
+    // Reset bitsWrapper buttons
+    document.querySelectorAll('.calc-bit').forEach(btn => {
+        btn.classList.remove('on');
+        btn.textContent = '0';
+    });
+    // Reset boxesWrapper circles
+    document.querySelectorAll('.big-cell').forEach(cell => {
+        cell.className = 'big-cell empty';
+        cell.textContent = '';
+    });
+    // Reset letterCells and numCells
+    document.querySelectorAll('.letter-cell').forEach(cell => {
+        cell.classList.remove('off');
+        cell.classList.add('on');
+    });
+    document.querySelectorAll('.num-cell').forEach(cell => {
+        cell.textContent = '0';
+        cell.classList.remove('off');
+        cell.classList.add('on');
+    });
+    // Reset formula
+    document.getElementById("2_rays").textContent = 0;
+    document.getElementById("4_rays").textContent = 0;
+    document.getElementById("6_rays").textContent = 0;
+    document.getElementById("8_rays").textContent = 0;
+    document.getElementById("bases_formula").textContent = 0;
 }
 
 // Function to process the bits and update the big cells
