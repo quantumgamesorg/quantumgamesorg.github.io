@@ -1,0 +1,387 @@
+#boardContainer {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    background-color: #ddd;
+}
+
+#boardContainer td {
+    padding: 8px;
+    vertical-align: top;
+    border: 0;
+    background-color: #ddd;
+}
+
+.basis {
+    display: flex;
+    gap: 1px;
+    align-items: center;
+    width: 100%;
+    background: transparent;
+}
+
+.basis .key {
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 0 0 40px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.basis .key .key-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.basis .key .eq {
+    flex: 0 0 14px;
+    width: 14px;
+    text-align: center;
+    opacity: 0.95;
+}
+
+.basis .values {
+    display: grid;
+    gap: 1px;
+    width: 100%;
+}
+
+.basis .val {
+    text-align: center;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.basis.clickable {
+    cursor: pointer;
+}
+
+.basis.selected {
+    outline: 2px solid var(--basis-selected-outline, rgba(0, 150, 0, 0.35));
+    background-color: var(--basis-selected-bg, rgba(0, 150, 0, 0.06));
+    border-radius: 4px;
+}
+
+.board-wrapper {
+    display: block;
+    position: relative;
+}
+
+.basis-panel {
+    position: absolute;
+    width: 260px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 8px;
+    box-sizing: border-box;
+    display: none;
+    z-index: 30;
+    font-size: 16px;
+}
+
+.basis-panel.visible {
+    display: block;
+}
+
+.basis-panel .panel-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+}
+
+.basis-panel .panel-close {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    font-size: 16px;
+    line-height: 1;
+    position: absolute;
+    right: 8px;
+}
+
+.basis-panel .panel-grid {
+    display: block;
+}
+
+.basis-panel .panel-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.basis-panel .panel-row:last-child {
+    border-bottom: none;
+}
+
+.basis-panel .panel-cell {
+    padding: 6px 4px;
+    text-align: center;
+    border: none;
+    font-family: monospace;
+    line-height: 1;
+}
+
+.basis-panel .panel-row.panel-row-bold .panel-cell {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.calc-container {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.calc-bits {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.calc-row {
+    display: flex;
+    gap: 8px;
+}
+
+.calc-bit {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    background: #fbb;
+    color: #600;
+    border: 1px solid #c44;
+    box-sizing: border-box;
+}
+
+.calc-bit.on {
+    background: #bfb;
+    color: #063;
+    border: 1px solid #3a3;
+}
+
+.calc-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.calc-set-btn {
+    appearance: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: linear-gradient(#dff8e8, #bff4c7);
+    color: #063;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #0002, inset 0 1px 0 #fff;
+}
+
+.big-area {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+
+.big-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.big-row {
+    display: flex;
+    gap: 0;
+}
+
+.big-cell {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    background: #fff;
+    box-sizing: border-box;
+    font-weight: 600;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 50%;
+}
+
+.big-cell.on {
+    background: #bfb;
+    color: #063;
+    border-color: #3a3;
+}
+
+.big-cell.off {
+    background: #fbb;
+    color: #600;
+    border-color: #c44;
+}
+
+.big-cell.empty {
+    background: #fff;
+    color: #000;
+    cursor: default;
+}
+
+.letter-area {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 12px;
+}
+
+.letter-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.letter-row,
+.num-row {
+    display: flex;
+    gap: 0;
+}
+
+.letter-cell {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    font-weight: 700;
+    margin: 0;
+}
+
+.letter-cell.on {
+    background: rgb(108, 255, 79);
+    color: #063;
+    border-color: #287;
+}
+
+.letter-cell.zero {
+    background: rgb(210, 255, 201);
+    color: #063;
+    border-color: #6a6;
+}
+
+.letter-cell.off {
+    background: #fbb;
+    color: #600;
+    border-color: #c44;
+}
+
+.num-cell {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    margin: 0;
+    cursor: pointer;
+}
+
+.num-cell.on {
+    background: rgb(108, 255, 79);
+    color: #063;
+    border-color: #287;
+}
+
+.num-cell.zero {
+    background: rgb(210, 255, 201);
+    color: #063;
+    border-color: #6a6;
+}
+
+.num-cell.off {
+    background: #fbb;
+    color: #600;
+    border-color: #c44;
+}
+
+.big-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.big-set-btn {
+    appearance: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: linear-gradient(#dff8e8, #bff4c7);
+    color: #063;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #0002, inset 0 1px 0 #fff;
+}
+
+.resetButton {
+    appearance: none;
+    border: 1px solid #c44;
+    background-color: #fdd;
+    color: #000;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #0002, inset 0 1px 0 #fff;
+}
+
+.resetButton:hover {
+    background-color: #fcc;
+}
+
+.resetButton:active {
+    background-color: #faa;
+    box-shadow: #0004 1px 1px 4px;
+    transform: translate(1px, 1px);
+}
+
+.calc-section {
+    margin-bottom: 18px;
+}
+
+.formula-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.formula-title {
+    margin: 0;
+}
+
+.intro-spacer {
+    margin-bottom: 10px;
+}
