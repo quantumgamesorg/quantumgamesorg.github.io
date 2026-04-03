@@ -100,7 +100,17 @@
 			number of times over all the lower case letters of a word representing a valid pattern. 
             </p>
             <p>
-                In the second step, we count the number of times each of the letters occurs over the word and append it as a subscript to the letter, and the fact that all the subscripts are even guarantees that the word represents a valid pattern. The last step shows the ray-basis formula of the pattern. The ray counts are obtained by replacing each of the letters by 15 (the number of rays it brings in) and then totaling the numbers associated with each of the subscripts and the number of bases is just 15 times the number of letters in the word.
+            To see how to tell whether a word represents a valid pattern or not, consider the word abegkri'. The wrod
+			consists of an odd number of letters, so it passes the first test. To see if it passes the second test, we
+			transform it as follows:
+			<br>
+			<br>
+			 begkri' &rarr; (ABST)(ABST)(ABST)(ABST)(ABST)(ABST)(ABST) &rarr; (ABBBBBBBBB)<sub>2</sub>(NN)<sub>4</sub> 
+			<br>
+				&rarr; (150)<sub>2</sub>(30)<sub>4</sub> &ndash; 105<sub>4</sub>
+			<br>
+			<br>
+				In the second step, we count the number of times each of the letters occurs over the word and append it as a subscript to the letter, and the fact that all the subscripts are even guarantees that the word represents a valid pattern. The last step shows the ray-basis formula of the pattern. The ray counts are obtained by replacing each of the letters by 15 (the number of rays it brings in) and then totaling the numbers associated with each of the subscripts and the number of bases is just 15 times the number of letters in the word.
             </p>
             <p>
                 The odd-letter word   does not represent a valid pattern, as the following transformation of it shows:
