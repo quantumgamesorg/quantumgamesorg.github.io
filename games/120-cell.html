@@ -105,32 +105,31 @@
 			transform it as follows:
 			<br>
 			<br>
-			 begkri' &rarr; (ABST)(ABST)(ABST)(ABST)(ABST)(ABST)(ABST) &rarr; (ABBBBBBBBB)<sub>2</sub>(NN)<sub>4</sub> 
-			<br>
+			 &nbsp;&nbsp; begkri' &rarr; (ABST)(ABST)(ABST)(ABST)(ABST)(ABST)(ABST) &rarr; (ABBBBBBBBB)<sub>2</sub>(NN)<sub>4</sub> 
 				&rarr; (150)<sub>2</sub>(30)<sub>4</sub> &ndash; 105<sub>4</sub>
 			<br>
 			<br>
-				In the second step, we count the number of times each of the letters occurs over the word and append it as a subscript to the letter, and the fact that all the subscripts are even guarantees that the word represents a valid pattern. The last step shows the ray-basis formula of the pattern. The ray counts are obtained by replacing each of the letters by 15 (the number of rays it brings in) and then totaling the numbers associated with each of the subscripts and the number of bases is just 15 times the number of letters in the word.
-            </p>
-            <p>
-                The odd-letter word   does not represent a valid pattern, as the following transformation of it shows:
-            </p>
-            <p>
-                The odd subscripts associated with xx of the letters shows that it doesn’t qualify.
-            </p>
-            <p>
-                The task of picking out all odd-letter words that give rise to valid patterns has been made easy for you. Simply enter a 0 or 1 in each of the 29 boxes below and click the Set button to the right of the second row. The letters of the pattern will then appear in the next row of boxes below. Clicking the set button to the right of the letters will show, in the boxes directly below them, how often each of the letters A through T occur over the word, with an even number shown on a green background and an odd number on a red one. If all the numbers are even, so that they all occur on a green background, one knows that the pattern is a valid one. The ray-basis formula of the pattern is shown below the colored boxes.
-            </p>
-            <p>
-                Instead of clicking the second Set button to the right of the word representing the pattern, you can click on its letters one by one and see the pattern building up. The colors in the boxes will alternate between red and green during the buildup, but when the entire word has been picked all the boxes below it should be green.
-            </p>
-            <p>
-                consist of an odd number of orbits with the property that each of the capital letters occurs an even number of times (including zero) over them. A valid pattern can thus be written as a word made up of an odd number of (distinct) lower-case letters with the property that each of the capital letters A through T occurs either 0,2,4,6 or 8 times over them.   
-            </p>
-            <p>
-                You can call up all valid patterns using the display below.
-            </p>
-            
+			<p>
+			In the first step, each lower case letter is replaced by its set of four capital letters; in the second, all 
+			letters occurring the same number of times over the word are collected together, with the number of occurrences
+			attached as a subscript; and in final step each string of letters within brackets to the left of the dash is 
+			replaced by fifteen times the number of letters in the string, while the number to the right of the dash is fifteen 
+			times the number of letters in the word, with the subcript 4 attached. The last step gives the formula of the pattern, 
+			or the number of occurrences of all the rays in it along with the total number of bases in the pattern. The word
+			represents a valid pattern only if all the subscripts to the left of the dash are even and the number to the right of
+			the dash (which is the number of bases) is odd.
+		   </p>
+        <p>
+        The task of picking out all odd-letter words that represent valid patterns has been made easy for you. Simply enter a 
+		0 or 1 in each of the 29 square boxes below and click the Set button on the right. The letters of the pattern will 
+		appear in the round boxes below the square ones. Clicking the second Set button will give a count of all the 
+		capital letters over the word and show the formula of the pattern below it. The validity of the pattern can be checked
+		by noting that all the capital letters that occur in it occur an even number of times (indicated by their green shading).
+		A word not representing a pattern would involve one or more letters that occur an odd number times (and which would be
+		shown on a red background. The absence of any red boxes is therefore a good sign. Instead of clicking the second Set 
+		button, you could click on the letters of the pattern one by one and see it build up. You will see red boxes occurring 
+		frequently during the buildup, but when all the letters have been activated the boxes should all be green.
+	    </p>            
             <div id="calculations">
                 <!-- Separate wrapper divs for the three calculation sets: top bits, big boxes, letter/number area -->
                 <div id="calc-bits-wrapper" class="calc-section"></div>
