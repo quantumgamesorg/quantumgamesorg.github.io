@@ -57,31 +57,32 @@
 			plane in such a way that their vertices lie on a number of concentric regular triacontagons (or 30-gons). Modifying 
 			the construction to apply to rays rather than vertices, we associate the rays, in sets of fifteen, with the vertices 
 			of twenty concentric regular pentadecagons (or 15-gons) that we label by the letters A through T. Rays 1-15 are 
-			associated with the vertices of A in counterclockwise order beginning from a chosen ray, rays 16-30 with the vertices 
-			of B in a similar manner, and so on, and ending with rays 286-300 being associated with the vertices of T. 
+			associated with the vertices of A in counterclockwise order beginning from a chosen vertex, rays 16-30 with the 
+			vertices of B in a similar manner, and so on, with rays 286-300 being associated with the vertices of T. 
             </p>
             <p>
             With this numbering of the rays, the bases become easy to specify because it turns out that adding one to each 
-			of the rays of a basis always yields another basis <b> provided that one loops back to the ray at the beginning 
-			of a 15-gon when one overshoots the ray at the end.</b> To understand what this means, consider the basis 
-			consisting of the rays 19, 120, 224, 249. Adding one to each of the rays gives 20, 121, 225, 250, but this is 
-			not the successor to the original basis because ray 120 is the last member of the 15-gon with the label H 
-			and must be followed by the ray at the beginning of H, which is 106; thus the successor to the original basis is
-			20, 106, 225, 250. From this example it should be clear that the bases break up into cycles of fifteen, with all 
-			the members of any cycle being obtainable from any one of them when its rays are subjected to repeated shifts of
-			a single unit. The 120-cell has 45 completely disjoint cycles of fifteen generators each, 
-			and the 45 x 15 = 675 bases they give rise to comprise all the bases of the 120-cell.
+			ray of a basis always yields another basis <b> provided that one loops back to the ray at the beginning 
+			of a 15-gon when one at the end is overshot.</b> To understand what the rider in bold means, consider the basis 
+			consisting of the rays 19, 120, 224, 249. Adding one to each of these rays gives 20, 121, 225, 250, but this is 
+			not a basis because the ray 120 is the last member of the 15-gon with label H and must be replaced by the ray 
+			at the beginning of H, which is 106; thus the successor to the basis 19, 120, 224, 249 is 20, 106, 225, 250.
+			It should be clear from this example that the bases come in cycles of fifteen, with all members of a 
+			cycle following from any one of them when its rays are shifted progressively by the same amonunt, subject to 
+			rider mentioned above. We will term the representative from each cycle from which all its other members can be 
+			obtained the <b> generator</b>. The 120-cell has 45 generators, each giving rise to a cycle of fifteen bases, and 
+			the 45 x 15 = 675 bases so obtained comprise all the bases of the 120-cell.
             </p>
 			<p>
-			For any cycle we can pick a single member, the <b> generator </b>, from which all the other members of that cycle
-			can be obtained. The table below shows a generator for each cycle, with a lower case letter attached to each. If
-			you click on any generator, the cycle it generates will 
-			  		 	
+			The generators of the 120-cell are shown below, with each being labeled by a lower case letter. Clicking on 
+			any generator will cause a pop-up window to appear to the right where all the bases resulting from it are listed.
+			If you run your eye down any column of numbers in that list, you will see all the rays associated with the 15-gon
+			whose label is indicated at the head of the column. Any cycle of fifteen bases can thus be specified either by 
+			the lower case letter representing a generator or by the set of four capital letters representing the 15-gons 
+			out of which the rays of its bases are drawn. This dual representation will be made use of shortly.
 			</p>
-
             <br>
             <br>
-
             <div id="game">
                 <table id="boardContainer"></table>
             </div>
