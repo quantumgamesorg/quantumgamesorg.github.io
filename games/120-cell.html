@@ -77,32 +77,27 @@
 			The generators of the 120-cell are shown below, with each being labeled by a lower case letter. Clicking on 
 			any generator will cause a pop-up window to appear to the right where all the bases resulting from it are listed.
 			If you run your eye down any column of numbers in that list, you will see all the rays associated with the 15-gon
-			whose label is indicated at the head of the column. Any cycle of fifteen bases can thus be specified either by 
+			whose label is indicated at the head of the column. Any cycle of fifteen bases can therefore be specified either by 
 			the lower case letter representing a generator or by the set of four capital letters representing the 15-gons 
-			out of which the rays of its bases are drawn. This dual representation will be made use of shortly.
+			out of which the rays of its bases are drawn; thus a = ABST, b = ACRT, and so on. This dual representation will 
+			be made use of shortly.
 			</p>
             <br>
             <br>
             <div id="game">
                 <table id="boardContainer"></table>
             </div>
-
             <br>
             <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-
             <p>
-                If you slide your cursor over any of the generators and click on it, the cycle of 15 bases associated with it will pop up for you to view. You will see, as you run your eye down any vertical column of numbers, that they make up all the rays of the 15-gon whose letter label is indicated at the top of the column. A generator can also be represented by the capital letters of the 15-gons whose rays make up the cycle of bases associated with it; thus a = ABST, b = ACRT, …, s’ = JJLL.
-            </p>
-            <p>
-                The patterns in the 120-cell that prove the BKS theorem can be written as “words” made up of an odd number of (distinct) letters, each representing one of the 45 generators above. Since each letter represents a cycle of 15 bases, a word with an odd number of letters corresponds to an odd number of bases, which is one of the characteristics of a valid pattern. However, not all odd-letter words are valid patterns because they must also satisfy the requirement that each ray occur an even number of times over all the bases of the pattern. Since only complete 15-gons of rays occur in the bases of a pattern, the latter requirement can be rephrased as the requirement that the capital letters that occur in a word each occur an even number of times over all the letters of the word.  This makes it easy to tell if a particular odd-letter word qualifies as a valid pattern or not. Consider the word    , for example. This word can be rewritten in terms of capital letters and then reorganized as follows:
+            The patterns in the 120-cell that prove the BKS theorem can be written as “words” made up of an odd number of 
+			distinct letters, each representing one of its 45 generators. The word must consist of an odd number of letters
+			because each letter represents fifteen bases and an odd number of letters would collectively yield an odd number
+			of bases, which is one of the requirements of a valid pattern. However, not all odd-letter words are patterns 
+			because of the additional requirement that each ray occur an even number of times over all the bases of the pattern. 
+			Since only complete 15-gons of rays occur in the words that represent valid patterns, the requiremnt that each ray
+			occur an even number of times over the pattern is equivalent to the requirement that every capital letter occur an even 
+			number of times over all the lower case letters of a word representing a valid pattern. 
             </p>
             <p>
                 In the second step, we count the number of times each of the letters occurs over the word and append it as a subscript to the letter, and the fact that all the subscripts are even guarantees that the word represents a valid pattern. The last step shows the ray-basis formula of the pattern. The ray counts are obtained by replacing each of the letters by 15 (the number of rays it brings in) and then totaling the numbers associated with each of the subscripts and the number of bases is just 15 times the number of letters in the word.
