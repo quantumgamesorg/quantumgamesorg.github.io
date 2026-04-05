@@ -72,17 +72,17 @@
 			obtain a chain of fifteen bases that loops back on itself, in the sense that the last basis of the chain 
 			leads back to the one we started off with. It is clear that all the members of the chain can be generated from
 			any one of them, and we will term the particular member we pick for this process the <b>generator</b>.
-			The 120-cell has 45 generators, each of which gives rise to a chain of fifteen bases and 
-			the 45 x 15 = 675 bases so obtained comprise all its bases.
+			The 120-cell has 45 generators, each of which gives rise to a chain of fifteen bases, and 
+			the 45 x 15 = 675 bases so obtained comprise all the bases of the 120-cell.
             </p>
 			<p>
 			The generators of the 120-cell are shown below, with a lower case letter attached to each. Clicking on 
-			any generator will cause a pop-up window to appear showing all the bases arising from it.
-			If you run your eye down any column in the list, you will see all the rays associated with the 15-gon
-			whose label is indicated at the head of that column. Any chain of fifteen bases can be specified by either  
-			the lower case letter of its generator or the set of four capital letters representing the 15-gons from 
-			which its rays are drawn; thus we can represnt the chains as a (or ABST), b (or ACRT), and so on. 
-			We will make use of this dual representation shortly.
+			a generator will cause all the bases associated with it to appear in a pop up window.
+			If you run your eye down any column of numbers in the window, you will see all the rays associated with the 
+			15-gon whose label is indicated at the head of the column. Thus any generator can be specified by either 
+			its lower case letter or the set of four capital letters representing the 15-gons from 
+			which its rays are drawn. For example, generator a can also be written as ABST, generator b as ACRT, and so on. 
+			We will make use of this equivalence shortly.
 			</p>
             <br>
             <br>
@@ -94,41 +94,49 @@
             <p>
             The patterns in the 120-cell that prove the BKS theorem can be written as “words” made up of an odd number of 
 			distinct letters, each representing one of its 45 generators. The word must consist of an odd number of letters
-			because each letter represents fifteen bases and an odd number of letters would collectively yield an odd number
-			of bases, which is one of the requirements of a valid pattern. However, not all odd-letter words are patterns 
-			because of the additional requirement that each ray occur an even number of times over all the bases of the pattern. 
-			Since only complete 15-gons of rays occur in the words that represent valid patterns, the requiremnt that each ray
-			occur an even number of times over the pattern is equivalent to the requirement that every capital letter occur an even 
-			number of times over all the lower case letters of a word representing a valid pattern. 
+			because each letter represents fifteen bases and the total number of bases associated with the word must be odd.
+			However, not all odd-letter words represent patterns because of the additional requirement that each ray occur 
+			an even number of times over all the bases of the pattern. Since only complete 15-gons of rays occur in the 
+			words we are considering, the requirement that each ray occur an even number of times over the pattern is 
+			equivalent to the requirement that every capital letter occur an even number of times over all the lower case 
+			letters that make up a word.  
             </p>
             <p>
-            To see how to tell whether a word represents a valid pattern or not, consider the word abegkri'. The word
-			consists of an odd number of letters, so it passes the first test. To see if it passes the second test, we
-			transform it as follows:
+            This makes it easy to tell if a word represents a valid pattern or not. If it consists of an odd number of 
+			letters, it passes the first test. To apply the second test, we replace each lower case letter of the word
+			by its set of four capital letters and then count the number of times each of the capital letters occurs 
+			over the word. If all the counts are even, the word passes the second test and represents a valid pattern.
+			</p>	
+			As an example of this procedure, consider the word abegkri'. The word consists of seven letters and so passes
+			the first test. The application of the second test is shown in the flowchart below:
 			<br>
 			<br>
 			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abegkri' &rarr; (ABST)(ACRT)(AFPT)(AHMT)(BEPS)(CFOR)(EHMO) &rarr; (BCEFHMOPRS)<sub>2</sub>(AT)<sub>4</sub> 
 				&rarr; 150<sub>2</sub>30<sub>4</sub> &ndash; 105<sub>4</sub>
 			<br>
 			<p>
-			In the first step, each lower case letter is replaced by its set of four capital letters; in the second, all 
-			letters occurring the same number of times over the word are collected together, with the number of occurrences
-			attached as a subscript; and in final step each string of letters within brackets to the left of the dash is 
-			replaced by fifteen times the number of letters in the string, while the number to the right of the dash is fifteen 
-			times the number of letters in the word, with the subcript 4 attached. The last step gives the formula of the pattern, 
-			or the number of occurrences of all the rays in it along with the total number of bases in the pattern. The word
-			represents a valid pattern only if all the subscripts to the left of the dash are even and the number to the right of
-			the dash (which is the number of bases) is odd.
+			The first step can be accomplished with the help of the pop up windows for the generators, which show what the
+			four capital letters of each are. In the second step, we collected together all letters occurring the same 
+			number of times over the word, attaching the number of occurrences as a subscript. At this stage we can tell
+			if the word represents a pattern or not by seeing if all the subscripts are even; if they are it represents a 
+			pattern, otherwise not. In the final step we obtain the ray-basis formula of the pattern by replacing each string 
+			of letters within brackets by fifteen times the number of letters in the string and add a dash followed
+			by the number of bases (which is fifteen times the number of letters in the word), with the subcript 4 attached
+			(which indicates the number of rays in each basis). The formula could also be obtained by first recovering all the
+			bases associated with the word and then doing a ray count over it, but the occurrence of entire 15-gons of rays in
+			the word makes this more involved procedure unnecessary.
 		   </p>
         <p>
-        The task of picking out all odd-letter words that represent valid patterns has been made easy for you. Simply enter a 
-		0 or 1 in each of the 29 square boxes below and click the set button to their right. This will make the letters of 
-		the pattern appear in the round boxes. Clicking the set button to the right of the round boxes will show how many 
-		times each of the capital letters occurs over the word, with even (or odd) counts being shown on a green (or red) 
-		background. The validity of the pattern can be confirmed at a glance by seeing that all the square boxes showing 
-		letter counts are colored green. Instead of clicking the set button after the round boxes, you could click on 
-		the letters one by one and see the pattern build up. You will see red boxes appearing frequently during the buildup, 
-		but after all the letters have been clicked only green boxes will appear. 
+        The task of picking out all odd-letter words that represent valid patterns is not straightforward. However it has 
+		been made easy for you. Simply enter a 0 or 1 in each of the 29 square boxes below (there are 15 boxes in the first
+		row and 14 in the second) and click the set button to their right. This will make the letters of the pattern appear 
+		in the round boxes below the first set of square ones. Clicking the set button to the right of the round boxes will 
+		show how many times each of the capital letters occurs over the word in the set of 20 square boxes below the round
+		ones. Even letter counts are shown on a green background and odd ones on a red background. This allows one to 
+		confirm at a glance that the pattern is a valid one simply by noting that all the boxes are green. Instead of 
+		clicking the set button after the round boxes, you can also click on the letters one by one and see the pattern build
+		up. If you do so, you will see red boxes frequently during the buildup, but after all the letters have been clicked 
+		only green boxes will be seen. 
 		<br>
 		<br>
 	    </p>            
