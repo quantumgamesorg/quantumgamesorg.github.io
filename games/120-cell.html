@@ -64,25 +64,23 @@
             <p>
             With this numbering of the rays, the bases become easy to specify because it turns out that adding one to each 
 			ray of a basis always yields another basis <b> provided that one loops back to the ray at the beginning 
-			of a 15-gon when the one at the end is overshot.</b> To understand better what this means, consider the basis 
-			consisting of the rays 19, 120, 224, 249. Adding one to each of these rays gives 20, 121, 225, 250, but this is 
-			not a basis because the ray 120 is the last member of the 15-gon H and must be replaced by the ray 
+			of a 15-gon when the one at the end is overshot.</b> To understand what the rider in bold means, consider the basis 
+			consisting of the rays 19, 120, 224, 249. Adding one to each of the rays gives 20, 121, 225, 250, but this is 
+			not a basis because ray 120 is the last member of the 15-gon H and must be replaced by the ray 
 			at the beginning of H, which is 106; thus the proper successor to 19, 120, 224, 249 is 20, 106, 225, 250.
-			Adding one to each ray of 20, 106, 225, 250 gives 21, 107, 211, 251, and one can continue in this way to 
-			obtain a chain of fifteen bases that loops back on itself, in the sense that the last basis of the chain 
-			leads back to the one we started off with. It is clear that all the members of the chain can be generated from
-			any one of them, and we will term the particular member we pick for this process the <b>generator</b>.
-			The 120-cell has 45 generators, each of which gives rise to a chain of fifteen bases, and 
-			the 45 x 15 = 675 bases so obtained comprise all the bases of the 120-cell.
+			Adding one to each ray of the new basis gives 21, 107, 211, 251, and one can continue in this way to 
+			generate a chain of fifteen bases that loops back on itself, in the sense that the last basis of the chain 
+			goes back into the basis we started with. It is clear that this chain of fifteen bases can be generated from 
+			any of its members, and the particular one we choose for the purpose will be termed the <b>generator</b>. 
+			The 120-cell has 45 generators, and the 45 x 15 = 675 bases they generate comprise all the bases of the 120-cell.
             </p>
 			<p>
 			The generators of the 120-cell are shown below, with a lower case letter attached to each. Clicking on 
-			a generator will cause all the bases associated with it to appear in a pop up window.
-			If you run your eye down any column of numbers in the window, you will see all the rays associated with the 
-			15-gon whose label is indicated at the head of the column. Thus any generator can be specified by either 
-			its lower case letter or the set of four capital letters representing the 15-gons from 
-			which its rays are drawn. For example, generator a can also be written as ABST, generator b as ACRT, and so on. 
-			We will make use of this equivalence shortly.
+			a generator will cause a pop up window to appear showing all the bases that arise from it. If you run your eye down any 
+			column of numbers in the list, you will see that they are those of all the rays associated with the 15-gon whose label 
+			is indicated at the head of the column. This suggests yet another way of labeling a generator, namely, by the four 
+			capital letters representing the 15-gons from which its rays are drawn. Thus, generator a can also be written as ABST, 
+			generator b as ACRT, and so on. We will make use of these two different ways of repreenting generators shortly.
 			</p>
             <br>
             <br>
@@ -92,9 +90,10 @@
             <br>
             <br>
             <p>
-            The patterns in the 120-cell that prove the BKS theorem can be written as “words” made up of an odd number of 
-			distinct letters, each representing one of its 45 generators. The word must consist of an odd number of letters
-			because each letter represents fifteen bases and the total number of bases associated with the word must be odd.
+            The patterns of the 120-cell we wish to present here can be written as “words” made up of an odd number of 
+			distinct letters, each representing one of its 45 generators. In order to represent a valid pattern (i.e., one
+			that proves the BKS theorem), the word must consist of an odd number of letters
+			because each letter represents fifteen bases and the total number of bases in a pattern must be odd.
 			However, not all odd-letter words represent patterns because of the additional requirement that each ray occur 
 			an even number of times over all the bases of the pattern. Since only complete 15-gons of rays occur in the 
 			words we are considering, the requirement that each ray occur an even number of times over the pattern is 
@@ -104,7 +103,7 @@
             <p>
             This makes it easy to tell if a word represents a valid pattern or not. If it consists of an odd number of 
 			letters, it passes the first test. To apply the second test, we replace each lower case letter of the word
-			by its set of four capital letters and then count the number of times each of the capital letters occurs 
+			by its set of four capital letters and count the number of times each of the capital letters occurs 
 			over the word. If all the counts are even, the word passes the second test and represents a valid pattern.
 			</p>	
 			<p>
@@ -116,7 +115,7 @@
 			<br>
 			<br>	
 			In the first step we replaced each lower case letter by its set of four capital letters (which can be looked up
-			in the pop up windows of the generators). In the second step we collected together all letters occurring the same 
+			in the pop up windows associated with the generators). In the second step we collected together all letters occurring the same 
 			number of times over the word, attaching the number of occurrences as a subscript. At this stage we can tell
 			if the word represents a pattern or not by seeing if all the subscripts are even; if they are it represents a 
 			pattern, otherwise not. In the final step we obtain the ray-basis formula of the pattern by replacing each string 
