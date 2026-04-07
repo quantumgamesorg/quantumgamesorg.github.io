@@ -13,7 +13,8 @@ function make_120_Board(boardContainer, vals) {
     const COLS = 5;
     const TABLE_SHIFT_PX = -150;
     const BASIS_VALUES_GAP_PX = 1;
-    const PANEL_HORIZONTAL_OFFSET_PX = -1;
+    const PANEL_WIDTH_PX = 220;
+    const PANEL_HORIZONTAL_OFFSET_PX = -22; // manually tuned
     const maxVals = Math.max(1, ...Object.values(vals).map(arr => Array.isArray(arr) ? arr.length : 1));
 
     let wrapper = boardContainer.parentNode;
@@ -38,7 +39,7 @@ function make_120_Board(boardContainer, vals) {
     }
 
     const table = boardContainer;
-    const panelWidth = 260;
+    panel.style.width = `${PANEL_WIDTH_PX}px`;
     panel.style.left = `calc(100% + ${PANEL_HORIZONTAL_OFFSET_PX}px)`;
     panel.style.top = `0px`;
     table.style.marginLeft = TABLE_SHIFT_PX + 'px';
@@ -67,11 +68,29 @@ function make_120_Board(boardContainer, vals) {
 
     const closeBtn = panel.querySelector('.panel-close');
     let currentSelected = null;
-    closeBtn.addEventListener('click', () => {
+
+    function hidePanel() {
         if (currentSelected) currentSelected.classList.remove('selected');
         currentSelected = null;
         panel.classList.remove('visible');
+    }
+
+    closeBtn.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        hidePanel();
     });
+
+    if (wrapper._outsideClickHandler) {
+        document.removeEventListener('click', wrapper._outsideClickHandler);
+    }
+    wrapper._outsideClickHandler = (ev) => {
+        const clickedInsidePanel = panel.contains(ev.target);
+        const clickedBasis = wrapper.contains(ev.target) && ev.target.closest('.basis.clickable');
+        if (!clickedInsidePanel && !clickedBasis) {
+            hidePanel();
+        }
+    };
+    document.addEventListener('click', wrapper._outsideClickHandler);
 
     let idx = 0;
     for (let r = 0; r < ROWS; r++) {
@@ -153,9 +172,7 @@ function make_120_Board(boardContainer, vals) {
                         panel.querySelector('.panel-title').textContent = el.dataset.key + '';
                         panel.classList.add('visible');
                     } else {
-                        el.classList.remove('selected');
-                        currentSelected = null;
-                        panel.classList.remove('visible');
+                        hidePanel();
                     }
                 });
                 td.appendChild(basisDiv);

@@ -75,15 +75,15 @@
 
 .basis-panel {
     position: absolute;
-    width: 260px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    width: 220px;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
     background: #fff;
     border: 1px solid #eee;
-    padding: 8px;
+    padding: 6px;
     box-sizing: border-box;
     display: none;
     z-index: 30;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .basis-panel.visible {
@@ -94,9 +94,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     position: relative;
 }
 
@@ -104,10 +104,11 @@
     cursor: pointer;
     border: 0;
     background: transparent;
-    font-size: 16px;
+    color: #c62828;
+    font-size: 14px;
     line-height: 1;
     position: absolute;
-    right: 8px;
+    right: 6px;
 }
 
 .basis-panel .panel-grid {
@@ -117,7 +118,7 @@
 .basis-panel .panel-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
+    gap: 3px;
     align-items: center;
     border-bottom: 1px solid #eee;
 }
@@ -127,7 +128,7 @@
 }
 
 .basis-panel .panel-cell {
-    padding: 6px 4px;
+    padding: 4px 3px;
     text-align: center;
     border: none;
     font-family: monospace;
@@ -136,7 +137,7 @@
 
 .basis-panel .panel-row.panel-row-bold .panel-cell {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .calc-container {
