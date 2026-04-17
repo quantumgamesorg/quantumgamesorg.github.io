@@ -386,3 +386,17 @@
 .intro-spacer {
     margin-bottom: 10px;
 }
+
+table {
+    border-collapse: collapse;
+    width: 75%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
