@@ -34,10 +34,10 @@
 			</b></p>	
             <p>
             The 120-cell is the generalization of the regular dodecahedron in a space of four dimensions. Like the 
-			600-cell and the two-qubit system, it has billions of simple patterns that give instant proofs of the 
+			600-cell and the two-qubit system, it has billions of simple patterns in it that give instant proofs of the 
 			Bell-Kochen-Specker theorem. However, the table of numbers in which the patterns are embedded is too large 
-			to be shown on a computer screen and so the patterns are presented here in a compressed form that nevertheless 
-			allows them to be recognized as being genuine.   
+			to be shown on a computer screen and so the patterns are presented in a compressed form that nevertheless 
+			allows them to be recognized as genuine.   
             <p>
             You should be familiar with the exhibit for the 600-cell before looking at this one, as that will make it 
 			easier to follow.  
@@ -50,7 +50,8 @@
 			in exactly nine bases. 
 			The 120-cell can therefore be described by the ray-basis symbol 300_9 – 675_4, where the subscript on the left
 			indicates the number of bases to which each ray belongs and that on the right the number of rays in each basis; 
-			note that 300 x 9 = 675 x 4, so that the total ray count is the same whether done by rays or bases.      
+			note that 300 x 9 = 675 x 4, so that the total count of all rays over the bases is the same whether done 
+			by rays or bases.      
             <p>
             The numbering of the rays is based on the “triacontagonal projection” of H.S.M.Coxeter, which is 
 			a way of casting a shadow of certain higher dimensional figures (of which the 120-cell is one) on to a two-dimensional 
@@ -127,19 +128,19 @@
 			be replaced by 106 rather than 121; thus the proper successor to the basis 19, 120, 224, 249 is 20, 106, 225, 250.
 			Adding one to each ray of this new basis gives 21, 107, 211, 251 (note the drop in number of the third ray!), 
 			and one can continue in this way to obtain a chain of fifteen bases whose final member goes back into the initial   
-			one when its rays are incremented. The chain can in fact be generated from any of its members, and the 
-			one chosen for the purpose is termed the <b>generator</b>. The 120-cell has 45 generators and they give rise 
-			to its 45 x 15 = 675 bases.
+			one when its rays are suitably incremented. Any chain of fifteen bases, like the one just described, can be 
+			generated from any of its members, and the one chosen for the purpose is termed the <b>generator</b>. 
+			The 120-cell has 45 generators and they give rise to its 45 x 15 = 675 bases.
             </p>
 			<p>
 			The generators of the 120-cell are shown below, with a lower case letter attached to each. Clicking on 
-			a generator will show the fifteen bases associated with it in a pop up window.
+			a generator will cause the fifteen bases associated with it to appear in a pop up window to the right.
 		    If you run your eye down any column of numbers in the window, you will see all the rays associated 
 			with the 15-gon whose label is indicated at the top of the column. The rider mentioned in the previous 
 			paragraph ensures that the rays in any column are confined to those of a particular 15-gon. 
-			It is quite remarkable (and far from obvious!) that the bases of the 120-cell can
-			be built up in this way from a set of generators. The existence of the chains of bases suggests 
-			another way in which a generator, and indeed the entire chain of which it is a part, can be 
+			It is remarkable (and far from obvious) that the bases of the 120-cell can
+			be built up in this way from a suitable set of generators. The existence of the chains of bases suggests 
+			another way in which any generator, and indeed the entire chain of which it is a part, can be 
 			labeled: it can be labeled by the capital letters of the four 15-gons to which its rays belong. 
 			Thus, generator a can be labeled as ABST, generator b as ACRT, and so on. This dual labeling will be 
 			made use of below.
@@ -155,19 +156,19 @@
             <br>
             <p>
             The patterns of the 120-cell that prove the BKS theorem can be written as “words” made up of an odd number of 
-			distinct letters, each representing one of its 45 generators. A valid pattern (i.e., one that proves
-			the BKS theorem) must consist of an odd number of letters because each letter represents fifteen bases 
+			distinct lower case letters, each representing one of its generators. A valid pattern (i.e., one that proves
+			the theorem) consists of an odd number of letters because each letter represents fifteen bases 
 			and the total number of bases in the pattern must be odd.
 			However, not all odd-letter words represent patterns because of the additional requirement that each ray 
 			occur an even number of times over all the bases of the pattern. 
 			Since only complete 15-gons of rays occur in a word (via its letters), the requirement that each ray occur
-			an even number of times over the bases of the pattern is the same as the requirement that every capital letter occur an 
-			even number of times over all the lower case letters of the word representing the pattern.   
+			an even number of times over the bases of the pattern is the same as the requirement that every capital letter 
+			occur an even number of times over the word representing the pattern.   
             </p>
             <p>
-            This makes it easy to tell if an odd-letter word represents a pattern or not. One need only replace each
+            This makes it easy to tell if an odd-letter word represents a pattern or not: one need only replace each
 			lower case letter in the word by its set of four capital letters and see if each capital letter occurs an even 
-			number of times over the word; if this is the case, the word represents a pattern, otherwise not.
+			number of times over the word; if it does, the word represents a pattern, otherwise not.
 			</p>	
 			<p>
 			As an example, consider the 7-letter word abegkri'. The application of the above test to 
@@ -178,23 +179,25 @@
 			<br>
 			<br>	
 			In the first step, each lower case letter is replaced by its set of four capital letters (which can be looked up
-			in the pop up windows of the generators). In the second step, all the capital letters occurring the same 
-			number of times over the word are collected together, with the number of occurrences indicated as a subscript. 
-			At this stage one can tell if the word represents a pattern or not simply by seeing if all the subscripts are even. 
-			In the final step, the ray-basis formula of the pattern is obtained by 
-			replacing each string of letters within brackets by fifteen times the number of letters and adding the number of bases 
-			(which is fifteen times the number of letters in the word) after a dash. 
+			in the pop up windows associated with the generators). In the second step, all the capital letters occurring the same 
+			number of times over the word are collected together within brackets, with the number of occurrences indicated 
+			as a subscript. At this stage one can tell if the word represents a pattern or not, simply by seeing if 
+			all the subscripts are even. In the final step, the ray-basis formula of the pattern is obatined by 
+			replacing each string of letters within brackets by fifteen times their number and adding the number of bases 
+			(which is fifteen times the number of letters in the word) after the dash. 
 		   </p>
         <p>
-        The task of picking out all odd-letter words that represent patterns is not straightforward, but it has 
-		been made easy for you. Simply enter a 0 or 1 in each of the 29 square boxes below (there are 15 boxes in the first
-		row and 14 in the second) and click the set button to their right. This will cause the letters of the pattern to appear 
-		in the round boxes. Clicking the second set button will show how many times each of the 
-		capital letters occurs over the letters of the pattern, with even counts shown on a green background and odd counts on a red one. 
-		This allows one to confirm at a glance that the pattern is a valid one simply by seeing that all the boxes are green. Instead 
-		of clicking the second set button, you could click on the letters of the pattern one by one and see it build up gradually. 
-		If you do this, you will see red boxes occurring frequently during the buildup, but when all the letters have been clicked 
-		only green boxes will remain. 
+        The task of picking out all the odd-letter words that represent valid patterns is not straightforward, but it has 
+		been made easy for you. Simply enter a 0 or 1 in each of the 29 square boxes below (of which there are 15 in the 
+		first row and 14 in the second) and click the set button to their right. This will cause the letters of the pattern 
+		to appear in the round boxes below the square ones. Clicking the second set button will show how many times each of 
+		the capital letters occurs over the letters of the pattern, with even counts being shown on a green background and 
+		odd counts on a red one. 
+		This allows one to confirm at a glance that the pattern is a valid one simply by seeing if all the boxes are green. 
+		Instead of clicking the second set button, you can click on the letters of the pattern one by one (in any order you want)
+		and see it capital letter counts build up gradually in the square boxes below. 
+		If you do this, you will see red boxes occurring frequently during the buildup, but when all the boxes have been 
+		clicked only green boxes will remain. The formula representing the pattern is indicated at the end. 
 		<br>
 		<br>
 	    </p>            
@@ -219,16 +222,16 @@
             <br>
 			<br>
 		<p>
-		Sometimes, a word representing a pattern may have a smaller word inside it that also represents a 
-		pattern. For example, the pattern <b>cduvy</b> with the 
-		formula 150<sub>2</sub> &ndash; 75<sub>4</sub> has inside it the smaller pattern
-		<b>cdy</b> with the formula 90<sub>2</sub> &ndash; 45<sub>4</sub>.
-		After you have called up a pattern, you can drop some of its letters in it (by clicking on them and turning 
-		them red) and see if remaining green letters make up a pattern. You will see that this happens more frequently
-		as the patterns get longer and longer. It is a challenge to find a long
-		word representing a pattern that doesn't have any smaller patterns in it. An example of this is provided by the
-		9-letter word <b>fghilmsup'</b>, which represents a pattern with the formula 180<sub>2</sub>45<sub>4</sub> &ndash; 135<sub>4</sub>. 
-		You can check that none of the 7-,5-,3- or 1-letter words in it are patterns.
+		Sometimes a word representing a pattern may have a smaller word representing a pattern contained within it. 
+		For example, the pattern <b>cduvy</b> with the 
+		formula 150<sub>2</sub> &ndash; 75<sub>4</sub> has the smaller pattern
+		<b>cdy</b> (with the formula 90<sub>2</sub> &ndash; 45<sub>4</sub>) within it.
+		After you have called up a pattern, you can drop any of its letters simply by clicking on them (and turning 
+		them red) and see if the remaining green letters make up a pattern. You will see that as the original pattern 
+		gets longer and longer, it becomes more likely to find a smaller pattern nestled within it.
+		It is a challenge to find long words representing patterns that don't have smaller patterns in them. An example of 
+		such a pattern is the 9-letter word <b>fghilmsup'</b>, whose formula is 180<sub>2</sub>45<sub>4</sub> &ndash; 135<sub>4</sub>. 
+		You can check that none of the 7-,5-,3- or 1-letter words inside this word is a pattern.
 		</p>
 		<p>
        This display is an adaptation of the material presented in <a href = https://arxiv.org/abs/2510.01063/> 
